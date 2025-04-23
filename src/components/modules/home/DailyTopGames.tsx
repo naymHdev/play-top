@@ -47,7 +47,7 @@ const DailyTopGames = () => {
         </div>
         <div className="bg-black bg-opacity-30 h-[148px] flex items-center justify-center shadow-lg shadow-black/50 -mt-20">
           <div className="flex items-center justify-center">
-            <Button className="px-2 py-5 flex items-center gap-2 rounded-full text-primary font-medium leading-7 max-w-[154px] max-h-[44px] bg-background border border-card">
+            <Button className="px-8 py-5 flex items-center gap-2 rounded-full text-primary font-medium leading-7 max-w-[154px] max-h-[44px] bg-background border border-card">
               Show More <FaArrowRight />
             </Button>
           </div>
