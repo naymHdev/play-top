@@ -1,5 +1,6 @@
 import BannerSection from "@/components/modules/home/Banner";
 import DailyTopGames from "@/components/modules/home/DailyTopGames";
+import UpcomingRelease from "@/components/modules/home/UpcomingRelease";
 import Newsletter from "@/components/Newsletter";
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
     <>
       <BannerSection />
       <DailyTopGames />
+      <UpcomingRelease />
       <Newsletter />
     </>
   );

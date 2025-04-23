@@ -26,13 +26,13 @@ const gamesData: TGame[] = [
 // To repeat the same data 5 times (for example)
 const repeatedGamesData = Array.from({ length: 10 }, (_, index) => ({
   ...gamesData[0],
-  _id: `${index + 1}`, // Make sure each game card has a unique ID
+  _id: `${index + 1}`,
 }));
 
 const DailyTopGames = () => {
   return (
     <>
-      <PTContainer>
+      <PTContainer className=" mt-20">
         <div>
           <PTSectionName
             title="Top Games of the Day"
@@ -40,7 +40,7 @@ const DailyTopGames = () => {
           />
         </div>
 
-        <div className="mt-16">
+        <div className="mt-10">
           {repeatedGamesData?.map((game) => (
             <PTGameCard key={game._id} games={game} />
           ))}

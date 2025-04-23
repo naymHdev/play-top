@@ -2,7 +2,7 @@ import { TGame } from "@/types/games";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./button";
-import { FiArrowDownLeft, FiArrowDownRight } from "react-icons/fi";
+import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 
 const PTGameCard = ({ games }: { games: TGame }) => {
   // console.log(games);
@@ -30,7 +30,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                 ${games.price}
               </h1>
               <Button className=" flex items-center gap-2 bg-card text-primary rounded-full max-w-[90px] max-h-[26px]">
-                <FiArrowDownLeft /> 4.5k <FiArrowDownRight />
+                <FiArrowUpRight /> 4.5k <FiArrowDownRight />
               </Button>
             </div>
           </div>
