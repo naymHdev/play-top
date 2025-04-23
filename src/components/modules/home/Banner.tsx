@@ -30,7 +30,7 @@ const BannerSection = () => {
             whatever works for you. Indie spirit meets seamless sharing, with
             discovery at its heart.
           </p>
-          <PTButton className=' px-[70px] py-[12px]' label="Learn More" icon={<MdArrowForwardIos className=" size-4 mt-1" />} />
+          <PTButton className=' px-[70px] py-[12px] bg-secondary' label="Learn More" icon={<MdArrowForwardIos className=" size-4 mt-1" />} />
         </div>
       </PTContainer>
     </div>

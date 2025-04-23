@@ -1,0 +1,59 @@
+import PTContainer from "@/components/ui/PTContainer";
+import PTSectionName from "@/components/ui/PTSectionName";
+import android from "../../../assets/icons/android.png";
+import apple from "../../../assets/icons/apple.png";
+import windows from "../../../assets/icons/windows.png";
+import linux from "../../../assets/icons/linux.png";
+import game1 from "../../../assets/images/weekly-t1.png";
+import PTWeeklyGameCard from "@/components/ui/PTWeeklyGameCard";
+import { TWeeklyGames } from "@/types/weeklyGames";
+import PTButton from "@/components/ui/PTButton";
+import { FiArrowRight } from "react-icons/fi";
+
+const gamesData: TWeeklyGames[] = [
+  {
+    _id: "1",
+    title: "The Talos Principle: Resaw",
+    image: game1,
+    categories: ["Productivity", "Artificial Intelligence"],
+    platform: [android, apple, windows, linux],
+    price: 8.99,
+  },
+];
+
+const WeeklyTopGames = () => {
+  // To repeat the same data 5 times (for example)
+  const weeklyGamesData = Array.from({ length: 10 }, (_, index) => ({
+    ...gamesData[0],
+    _id: `${index + 1}`,
+  }));
+
+  return (
+    <>
+      <div className="mt-20">
+        <PTContainer>
+          <div>
+            <PTSectionName
+              title="Top Games of the Week"
+              description="Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat, cursus dictum enim."
+            />
+            <div className=" mt-12 grid grid-cols-2 gap-5">
+              {weeklyGamesData?.map((games) => (
+                <PTWeeklyGameCard key={games._id} game={games} />
+              ))}
+            </div>
+          </div>
+          <div className=" flex items-center justify-center">
+            <PTButton
+              className=" border border-card py-2 px-5"
+              label="Show All Games"
+              icon={<FiArrowRight />}
+            />
+          </div>
+        </PTContainer>
+      </div>
+    </>
+  );
+};
+
+export default WeeklyTopGames;
