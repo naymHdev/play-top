@@ -1,5 +1,10 @@
 import { TGame } from "@/types/games";
 import game1 from "../../../assets/images/game1.png";
+import g3 from "../../../assets/images/g3.png";
+import g4 from "../../../assets/images/g4.png";
+import g5 from "../../../assets/images/g5.png";
+import g6 from "../../../assets/images/g6.png";
+import g8 from "../../../assets/images/g8.png";
 import android from "../../../assets/icons/android.png";
 import apple from "../../../assets/icons/apple.png";
 import windows from "../../../assets/icons/windows.png";
@@ -11,6 +16,7 @@ import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
+import UserActivities from "@/components/modules/productDetails/UserActivities";
 
 const gamesData: TGame[] = [
   {
@@ -21,7 +27,7 @@ const gamesData: TGame[] = [
       "Save on the Sakura Storm Collection, Koumei Visions Bundle and more from April 9-23.",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis dui dui. Nullam laoreet facilisis tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet. Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac habitasse platea dictumst. Cras vel accumsan odio, ac elementum lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien congue. Vestibulum aliquet pretium ligula, nec semper mauris commodo et. Cras vestibulum sollicitudin tortor non elementum. Quisque dapibus mauris at egestas luctus. ",
-    image: game1,
+    image: [game1, g3, g4, g5, g6, g8],
     categories: ["Design Tools", "Productivity", "Artificial Intelligence"],
     platform: [android, apple, windows, linux],
     price: 8.99,
@@ -55,7 +61,7 @@ const GameDetailsPage = async ({
   // console.log(id);
 
   const findGame: TGame | undefined = gamesData.find((game) => game._id == id);
-  console.log(findGame);
+  //   console.log(findGame);
 
   return (
     <>
@@ -80,7 +86,21 @@ const GameDetailsPage = async ({
             {/* ------------------------------------\\ Grid Content Layout \\------------------------------------ */}
             <div className="mt-8 grid grid-cols-5 gap-6">
               {/* ------------------------------------\\ Left Side Content \\------------------------------------ */}
-              <div className=" border col-span-3"></div>
+              <div className="col-span-3">
+                <div>
+                  {/* <ProductCarousel images={findGame?.image ?? []} /> */}
+                </div>
+                <div className="mt-8">
+                  <h3 className=" font-medium text-foreground uppercase">
+                    Description
+                  </h3>
+                  <p className=" m-2 text-primary">{findGame?.description}</p>
+                </div>
+                <div className="mt-6">
+                  <UserActivities />
+                </div>
+              </div>
+
               {/* ------------------------------------\\ Right Side Content \\------------------------------------ */}
               <div className="col-span-2">
                 <div className=" p-5 border border-card rounded-xl">
@@ -111,8 +131,8 @@ const GameDetailsPage = async ({
                   </p>
 
                   <div className=" flex items-center gap-2">
-                    {findGame?.categories?.map((category) => (
-                      <div className=" flex items-center gap-2 mt-1">
+                    {findGame?.categories?.map((category, idx) => (
+                      <div key={idx} className=" flex items-center gap-2 mt-1">
                         <span className=" w-1 h-1 bg-primary rounded-full"></span>
                         <p className=" text-sm text-foreground font-semibold">
                           {category}

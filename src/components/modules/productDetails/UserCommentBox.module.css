@@ -1,0 +1,22 @@
+.toolbarButton {
+  font-size: 14px;
+  padding: 4px 8px;
+  margin-right: 6px;
+  color: #f3f1f1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.toolbarButton:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+.editorArea {
+  border: 1px solid #202020;
+  min-height: 6em;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #202020;
+}
