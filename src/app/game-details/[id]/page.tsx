@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import UserActivities from "@/components/modules/productDetails/UserActivities";
 import RelatedGames from "@/components/modules/productDetails/RelatedGames";
+import ProductCarousel from "@/components/modules/productDetails/ProductCarousel";
+import { EmblaOptionsType } from "embla-carousel";
 
 const gamesData: TGame[] = [
   {
@@ -52,6 +54,10 @@ const gamesData: TGame[] = [
     ],
   },
 ];
+
+const OPTIONS: EmblaOptionsType = {}
+const SLIDE_COUNT = 10
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const GameDetailsPage = async ({
   params,
@@ -89,7 +95,7 @@ const GameDetailsPage = async ({
               {/* ------------------------------------\\ Left Side Content \\------------------------------------ */}
               <div className="col-span-3">
                 <div>
-                  {/* <ProductCarousel images={findGame?.image ?? []} /> */}
+                  <ProductCarousel slides={SLIDES} options={OPTIONS} />
                 </div>
                 <div className="mt-8">
                   <h3 className=" font-medium text-foreground uppercase">
