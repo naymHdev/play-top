@@ -3,11 +3,12 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
+import Link from "next/link";
 
 const PTGameCard = ({ games }: { games: TGame }) => {
   // console.log(games);
   return (
-    <>
+    <Link href={`game-details/${games._id}`}>
       <div className="mt-2 border border-card rounded-2xl shadow">
         <div className=" grid grid-cols-3 gap-4 items-center">
           <div>
@@ -57,7 +58,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
           </div>
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 

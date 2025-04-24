@@ -10,16 +10,41 @@ import apple from "../../../assets/icons/apple.png";
 import windows from "../../../assets/icons/windows.png";
 import linux from "../../../assets/icons/linux.png";
 import { Button } from "@/components/ui/button";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowRight, FaXTwitter } from "react-icons/fa6";
+import thumb from "../../../assets/images/gameThumbnail.png";
+import { FaLinkedin, FaReddit } from "react-icons/fa";
 
 const gamesData: TGame[] = [
   {
     _id: "1",
+    author: "John Doe",
     title: "Need for Speed™ Heat Deluxe Edition",
+    subTitle:
+      "Save on the Sakura Storm Collection, Koumei Visions Bundle and more from April 9-23.",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis dui dui. Nullam laoreet facilisis tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet. Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac habitasse platea dictumst. Cras vel accumsan odio, ac elementum lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien congue. Vestibulum aliquet pretium ligula, nec semper mauris commodo et. Cras vestibulum sollicitudin tortor non elementum. Quisque dapibus mauris at egestas luctus. ",
     image: game1,
     categories: ["Design Tools", "Productivity", "Artificial Intelligence"],
     platform: [android, apple, windows, linux],
     price: 8.99,
+    thumbnail: thumb,
+    socialLinks: [
+      {
+        icon: <FaReddit />,
+        name: "Reddit",
+        link: "https://www.facebook.com/",
+      },
+      {
+        icon: <FaLinkedin />,
+        name: "Linkedin",
+        link: "https://www.facebook.com/",
+      },
+      {
+        icon: <FaXTwitter />,
+        name: "Twitter",
+        link: "https://twitter.com/",
+      },
+    ],
   },
 ];
 
