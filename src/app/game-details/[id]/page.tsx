@@ -6,7 +6,7 @@ import windows from "../../../assets/icons/windows.png";
 import linux from "../../../assets/icons/linux.png";
 import { FaXTwitter } from "react-icons/fa6";
 import thumb from "../../../assets/images/gameThumbnail.png";
-import { FaLinkedin, FaReddit } from "react-icons/fa";
+import { FaExternalLinkAlt, FaLinkedin, FaReddit } from "react-icons/fa";
 import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
@@ -121,13 +121,53 @@ const GameDetailsPage = async ({
                     ))}
                   </div>
 
-                  <p className="mt-6 uppercase font-semibold text-foreground">
-                    Platform:
-                  </p>
+                  <div>
+                    <p className="mt-6 uppercase font-semibold text-foreground">
+                      Platform:
+                    </p>
 
-                  <div className="mt-1 flex gap-2 items-center">
-                    {findGame?.platform.map((device, idx) => (
-                      <Image key={idx} src={device} alt="Device" />
+                    <div className="mt-1 flex gap-2 items-center">
+                      {findGame?.platform.map((device, idx) => (
+                        <Image key={idx} src={device} alt="Device" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* ------------------------------------\\ Social Links \\------------------------------------ */}
+                <div>
+                  <p className="mt-6 uppercase font-semibold text-foreground">
+                    Links
+                  </p>
+                  <div className="mt-2 space-y-2">
+                    {findGame?.socialLinks.map((link, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between rounded-md bg-[#111111]"
+                      >
+                        <div className=" flex">
+                          <div className=" flex items-center gap-2">
+                            <div className="text-xl text-sky-600 p-3 bg-[#202020] rounded-l-md">
+                              {link.icon}
+                            </div>
+                            <p className="text-sm font-semibold text-foreground">
+                              {link.name}
+                            </p>
+                          </div>
+                        </div>
+                        <div className=" px-3">
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={link.link}
+                          >
+                            <FaExternalLinkAlt
+                              size={16}
+                              className=" text-primary"
+                            />
+                          </a>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
