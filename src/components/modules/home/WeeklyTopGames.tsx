@@ -21,13 +21,13 @@ const gamesData: TWeeklyGames[] = [
   },
 ];
 
-const WeeklyTopGames = () => {
-  // To repeat the same data 5 times (for example)
-  const weeklyGamesData = Array.from({ length: 10 }, (_, index) => ({
-    ...gamesData[0],
-    _id: `${index + 1}`,
-  }));
+// To repeat the same data 5 times (for example)
+export const weeklyGamesData = Array.from({ length: 10 }, (_, index) => ({
+  ...gamesData[0],
+  _id: `${index + 1}`,
+}));
 
+const WeeklyTopGames = () => {
   return (
     <>
       <div className="mt-20">

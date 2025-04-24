@@ -17,6 +17,7 @@ import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import UserActivities from "@/components/modules/productDetails/UserActivities";
+import RelatedGames from "@/components/modules/productDetails/RelatedGames";
 
 const gamesData: TGame[] = [
   {
@@ -193,6 +194,11 @@ const GameDetailsPage = async ({
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* ------------------------------------\\ Related Games \\------------------------------------ */}
+          <div className=" mt-20">
+            <RelatedGames />
           </div>
         </PTContainer>
       </div>

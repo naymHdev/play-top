@@ -3,11 +3,13 @@
 import PTContainer from "../ui/PTContainer";
 import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Separator } from "../ui/separator";
+import Newsletter from "../Newsletter";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <>
+      <Newsletter />
       <PTContainer>
         <div className=" mt-16 grid grid-cols-3 gap-56">
           <div className="  col-span-full md:col-span-1">
