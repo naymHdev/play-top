@@ -4,13 +4,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { Thumb } from "./EmblaCarouselThumbsButton";
+import Image, { StaticImageData } from "next/image";
 
 type PropType = {
-  slides: number[];
+  slides: StaticImageData[];
   options?: EmblaOptionsType;
 };
 
 const ProductCarousel: React.FC<PropType> = (props) => {
+  // console.log(props.slides);
   const { slides, options } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
@@ -44,9 +46,11 @@ const ProductCarousel: React.FC<PropType> = (props) => {
       <div className="embla">
         <div className="embla__viewport" ref={emblaMainRef}>
           <div className="embla__container">
-            {slides.map((index) => (
-              <div className="embla__slide" key={index}>
-                <div className="embla__slide__number">{index + 1}</div>
+            {slides.map((img, idx) => (
+              <div className="embla__slide" key={idx}>
+                <div className="embla__slide__number">
+                  <Image src={img} alt="image" />
+                </div>
               </div>
             ))}
           </div>
@@ -55,13 +59,14 @@ const ProductCarousel: React.FC<PropType> = (props) => {
         <div className="embla-thumbs">
           <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
             <div className="embla-thumbs__container">
-              {slides.map((index) => (
-                <Thumb
-                  key={index}
-                  onClick={() => onThumbClick(index)}
-                  selected={index === selectedIndex}
-                  index={index}
-                />
+              {slides.map((img, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => onThumbClick(idx)}
+                  selected={idx === selectedIndex}
+                >
+                  <Image src={img} alt="image" />
+                </div>
               ))}
             </div>
           </div>

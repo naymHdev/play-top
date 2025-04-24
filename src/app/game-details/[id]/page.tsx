@@ -56,8 +56,6 @@ const gamesData: TGame[] = [
 ];
 
 const OPTIONS: EmblaOptionsType = {}
-const SLIDE_COUNT = 10
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const GameDetailsPage = async ({
   params,
@@ -95,7 +93,7 @@ const GameDetailsPage = async ({
               {/* ------------------------------------\\ Left Side Content \\------------------------------------ */}
               <div className="col-span-3">
                 <div>
-                  <ProductCarousel slides={SLIDES} options={OPTIONS} />
+                  <ProductCarousel slides={findGame?.image} options={OPTIONS} />
                 </div>
                 <div className="mt-8">
                   <h3 className=" font-medium text-foreground uppercase">
