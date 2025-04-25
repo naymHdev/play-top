@@ -30,7 +30,7 @@ const gamesData: TGame[] = [
       "Save on the Sakura Storm Collection, Koumei Visions Bundle and more from April 9-23.",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis dui dui. Nullam laoreet facilisis tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet. Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac habitasse platea dictumst. Cras vel accumsan odio, ac elementum lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien congue. Vestibulum aliquet pretium ligula, nec semper mauris commodo et. Cras vestibulum sollicitudin tortor non elementum. Quisque dapibus mauris at egestas luctus. ",
-    image: [game1, g3, g4, g5, g6, g8],
+    image: [game1, g3, g4, g5, g6, g8, g3, g4, g5, g6, g8],
     categories: ["Design Tools", "Productivity", "Artificial Intelligence"],
     platform: [android, apple, windows, linux],
     price: 8.99,

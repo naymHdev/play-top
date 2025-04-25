@@ -203,3 +203,15 @@
 .embla-thumbs__slide--selected .embla-thumbs__slide__number {
   color: var(--text-body);
 }
+
+.embla-thumbs__slide__img {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
+
+.embla-thumbs__slide--selected .embla-thumbs__slide__img {
+  border-color: #e0e9e4;
+}

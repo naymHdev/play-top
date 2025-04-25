@@ -46,10 +46,16 @@ const ProductCarousel: React.FC<PropType> = (props) => {
       <div className="embla">
         <div className="embla__viewport" ref={emblaMainRef}>
           <div className="embla__container">
-            {slides.map((img, idx) => (
+            {slides.slice(1).map((img, idx) => (
               <div className="embla__slide" key={idx}>
-                <div className="embla__slide__number">
-                  <Image src={img} alt="image" />
+                <div className="relative w-full aspect-[5/3]">
+                  <Image
+                    src={img}
+                    alt="image"
+                    fill
+                    className="object-contain object-center"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                  />
                 </div>
               </div>
             ))}
@@ -59,14 +65,14 @@ const ProductCarousel: React.FC<PropType> = (props) => {
         <div className="embla-thumbs">
           <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
             <div className="embla-thumbs__container">
-              {slides.map((img, idx) => (
-                <div
+              {slides.slice(1).map((img, idx) => (
+                <Thumb
                   key={idx}
                   onClick={() => onThumbClick(idx)}
                   selected={idx === selectedIndex}
-                >
-                  <Image src={img} alt="image" />
-                </div>
+                  index={idx}
+                  imageUrl={img}
+                />
               ))}
             </div>
           </div>
