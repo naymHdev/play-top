@@ -32,7 +32,7 @@ const Navbar = () => {
                   <FaPlus className=" ml-2" />
                 </Button>
               </Link>
-              <Link href="#">
+              <Link href="/profile">
                 <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2">
                   <FaRegUser /> Sign In
                 </Button>

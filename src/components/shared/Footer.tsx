@@ -61,7 +61,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" mt-12">
+        <div className=" my-5">
           <Separator className="my-6 opacity-30" />
           <div className=" text-foreground text-sm font-medium text-center">
             © {currentYear} Business Name. All Rights Reserved.
