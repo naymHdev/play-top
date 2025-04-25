@@ -4,12 +4,18 @@ import PTContainer from "../ui/PTContainer";
 import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Separator } from "../ui/separator";
 import Newsletter from "../Newsletter";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const path = usePathname();
   const currentYear = new Date().getFullYear();
+
+  const shouldShowNewsletter = path !== "/submit-product";
+
   return (
     <>
-      <Newsletter />
+      {shouldShowNewsletter && <Newsletter />}
+
       <PTContainer>
         <div className=" mt-16 grid grid-cols-3 gap-56">
           <div className="  col-span-full md:col-span-1">

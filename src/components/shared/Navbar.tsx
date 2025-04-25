@@ -28,7 +28,7 @@ const Navbar = () => {
                   size={18}
                 />
               </div>
-              <Link href="#">
+              <Link href="/submit-product">
                 <Button className="w-[179px] h-[48px] rounded-full bg-secondary text-primary font-medium flex items-center gap-1">
                   Submit Game
                   <FaPlus className=" ml-2" />
