@@ -12,7 +12,9 @@ const Navbar = () => {
         <PTContainer>
           <div className=" flex items-center justify-between">
             <div>
-              <h1 className=" text-3xl font-bold text-primary">Logo</h1>
+              <Link href={"/"}>
+                <h1 className=" text-3xl font-bold text-primary">Logo</h1>
+              </Link>
             </div>
             <div className=" flex gap-4 items-center justify-center">
               <div className="relative w-full">

@@ -49,7 +49,7 @@ const gamesData: TGame[] = [
 ];
 
 // To repeat the same data 5 times (for example)
-const repeatedGamesData = Array.from({ length: 10 }, (_, index) => ({
+export const repeatedGamesData = Array.from({ length: 10 }, (_, index) => ({
   ...gamesData[0],
   _id: `${index + 1}`,
 }));
