@@ -7,7 +7,7 @@ import { Thumb } from "./EmblaCarouselThumbsButton";
 import Image, { StaticImageData } from "next/image";
 
 type PropType = {
-  slides: StaticImageData[];
+  slides: StaticImageData[] | undefined;
   options?: EmblaOptionsType;
 };
 
@@ -46,9 +46,9 @@ const ProductCarousel: React.FC<PropType> = (props) => {
       <div className="embla">
         <div className="embla__viewport" ref={emblaMainRef}>
           <div className="embla__container">
-            {slides.slice(1).map((img, idx) => (
+            {slides.slice(2).map((img, idx) => (
               <div className="embla__slide" key={idx}>
-                <div className="relative w-full aspect-[5/3]">
+                <div className="relative w-full aspect-[6/4]">
                   <Image
                     src={img}
                     alt="image"
@@ -65,7 +65,7 @@ const ProductCarousel: React.FC<PropType> = (props) => {
         <div className="embla-thumbs">
           <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
             <div className="embla-thumbs__container">
-              {slides.slice(1).map((img, idx) => (
+              {slides.slice(2).map((img, idx) => (
                 <Thumb
                   key={idx}
                   onClick={() => onThumbClick(idx)}

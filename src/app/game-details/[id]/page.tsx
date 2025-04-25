@@ -55,7 +55,7 @@ const gamesData: TGame[] = [
   },
 ];
 
-const OPTIONS: EmblaOptionsType = {}
+const OPTIONS: EmblaOptionsType = {};
 
 const GameDetailsPage = async ({
   params,
@@ -74,7 +74,7 @@ const GameDetailsPage = async ({
         <Image
           className="object-cover"
           src={findGame?.thumbnail}
-          alt={findGame?.title}
+          alt="Thumbnail"
         />
 
         <PTContainer>
@@ -95,11 +95,13 @@ const GameDetailsPage = async ({
                 <div>
                   <ProductCarousel slides={findGame?.image} options={OPTIONS} />
                 </div>
-                <div className="mt-8">
+                <div className="mt-5">
                   <h3 className=" font-medium text-foreground uppercase">
                     Description
                   </h3>
-                  <p className=" m-2 text-primary">{findGame?.description}</p>
+                  <p className=" m-2 text-primary/90">
+                    {findGame?.description}
+                  </p>
                 </div>
                 <div className="mt-6">
                   <UserActivities />
