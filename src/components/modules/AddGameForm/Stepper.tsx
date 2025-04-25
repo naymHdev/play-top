@@ -1,0 +1,41 @@
+"use client";
+
+import { Check } from "lucide-react";
+
+const steps = [
+  "Add Title",
+  "Description",
+  "Social Links for the Game",
+  "Upload file",
+];
+
+export const StepIndicator = ({
+  stepIndex,
+  currentStep,
+}: {
+  stepIndex: number;
+  currentStep: number;
+}) => {
+  const isCompleted = stepIndex < currentStep;
+  const isActive = stepIndex === currentStep;
+
+  return (
+    <div className="flex flex-col items-center justify-between text-white">
+      <div
+        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm
+        ${
+          isCompleted
+            ? "bg-green-500"
+            : isActive
+            ? "border-2 border-green-500"
+            : "bg-gray-700"
+        }`}
+      >
+        {isCompleted ? <Check className="w-4 h-4" /> : stepIndex + 1}
+      </div>
+      {stepIndex !== steps.length - 1 && (
+        <div className="h-10 w-1 bg-gray-600"></div>
+      )}
+    </div>
+  );
+};

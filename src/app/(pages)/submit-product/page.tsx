@@ -1,4 +1,4 @@
-import AddNewGame from "@/components/modules/addGame";
+import AddGameForm from "@/components/modules/AddGameForm";
 import PTContainer from "@/components/ui/PTContainer";
 
 const SubmitProductPage = () => {
@@ -7,7 +7,7 @@ const SubmitProductPage = () => {
       <div>
         <PTContainer>
           <div>
-            <AddNewGame />
+            <AddGameForm />
           </div>
         </PTContainer>
       </div>
