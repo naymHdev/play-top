@@ -182,27 +182,26 @@ export default function AddGameForm() {
                 </div>
               </div>
             )}
-
-            <div className="mt-4 flex items-center justify-between">
-              <div>
-                <PTButton
-                  label="Cancel"
-                  className="border border-card text-primary bg-background px-6 py-2"
-                />
-              </div>
-              <div className=" flex items-center gap-4">
-                <PTButton
-                  label="Save as Draft"
-                  className=" border-none text-primary bg-foreground px-6 py-2"
-                />
-                <PTButton
-                  label="Submit Game"
-                  className=" text-primary border-none bg-secondary px-6 py-2"
-                />
-              </div>
-            </div>
           </section>
         ))}
+        <div className="flex items-center justify-between">
+          <div>
+            <PTButton
+              label="Cancel"
+              className="border border-card text-primary bg-background px-6 py-2"
+            />
+          </div>
+          <div className=" flex items-center gap-4">
+            <PTButton
+              label="Save as Draft"
+              className=" border-none text-primary bg-foreground px-6 py-2"
+            />
+            <PTButton
+              label="Submit Game"
+              className=" text-primary border-none bg-secondary px-6 py-2"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
