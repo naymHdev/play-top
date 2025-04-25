@@ -4,6 +4,7 @@ import PTButton from "@/components/ui/PTButton";
 import PTContainer from "@/components/ui/PTContainer";
 import { CiEdit } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 const ProfileBanner = () => {
   return (
@@ -31,13 +32,15 @@ const ProfileBanner = () => {
                   </p>
                 </div>
               </div>
-              <div>
-                <PTButton
-                  className="border border-primary py-2 px-5"
-                  label="Edit Profile"
-                  icon={<CiEdit />}
-                />
-              </div>
+              <Link href="/update-profile">
+                <div>
+                  <PTButton
+                    className="border border-primary py-2 px-5"
+                    label="Edit Profile"
+                    icon={<CiEdit />}
+                  />
+                </div>
+              </Link>
             </div>
           </div>
         </PTContainer>

@@ -12,7 +12,7 @@ const GamesTabs = () => {
           </TabsTrigger>
           <TabsTrigger value="upvoted">Games Upvoted</TabsTrigger>
         </TabsList>
-        <div className=" border-b-3 w-[99%] mx-auto -mt-[14px] -z-10 rounded-full"></div>
+        <div className=" border-b-3 border-card w-[99%] mx-auto -mt-[14px] -z-10 rounded-full"></div>
         <TabsContent value="submitted">
           {/* Content for Games Submitted */}
           <div className="">
