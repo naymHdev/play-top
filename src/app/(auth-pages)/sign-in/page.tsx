@@ -1,0 +1,199 @@
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
+
+// Define the schema for the form using Zod
+const signInSchema = z.object({
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  password: z.string().min(8, {
+    message: "Password must be at least 8 characters long.",
+  }),
+});
+
+// Animation variants for the form container
+const formVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
+const SignInPage = () => {
+  // Initialize the form using useForm
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema), // Use Zod schema for validation
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  // Function to handle form submission
+  const onSubmit = async (values: z.infer<typeof signInSchema>) => {
+    // Simulate an API call (replace with your actual sign-in logic)
+    console.log("Signing in with:", values);
+    try {
+      // Replace this with your actual authentication logic (e.g., an API call)
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a 1-second delay
+      // If sign-in is successful, you might want to redirect the user:
+      // window.location.href = '/dashboard'; // Example: Redirect to dashboard
+      alert("Sign in successful! (Simulated)"); // Replace with a proper notification
+    } catch (error) {
+      // Handle errors (e.g., display an error message)
+      console.error("Sign in failed:", error);
+      // form.setError('root', { message: 'Failed to sign in. Please check your credentials.' }); // Example
+      alert("Sign in failed. Please check your credentials and try again.");
+    }
+  };
+
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center min-h-screen ",
+        "p-4 sm:p-8" // Responsive padding
+      )}
+    >
+      <div
+        className={cn(
+          "w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
+          "border border-white/10 p-6 sm:p-8", // Responsive padding
+          "space-y-6"
+        )}
+      >
+        <h1
+          className={cn(
+            "text-3xl sm:text-4xl font-bold text-center text-primary/80",
+            "mb-4 sm:mb-6"
+          )}
+        >
+          Welcome Back
+        </h1>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 sm:space-y-6" // Responsive spacing
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    className={cn(
+                      "text-white/90 block mb-2 sm:mb-3",
+                      "text-sm sm:text-base"
+                    )}
+                  >
+                    Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your email"
+                      {...field}
+                      type="email"
+                      className={cn(
+                        "shadow-inner shadow-black/20",
+                        "py-2.5 sm:py-3 px-2",
+                        "text-sm sm:text-base"
+                      )}
+                    />
+                  </FormControl>
+                  <FormMessage
+                    className={cn(
+                      "text-red-400 mt-1.5 sm:mt-2",
+                      "text-xs sm:text-sm"
+                    )}
+                  />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    className={cn(
+                      "text-white/90 block mb-2 sm:mb-3",
+                      "text-sm sm:text-base"
+                    )}
+                  >
+                    Password
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your password"
+                      {...field}
+                      type="password"
+                      className={cn(
+                        "bg-black/20 text-white ",
+                        "shadow-inner shadow-black/20",
+                        "py-2.5 sm:py-3 px-2",
+                        "text-sm sm:text-base"
+                      )}
+                    />
+                  </FormControl>
+                  <FormMessage
+                    className={cn(
+                      "text-red-400 mt-1.5 sm:mt-2",
+                      "text-xs sm:text-sm"
+                    )}
+                  />
+                </FormItem>
+              )}
+            />
+            <Button
+              type="submit"
+              className={cn(
+                "w-full bg-secondary",
+                "text-white font-semibold py-2.5 sm:py-3.5",
+                "rounded-full hover:bg-secondary/80",
+                "transition-all duration-300 shadow-lg hover:shadow-xl",
+                "text-base sm:text-lg"
+              )}
+            >
+              Sign In
+            </Button>
+            <div
+              className={cn(
+                "text-center text-gray-400",
+                "text-sm sm:text-base",
+                "mt-4 sm:mt-6"
+              )}
+            >
+              Don't have an account?{" "}
+              <a
+                href="/sign-up"
+                className={cn(
+                  "text-green-300 hover:text-green-200 font-semibold",
+                  "transition-colors duration-200"
+                )}
+              >
+                Sign Up
+              </a>
+            </div>
+          </form>
+        </Form>
+      </div>
+    </div>
+  );
+};
+
+export default SignInPage;

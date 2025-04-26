@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
-  const activeUser = true;
+  const activeUser = false;
 
   return (
     <>
@@ -67,8 +67,8 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link href="/profile">
-                    <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2">
+                  <Link href="/sign-in">
+                    <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
                       <FaRegUser /> Sign In
                     </Button>
                   </Link>
