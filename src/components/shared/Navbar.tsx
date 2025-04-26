@@ -2,10 +2,15 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import PTContainer from "../ui/PTContainer";
-import { FaPlus, FaRegUser } from "react-icons/fa6";
+import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
+import { IoNotificationsOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
+  const activeUser = true;
+
   return (
     <>
       <div className=" py-6">
@@ -34,11 +39,41 @@ const Navbar = () => {
                   <FaPlus className=" ml-2" />
                 </Button>
               </Link>
-              <Link href="/profile">
-                <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2">
-                  <FaRegUser /> Sign In
-                </Button>
-              </Link>
+              {activeUser ? (
+                <>
+                  <div className="flex items-center gap-4">
+                    {/* Notification Icon with Green Dot */}
+                    <div className="relative">
+                      <div className="rounded-full bg-card p-3 flex items-center justify-center">
+                        <IoNotificationsOutline
+                          size={24}
+                          className="text-primary"
+                        />
+                      </div>
+                      {/* Green Dot */}
+                      <span className="absolute top-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background" />
+                    </div>
+
+                    {/* Avatar */}
+                    <div>
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>
+                          <FaRegCircleUser />
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link href="/profile">
+                    <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2">
+                      <FaRegUser /> Sign In
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </PTContainer>
