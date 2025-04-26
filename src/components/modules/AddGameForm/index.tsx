@@ -1,12 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { StepIndicator } from "./Stepper";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import PTButton from "@/components/ui/PTButton";
 import { MdOutlineCloudUpload } from "react-icons/md";
+import dynamic from "next/dynamic";
+import { EditorState } from "draft-js";
+import styles from "./description.module.css";
 
+// Dynamically import the editor
+const Editor = dynamic(
+  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
+  { ssr: false }
+);
+
+// Steps for timeline
 const steps = [
   "Add Title",
   "Description",
@@ -14,12 +27,34 @@ const steps = [
   "Upload file",
 ];
 
+// Zod Schema
+const formSchema = z.object({
+  gameTitle: z.string().min(1, "Title is required"),
+  steamAccount: z.string().optional(),
+  linkedinAccount: z.string().optional(),
+  redditAccount: z.string().optional(),
+  instagramAccount: z.string().optional(),
+  xAccount: z.string().optional(),
+});
+
+type FormData = z.infer<typeof formSchema>;
+
 export default function AddGameForm() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [gameTitle, setGameTitle] = useState("");
-  const [description, setDescription] = useState("");
-
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+  });
+
+  const watchedGameTitle = watch("gameTitle");
 
   useEffect(() => {
     if (sectionRefs.current[currentStep]) {
@@ -28,19 +63,21 @@ export default function AddGameForm() {
   }, [currentStep]);
 
   useEffect(() => {
-    if (currentStep === 0 && gameTitle.trim().length > 0) {
+    if (currentStep === 0 && watchedGameTitle?.trim().length > 0) {
       setTimeout(() => setCurrentStep(1), 500);
     }
-  }, [gameTitle]);
+  }, [watchedGameTitle]);
 
-  useEffect(() => {
-    if (currentStep === 1 && description.trim().length > 0) {
-      setTimeout(() => setCurrentStep(2), 500);
-    }
-  }, [description]);
+  const onSubmit = (data: FormData) => {
+    console.log("Form Data:", data);
+    console.log("Description Content:", editorState);
+  };
 
   return (
-    <div className="flex max-w-4xl mx-auto text-white">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex max-w-4xl mx-auto text-white"
+    >
       {/* Timeline */}
       <div className="w-20 flex flex-col items-center py-10 sticky top-0">
         {steps.map((_, index) => (
@@ -52,7 +89,7 @@ export default function AddGameForm() {
         ))}
       </div>
 
-      {/* Form */}
+      {/* Form Sections */}
       <div className="flex-1 space-y-14 p-10">
         <div>
           <h2 className=" text-5xl font-bold leading-14 text-primary">
@@ -63,135 +100,207 @@ export default function AddGameForm() {
             cursus dictum enim. 
           </p>
         </div>
+
         {steps.map((step, index) => (
           <section key={index} ref={(el) => (sectionRefs.current[index] = el)}>
             <h2 className="text-3xl font-bold mb-4">{step}</h2>
 
-            {/* ---------------- Game Title & Category ---------------- */}
+            {/* --- Step 1: Game Title & Category --- */}
             {index === 0 && (
               <div>
                 <p className="text-sm text-gray-400 mb-4">
                   Save on the Sakura Storm Collection, Koumei Visions Bundle and
                   more from April 9-23.
                 </p>
-                <label className="block text-lg font-semibold">
+                <label className="block text-lg font-semibold text-primary/80">
                   Game Title
                 </label>
                 <input
                   type="text"
                   maxLength={40}
                   placeholder="Enter game title"
-                  value={gameTitle}
-                  onChange={(e) => setGameTitle(e.target.value)}
+                  {...register("gameTitle")}
                   className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
                 />
+                {errors.gameTitle && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.gameTitle.message}
+                  </p>
+                )}
 
-                <label className="block mt-4 text-lg font-semibold">
+                <label className="block mt-4 text-lg font-semibold text-primary/80">
                   Select Categories
                 </label>
                 <select className="w-full mt-2 p-2 py-3 px-2 rounded-md border-none bg-card">
                   <option>Select a category from the list</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
                 </select>
               </div>
             )}
 
-            {/* ---------------- Game Details ---------------- */}
+            {/* --- Step 2: Description --- */}
             {index === 1 && (
               <div>
                 <p className="text-sm text-gray-400 mb-4">
                   Save on the Sakura Storm Collection, Koumei Visions Bundle and
                   more from April 9-23.
                 </p>
-                <label className="block text-lg font-semibold">
+                <label className="block text-lg font-semibold text-primary/80">
                   Description of the game
                 </label>
-                <textarea
-                  rows={6}
-                  placeholder="Add game description..."
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full mt-2 py-3 px-2 rounded-md border-none bg-card"
-                />
+                <div className={`${styles.editorWrapper} mt-3`}>
+                  <Editor
+                    editorState={editorState}
+                    onEditorStateChange={setEditorState}
+                    wrapperClassName={styles.wrapper}
+                    toolbarClassName={styles.toolbar}
+                    editorClassName={styles.editor}
+                    toolbar={{
+                      options: ["inline", "link", "list"],
+                      inline: {
+                        options: ["bold", "italic"],
+                        className: styles.toolbarButton,
+                      },
+                      link: {
+                        className: styles.toolbarButton,
+                      },
+                      list: {
+                        className: styles.toolbarButton,
+                      },
+                    }}
+                    placeholder="Short description of the game..."
+                  />
+                </div>
               </div>
             )}
 
-            {/* ---------------- Social Links Upload---------------- */}
+            {/* --- Step 3: Social Links --- */}
             {index === 2 && (
               <div>
                 <p className="text-sm text-gray-400 mb-4">
-                  Atleast 1 link is required*
+                  At least 1 link is required*
                 </p>
-                <div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="steamAccount">
-                        Steam account of the game
-                      </Label>
-                      <div className="relative">
-                        <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                          steam.com/
-                        </div>
-                        <div className="">
-                          <Input
-                            type="text"
-                            id="steamAccount"
-                            // {...register("steamAccount")}
-                            className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                          />
-                        </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Steam */}
+                  <div>
+                    <Label htmlFor="steamAccount" className="text-primary/80">
+                      Steam account of the game
+                    </Label>
+                    <div className="relative">
+                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
+                        steam.com/
                       </div>
+                      <Input
+                        type="text"
+                        id="steamAccount"
+                        {...register("steamAccount")}
+                        className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                      />
                     </div>
+                  </div>
 
-                    <div>
-                      <Label htmlFor="xAccount">X account of the game</Label>
-                      <div className="relative">
-                        <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                          x.com/
-                        </div>
-                        <div className="">
-                          <Input
-                            type="text"
-                            id="steamAccount"
-                            // {...register("steamAccount")}
-                            className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                          />
-                        </div>
+                  {/* LinkedIn */}
+                  <div>
+                    <Label
+                      htmlFor="linkedinAccount"
+                      className="text-primary/80"
+                    >
+                      LinkedIn account of the game
+                    </Label>
+                    <div className="relative">
+                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
+                        linkedin.com/
                       </div>
+                      <Input
+                        type="text"
+                        id="linkedinAccount"
+                        {...register("linkedinAccount")}
+                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Reddit */}
+                  <div>
+                    <Label htmlFor="redditAccount">
+                      Reddit account of the game
+                    </Label>
+                    <div className="relative">
+                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
+                        reddit.com/
+                      </div>
+                      <Input
+                        type="text"
+                        id="redditAccount"
+                        {...register("redditAccount")}
+                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Instagram */}
+                  <div>
+                    <Label htmlFor="instagramAccount">
+                      Instagram account of the game
+                    </Label>
+                    <div className="relative">
+                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
+                        instagram.com/
+                      </div>
+                      <Input
+                        type="text"
+                        id="instagramAccount"
+                        {...register("instagramAccount")}
+                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                      />
+                    </div>
+                  </div>
+
+                  {/* X */}
+                  <div>
+                    <Label htmlFor="xAccount">X account of the game</Label>
+                    <div className="relative">
+                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
+                        x.com/
+                      </div>
+                      <Input
+                        type="text"
+                        id="xAccount"
+                        {...register("xAccount")}
+                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* ---------------- File Uploading Systems---------------- */}
+            {/* --- Step 4: File Upload --- */}
             {index === 3 && (
               <div>
                 <p className="text-sm text-gray-400 mb-4">
                   Save on the Sakura Storm Collection, Koumei Visions Bundle and
                   more from April 9-23.
                 </p>
+
+                {/* Thumbnail Upload */}
                 <div>
-                  <label className="block text-lg font-semibold">
+                  <label className="block text-lg font-semibold text-primary/80">
                     Upload thumbnail
                   </label>
-                  <p className=" mt-1 text-sm font-normal text-foreground">
+                  <p className="mt-1 text-sm font-normal text-foreground">
                     Keep in mind that the first file you upload will appear in
-                    the cover preview. We recommend the size 930x560 with aspect
-                    ratio 4:3. Not sure what to
-                    <span className=" underline px-1">upload</span>?
+                    the cover preview.
                   </p>
-                  <div className="relative border border-dashed border-card mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-muted transition">
-                    {/* Invisible file input over the whole area */}
+                  <div className="relative border border-dashed border-foreground mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer">
                     <input
                       id="picture"
                       type="file"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
-
-                    {/* Upload icon */}
                     <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
-
-                    {/* Upload text */}
                     <div className="space-y-1">
                       <p className="text-primary font-medium">
                         Drag your file(s) here or{" "}
@@ -203,10 +312,37 @@ export default function AddGameForm() {
                         </label>
                       </p>
                       <p className="text-sm text-foreground">
-                        You can upload the following formats:
-                      </p>
-                      <p className="text-sm text-foreground">
                         .jpg, .jpeg, .png, .avi — Max size: 50MB — Max files: 1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cover Upload */}
+                <div className="mt-8">
+                  <label className="block text-lg font-semibold text-primary/80">
+                    Upload cover image
+                  </label>
+                  <p className="mt-1 text-sm font-normal text-foreground">
+                    Keep in mind that the first file you upload will appear in
+                    the cover preview.
+                  </p>
+                  <div className="relative border border-dashed border-foreground mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer">
+                    <input
+                      id="cover"
+                      type="file"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                    <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
+                    <div className="space-y-1">
+                      <p className="text-primary font-medium">
+                        Drag your file(s) here or{" "}
+                        <label
+                          htmlFor="cover"
+                          className="text-secondary underline cursor-pointer"
+                        >
+                          browse
+                        </label>
                       </p>
                     </div>
                   </div>
@@ -215,6 +351,8 @@ export default function AddGameForm() {
             )}
           </section>
         ))}
+
+        {/* Submit Button */}
         <div className="flex items-center justify-between">
           <div>
             <PTButton
@@ -228,12 +366,13 @@ export default function AddGameForm() {
               className=" border-none text-primary bg-foreground px-6 py-2"
             />
             <PTButton
+              type="submit"
               label="Submit Game"
               className=" text-primary border-none bg-secondary px-6 py-2"
             />
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
