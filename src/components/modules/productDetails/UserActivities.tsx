@@ -1,4 +1,5 @@
 "use client";
+import CommentsSection from "./Comments";
 import UserCommentBox from "./UserCommentBox";
 
 const UserActivities = () => {
@@ -6,6 +7,7 @@ const UserActivities = () => {
     <>
       <div>
         <UserCommentBox />
+        <CommentsSection />
       </div>
     </>
   );

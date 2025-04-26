@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
@@ -26,6 +26,9 @@ const profileUpdateSchema = z.object({
 type ProfileUpdateFormData = z.infer<typeof profileUpdateSchema>;
 
 const ProfileUpdateForm = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const {
     register,
     handleSubmit,
@@ -57,22 +60,48 @@ const ProfileUpdateForm = () => {
     setBioText(event.target.value);
   };
 
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
+
+  const handleOverlayClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div className=" -mt-[190px]">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-6 max-w-3xl mx-auto mt-10"
       >
-        <div className=" flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <div className="relative flex items-center justify-center w-[200px] h-[200px]">
             {/* Profile Image */}
             <Avatar className="w-full h-full">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage
+                src={selectedImage || "https://github.com/shadcn.png"}
+              />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
 
+            {/* Hidden Input for Upload */}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              ref={fileInputRef}
+              className="hidden"
+            />
+
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center hover:cursor-pointer">
+            <div
+              className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center hover:cursor-pointer"
+              onClick={handleOverlayClick}
+            >
               <FaCamera className="text-white text-3xl" />
             </div>
           </div>
@@ -129,6 +158,7 @@ const ProfileUpdateForm = () => {
                 <Input
                   type="text"
                   id="steamAccount"
+                  placeholder="@game"
                   {...register("steamAccount")}
                   className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
                 />
@@ -240,6 +270,7 @@ const ProfileUpdateForm = () => {
             label="Cancel"
           />
           <PTButton
+            type="submit"
             className=" border-none bg-secondary rounded-full px-8 py-3"
             label="Save Change"
           />

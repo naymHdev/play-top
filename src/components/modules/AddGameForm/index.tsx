@@ -195,6 +195,7 @@ export default function AddGameForm() {
                       <Input
                         type="text"
                         id="steamAccount"
+                        placeholder="steam.com/"
                         {...register("steamAccount")}
                         className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
                       />
@@ -216,8 +217,9 @@ export default function AddGameForm() {
                       <Input
                         type="text"
                         id="linkedinAccount"
+                        placeholder="linkedin.com/"
                         {...register("linkedinAccount")}
-                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                        className="pl-[122px] pr-2 mt-3 bg-[#111111] border-none py-6"
                       />
                     </div>
                   </div>
@@ -234,8 +236,9 @@ export default function AddGameForm() {
                       <Input
                         type="text"
                         id="redditAccount"
+                        placeholder="@reddit.com/"
                         {...register("redditAccount")}
-                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                        className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
                       />
                     </div>
                   </div>
@@ -252,8 +255,9 @@ export default function AddGameForm() {
                       <Input
                         type="text"
                         id="instagramAccount"
+                        placeholder="instagram.com/"
                         {...register("instagramAccount")}
-                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                        className="pl-[138px] pr-2 mt-3 bg-[#111111] border-none py-6"
                       />
                     </div>
                   </div>
@@ -268,6 +272,7 @@ export default function AddGameForm() {
                       <Input
                         type="text"
                         id="xAccount"
+                        placeholder="x.com/"
                         {...register("xAccount")}
                         className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
                       />
