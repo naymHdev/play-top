@@ -5,6 +5,7 @@ import { StepIndicator } from "./Stepper";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import PTButton from "@/components/ui/PTButton";
+import { MdOutlineCloudUpload } from "react-icons/md";
 
 const steps = [
   "Add Title",
@@ -179,6 +180,36 @@ export default function AddGameForm() {
                     ratio 4:3. Not sure what to
                     <span className=" underline px-1">upload</span>?
                   </p>
+                  <div className="relative border border-dashed border-card mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-muted transition">
+                    {/* Invisible file input over the whole area */}
+                    <input
+                      id="picture"
+                      type="file"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+
+                    {/* Upload icon */}
+                    <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
+
+                    {/* Upload text */}
+                    <div className="space-y-1">
+                      <p className="text-primary font-medium">
+                        Drag your file(s) here or{" "}
+                        <label
+                          htmlFor="picture"
+                          className="text-secondary underline cursor-pointer"
+                        >
+                          browse
+                        </label>
+                      </p>
+                      <p className="text-sm text-foreground">
+                        You can upload the following formats:
+                      </p>
+                      <p className="text-sm text-foreground">
+                        .jpg, .jpeg, .png, .avi — Max size: 50MB — Max files: 1
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
