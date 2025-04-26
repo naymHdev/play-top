@@ -215,3 +215,26 @@
 .embla-thumbs__slide--selected .embla-thumbs__slide__img {
   border-color: #e0e9e4;
 }
+
+/* ------------------- Comment Box Custom Design ---------------- */
+/* styles/editor.css or globals.css */
+.custom-toolbar {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+}
+
+.custom-toolbar .rdw-option-wrapper {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white !important; /* White icons */
+}
+
+.custom-toolbar .rdw-option-wrapper:hover {
+  background: rgba(0, 0, 0, 0.05) !important; /* very soft hover */
+}
+
+.custom-toolbar .rdw-option-active {
+  background: rgba(0, 0, 0, 0.1) !important; /* soft active selected */
+}

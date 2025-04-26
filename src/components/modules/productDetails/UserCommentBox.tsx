@@ -1,44 +1,63 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import styles from "./UserCommentBox.module.css";
+import "draft-js/dist/Draft.css";
+import PTButton from "@/components/ui/PTButton";
 
-// Dynamically import the editor
+// Dynamically import the Editor
 const Editor = dynamic(
   () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
   { ssr: false }
 );
 
 const UserCommentBox = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+  const editor = useRef<any>(null);
+
+  function focusEditor() {
+    if (editor.current) {
+      editor.current.focus();
+    }
+  }
 
   return (
-    <div className={styles.editorWrapper}>
+    <div
+      className="border border-card bg-card rounded-2xl p-4"
+      style={{ minHeight: "10em", cursor: "text" }}
+      onClick={focusEditor}
+    >
       <Editor
         editorState={editorState}
         onEditorStateChange={setEditorState}
-        wrapperClassName={styles.wrapper}
-        toolbarClassName={styles.toolbar}
-        editorClassName={styles.editor}
+        placeholder="What do you think?..."
+        editorRef={(ref) => (editor.current = ref)}
         toolbar={{
           options: ["inline", "link", "list"],
           inline: {
             options: ["bold", "italic"],
-            className: styles.toolbarButton,
           },
           link: {
-            className: styles.toolbarButton,
+            options: ["link"],
           },
           list: {
-            className: styles.toolbarButton,
+            options: ["unordered", "ordered"],
           },
         }}
-        placeholder="What do you think?..."
+        toolbarStyle={{
+          backgroundColor: "transparent",
+        }}
+        toolbarClassName="custom-toolbar"
       />
-      <div className={styles.footer}>
-        <button className={styles.loginButton}>Login to comment</button>
+      <div className=" flex items-center justify-end -mt-[130px]">
+        <PTButton
+          className="border border-foreground/70 text-sm py-2 px-5 bg-card"
+          label="Login to Comment"
+        />
       </div>
     </div>
   );
