@@ -26,7 +26,7 @@ const upcomingGamesData = Array.from({ length: 10 }, (_, index) => ({
 const UpcomingRelease = () => {
   return (
     <>
-      <div className="relative">
+      <div className="relative mt-16">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image

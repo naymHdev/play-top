@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaXTwitter } from "react-icons/fa6";
 import thumb from "../../../assets/images/gameThumbnail.png";
 import { FaLinkedin, FaReddit } from "react-icons/fa";
+import PTButton from "@/components/ui/PTButton";
 
 const gamesData: TGame[] = [
   {
@@ -57,7 +58,7 @@ export const repeatedGamesData = Array.from({ length: 10 }, (_, index) => ({
 const DailyTopGames = () => {
   return (
     <>
-      <PTContainer className=" mt-20">
+      <PTContainer className=" mt-20 relative">
         <div>
           <PTSectionName
             title="Top Games of the Day"
@@ -70,12 +71,13 @@ const DailyTopGames = () => {
             <PTGameCard key={game._id} games={game} />
           ))}
         </div>
-        <div className="bg-black bg-opacity-30 h-[148px] flex items-center justify-center shadow-lg shadow-black/50 -mt-20">
-          <div className="flex items-center justify-center">
-            <Button className="px-8 py-5 flex items-center gap-2 rounded-full text-primary font-medium leading-7 max-w-[154px] max-h-[44px] bg-background border border-card">
-              Show More <FaArrowRight />
-            </Button>
-          </div>
+
+        <div className="bg-gradient-to-t from-black  to-transparent h-[148px] absolute w-full -bottom-10 flex items-center justify-center">
+          <PTButton
+            className="py-2 px-5 rounded-full border border-card hover:border-white"
+            label="Show More"
+            icon={<FaArrowRight />}
+          />
         </div>
       </PTContainer>
     </>
