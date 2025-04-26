@@ -13,7 +13,7 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-const UserCommentBox = () => {
+const Description = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -27,7 +27,7 @@ const UserCommentBox = () => {
 
   return (
     <div
-      className="border border-card bg-card rounded-2xl p-2 relative"
+      className="border border-card bg-card rounded-xl p-2 mt-3 relative"
       style={{ minHeight: "10em", cursor: "text" }}
       onClick={focusEditor}
     >
@@ -53,14 +53,8 @@ const UserCommentBox = () => {
         }}
         toolbarClassName="custom-toolbar"
       />
-      {/* <div className=" flex items-center justify-end -mt-16">
-        <PTButton
-          className="border border-foreground/70 text-sm py-1 px-5 bg-card"
-          label="Login to Comment"
-        />
-      </div> */}
     </div>
   );
 };
 
-export default UserCommentBox;
+export default Description;

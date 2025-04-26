@@ -9,15 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import PTButton from "@/components/ui/PTButton";
 import { MdOutlineCloudUpload } from "react-icons/md";
-import dynamic from "next/dynamic";
-import { EditorState } from "draft-js";
-import styles from "./description.module.css";
-
-// Dynamically import the editor
-const Editor = dynamic(
-  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
+import Description from "./Description";
 
 // Steps for timeline
 const steps = [
@@ -41,7 +33,6 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function AddGameForm() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const {
@@ -150,29 +141,7 @@ export default function AddGameForm() {
                 <label className="block text-lg font-semibold text-primary/80">
                   Description of the game
                 </label>
-                <div className={`${styles.editorWrapper} mt-3`}>
-                  <Editor
-                    editorState={editorState}
-                    onEditorStateChange={setEditorState}
-                    wrapperClassName={styles.wrapper}
-                    toolbarClassName={styles.toolbar}
-                    editorClassName={styles.editor}
-                    toolbar={{
-                      options: ["inline", "link", "list"],
-                      inline: {
-                        options: ["bold", "italic"],
-                        className: styles.toolbarButton,
-                      },
-                      link: {
-                        className: styles.toolbarButton,
-                      },
-                      list: {
-                        className: styles.toolbarButton,
-                      },
-                    }}
-                    placeholder="Short description of the game..."
-                  />
-                </div>
+                <Description />
               </div>
             )}
 
