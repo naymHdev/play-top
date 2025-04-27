@@ -30,7 +30,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               <h1 className=" font-medium text-xl uppercase text-secondary">
                 ${games.price}
               </h1>
-              <Button className=" flex items-center gap-2 bg-card text-primary rounded-full max-w-[90px] max-h-[26px]">
+              <Button className=" flex items-center gap-2 bg-card hover:bg-card hover:cursor-pointer text-primary rounded-full max-w-[90px] max-h-[26px]">
                 <FiArrowUpRight /> 4.5k <FiArrowDownRight />
               </Button>
             </div>

@@ -125,7 +125,7 @@ const LinkInputs = ({ register }: { register: any }) => {
         onClick={handleAddMore}
         className="mt-4 px-4 py-2 bg-card hover:bg-card/80 text-white rounded-md"
       >
-        + Add More
+        + Add More Links
       </button>
     </div>
   );

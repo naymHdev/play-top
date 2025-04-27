@@ -33,7 +33,7 @@ const Navbar = () => {
                 />
               </div>
               <Link href="/submit-product">
-                <Button className="w-[179px] h-[48px] rounded-full bg-secondary text-primary font-medium flex items-center gap-1">
+                <Button className="w-[179px] h-[48px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
                   Submit Game
                   <FaPlus className=" ml-2" />
                 </Button>

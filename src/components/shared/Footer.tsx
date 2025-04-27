@@ -27,8 +27,12 @@ const Footer = () => {
               with discovery at its heart.
             </p>
             <div className=" mt-6 flex gap-4 text-primary">
-              <FaXTwitter size={30} />
-              <FaDiscord size={30} />
+              <a href="#">
+                <FaXTwitter size={30} />
+              </a>
+              <a href="#">
+                <FaDiscord size={30} />
+              </a>
             </div>
           </div>
           <div className=" col-span-full md:col-span-2">
@@ -36,30 +40,44 @@ const Footer = () => {
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
                 <ul className="flex flex-col gap-3 mt-3 md:mt-6">
-                  <li className=" text-foreground font-medium">Home</li>
-                  <li className=" text-foreground font-medium">About Us</li>
-                  <li className=" text-foreground font-medium">Products</li>
-                  <li className=" text-foreground font-medium">Contact</li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    Home
+                  </li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    About Us
+                  </li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    Products
+                  </li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    Contact
+                  </li>
                 </ul>
               </div>
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
                 <ul className="flex flex-col gap-3 mt-3 md:mt-6">
-                  <li className=" text-foreground font-medium">News</li>
-                  <li className=" text-foreground font-medium">Forums</li>
-                  <li className=" text-foreground font-medium">Advertise</li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    News
+                  </li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    Forums
+                  </li>
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                    Advertise
+                  </li>
                 </ul>
               </div>
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
                 <ul className="flex flex-col gap-3 mt-3 md:mt-6">
-                  <li className=" text-foreground font-medium">
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
                     Terms Of Service
                   </li>
-                  <li className=" text-foreground font-medium">
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
                     Privacy Policy
                   </li>
-                  <li className=" text-foreground font-medium">
+                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
                     Do not sell my info
                   </li>
                 </ul>
