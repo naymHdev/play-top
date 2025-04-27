@@ -57,14 +57,13 @@ const UpcomingRelease = () => {
               </div>
             </div>
             <div className=" flex items-center justify-center ">
-            <PTButton
-              className=" px-[70px] py-[12px] bg-secondary"
-              label="See All Games "
-              icon={<MdArrowForwardIos className=" size-4 mt-1" />}
-            />
+              <PTButton
+                className=" px-[70px] py-[12px] bg-secondary"
+                label="See All Games "
+                icon={<MdArrowForwardIos className=" size-4 mt-1" />}
+              />
+            </div>
           </div>
-          </div>
-        
         </PTContainer>
       </div>
     </>

@@ -9,10 +9,10 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
     <>
       <Link href={`/${game._id}`}>
         <div className="border border-card rounded-2xl shadow relative">
-          <div className="flex items-center justify-evenly">
-            <div>
+          <div className=" grid lg:flex items-center lg:justify-evenly p-2">
+            <div className=" flx items-center justify-center ">
               <Image
-                className=""
+                className="flx items-center justify-center"
                 src={game.image}
                 alt={game.title}
                 width={200}
@@ -20,18 +20,18 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
               />
             </div>
             <div>
-              <h2 className=" text-2xl font-semibold text-primary">
+              <h2 className=" text-xl lg:text-2xl font-semibold text-primary">
                 {game.title}
               </h2>
             </div>
             <div>
-              <h1 className=" font-medium text-xl uppercase text-secondary">
+              <h1 className="mt-2 md:mt-0 font-medium text-xl uppercase text-secondary">
                 ${game.price}
               </h1>
             </div>
           </div>
-          <div className=" p-1 bg-card border-t border-card rounded-b-2xl">
-            <div className=" flex items-center justify-around font-medium text-[12px] leading-5 text-foreground">
+          <div className=" p-2 lg:p-1 bg-card border-t border-card rounded-b-2xl">
+            <div className=" lg:flex items-center justify-around font-medium text-[12px] leading-5 text-foreground space-y-3">
               <div className=" flex items-center gap-2">
                 <h3 className=" ">Categories:</h3>
                 <div className=" flex gap-2 items-center">
