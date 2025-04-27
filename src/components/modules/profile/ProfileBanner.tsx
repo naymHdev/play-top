@@ -13,9 +13,9 @@ const ProfileBanner = () => {
         <PTContainer>
           <div className="">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <div className="w-[240px] h-[240px] mt-14">
-                  <Avatar className="w-[240px] h-[240px]">
+              <div className="lg:flex items-center gap-5">
+                <div className="lg:w-[240px] w-[130px] lg:h-[240px] h-[130px] mt-8 lg:mt-14">
+                  <Avatar className="lg:w-[240px] w-[130px] lg:h-[240px] h-[130px]">
                     <AvatarImage
                       src="https://github.com/shadcn.png"
                       alt="@shadcn"
@@ -32,15 +32,15 @@ const ProfileBanner = () => {
                   </p>
                 </div>
               </div>
-              <Link href="/update-profile">
-                <div>
+              <div>
+                <Link href="/update-profile">
                   <PTButton
                     className="border border-primary py-2 px-5"
                     label="Edit Profile"
                     icon={<CiEdit />}
                   />
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
         </PTContainer>

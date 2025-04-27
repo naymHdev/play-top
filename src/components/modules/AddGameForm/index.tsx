@@ -67,7 +67,7 @@ export default function AddGameForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex max-w-4xl mx-auto text-white"
+      className="flex w-full lg:max-w-4xl mx-auto text-white"
     >
       {/* Timeline */}
       <div className="w-20 flex flex-col items-center py-10 sticky top-0">
@@ -81,7 +81,7 @@ export default function AddGameForm() {
       </div>
 
       {/* Form Sections */}
-      <div className="flex-1 space-y-14 p-10">
+      <div className="flex-1 space-y-14 lg:p-10 py-6 lg:py-0">
         <div>
           <h2 className=" text-5xl font-bold leading-14 text-primary">
             Add a new game
@@ -331,18 +331,18 @@ export default function AddGameForm() {
           <div>
             <PTButton
               label="Cancel"
-              className="border border-card text-primary bg-background px-6 py-2"
+              className="border border-card text-primary bg-background px-3 lg:px-6 py-2"
             />
           </div>
-          <div className=" flex items-center gap-4">
+          <div className=" flex items-center gap-2 lg:gap-4">
             <PTButton
               label="Save as Draft"
-              className=" border-none text-primary bg-foreground px-6 py-2"
+              className=" border-none text-primary bg-foreground px-2 lg:px-6 py-2"
             />
             <PTButton
               type="submit"
               label="Submit Game"
-              className=" text-primary border-none bg-secondary px-6 py-2"
+              className=" text-primary border-none bg-secondary px-2 lg:px-6 py-2"
             />
           </div>
         </div>

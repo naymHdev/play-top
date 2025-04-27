@@ -13,7 +13,7 @@ import ProductTab from "./ProductTab";
 const ProfileDetails = () => {
   return (
     <>
-      <div className=" mt-24 grid grid-cols-6 gap-8">
+      <div className=" mt-24 grid-cols-1 grid lg:grid-cols-6 gap-8">
         {/* ----------- User Bio ----------- */}
         <div className=" col-span-4">
           <h4 className=" text-foreground font-semibold uppercase text-sm">
