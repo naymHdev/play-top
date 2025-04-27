@@ -13,6 +13,7 @@ import PTButton from "@/components/ui/PTButton";
 import { FaCamera } from "react-icons/fa6";
 import PasswordChange from "./PasswordChange";
 import DeleteAccount from "./DeleteAccount";
+import Link from "next/link";
 
 const profileUpdateSchema = z.object({
   nameTitle: z.string().optional(),
@@ -267,10 +268,12 @@ const ProfileUpdateForm = () => {
         </div>
 
         <div className="flex items-center justify-between">
-          <PTButton
-            className="border border-card rounded-full px-8 py-3"
-            label="Cancel"
-          />
+          <Link href={"/profile"}>
+            <PTButton
+              className="border border-card rounded-full px-8 py-3"
+              label="Cancel"
+            />
+          </Link>
           <PTButton
             type="submit"
             className=" border-none bg-secondary rounded-full px-8 py-3"

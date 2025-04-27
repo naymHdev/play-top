@@ -8,7 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
-  const activeUser = false;
+  const activeUser = true;
 
   return (
     <>
@@ -43,9 +43,9 @@ const Navbar = () => {
                   <div className="flex items-center gap-4">
                     {/* Notification Icon with Green Dot */}
                     <div className="relative">
-                      <div className="rounded-full bg-card p-3 flex items-center justify-center">
+                      <div className="rounded-full bg-card p-2 flex items-center justify-center">
                         <IoNotificationsOutline
-                          size={24}
+                          size={22}
                           className="text-primary"
                         />
                       </div>
@@ -55,12 +55,14 @@ const Navbar = () => {
 
                     {/* Avatar */}
                     <div>
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>
-                          <FaRegCircleUser />
-                        </AvatarFallback>
-                      </Avatar>
+                      <Link href={"/profile"}>
+                        <Avatar>
+                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarFallback>
+                            <FaRegCircleUser />
+                          </AvatarFallback>
+                        </Avatar>
+                      </Link>
                     </div>
                   </div>
                 </>
