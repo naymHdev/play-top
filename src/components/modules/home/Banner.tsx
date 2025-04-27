@@ -21,8 +21,8 @@ const BannerSection = () => {
 
         {/* Content on top of the image */}
         <PTContainer>
-          <div className="relative w-1/2 z-10 py-46">
-            <h2 className="text-primary font-extrabold text-6xl leading-16">
+          <div className="relative lg:w-1/2 z-10 py-10 lg:py-46">
+            <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
               All in One Place for Game Creators and Fans Alike
             </h2>
             <p className="text-primary text-sm leading-normal mt-5 max-w-3xl mx-auto">

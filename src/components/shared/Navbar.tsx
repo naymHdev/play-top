@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" py-6">
+      <div className=" hidden md:block py-6">
         <PTContainer>
           <div className=" flex items-center justify-between">
             <div>

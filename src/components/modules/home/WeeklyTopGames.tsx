@@ -37,7 +37,7 @@ const WeeklyTopGames = () => {
               title="Top Games of the Week"
               description="Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat, cursus dictum enim."
             />
-            <div className=" mt-12 grid grid-cols-2 gap-5">
+            <div className=" mt-12 grid grid-cols-1 md:grid-cols-2 gap-5">
               {weeklyGamesData?.map((games) => (
                 <PTWeeklyGameCard key={games._id} game={games} />
               ))}

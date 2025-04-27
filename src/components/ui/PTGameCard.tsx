@@ -10,7 +10,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
   return (
     <Link href={`game-details/${games._id}`}>
       <div className="mt-2 border border-card rounded-2xl shadow">
-        <div className=" grid grid-cols-3 gap-4 items-center">
+        <div className=" grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
           <div>
             <Image
               className=""
@@ -20,13 +20,13 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               height={350}
             />
           </div>
-          <div>
-            <h2 className=" text-2xl font-semibold text-primary">
+          <div className=" px-3 lg:px-0">
+            <h2 className=" text-xl lg:text-2xl font-semibold text-primary">
               {games.title}
             </h2>
           </div>
-          <div>
-            <div className=" flex items-center justify-evenly">
+          <div className="px-3">
+            <div className=" flex items-center justify-between lg:justify-evenly">
               <h1 className=" font-medium text-xl uppercase text-secondary">
                 ${games.price}
               </h1>
@@ -36,8 +36,8 @@ const PTGameCard = ({ games }: { games: TGame }) => {
             </div>
           </div>
         </div>
-        <div className=" p-2 bg-card border-t border-card rounded-b-2xl">
-          <div className=" flex items-center space-x-6 font-medium text-[12px] leading-5 text-foreground">
+        <div className="mt-3 p-3 bg-card border-t border-card rounded-b-2xl">
+          <div className="lg:flex items-center space-x-6 font-medium text-[12px] leading-5 text-foreground">
             <div className=" flex items-center gap-2">
               <h3 className=" ">Categories:</h3>
               <div className=" flex gap-2 items-center">
@@ -46,8 +46,8 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                 ))}
               </div>
             </div>
-            <div className=" h-6 border-r border-[#666262]"></div>
-            <div className=" flex items-center gap-2">
+            <div className=" h-6 border-r border-[#666262] hidden lg:block"></div>
+            <div className=" flex items-center gap-2 mt-2 lg:mt-0">
               <h3 className="">Platform:</h3>
               <div className=" flex gap-2 items-center">
                 {games.platform.map((device, idx) => (

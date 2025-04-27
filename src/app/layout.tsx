@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistInter.variable} antialiased`}>
+      <body className={`${geistInter.variable} antialiased border`}>
         <div className=" min-h-screen flex flex-col">
           <Navbar />
           {children}

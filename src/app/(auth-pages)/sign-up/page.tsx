@@ -38,27 +38,19 @@ const formVariants = {
 const SignUpPage = () => {
   // Initialize the form using useForm
   const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema), // Use Zod schema for validation
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
-
-  // Function to handle form submission
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
-    // Simulate an API call (replace with your actual sign-in logic)
     console.log("Signing in with:", values);
     try {
-      // Replace this with your actual authentication logic (e.g., an API call)
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a 1-second delay
-      // If sign-in is successful, you might want to redirect the user:
-      // window.location.href = '/dashboard'; // Example: Redirect to dashboard
-      alert("Sign in successful! (Simulated)"); // Replace with a proper notification
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      alert("Sign in successful! (Simulated)");
     } catch (error) {
-      // Handle errors (e.g., display an error message)
       console.error("Sign in failed:", error);
-      // form.setError('root', { message: 'Failed to sign in. Please check your credentials.' }); // Example
       alert("Sign in failed. Please check your credentials and try again.");
     }
   };
@@ -67,13 +59,13 @@ const SignUpPage = () => {
     <div
       className={cn(
         "flex items-center justify-center min-h-screen ",
-        "p-4 sm:p-8" // Responsive padding
+        "p-4 sm:p-8"
       )}
     >
       <div
         className={cn(
           "w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
-          "border border-white/10 p-6 sm:p-8", // Responsive padding
+          "border border-white/10 p-6 sm:p-8",
           "space-y-6"
         )}
       >

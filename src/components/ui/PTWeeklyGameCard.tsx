@@ -9,7 +9,7 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
     <>
       <Link href={`/${game._id}`}>
         <div className="border border-card rounded-2xl shadow relative">
-          <div className=" flex items-center justify-evenly">
+          <div className="flex items-center justify-evenly">
             <div>
               <Image
                 className=""
