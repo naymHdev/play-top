@@ -17,7 +17,7 @@ const Footer = () => {
       {shouldShowNewsletter && <Newsletter />}
 
       <PTContainer>
-        <div className=" mt-16 grid grid-cols-3 gap-8 lg:gap-56">
+        <div className=" mt-16 grid grid-cols-3 gap-8 lg:gap-56 ">
           <div className="  col-span-full md:col-span-1">
             <h2 className=" text-primary text-4xl font-bold">Logo</h2>
             <p className=" text-foreground leading-normal mt-6">
@@ -32,10 +32,10 @@ const Footer = () => {
             </div>
           </div>
           <div className=" col-span-full md:col-span-2">
-            <div className="grid grid-cols-1 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0">
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
-                <ul className="flex flex-col gap-3 mt-6">
+                <ul className="flex flex-col gap-3 mt-3 md:mt-6">
                   <li className=" text-foreground font-medium">Home</li>
                   <li className=" text-foreground font-medium">About Us</li>
                   <li className=" text-foreground font-medium">Products</li>
@@ -44,7 +44,7 @@ const Footer = () => {
               </div>
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
-                <ul className="flex flex-col gap-3 mt-6">
+                <ul className="flex flex-col gap-3 mt-3 md:mt-6">
                   <li className=" text-foreground font-medium">News</li>
                   <li className=" text-foreground font-medium">Forums</li>
                   <li className=" text-foreground font-medium">Advertise</li>
@@ -52,7 +52,7 @@ const Footer = () => {
               </div>
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
-                <ul className="flex flex-col gap-3 mt-6">
+                <ul className="flex flex-col gap-3 mt-3 md:mt-6">
                   <li className=" text-foreground font-medium">
                     Terms Of Service
                   </li>

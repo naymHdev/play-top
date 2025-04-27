@@ -7,7 +7,7 @@ import PTButton from "@/components/ui/PTButton";
 const BannerSection = () => {
   return (
     <>
-      <div className="relative">
+      <div className="relative mt-10 lg:mt-0">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image

@@ -1,160 +1,87 @@
 "use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import PTContainer from "../ui/PTContainer";
-import {
-  FaPlus,
-  FaRegUser,
-  FaHome, // Added Home icon
-} from "react-icons/fa";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
-import { HiOutlineMenuAlt4 } from "react-icons/hi"; // Hamburger Menu icon
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useState } from "react";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-// Renamed to MobileNavbar for clarity
 const MobileNavbar = () => {
-  const activeUser = false;
+  const [isOpen, setIsOpen] = useState(false);
 
-  // You might need state for modals/drawers triggered by icons
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <>
-      {/* --- Top Bar --- */}
-      <div className="py-3 sticky top-0 left-0 right-0 bg-background border-b z-40">
-        {" "}
-        {/* Sticky top bar */}
-        <PTContainer>
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div>
-              <Link href={"/"}>
-                {/* Consider using a smaller logo/icon on mobile */}
-                <h1 className="text-2xl font-bold text-primary">Logo</h1>
-              </Link>
-            </div>
+    <header className="bg-black text-white fixed top-0 left-0 right-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <Link href="/" className="text-xl font-bold">
+          Logo
+        </Link>
+        <button
+          onClick={toggleNavbar}
+          className="text-2xl focus:outline-none lg:hidden hover:cursor-pointer"
+          aria-label={isOpen ? "Close Menu" : "Open Menu"}
+        >
+          {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+        </button>
 
-            {/* Right side Icons (e.g., Search, Menu) */}
-            <div className="flex items-center gap-2">
-              {/* Search Icon - Could trigger a modal or navigate to a search page */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-primary"
-                onClick={() => {
-                  /* Open Search Modal or Navigate */
-                }}
-              >
-                <FiSearch size={20} />
-              </Button>
-              {/* Hamburger Menu Icon - Could trigger a sidebar/drawer */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-primary"
-                onClick={() => {
-                  /* Open Menu Drawer */
-                }}
-              >
-                <HiOutlineMenuAlt4 size={22} />
-              </Button>
-            </div>
+        {/* Mobile Menu (Slide-in) */}
+        <div
+          className={`fixed top-0 right-0 h-full w-64 bg-black shadow-lg transform transition-transform duration-300 ease-in-out ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          } lg:hidden`}
+        >
+          <div className="flex justify-end p-4">
+            <button
+              onClick={toggleNavbar}
+              className="text-2xl focus:outline-non hover:cursor-pointer"
+              aria-label="Close Menu"
+            >
+              <AiOutlineClose />
+            </button>
           </div>
-        </PTContainer>
-      </div>
-
-      {/* --- Bottom Navigation Bar --- */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t py-2 px-4 z-50">
-        <div className="flex items-center justify-around">
-          {/* Home Link */}
-          <Link href="/">
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center h-auto text-primary p-1"
-            >
-              <FaHome size={22} />
-              <span className="text-xs mt-1">Home</span>
-            </Button>
-          </Link>
-
-          {/* Search Link (Example: linking to a dedicated search page) */}
-          <Link href="/search">
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center h-auto text-primary p-1"
-            >
-              <FiSearch size={22} />
-              <span className="text-xs mt-1">Search</span>
-            </Button>
-          </Link>
-
-          {/* Submit Game Link */}
-          <Link href="/submit-product">
-            <Button
-              variant="ghost"
-              className="flex flex-col items-center h-auto text-primary p-1"
-            >
-              <FaPlus size={22} />
-              <span className="text-xs mt-1">Submit</span>
-            </Button>
-          </Link>
-
-          {/* Conditional Rendering: Notifications or Sign In */}
-          {activeUser ? (
-            <>
-              {/* Notifications Link (Example: linking to a notifications page) */}
-              <Link href="/notifications">
-                <Button
-                  variant="ghost"
-                  className="relative flex flex-col items-center h-auto text-primary p-1"
-                >
-                  <IoNotificationsOutline size={24} />
-                  {/* Green Dot - Consider if notifications are unread */}
-                  <span className="absolute top-0 right-1 block h-2 w-2 rounded-full bg-green-500 ring-1 ring-background" />
-                  <span className="text-xs mt-1">Alerts</span>
-                </Button>
-              </Link>
-
-              {/* Profile Link (Example: linking to a profile page) */}
-              <Link href="/profile">
-                <Button
-                  variant="ghost"
-                  className="flex flex-col items-center h-auto text-primary p-1"
-                >
-                  {/* Using Avatar directly might be too large, consider an icon or smaller avatar */}
-                  <Avatar className="w-6 h-6 mb-0.5">
-                    {/* Smaller Avatar */}
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="User Avatar"
-                    />
-                    <AvatarFallback className="text-xs">
-                      <FaRegCircleUser size={20} />
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="text-xs mt-1">Profile</span>
-                </Button>
-              </Link>
-            </>
-          ) : (
-            // Sign In Link
-            <Link href="/sign-in">
-              <Button
-                variant="ghost"
-                className="flex flex-col items-center h-auto text-primary p-1"
-              >
-                <FaRegUser size={20} />
-                <span className="text-xs mt-1">Sign In</span>
-              </Button>
+          <nav className="flex flex-col items-start p-4">
+            <Link href="/" className="block py-2 text-lg hover:text-gray-300">
+              Home
             </Link>
-          )}
+            <Link
+              href="/about"
+              className="block py-2 text-lg hover:text-gray-300"
+            >
+              About
+            </Link>
+            <Link
+              href="/services"
+              className="block py-2 text-lg hover:text-gray-300"
+            >
+              Services
+            </Link>
+            <Link
+              href="/contact"
+              className="block py-2 text-lg hover:text-gray-300"
+            >
+              Contact
+            </Link>
+          </nav>
         </div>
+
+        {/* Desktop Menu (Hidden on mobile) */}
+        <nav className="hidden lg:flex space-x-4">
+          <Link href="/" className="hover:text-gray-300">
+            Home
+          </Link>
+          <Link href="/about" className="hover:text-gray-300">
+            About
+          </Link>
+          <Link href="/services" className="hover:text-gray-300">
+            Services
+          </Link>
+          <Link href="/contact" className="hover:text-gray-300">
+            Contact
+          </Link>
+        </nav>
       </div>
-    </>
+    </header>
   );
 };
 
