@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import MobileNavbar from "@/components/shared/MobileNavbar";
+import { Toaster } from "react-hot-toast";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </div>
+        <Toaster />
       </body>
     </html>
   );

@@ -60,7 +60,7 @@ export default function AddGameForm() {
 
   const onSubmit = (data: FormData) => {
     console.log("Form Data:", data);
-    console.log("Description Content:", editorState);
+    console.log("Description Content:");
   };
 
   return (

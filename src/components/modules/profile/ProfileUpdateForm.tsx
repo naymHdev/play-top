@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PTButton from "@/components/ui/PTButton";
 import { FaCamera } from "react-icons/fa6";
+import PasswordChange from "./PasswordChange";
+import DeleteAccount from "./DeleteAccount";
 
 const profileUpdateSchema = z.object({
   nameTitle: z.string().optional(),
@@ -276,6 +278,10 @@ const ProfileUpdateForm = () => {
           />
         </div>
       </form>
+      <div className="flex items-center gap-4 justify-end max-w-3xl mx-auto mt-10">
+        <PasswordChange />
+        <DeleteAccount />
+      </div>
     </div>
   );
 };
