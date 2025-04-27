@@ -8,7 +8,7 @@ type TSocialLinks = {
   link: string;
 };
 
-export type TImages = StaticImageData;
+export type TImages = string | StaticImport | undefined;
 
 export type TGame = {
   _id: string;

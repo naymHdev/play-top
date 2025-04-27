@@ -9,9 +9,9 @@ import android from "../../../assets/icons/android.png";
 import apple from "../../../assets/icons/apple.png";
 import windows from "../../../assets/icons/windows.png";
 import linux from "../../../assets/icons/linux.png";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import thumb from "../../../assets/images/gameThumbnail.png";
-import { FaExternalLinkAlt, FaLinkedin, FaReddit } from "react-icons/fa";
+import { FaExternalLinkAlt, FaReddit } from "react-icons/fa";
 import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
@@ -37,19 +37,19 @@ const gamesData: TGame[] = [
     thumbnail: thumb,
     socialLinks: [
       {
+        icon: <FaXTwitter />,
+        name: "Twitter",
+        link: "https://twitter.com/",
+      },
+      {
         icon: <FaReddit />,
         name: "Reddit",
         link: "https://www.facebook.com/",
       },
       {
-        icon: <FaLinkedin />,
-        name: "Linkedin",
+        icon: <FaInstagram />,
+        name: "Instagram",
         link: "https://www.facebook.com/",
-      },
-      {
-        icon: <FaXTwitter />,
-        name: "Twitter",
-        link: "https://twitter.com/",
       },
     ],
   },
@@ -70,7 +70,7 @@ const GameDetailsPage = async ({
 
   return (
     <>
-      <div>
+      <div className=" mt-16">
         <Image
           className="object-cover"
           src={findGame?.thumbnail}
@@ -78,9 +78,9 @@ const GameDetailsPage = async ({
         />
 
         <PTContainer>
-          <div className=" -mt-24">
+          <div className=" -mt-26">
             <div>
-              <h2 className=" text-4xl text-primary font-extrabold">
+              <h2 className=" text-2xl lg:text-4xl text-primary mt-10 lg:mt-0 font-bold lg:font-extrabold">
                 {findGame?.title}
               </h2>
               <p className=" text-primary text-lg leading-7 mt-4 opacity-70">
@@ -89,7 +89,7 @@ const GameDetailsPage = async ({
             </div>
 
             {/* ------------------------------------\\ Grid Content Layout \\------------------------------------ */}
-            <div className="mt-8 grid grid-cols-5 gap-6">
+            <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6">
               {/* ------------------------------------\\ Left Side Content \\------------------------------------ */}
               <div className="col-span-3">
                 <div>
@@ -116,14 +116,21 @@ const GameDetailsPage = async ({
                     <p className=" font-bold">{findGame?.author}</p>
                   </div>
                   <div className="mt-8 space-y-8">
-                    <div>
-                      <p className=" uppercase text-sm text-primary">Price</p>
-                      <h3 className=" font-medium text-xl uppercase text-secondary">
-                        ${findGame?.price}
-                      </h3>
+                    <div className=" flex items-center justify-between">
+                      <div>
+                        <p className=" uppercase text-sm text-primary">Price</p>
+                        <h3 className=" font-medium text-xl uppercase text-secondary">
+                          ${findGame?.price}
+                        </h3>
+                      </div>
+                      <div>
+                        <Button className="flex items-center gap-2 bg-card text-primary rounded-full">
+                          Shop Now <FiArrowUpRight />
+                        </Button>
+                      </div>
                     </div>
 
-                    <div>
+                    <div className="">
                       <Button className="flex items-center gap-2 bg-secondary text-primary rounded-full">
                         <FiArrowUpRight /> Upvote 4.5k <FiArrowDownRight />
                       </Button>
@@ -174,7 +181,7 @@ const GameDetailsPage = async ({
                       >
                         <div className=" flex">
                           <div className=" flex items-center gap-2">
-                            <div className="text-xl text-sky-600 p-3 bg-[#202020] rounded-l-md">
+                            <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
                               {link.icon}
                             </div>
                             <p className="text-sm font-semibold text-foreground">

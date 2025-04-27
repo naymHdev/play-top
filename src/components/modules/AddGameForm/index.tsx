@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import PTButton from "@/components/ui/PTButton";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import Description from "./Description";
+import LinkInputs from "./LinkInputs";
 
 // Steps for timeline
 const steps = [
@@ -149,105 +150,9 @@ export default function AddGameForm() {
             {index === 2 && (
               <div>
                 <p className="text-sm text-gray-400 mb-4">
-                  At least 1 link is required*
+                  At least 1 social link is required*
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Steam */}
-                  <div>
-                    <Label htmlFor="steamAccount" className="text-primary/80">
-                      Steam account of the game
-                    </Label>
-                    <div className="relative">
-                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                        steam.com/
-                      </div>
-                      <Input
-                        type="text"
-                        id="steamAccount"
-                        placeholder="steam.com/"
-                        {...register("steamAccount")}
-                        className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                      />
-                    </div>
-                  </div>
-
-                  {/* LinkedIn */}
-                  <div>
-                    <Label
-                      htmlFor="linkedinAccount"
-                      className="text-primary/80"
-                    >
-                      LinkedIn account of the game
-                    </Label>
-                    <div className="relative">
-                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                        linkedin.com/
-                      </div>
-                      <Input
-                        type="text"
-                        id="linkedinAccount"
-                        placeholder="linkedin.com/"
-                        {...register("linkedinAccount")}
-                        className="pl-[122px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Reddit */}
-                  <div>
-                    <Label htmlFor="redditAccount">
-                      Reddit account of the game
-                    </Label>
-                    <div className="relative">
-                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                        reddit.com/
-                      </div>
-                      <Input
-                        type="text"
-                        id="redditAccount"
-                        placeholder="@reddit.com/"
-                        {...register("redditAccount")}
-                        className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Instagram */}
-                  <div>
-                    <Label htmlFor="instagramAccount">
-                      Instagram account of the game
-                    </Label>
-                    <div className="relative">
-                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                        instagram.com/
-                      </div>
-                      <Input
-                        type="text"
-                        id="instagramAccount"
-                        placeholder="instagram.com/"
-                        {...register("instagramAccount")}
-                        className="pl-[138px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                      />
-                    </div>
-                  </div>
-
-                  {/* X */}
-                  <div>
-                    <Label htmlFor="xAccount">X account of the game</Label>
-                    <div className="relative">
-                      <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                        x.com/
-                      </div>
-                      <Input
-                        type="text"
-                        id="xAccount"
-                        placeholder="x.com/"
-                        {...register("xAccount")}
-                        className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <LinkInputs register={register} />
               </div>
             )}
 
