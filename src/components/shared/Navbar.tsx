@@ -6,14 +6,13 @@ import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 
 const Navbar = () => {
   const activeUser = false;
 
   return (
     <>
-      <div className=" hidden md:block py-6">
+      <div className="py-6">
         <PTContainer>
           <div className=" flex items-center justify-between">
             <div>

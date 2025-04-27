@@ -17,7 +17,7 @@ const Footer = () => {
       {shouldShowNewsletter && <Newsletter />}
 
       <PTContainer>
-        <div className=" mt-16 grid grid-cols-3 gap-56">
+        <div className=" mt-16 grid grid-cols-3 gap-8 lg:gap-56">
           <div className="  col-span-full md:col-span-1">
             <h2 className=" text-primary text-4xl font-bold">Logo</h2>
             <p className=" text-foreground leading-normal mt-6">

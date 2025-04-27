@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import MobileNavbar from "@/components/shared/MobileNavbar";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -21,9 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistInter.variable} antialiased border`}>
+      <body className={`${geistInter.variable} antialiased`}>
         <div className=" min-h-screen flex flex-col">
-          <Navbar />
+          {/* Show Desktop Navbar on medium screens and up */}
+          <div className="hidden md:block">
+            <Navbar />
+          </div>
+
+          {/* Show Mobile Navbar on screens smaller than medium */}
+          <div className="block md:hidden">
+            <MobileNavbar />
+          </div>
           {children}
           <Footer />
         </div>
