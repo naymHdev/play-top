@@ -70,7 +70,7 @@ const GameDetailsPage = async ({
 
   return (
     <>
-      <div className=" mt-16">
+      <div className=" mt-16 lg:mt-0">
         <Image
           className="object-cover"
           src={findGame?.thumbnail}

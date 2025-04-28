@@ -9,7 +9,7 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
     <>
       <Link href={`/${game._id}`}>
         <div className="border border-card rounded-2xl shadow relative">
-          <div className=" grid lg:flex items-center lg:justify-evenly p-2">
+          <div className=" grid lg:flex items-center lg:justify-evenly p-2 lg:p-0">
             <div className=" flx items-center justify-center ">
               <Image
                 className="flx items-center justify-center"
@@ -30,8 +30,8 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
               </h1>
             </div>
           </div>
-          <div className=" p-2 lg:p-1 bg-card border-t border-card rounded-b-2xl">
-            <div className=" lg:flex items-center justify-around font-medium text-[12px] leading-5 text-foreground space-y-3">
+          <div className=" p-2 bg-card border-t border-card rounded-b-2xl">
+            <div className=" lg:flex items-center justify-around font-medium text-[12px] leading-5 text-foreground space-y-3 lg:space-y-0">
               <div className=" flex items-center gap-2">
                 <h3 className=" ">Categories:</h3>
                 <div className=" flex gap-2 items-center">

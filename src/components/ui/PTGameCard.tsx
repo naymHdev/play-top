@@ -36,7 +36,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
             </div>
           </div>
         </div>
-        <div className="mt-3 p-3 bg-card border-t border-card rounded-b-2xl">
+        <div className=" lg:mt-0 mt-3 p-3 bg-card border-t border-card rounded-b-2xl">
           <div className="lg:flex items-center space-x-6 font-medium text-[12px] leading-5 text-foreground">
             <div className=" flex items-center gap-2">
               <h3 className=" ">Categories:</h3>

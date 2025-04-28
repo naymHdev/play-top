@@ -29,6 +29,7 @@ export default function UploadSection() {
   };
 
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
     const files = e.target.files;
     if (files) {
       const selectedFiles = Array.from(files).slice(0, 5); // Max 5 files
@@ -114,7 +115,7 @@ export default function UploadSection() {
               <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
               <div className="space-y-1">
                 <p className="text-primary font-medium">
-                  Drag your file here or{" "}
+                  Drag your file here or
                   <label
                     htmlFor="cover"
                     className="text-secondary underline cursor-pointer"
@@ -163,7 +164,7 @@ export default function UploadSection() {
               <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
               <div className="space-y-1">
                 <p className="text-primary font-medium">
-                  Drag your files here or{" "}
+                  Drag your files here or
                   <label
                     htmlFor="gallery"
                     className="text-secondary underline cursor-pointer"
