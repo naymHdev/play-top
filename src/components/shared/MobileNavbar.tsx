@@ -54,14 +54,16 @@ const MobileNavbar = () => {
             {activeUser ? (
               <div className="flex items-center justify-end gap-4 w-full mt-4">
                 {/* Avatar */}
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <Image
-                    src={profile}
-                    alt="Profile Image"
-                    className="object-cover w-12 h-12"
-                    priority
-                  />
-                </div>
+                <Link href={"/profile"}>
+                  <div className="w-12 h-12 rounded-full overflow-hidden">
+                    <Image
+                      src={profile}
+                      alt="Profile Image"
+                      className="object-cover w-12 h-12"
+                      priority
+                    />
+                  </div>
+                </Link>
                 {/* Notification */}
                 <div className="relative">
                   <div className="flex items-center justify-center rounded-full bg-card p-3">

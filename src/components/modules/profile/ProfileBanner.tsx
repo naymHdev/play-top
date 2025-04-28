@@ -9,7 +9,7 @@ import Link from "next/link";
 const ProfileBanner = () => {
   return (
     <>
-      <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A]">
+      <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A] mt-10 lg:mt-0">
         <PTContainer>
           <div className="">
             <div className="flex items-center justify-between">

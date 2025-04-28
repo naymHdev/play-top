@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
-import PTButton from "@/components/ui/PTButton";
 
 // Dynamically import the Editor
 const Editor = dynamic(
@@ -13,10 +11,10 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-const Description = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
+const Description = ({editorState, setEditorState}) => {
+
+
+  const [mounted, setMounted] = useState(false);
   const editor = useRef<any>(null);
 
   function focusEditor() {
@@ -24,6 +22,16 @@ const Description = () => {
       editor.current.focus();
     }
   }
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Don't render Editor before mounted
+  }
+
+
 
   return (
     <div

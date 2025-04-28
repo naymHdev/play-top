@@ -7,12 +7,12 @@ const SubmitProductPage = () => {
   return (
     <>
       <div className=" relative">
-        <PTContainer>
+        <PTContainer className=" z-50">
           <div>
             <AddGameForm />
           </div>
         </PTContainer>
-        <div className=" absolute bottom-0">
+        <div className=" absolute bottom-0 -z-10">
           <Image src={masking} alt="Bg Masking" />
         </div>
       </div>

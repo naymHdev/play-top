@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { MdOutlineCloudUpload } from "react-icons/md";
 
-export default function UploadSection() {
+type TUploadFileProps = {
+  setIsThumbnail: any;
+  setIsCover: any;
+};
+
+export default function UploadSection({
+  setIsThumbnail,
+  setIsCover,
+}: TUploadFileProps) {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
@@ -15,6 +23,8 @@ export default function UploadSection() {
       };
       reader.readAsDataURL(file);
     }
+    setIsThumbnail(file);
+    // console.log("file", file);
   };
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +36,7 @@ export default function UploadSection() {
       };
       reader.readAsDataURL(file);
     }
+    setIsCover(file);
   };
 
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,58 +133,6 @@ export default function UploadSection() {
                   >
                     browse
                   </label>
-                </p>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Gallery Upload (Multiple Images) */}
-      <div>
-        <label className="block text-lg font-semibold text-primary/80">
-          Upload media (up to 5 pictures)
-        </label>
-        <p className="mt-1 text-sm font-normal text-foreground">
-          Keep in mind that the first file you upload will appear in the cover
-          preview. We recommend the size 1920x340 with aspect ratio 4:3. Not
-          sure what to upload?
-        </p>
-        <div className="relative border border-dashed border-foreground mt-4 bg-card rounded-lg py-6 px-4 flex flex-col items-center justify-center text-center cursor-pointer">
-          <input
-            id="gallery"
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleGalleryChange}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-          />
-          {galleryPreviews.length > 0 ? (
-            <div className="grid grid-cols-2 gap-4">
-              {galleryPreviews.map((src, index) => (
-                <img
-                  key={index}
-                  src={src}
-                  alt={`Gallery Preview ${index + 1}`}
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-              ))}
-            </div>
-          ) : (
-            <>
-              <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
-              <div className="space-y-1">
-                <p className="text-primary font-medium">
-                  Drag your files here or
-                  <label
-                    htmlFor="gallery"
-                    className="text-secondary underline cursor-pointer"
-                  >
-                    browse
-                  </label>
-                </p>
-                <p className="text-sm text-foreground">
-                  .jpg, .jpeg, .png — Max size: 50MB each — Max files: 5
                 </p>
               </div>
             </>

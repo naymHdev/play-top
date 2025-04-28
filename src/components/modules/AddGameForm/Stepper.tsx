@@ -1,13 +1,7 @@
 "use client";
 
+import { steps } from "@/constants/gameForm";
 import { Check } from "lucide-react";
-
-const steps = [
-  "Add Title",
-  "Description",
-  "Social Links for the Game",
-  "Upload file",
-];
 
 export const StepIndicator = ({
   stepIndex,
