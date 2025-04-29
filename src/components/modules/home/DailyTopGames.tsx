@@ -9,7 +9,6 @@ import android from "../../../assets/icons/android.png";
 import apple from "../../../assets/icons/apple.png";
 import windows from "../../../assets/icons/windows.png";
 import linux from "../../../assets/icons/linux.png";
-import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaXTwitter } from "react-icons/fa6";
 import thumb from "../../../assets/images/gameThumbnail.png";
 import { FaLinkedin, FaReddit } from "react-icons/fa";
