@@ -68,8 +68,8 @@ const DailyTopGames = () => {
           />
         </div>
 
-        <div className="mt-10 grid grid-cols-6 gap-5">
-          <div className=" col-span-full lg:col-span-4">
+        <div className="mt-10 w-full lg:w-[70%]">
+          <div className="">
             {repeatedGamesData?.map((game) => (
               <PTGameCard key={game._id} games={game} />
             ))}
@@ -83,7 +83,6 @@ const DailyTopGames = () => {
               </div>
             </div>
           </div>
-          <div className=" col-span-full lg:col-span-2"></div>
         </div>
       </PTContainer>
     </>
