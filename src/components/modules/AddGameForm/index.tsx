@@ -188,7 +188,7 @@ export default function AddGameForm() {
                   <div className="mt-8">
                     <div>
                       <label className="block text-lg font-semibold text-primary/80">
-                        Upload media (up to 5 pictures)
+                        Upload Photos of game and gameplay (up to 5 pictures)
                         <span className=" text-red-600 font-medium px-1">
                           *
                         </span>

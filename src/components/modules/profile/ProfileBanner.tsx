@@ -11,7 +11,7 @@ const ProfileBanner = () => {
     <>
       <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A] mt-10 lg:mt-0">
         <PTContainer>
-          <div className="">
+          <div className="w-full lg:max-w-4xl mx-auto">
             <div className="flex items-center justify-between">
               <div className="lg:flex items-center gap-5">
                 <div className="lg:w-[240px] w-[130px] lg:h-[240px] h-[130px] mt-8 lg:mt-14">

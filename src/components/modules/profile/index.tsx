@@ -54,7 +54,7 @@ const ProfileDetails = () => {
               </div>
               <div className=" px-3">
                 <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary" />
+                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
                 </a>
               </div>
             </div>
@@ -71,7 +71,7 @@ const ProfileDetails = () => {
               </div>
               <div className=" px-3">
                 <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary" />
+                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
                 </a>
               </div>
             </div>
@@ -88,7 +88,7 @@ const ProfileDetails = () => {
               </div>
               <div className=" px-3">
                 <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary" />
+                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
                 </a>
               </div>
             </div>
@@ -105,7 +105,7 @@ const ProfileDetails = () => {
               </div>
               <div className=" px-3">
                 <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary" />
+                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
                 </a>
               </div>
             </div>

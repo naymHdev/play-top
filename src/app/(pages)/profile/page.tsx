@@ -8,7 +8,7 @@ const ProfilePage = () => {
       <div>
         <ProfileBanner />
         <PTContainer>
-          <div>
+          <div className=" w-full lg:max-w-4xl mx-auto">
             <ProfileDetails />
           </div>
         </PTContainer>
