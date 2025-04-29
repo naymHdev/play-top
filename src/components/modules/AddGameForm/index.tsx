@@ -17,6 +17,7 @@ import ImagePreviewer from "@/components/ui/core/PTImageUploader/ImagePreviewer"
 // --- Schema & Types ---
 const formSchema = z.object({
   gameTitle: z.string().min(1, "Title is required"),
+  gameCategory: z.string({ required_error: "Category must be required" }),
   steamAccount: z.string().optional(),
   linkedinAccount: z.string().optional(),
   redditAccount: z.string().optional(),
@@ -135,17 +136,22 @@ export default function AddGameForm() {
                     </p>
                   )}
 
-                  {/* Category Select */}
+                  {/* Category Input */}
                   <label className="block mt-4 text-lg font-semibold text-primary/80">
-                    Select Category
-                    <span className=" text-red-600 font-medium px-1">*</span>
+                    Mention categories with a comma
+                    <span className="text-red-600 font-medium px-1">*</span>
                   </label>
-                  <select className="w-full mt-2 py-3 px-2 rounded-md border-none bg-card">
-                    <option>Select a category from the list</option>
-                    <option>Action</option>
-                    <option>Adventure</option>
-                    <option>Strategy</option>
-                  </select>
+                  <input
+                    type="text"
+                    placeholder="e.g. Action, Adventure, Strategy"
+                    {...register("gameCategory")}
+                    className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
+                  />
+                  {errors.gameCategory && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.gameCategory.message}
+                    </p>
+                  )}
                 </div>
               )}
 
