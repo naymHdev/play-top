@@ -46,7 +46,7 @@ const UpcomingRelease = () => {
               description="Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat, cursus dictum enim."
             />
 
-            <div className="mt-12">
+            <div className="mt-12 lg:w-10/12 mx-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {upcomingGamesData.map((upcomming) => (
                   <PTUpcommingGameCard
@@ -55,13 +55,6 @@ const UpcomingRelease = () => {
                   />
                 ))}
               </div>
-            </div>
-            <div className=" flex items-center justify-center ">
-              <PTButton
-                className=" px-[70px] py-[12px] bg-secondary"
-                label="See All Games "
-                icon={<MdArrowForwardIos className=" size-4 mt-1" />}
-              />
             </div>
           </div>
         </PTContainer>

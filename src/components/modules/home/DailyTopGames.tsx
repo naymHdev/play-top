@@ -58,7 +58,10 @@ export const repeatedGamesData = Array.from({ length: 10 }, (_, index) => ({
 const DailyTopGames = () => {
   return (
     <>
-      <PTContainer className=" mt-20 relative">
+      <PTContainer
+        className=" mt-20 relative
+      "
+      >
         <div>
           <PTSectionName
             title="Top Games of the Day"
@@ -66,18 +69,22 @@ const DailyTopGames = () => {
           />
         </div>
 
-        <div className="mt-10">
-          {repeatedGamesData?.map((game) => (
-            <PTGameCard key={game._id} games={game} />
-          ))}
-        </div>
-
-        <div className="bg-gradient-to-t from-black  to-transparent h-[148px] absolute w-full -bottom-10 flex items-center justify-center">
-          <PTButton
-            className="py-2 px-5 rounded-full border border-card hover:border-white"
-            label="Show More"
-            icon={<FaArrowRight />}
-          />
+        <div className="mt-10 grid grid-cols-6 gap-5">
+          <div className=" col-span-full lg:col-span-4">
+            {repeatedGamesData?.map((game) => (
+              <PTGameCard key={game._id} games={game} />
+            ))}
+            <div className="bg-gradient-to-t from-black  to-transparent h-[148px] absolute bottom-0 w-full">
+              <div className=" w-full flex items-center ml-[130px] lg:ml-[340px] mt-20">
+                <PTButton
+                  className="py-2 px-5 rounded-full border border-card hover:border-white"
+                  label="Show More"
+                  icon={<FaArrowRight />}
+                />
+              </div>
+            </div>
+          </div>
+          <div className=" col-span-full lg:col-span-2"></div>
         </div>
       </PTContainer>
     </>
