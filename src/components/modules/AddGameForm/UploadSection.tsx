@@ -57,6 +57,7 @@ export default function UploadSection({
       <div>
         <label className="block text-lg font-semibold text-primary/80">
           Upload thumbnail
+          <span className=" text-red-600 font-medium px-1">*</span>
         </label>
         <p className="mt-1 text-sm font-normal text-foreground">
           Keep in mind that the first file you upload will appear in the cover

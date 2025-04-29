@@ -82,7 +82,7 @@ export default function AddGameForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex w-full lg:max-w-4xl mx-auto text-white py-10">
+      <div className="flex w-full lg:max-w-3xl mx-auto text-white py-10">
         {/* Timeline */}
         <div className="w-20 flex flex-col items-center py-10 sticky top-0">
           {steps.map((_, index) => (
@@ -117,14 +117,10 @@ export default function AddGameForm() {
 
               {index === 0 && (
                 <div>
-                  <p className="text-sm text-gray-400 mb-4">
-                    Save on the Sakura Storm Collection, Koumei Visions Bundle
-                    and more from April 9–23.
-                  </p>
-
                   {/* Game Title Input */}
                   <label className="block text-lg font-semibold text-primary/80">
                     Game Title
+                    <span className=" text-red-600 font-medium px-1">*</span>
                   </label>
                   <input
                     type="text"
@@ -142,6 +138,7 @@ export default function AddGameForm() {
                   {/* Category Select */}
                   <label className="block mt-4 text-lg font-semibold text-primary/80">
                     Select Category
+                    <span className=" text-red-600 font-medium px-1">*</span>
                   </label>
                   <select className="w-full mt-2 py-3 px-2 rounded-md border-none bg-card">
                     <option>Select a category from the list</option>
@@ -154,13 +151,9 @@ export default function AddGameForm() {
 
               {index === 1 && (
                 <div>
-                  <p className="text-sm text-gray-400 mb-4">
-                    Save on the Sakura Storm Collection, Koumei Visions Bundle
-                    and more from April 9–23.
-                  </p>
-
                   <label className="block text-lg font-semibold text-primary/80">
                     Description of the Game
+                    <span className=" text-red-600 font-medium px-1">*</span>
                   </label>
                   <Description
                     editorState={editorState}
@@ -180,10 +173,6 @@ export default function AddGameForm() {
 
               {index === 3 && (
                 <div>
-                  <p className="text-sm text-gray-400 mb-4">
-                    Save on the Sakura Storm Collection, Koumei Visions Bundle
-                    and more from April 9–23.
-                  </p>
                   <UploadSection
                     setIsThumbnail={setIsThumbnail}
                     setIsCover={setIsCover}
@@ -194,6 +183,9 @@ export default function AddGameForm() {
                     <div>
                       <label className="block text-lg font-semibold text-primary/80">
                         Upload media (up to 5 pictures)
+                        <span className=" text-red-600 font-medium px-1">
+                          *
+                        </span>
                       </label>
                       <p className="mt-1 text-sm font-normal text-foreground">
                         Keep in mind that the first file you upload will appear

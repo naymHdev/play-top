@@ -111,7 +111,9 @@ const GameDetailsPage = async ({
               <div className="col-span-2">
                 <div className=" p-5 border border-card rounded-xl">
                   <div className=" text-primary flex items-center gap-3">
-                    <p className=" uppercase text-sm text-gray-300">Game Posted By</p>
+                    <p className=" uppercase text-sm text-gray-300">
+                      Game Posted By
+                    </p>
                     <p className=" font-bold -mt-0.5">{findGame?.author}</p>
                   </div>
                   <div className="mt-8 space-y-8">
@@ -143,12 +145,11 @@ const GameDetailsPage = async ({
                     Categories
                   </p>
 
-                  <div className=" flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-3">
                     {findGame?.categories?.map((category, idx) => (
-                      <div key={idx} className=" flex items-center gap-2 mt-1">
-                        <span className=" w-1 h-1 bg-primary rounded-full"></span>
-                        <p className=" text-sm text-foreground font-semibold">
-                          {category}
+                      <div key={idx} className="flex items-center gap-2">
+                        <p className="text-sm text-foreground font-medium">
+                          "{category}",
                         </p>
                       </div>
                     ))}
@@ -196,7 +197,7 @@ const GameDetailsPage = async ({
                           >
                             <FaExternalLinkAlt
                               size={16}
-                              className=" text-primary"
+                              className=" text-primary/80"
                             />
                           </a>
                         </div>
