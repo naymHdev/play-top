@@ -50,7 +50,7 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
               </div>
 
               <div className=" flx justify-end">
-                <Button className=" flex items-center text-lg gap-2 bg-[#424242] hover:bg-card hover:cursor-pointer text-primary rounded-full max-w-[90px] max-h-[26px]">
+                <Button className=" flex items-center text-lg gap-2 bg-[#424242] hover:bg-gray-600 hover:cursor-pointer text-primary rounded-full max-w-[90px] max-h-[26px]">
                   <FiArrowUpRight /> 4.5k <FiArrowDownRight />
                 </Button>
               </div>

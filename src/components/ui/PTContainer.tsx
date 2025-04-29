@@ -18,7 +18,6 @@ interface ContainerProps {
 
 export default function PTContainer({
   children,
-  maxWidth = "xl",
   className,
 }: ContainerProps) {
   return (

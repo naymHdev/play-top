@@ -63,7 +63,6 @@ const GameDetailsPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  // console.log(id);
 
   const findGame: TGame | undefined = gamesData.find((game) => game._id == id);
   //   console.log(findGame);
@@ -78,7 +77,7 @@ const GameDetailsPage = async ({
         />
 
         <PTContainer>
-          <div className=" -mt-26">
+          <div className=" -mt-26 w-full lg:w-11/12 mx-auto">
             <div>
               <h2 className=" text-2xl lg:text-4xl text-primary mt-10 lg:mt-0 font-bold lg:font-extrabold">
                 {findGame?.title}
@@ -112,8 +111,8 @@ const GameDetailsPage = async ({
               <div className="col-span-2">
                 <div className=" p-5 border border-card rounded-xl">
                   <div className=" text-primary flex items-center gap-3">
-                    <p className=" uppercase text-sm">Game Posted By</p>
-                    <p className=" font-bold">{findGame?.author}</p>
+                    <p className=" uppercase text-sm text-gray-300">Game Posted By</p>
+                    <p className=" font-bold -mt-0.5">{findGame?.author}</p>
                   </div>
                   <div className="mt-8 space-y-8">
                     <div className=" flex items-center justify-between">
@@ -124,14 +123,14 @@ const GameDetailsPage = async ({
                         </h3>
                       </div>
                       <div>
-                        <Button className="flex items-center gap-2 bg-card text-primary rounded-full">
-                          Shop Now <FiArrowUpRight />
+                        <Button className="flex items-center gap-1 bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary rounded-full">
+                          Buy Now <FiArrowUpRight />
                         </Button>
                       </div>
                     </div>
 
                     <div className="">
-                      <Button className="flex items-center gap-2 bg-secondary text-primary rounded-full">
+                      <Button className="flex items-center gap-2 bg-[#124116] hover:bg-green-900 hover:cursor-pointer text-primary rounded-full">
                         <FiArrowUpRight /> Upvote 4.5k <FiArrowDownRight />
                       </Button>
                     </div>
@@ -210,7 +209,7 @@ const GameDetailsPage = async ({
           </div>
 
           {/* ------------------------------------\\ Related Games \\------------------------------------ */}
-          <div className=" mt-20">
+          <div className=" mt-20 w-full lg:w-11/12 mx-auto">
             <RelatedGames />
           </div>
         </PTContainer>

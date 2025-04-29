@@ -32,7 +32,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               </h1>
               <Button
                 size="lg"
-                className="flex items-center gap-1 px-3 py-1 bg-card text-primary rounded-full hover:bg-muted transition-colors"
+                className="flex items-center gap-1 px-3 py-1 bg-[#124116] hover:bg-green-900 text-primary rounded-full transition-colors"
               >
                 <FiArrowUpRight className="text-base" />
                 <span className="text-lg font-medium">4.5k</span>
