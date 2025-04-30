@@ -30,17 +30,20 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               <h1 className=" font-medium text-xl uppercase text-secondary">
                 ${games.price}
               </h1>
-              <Button
-                size="lg"
-                className="flex items-center gap-1 px-3 py-1 bg-[#124116] hover:bg-green-900 text-primary rounded-full transition-colors"
-              >
-                <FiArrowUpRight className="text-base" />
-                <span className="text-lg font-medium">4.5k</span>
-                <FiArrowDownRight className="text-base" />
-              </Button>
+              {/* ----------- Up & Down Vot button -------------- */}
+              <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full px-2 py-1">
+                <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                  <FiArrowUpRight />
+                </Button>
+                <span className="text-white text-lg font-semibold">4.5k</span>
+                <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                  <FiArrowDownRight />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+
         <div className=" lg:mt-0 mt-3 p-3 bg-card border-t border-card rounded-b-2xl">
           <div className="lg:flex items-center space-x-6 font-medium text-[12px] leading-5 text-foreground">
             <div className=" flex items-center gap-2">

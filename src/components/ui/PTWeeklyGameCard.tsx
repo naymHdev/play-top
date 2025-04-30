@@ -7,8 +7,8 @@ import Link from "next/link";
 const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
   return (
     <>
-      <Link href={`/${game._id}`}>
-        <div className="border border-card rounded-2xl shadow">
+      <div className="border border-card rounded-2xl shadow">
+        <Link href={`/${game._id}`}>
           <div className=" grid lg:flex items-center lg:justify-evenly p-2 lg:p-0">
             <div className=" flx items-center justify-center ">
               <Image
@@ -30,34 +30,39 @@ const PTWeeklyGameCard = ({ game }: { game: TWeeklyGames }) => {
               </h1>
             </div>
           </div>
-          <div className=" p-2 bg-card border-t border-card rounded-b-2xl">
-            <div className=" lg:flex items-center justify-around font-medium text-[12px] leading-5 text-foreground space-y-3 lg:space-y-0">
-              <div className=" flex items-center gap-2">
-                <h3 className=" ">Categories:</h3>
-                <div className=" flex gap-2 items-center">
-                  {game.categories.map((category, idx) => (
-                    <p key={idx}>{category}</p>
-                  ))}
-                </div>
+        </Link>
+        <div className=" p-2 bg-card border-t border-card rounded-b-2xl">
+          <div className=" lg:flex items-center justify-around font-medium text-[12px] leading-5 text-foreground space-y-3 lg:space-y-0">
+            <div className=" flex items-center gap-2">
+              <h3 className=" ">Categories:</h3>
+              <div className=" flex gap-2 items-center">
+                {game.categories.map((category, idx) => (
+                  <p key={idx}>{category}</p>
+                ))}
               </div>
-              <div className=" flex items-center gap-2">
-                <h3 className="">Platform:</h3>
-                <div className=" flex gap-2 items-center">
-                  {game.platform.map((device, idx) => (
-                    <Image key={idx} src={device} alt="Device" />
-                  ))}
-                </div>
+            </div>
+            <div className=" flex items-center gap-2">
+              <h3 className="">Platform:</h3>
+              <div className=" flex gap-2 items-center">
+                {game.platform.map((device, idx) => (
+                  <Image key={idx} src={device} alt="Device" />
+                ))}
               </div>
+            </div>
 
-              <div className=" flx justify-end">
-                <Button className=" flex items-center text-lg gap-2 bg-[#424242] hover:bg-gray-600 hover:cursor-pointer text-primary rounded-full max-w-[90px] max-h-[26px]">
-                  <FiArrowUpRight /> 4.5k <FiArrowDownRight />
-                </Button>
-              </div>
+            {/* ----------- Up & Down Vot button -------------- */}
+            <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full px-2 py-1">
+              <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                <FiArrowUpRight />
+              </Button>
+              <span className="text-white text-lg font-semibold">4.5k</span>
+              <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                <FiArrowDownRight />
+              </Button>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

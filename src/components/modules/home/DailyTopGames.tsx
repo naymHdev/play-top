@@ -56,7 +56,7 @@ export const repeatedGamesData = Array.from({ length: 20 }, (_, index) => ({
 }));
 
 const DailyTopGames = () => {
-  const INITIAL_COUNT = 5;
+  const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   const isShowingAll = visibleCount >= repeatedGamesData.length;
