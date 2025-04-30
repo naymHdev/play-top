@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import SocialAuth from "@/components/modules/auth/SocialAuth";
+import toast from "react-hot-toast";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -52,10 +53,12 @@ const SignUpPage = () => {
     console.log("Signing in with:", values);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert("Sign in successful! (Simulated)");
+      toast.success("Sign in successful! (Simulated)");
     } catch (error) {
       console.error("Sign in failed:", error);
-      alert("Sign in failed. Please check your credentials and try again.");
+      toast.error(
+        "Sign in failed. Please check your credentials and try again."
+      );
     }
   };
 

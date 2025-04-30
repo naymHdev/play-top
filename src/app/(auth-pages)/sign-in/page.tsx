@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import SocialAuth from "@/components/modules/auth/SocialAuth";
+import toast from "react-hot-toast";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -55,22 +56,26 @@ const SignInPage = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a 1-second delay
       // If sign-in is successful, you might want to redirect the user:
       // window.location.href = '/dashboard'; // Example: Redirect to dashboard
-      alert("Sign in successful! (Simulated)"); // Replace with a proper notification
+      toast.success("Sign in successful! (Simulated)"); // Replace with a proper notification
     } catch (error) {
       // Handle errors (e.g., display an error message)
       console.error("Sign in failed:", error);
       // form.setError('root', { message: 'Failed to sign in. Please check your credentials.' }); // Example
-      alert("Sign in failed. Please check your credentials and try again.");
+      toast.error(
+        "Sign in failed. Please check your credentials and try again."
+      );
     }
   };
 
   return (
     <div
       className={cn(
-        "flex items-center justify-center min-h-screen ",
+        "flex items-center justify-center min-h-screen relative",
         "p-4 sm:p-8" // Responsive padding
       )}
     >
+      {/* Background Gradient */}
+      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,197,94,0.3)_0%,_rgba(0,0,0,1)_60%)] z-0 transition-all duration-1000" />
       <div
         className={cn(
           "w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
