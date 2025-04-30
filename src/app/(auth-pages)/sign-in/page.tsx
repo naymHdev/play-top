@@ -16,8 +16,6 @@ import {
 import { cn } from "@/lib/utils";
 import SocialAuth from "@/components/modules/auth/SocialAuth";
 import toast from "react-hot-toast";
-import Image from "next/image";
-import logo from "../../../assets/images/google.png";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -78,23 +76,10 @@ const SignInPage = () => {
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,197,94,0.3)_0%,_rgba(0,0,0,1)_60%)] z-0 transition-all duration-1000" />
-      <div className="flex items-center justify-center gap-4 py-12">
-        <Image
-          src={logo}
-          alt="Website Logo"
-          width={30}
-          height={30}
-          className="object-contain"
-          priority
-        />
-        <h2 className="text-base sm:text-lg font-bold text-primary">
-          Website Title
-        </h2>
-      </div>
       <div
         className={cn(
           "w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
-          "border border-white/10 p-6 sm:p-8", // Responsive padding
+          "p-6 sm:p-8", // Responsive padding
           "space-y-6"
         )}
       >
