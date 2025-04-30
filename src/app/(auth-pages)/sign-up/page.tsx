@@ -62,13 +62,16 @@ const SignUpPage = () => {
   return (
     <div
       className={cn(
-        "flex items-center justify-center min-h-screen ",
+        "flex items-center justify-center min-h-screen relative",
         "p-4 sm:p-8"
       )}
     >
+      {/* Background Gradient */}
+      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,197,94,0.3)_0%,_rgba(0,0,0,1)_60%)] z-0 transition-all duration-1000" />
+
       <div
         className={cn(
-          "w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
+          "relative z-10 w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
           "border border-white/10 p-6 sm:p-8",
           "space-y-6"
         )}

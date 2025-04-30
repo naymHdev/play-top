@@ -10,7 +10,11 @@ const Footer = () => {
   const path = usePathname();
   const currentYear = new Date().getFullYear();
 
-  const shouldShowNewsletter = path !== "/submit-product";
+  const shouldShowNewsletter = ![
+    "/submit-product",
+    "/sign-up",
+    "/sign-in",
+  ].includes(path);
 
   return (
     <>
