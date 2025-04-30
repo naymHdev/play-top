@@ -206,27 +206,27 @@ const SignUpPage = () => {
             >
               Sign In
             </Button>
-            <SocialAuth />
-            <div
-              className={cn(
-                "text-center text-gray-400",
-                "text-sm sm:text-base",
-                "mt-4 sm:mt-6"
-              )}
-            >
-              Already have an account?
-              <a
-                href="/sign-in"
-                className={cn(
-                  "text-green-300 hover:text-green-200 font-semibold px-1",
-                  "transition-colors duration-200"
-                )}
-              >
-                Sign In
-              </a>
-            </div>
           </form>
         </Form>
+        <SocialAuth />
+        <div
+          className={cn(
+            "text-center text-gray-400",
+            "text-sm sm:text-base",
+            "mt-4 sm:mt-6"
+          )}
+        >
+          Already have an account?
+          <a
+            href="/sign-in"
+            className={cn(
+              "text-green-300 hover:text-green-200 font-semibold px-1",
+              "transition-colors duration-200"
+            )}
+          >
+            Sign In
+          </a>
+        </div>
       </div>
     </div>
   );

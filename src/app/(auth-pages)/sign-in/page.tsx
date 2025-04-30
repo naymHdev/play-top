@@ -177,27 +177,27 @@ const SignInPage = () => {
             >
               Sign In
             </Button>
-            <SocialAuth />
-            <div
-              className={cn(
-                "text-center text-gray-400",
-                "text-sm sm:text-base",
-                "mt-4 sm:mt-6"
-              )}
-            >
-              Don't have an account?{" "}
-              <a
-                href="/sign-up"
-                className={cn(
-                  "text-green-300 hover:text-green-200 font-semibold",
-                  "transition-colors duration-200"
-                )}
-              >
-                Sign Up
-              </a>
-            </div>
           </form>
         </Form>
+        <SocialAuth />
+        <div
+          className={cn(
+            "text-center text-gray-400",
+            "text-sm sm:text-base",
+            "mt-4 sm:mt-6"
+          )}
+        >
+          Don't have an account?{" "}
+          <a
+            href="/sign-up"
+            className={cn(
+              "text-green-300 hover:text-green-200 font-semibold",
+              "transition-colors duration-200"
+            )}
+          >
+            Sign Up
+          </a>
+        </div>
       </div>
     </div>
   );

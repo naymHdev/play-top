@@ -5,6 +5,7 @@ import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Separator } from "../ui/separator";
 import Newsletter from "../Newsletter";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Footer = () => {
   const path = usePathname();
@@ -44,9 +45,12 @@ const Footer = () => {
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
                 <ul className="flex flex-col gap-3 mt-3 md:mt-6">
-                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                  <Link
+                    href={"/"}
+                    className=" text-foreground font-medium hover:underline hover:text-primary"
+                  >
                     Home
-                  </li>
+                  </Link>
                   <li className=" text-foreground font-medium hover:underline hover:text-primary">
                     About Us
                   </li>
