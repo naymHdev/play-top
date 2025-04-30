@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import SocialAuth from "@/components/modules/auth/SocialAuth";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -171,6 +172,7 @@ const SignInPage = () => {
             >
               Sign In
             </Button>
+            <SocialAuth />
             <div
               className={cn(
                 "text-center text-gray-400",

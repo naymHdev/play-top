@@ -14,9 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
+import SocialAuth from "@/components/modules/auth/SocialAuth";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
+  name: z.string({
+    required_error: "Enter your valid name",
+  }),
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -80,8 +84,42 @@ const SignUpPage = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 sm:space-y-6" // Responsive spacing
+            className="space-y-4 sm:space-y-6"
           >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    className={cn(
+                      "text-white/90 block mb-2 sm:mb-3",
+                      "text-sm sm:text-base"
+                    )}
+                  >
+                    Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your name"
+                      {...field}
+                      type="text"
+                      className={cn(
+                        "shadow-inner shadow-black/20",
+                        "py-2.5 sm:py-3 px-2",
+                        "text-sm sm:text-base"
+                      )}
+                    />
+                  </FormControl>
+                  <FormMessage
+                    className={cn(
+                      "text-red-400 mt-1.5 sm:mt-2",
+                      "text-xs sm:text-sm"
+                    )}
+                  />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
@@ -163,6 +201,7 @@ const SignUpPage = () => {
             >
               Sign In
             </Button>
+            <SocialAuth />
             <div
               className={cn(
                 "text-center text-gray-400",

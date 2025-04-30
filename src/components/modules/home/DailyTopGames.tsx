@@ -58,8 +58,7 @@ const DailyTopGames = () => {
   return (
     <>
       <PTContainer
-        className=" mt-20 relative
-      "
+        className=" mt-20 relative"
       >
         <div>
           <PTSectionName

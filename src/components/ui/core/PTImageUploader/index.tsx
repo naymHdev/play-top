@@ -33,7 +33,7 @@ const NMImageUploader = ({
 
   return (
     <>
-      <div className={cn("flex flex-col items-center w-full gap-4 bg-card rounded-md border border-dashed border-foreground", className)}>
+      <div className={cn("flex flex-col items-center w-full h-fit gap-4 bg-card rounded-md border border-dashed border-foreground", className)}>
         <Input
           onChange={handleImageChange}
           type="file"
