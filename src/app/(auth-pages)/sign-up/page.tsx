@@ -22,6 +22,7 @@ import Link from "next/link";
 import { signUp } from "@/services/auth";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -37,6 +38,8 @@ const signInSchema = z.object({
 });
 
 const SignUpPage = () => {
+  const router = useRouter();
+
   // Initialize the form using useForm
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -47,6 +50,7 @@ const SignUpPage = () => {
       const res = await signUp(values);
       if (res.success) {
         toast.success(res.message || "Sign in successful!");
+        router.push("/profile"); // ✅ redirect to profile page
       } else {
         toast.error(res.message || "Sign in failed.");
       }

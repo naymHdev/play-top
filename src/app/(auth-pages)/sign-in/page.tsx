@@ -21,6 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { signInUser } from "@/services/auth";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -35,27 +36,22 @@ const signInSchema = z.object({
 const SignInPage = () => {
   // Initialize the form using useForm
   const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema), // Use Zod schema for validation
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    resolver: zodResolver(signInSchema),
   });
 
   // Function to handle form submission
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
-    // Simulate an API call (replace with your actual sign-in logic)
-    console.log("Signing in with:", values);
     try {
-      // Replace this with your actual authentication logic (e.g., an API call)
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a 1-second delay
-      // If sign-in is successful, you might want to redirect the user:
       // window.location.href = '/dashboard'; // Example: Redirect to dashboard
-      toast.success("Sign in successful! (Simulated)"); // Replace with a proper notification
+      const res = await signInUser(values);
+      if (res.success) {
+        toast.success(res.message || "Sign in successful!");
+        window.location.href = "/profile"; // ✅ redirect to profile page
+      } else {
+        toast.error(res.message || "Sign in failed.");
+      }
     } catch (error) {
-      // Handle errors (e.g., display an error message)
       console.error("Sign in failed:", error);
-      // form.setError('root', { message: 'Failed to sign in. Please check your credentials.' }); // Example
       toast.error(
         "Sign in failed. Please check your credentials and try again."
       );
@@ -119,7 +115,7 @@ const SignInPage = () => {
                       {...field}
                       type="email"
                       className={cn(
-                        "shadow-inner shadow-black/20",
+                        "shadow-inner shadow-black/20 text-primary",
                         "py-2.5 sm:py-3 px-2",
                         "text-sm sm:text-base"
                       )}
