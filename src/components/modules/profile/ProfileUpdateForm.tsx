@@ -42,11 +42,11 @@ const ProfileUpdateForm = () => {
       nameTitle: "Jackson Roy",
       userId: "@jacksonroy.gammer",
       bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis dui dui. Nullam laoreet facilisis tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet. Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac habitasse platea dictumst. Cras vel accumsan odio, ac elementum lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien congue.`,
-      steamAccount: "@game",
-      xAccount: "@game",
-      linkedinAccount: "@game",
-      redditAccount: "@game",
-      instagramAccount: "@game",
+      steamAccount: "Stream profile link",
+      xAccount: "X profile link",
+      linkedinAccount: "Linkedin profile link",
+      redditAccount: "Reddit profile link",
+      instagramAccount: "Instagram profile link",
     },
   });
 
@@ -154,16 +154,12 @@ const ProfileUpdateForm = () => {
           <div>
             <Label htmlFor="steamAccount">Steam account of the game</Label>
             <div className="relative">
-              <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                steam.com/
-              </div>
               <div className="">
                 <Input
                   type="text"
                   id="steamAccount"
-                  placeholder="@game"
                   {...register("steamAccount")}
-                  className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                  className="px-2 mt-3 bg-[#111111] border-none py-6"
                 />
               </div>
             </div>
@@ -175,15 +171,12 @@ const ProfileUpdateForm = () => {
           <div>
             <Label htmlFor="xAccount">X account of the game</Label>
             <div className="relative">
-              <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                x.com/
-              </div>
               <div className="">
                 <Input
                   type="text"
                   id="steamAccount"
                   {...register("steamAccount")}
-                  className="pl-[75px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                  className="px-2 mt-3 bg-[#111111] border-none py-6"
                 />
               </div>
             </div>
@@ -199,15 +192,12 @@ const ProfileUpdateForm = () => {
               LinkedIn account of the game
             </Label>
             <div className="relative">
-              <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                linkedin.com/
-              </div>
               <div className="">
                 <Input
                   type="text"
                   id="steamAccount"
                   {...register("steamAccount")}
-                  className="pl-[125px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                  className="px-2 mt-3 bg-[#111111] border-none py-6"
                 />
               </div>
             </div>
@@ -221,15 +211,12 @@ const ProfileUpdateForm = () => {
           <div>
             <Label htmlFor="redditAccount">Reddit account of the game</Label>
             <div className="relative">
-              <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                reddit.com/
-              </div>
               <div className="">
                 <Input
                   type="text"
                   id="steamAccount"
                   {...register("steamAccount")}
-                  className="pl-[110px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                  className="px-2 mt-3 bg-[#111111] border-none py-6"
                 />
               </div>
             </div>
@@ -247,15 +234,12 @@ const ProfileUpdateForm = () => {
               Instagram account of the game
             </Label>
             <div className="relative">
-              <div className="absolute bg-card inset-y-0 flex items-center rounded-l-md left-0 pointer-events-none px-3">
-                instagram.com/
-              </div>
               <div className="">
                 <Input
                   type="text"
                   id="steamAccount"
                   {...register("steamAccount")}
-                  className="pl-[140px] pr-2 mt-3 bg-[#111111] border-none py-6"
+                  className="px-2 mt-3 bg-[#111111] border-none py-6"
                 />
               </div>
             </div>
