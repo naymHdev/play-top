@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import logo from "../../../assets/images/google.png";
 import Image from "next/image";
 import Link from "next/link";
+import { signUp } from "@/services/auth";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -33,29 +34,16 @@ const signInSchema = z.object({
   }),
 });
 
-// Animation variants for the form container
-const formVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
 const SignUpPage = () => {
   // Initialize the form using useForm
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
   });
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
     console.log("Signing in with:", values);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const res = await signUp(values);
+      console.log("Registered user:", res);
       toast.success("Sign in successful! (Simulated)");
     } catch (error) {
       console.error("Sign in failed:", error);
@@ -121,7 +109,7 @@ const SignUpPage = () => {
                       {...field}
                       type="text"
                       className={cn(
-                        "shadow-inner shadow-black/20",
+                        "shadow-inner shadow-black/20 text-primary",
                         "py-2.5 sm:py-3 px-2",
                         "text-sm sm:text-base"
                       )}
@@ -155,7 +143,7 @@ const SignUpPage = () => {
                       {...field}
                       type="email"
                       className={cn(
-                        "shadow-inner shadow-black/20",
+                        "shadow-inner shadow-black/20 text-primary",
                         "py-2.5 sm:py-3 px-2",
                         "text-sm sm:text-base"
                       )}
@@ -187,7 +175,7 @@ const SignUpPage = () => {
                     <Input
                       placeholder="Enter your password"
                       {...field}
-                      type="password"
+                      type="text"
                       className={cn(
                         "bg-black/20 text-white ",
                         "shadow-inner shadow-black/20",
