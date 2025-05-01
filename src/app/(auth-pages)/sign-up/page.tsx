@@ -16,6 +16,9 @@ import {
 import { cn } from "@/lib/utils";
 import SocialAuth from "@/components/modules/auth/SocialAuth";
 import toast from "react-hot-toast";
+import logo from "../../../assets/images/google.png";
+import Image from "next/image";
+import Link from "next/link";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -71,6 +74,14 @@ const SignUpPage = () => {
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,197,94,0.3)_0%,_rgba(0,0,0,1)_60%)] z-0 transition-all duration-1000" />
+      <Link className=" z-10" href={"/"}>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-1 py-8 hover:cursor-pointer text-center md:text-left">
+          <Image src={logo} width={50} height={50} alt="Web logo" />
+          <h3 className="text-2xl font-bold text-primary leading-snug">
+            Web Title
+          </h3>
+        </div>
+      </Link>
       <div
         className={cn(
           "relative z-10 w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl shadow-2xl",
