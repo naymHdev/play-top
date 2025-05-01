@@ -79,12 +79,12 @@ const Footer = () => {
               <div>
                 <h2 className=" text-primary text-lg font-semibold">Links</h2>
                 <ul className="flex flex-col gap-3 mt-3 md:mt-6">
-                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                  <Link href={'/terms-of-service'} className=" text-foreground font-medium hover:underline hover:text-primary">
                     Terms Of Service
-                  </li>
-                  <li className=" text-foreground font-medium hover:underline hover:text-primary">
+                  </Link>
+                  <Link href={'/privacy-policy'} className=" text-foreground font-medium hover:underline hover:text-primary">
                     Privacy Policy
-                  </li>
+                  </Link>
                   <li className=" text-foreground font-medium hover:underline hover:text-primary">
                     Do not sell my info
                   </li>
