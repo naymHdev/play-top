@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import LayoutWrapper from "@/components/shared/LayoutWrapper";
+import Providers from "@/providers/Providers";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistInter.variable} antialiased`}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <Providers>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </Providers>
         <Toaster />
       </body>
     </html>

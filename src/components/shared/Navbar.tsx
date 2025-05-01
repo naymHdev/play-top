@@ -6,9 +6,13 @@ import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useUser } from "@/contexts/UserContext";
 
 const Navbar = () => {
   const activeUser = false;
+
+  const {user} = useUser()
+  console.log(user);
 
   return (
     <>
