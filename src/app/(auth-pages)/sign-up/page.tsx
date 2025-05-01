@@ -20,6 +20,8 @@ import logo from "../../../assets/images/google.png";
 import Image from "next/image";
 import Link from "next/link";
 import { signUp } from "@/services/auth";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 // Define the schema for the form using Zod
 const signInSchema = z.object({
@@ -40,11 +42,14 @@ const SignUpPage = () => {
     resolver: zodResolver(signInSchema),
   });
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
-    console.log("Signing in with:", values);
+    // console.log("Signing in with:", values);
     try {
       const res = await signUp(values);
-      console.log("Registered user:", res);
-      toast.success("Sign in successful! (Simulated)");
+      if (res.success) {
+        toast.success(res.message || "Sign in successful!");
+      } else {
+        toast.error(res.message || "Sign in failed.");
+      }
     } catch (error) {
       console.error("Sign in failed:", error);
       toast.error(
@@ -161,37 +166,55 @@ const SignUpPage = () => {
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel
-                    className={cn(
-                      "text-white/90 block mb-2 sm:mb-3",
-                      "text-sm sm:text-base"
-                    )}
-                  >
-                    Password
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your password"
-                      {...field}
-                      type="text"
+              render={({ field }) => {
+                const [showPassword, setShowPassword] = useState(false);
+
+                return (
+                  <FormItem>
+                    <FormLabel
                       className={cn(
-                        "bg-black/20 text-white ",
-                        "shadow-inner shadow-black/20",
-                        "py-2.5 sm:py-3 px-2",
+                        "text-white/90 block mb-2 sm:mb-3",
                         "text-sm sm:text-base"
                       )}
+                    >
+                      Password
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          className={cn(
+                            "bg-black/20 text-white w-full",
+                            "shadow-inner shadow-black/20",
+                            "py-2.5 sm:py-3 px-2 pr-10", // leave space for eye icon
+                            "text-sm sm:text-base"
+                          )}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-white"
+                          tabIndex={-1}
+                        >
+                          {showPassword ? (
+                            <EyeOff size={18} />
+                          ) : (
+                            <Eye size={18} />
+                          )}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage
+                      className={cn(
+                        "text-red-400 mt-1.5 sm:mt-2",
+                        "text-xs sm:text-sm"
+                      )}
                     />
-                  </FormControl>
-                  <FormMessage
-                    className={cn(
-                      "text-red-400 mt-1.5 sm:mt-2",
-                      "text-xs sm:text-sm"
-                    )}
-                  />
-                </FormItem>
-              )}
+                  </FormItem>
+                );
+              }}
             />
             <Button
               type="submit"
