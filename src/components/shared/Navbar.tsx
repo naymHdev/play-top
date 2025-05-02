@@ -7,12 +7,26 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/contexts/UserContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { logout } from "@/services/auth";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const activeUser = false;
+  const { user, setIsLoading } = useUser();
+  const router = useRouter();
+  // console.log(user);
 
-  const {user} = useUser()
-  console.log(user);
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
+
+    router.push("/sign-in");
+  };
 
   return (
     <>
@@ -42,7 +56,7 @@ const Navbar = () => {
                   <FaPlus className=" ml-2" />
                 </Button>
               </Link>
-              {activeUser ? (
+              {user && user.role === "USER" ? (
                 <>
                   <div className="flex items-center gap-4">
                     {/* Notification Icon with Green Dot */}
@@ -59,14 +73,29 @@ const Navbar = () => {
 
                     {/* Avatar */}
                     <div>
-                      <Link href={"/profile"}>
-                        <Avatar>
-                          <AvatarImage src="https://github.com/shadcn.png" />
-                          <AvatarFallback>
-                            <FaRegCircleUser />
-                          </AvatarFallback>
-                        </Avatar>
-                      </Link>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <div className="cursor-pointer">
+                            <Avatar>
+                              <AvatarImage src="https://github.com/shadcn.png" />
+                              <AvatarFallback>
+                                <FaRegCircleUser />
+                              </AvatarFallback>
+                            </Avatar>
+                          </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" sideOffset={8}>
+                          <DropdownMenuItem asChild>
+                            <Link href="/profile">Profile</Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={handleLogout}
+                            className="text-red-600"
+                          >
+                            Log out
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </div>
                 </>

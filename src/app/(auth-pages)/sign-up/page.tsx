@@ -222,6 +222,7 @@ const SignUpPage = () => {
             />
             <Button
               type="submit"
+              disabled={form.formState.isSubmitting}
               className={cn(
                 "w-full bg-secondary",
                 "text-white font-semibold py-2.5 sm:py-3.5",
@@ -230,7 +231,7 @@ const SignUpPage = () => {
                 "text-base sm:text-lg"
               )}
             >
-              Sign In
+              {form.formState.isSubmitting ? "Submitting..." : "Sign Up"}
             </Button>
           </form>
         </Form>

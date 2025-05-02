@@ -185,15 +185,17 @@ const SignInPage = () => {
             />
             <Button
               type="submit"
+              disabled={form.formState.isSubmitting}
               className={cn(
                 "w-full bg-secondary",
                 "text-white font-semibold py-2.5 sm:py-3.5",
                 "rounded-full hover:bg-secondary/80",
                 "transition-all duration-300 shadow-lg hover:shadow-xl",
-                "text-base sm:text-lg"
+                "text-base sm:text-lg",
+                form.formState.isSubmitting && "opacity-60 cursor-not-allowed"
               )}
             >
-              Sign In
+              {form.formState.isSubmitting ? "Submitting..." : "Sign In"}
             </Button>
           </form>
         </Form>
