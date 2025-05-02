@@ -17,7 +17,7 @@ const HomePage = async () => {
   return (
     <>
       <BannerSection />
-      <DailyTopGames topGameDay={topGameDay} />
+      <DailyTopGames topGameDay={allGamesData.allGames} />
       <UpcomingRelease />
       <WeeklyTopGames topGameWeek={topGameWeek} />
     </>

@@ -49,12 +49,15 @@ const gamesData: TGame[] = [
   },
 ];
 
-// Simulated game list
-export const repeatedGamesData = Array.from({ length: 20 }, (_, index) => ({
-  ...gamesData[0],
-  _id: `${index + 1}`,
-}));
 const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
+  console.log(topGameDay);
+
+  // Simulated game list
+  const repeatedGamesData = Array.from({ length: 20 }, (_, index) => ({
+    ...gamesData[0],
+    _id: `${index + 1}`,
+  }));
+
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 

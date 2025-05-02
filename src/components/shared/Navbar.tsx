@@ -84,13 +84,22 @@ const Navbar = () => {
                             </Avatar>
                           </div>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" sideOffset={8}>
+                        <DropdownMenuContent
+                          align="end"
+                          sideOffset={8}
+                          className="border-none bg-card text-primary"
+                        >
                           <DropdownMenuItem asChild>
-                            <Link href="/profile">Profile</Link>
+                            <Link
+                              className=" hover:cursor-pointer"
+                              href="/profile"
+                            >
+                              Profile
+                            </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             onClick={handleLogout}
-                            className="text-red-600"
+                            className="hover:text-red-600 hover:cursor-pointer"
                           >
                             Log out
                           </DropdownMenuItem>

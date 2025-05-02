@@ -36,7 +36,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
             {/* ----------- Up & Down Vot button -------------- */}
             <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full px-2 py-1">
               <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
-                <FiArrowUpRight  />
+                <FiArrowUpRight />
               </Button>
               <span className="text-white text-lg font-semibold">4.5k</span>
               <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
