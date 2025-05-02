@@ -12,6 +12,7 @@ import PTWeeklyGameCard from "@/components/ui/PTWeeklyGameCard";
 import { TWeeklyGames } from "@/types/weeklyGames";
 import PTButton from "@/components/ui/PTButton";
 import { FiArrowRight, FiArrowUp } from "react-icons/fi";
+import { TGame } from "@/types/games";
 
 // Game Data
  const gamesData: TWeeklyGames[] = [
@@ -31,7 +32,7 @@ export const weeklyGamesData = Array.from({ length: 30 }, (_, index) => ({
   _id: `${index + 1}`,
 }));
 
-const WeeklyTopGames = () => {
+const WeeklyTopGames = ({topGameWeek}: {topGameWeek: TGame[]}) => {
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
