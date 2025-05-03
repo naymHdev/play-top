@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client";
+
+import { use, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,12 +14,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
+import { updatePassword } from "@/services/auth";
+import { useUser } from "@/contexts/UserContext";
 
 const PasswordChange = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { user } = useUser();
+  console.log("user", user);
 
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
@@ -27,32 +34,17 @@ const PasswordChange = () => {
 
     try {
       setLoading(true);
+      const passwordData = {
+        userId: user?.id,
+        password: oldPassword,
+        newPassword,
+      };
+      console.log("passwordData", passwordData);
 
-      // Replace this with your actual API call
-      const response = await fetch("/api/change-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          oldPassword,
-          newPassword,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success("Password changed successfully!");
-        setOldPassword("");
-        setNewPassword("");
-        setConfirmPassword("");
-      } else {
-        toast.error(data.message || "Failed to change password.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong.");
-    } finally {
-      setLoading(false);
+      const res = await updatePassword(passwordData);
+      console.log(res);
+    } catch (error: any) {
+      console.log(error);
     }
   };
 
@@ -79,7 +71,7 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="oldPassword"
-              type="password"
+              type="text"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
               className="col-span-3 px-2 border border-foreground text-primary"
@@ -93,7 +85,7 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="newPassword"
-              type="password"
+              type="text"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="col-span-3 px-2 border border-foreground text-primary"
@@ -107,7 +99,7 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="confirmPassword"
-              type="password"
+              type="text"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="col-span-3 px-2 border border-foreground text-primary"

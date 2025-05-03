@@ -51,7 +51,6 @@ export const signInUser = async (userData: FieldValues) => {
   }
 };
 
-
 export const getCurrentUser = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;
   let decodedData = null;
@@ -66,4 +65,66 @@ export const getCurrentUser = async () => {
 
 export const logout = async () => {
   (await cookies()).delete("accessToken");
+};
+
+// -------- All User --------
+export const allUser = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/user/find_all_users`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value || "",
+        },
+      }
+    );
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+// ---------- update user profile ----------
+export const updateUserProfile = async (profileData: FormData) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/user/update_profile`,
+      {
+        method: "PATCH",
+        body: profileData,
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value || "",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Failed to update profile");
+    }
+    revalidateTag("USER");
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+export const updatePassword = async (updateData) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/update-password`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updateData),
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value || "",
+        },
+      }
+    );
+
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
 };

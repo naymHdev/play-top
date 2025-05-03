@@ -50,7 +50,7 @@ const SignUpPage = () => {
       const res = await signUp(values);
       if (res.success) {
         toast.success(res.message || "Sign in successful!");
-        router.push("/profile"); // ✅ redirect to profile page
+        router.push("/sign-in"); // ✅ redirect to profile page
       } else {
         toast.error(res.message || "Sign in failed.");
       }

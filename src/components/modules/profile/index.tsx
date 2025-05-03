@@ -3,7 +3,6 @@
 import { FaExternalLinkAlt } from "react-icons/fa";
 import {
   FaInstagram,
-  FaLinkedin,
   FaReddit,
   FaXTwitter,
   FaYoutube,
@@ -114,7 +113,7 @@ const ProfileDetails = () => {
       </div>
 
       {/* ----------- User Games ----------- */}
-      <ProductTab />
+      {/* <ProductTab /> */}
     </>
   );
 };

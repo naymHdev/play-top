@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { user, setIsLoading } = useUser();
+  // console.log("userId", user?.id);
   const router = useRouter();
   // console.log(user);
 
