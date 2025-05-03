@@ -110,7 +110,7 @@ export const updateUserProfile = async (profileData: FormData) => {
   }
 };
 
-export const updatePassword = async (updateData) => {
+export const updatePassword = async (updateData: FieldValues) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/update-password`,

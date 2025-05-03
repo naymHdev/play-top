@@ -13,17 +13,19 @@ import { steps } from "@/constants/gameForm";
 import { EditorState } from "draft-js";
 import NMImageUploader from "@/components/ui/core/PTImageUploader";
 import ImagePreviewer from "@/components/ui/core/PTImageUploader/ImagePreviewer";
-
-// --- Schema & Types ---
-const formSchema = z.object({
-  gameTitle: z.string().min(1, "Title is required"),
-  gameCategory: z.string({ required_error: "Category must be required" }),
-  steamAccount: z.string().optional(),
-  linkedinAccount: z.string().optional(),
-  redditAccount: z.string().optional(),
-  instagramAccount: z.string().optional(),
-  xAccount: z.string().optional(),
-});
+import { formSchema } from "@/types/uploadGame";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 type FormData = z.infer<typeof formSchema>;
 
@@ -45,6 +47,8 @@ export default function AddGameForm() {
     register,
     handleSubmit,
     watch,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -52,6 +56,8 @@ export default function AddGameForm() {
   });
 
   const watchedGameTitle = watch("gameTitle");
+  const status = watch("status");
+  const publishDate = watch("publishDate");
 
   // Auto-scroll to the current section
   useEffect(() => {
@@ -151,6 +157,99 @@ export default function AddGameForm() {
                     <p className="text-red-500 text-sm mt-1">
                       {errors.gameCategory.message}
                     </p>
+                  )}
+                  {/* Price */}
+                  <div className="space-y-2">
+                    <label
+                      className="block mt-4 text-lg font-semibold text-primary/80"
+                      htmlFor="price"
+                    >
+                      Price
+                    </label>
+                    <input
+                      className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
+                      id="price"
+                      placeholder="Enter price"
+                      {...register("price")}
+                    />
+                    {errors.price && (
+                      <p className="text-sm text-red-500">
+                        {errors.price.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Status */}
+                  <div className="space-y-2">
+                    <Label className="block mt-4 text-lg font-semibold text-primary/80">
+                      Status
+                    </Label>
+                    <div className="flex gap-6">
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          value="active"
+                          {...register("status")}
+                        />
+                        Active
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          value="upcoming"
+                          {...register("status")}
+                        />
+                        Upcoming
+                      </label>
+                    </div>
+                    {errors.status && (
+                      <p className="text-sm text-red-500">
+                        {errors.status.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Conditional Calendar */}
+                  {status === "upcoming" && (
+                    <div className="space-y-2">
+                      <Label className="block mt-4 text-lg font-semibold text-primary/80">
+                        Publish Date
+                      </Label>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full justify-start text-left font-normal bg-card border-none",
+                              !publishDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {publishDate
+                              ? format(publishDate, "PPP")
+                              : "Pick a date"}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 border-none rounded-md bg-card">
+                          <Calendar
+                            className="w-full rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
+                            mode="single"
+                            selected={publishDate}
+                            onSelect={(date) => {
+                              setValue("publishDate", date, {
+                                shouldValidate: true,
+                              });
+                            }}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      {errors.publishDate && (
+                        <p className="text-sm text-red-500">
+                          {errors.publishDate.message}
+                        </p>
+                      )}
+                    </div>
                   )}
                 </div>
               )}
