@@ -14,7 +14,6 @@ import { EditorState } from "draft-js";
 import NMImageUploader from "@/components/ui/core/PTImageUploader";
 import ImagePreviewer from "@/components/ui/core/PTImageUploader/ImagePreviewer";
 import { formSchema } from "@/types/uploadGame";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Popover,
@@ -48,7 +47,6 @@ export default function AddGameForm() {
     handleSubmit,
     watch,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -76,12 +74,22 @@ export default function AddGameForm() {
   }, [watchedGameTitle, currentStep]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    const allLinks = [
+      data.steamAccount,
+      data.linkedinAccount,
+      data.redditAccount,
+      data.instagramAccount,
+      data.xAccount,
+      ...(data.socialLinks?.map((link) => link.url).filter(Boolean) ?? []),
+    ].filter(Boolean); // Remove any undefined or empty strings
+
     const gameFormData = {
       ...data,
       gameDescription,
       isThumbnail,
       isCover,
       gameImages: imageFiles,
+      allLinks,
     };
 
     console.log("Form Data:", gameFormData);
@@ -165,6 +173,7 @@ export default function AddGameForm() {
                       htmlFor="price"
                     >
                       Price
+                      <span className="text-red-600 font-medium px-1">*</span>
                     </label>
                     <input
                       className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
@@ -183,6 +192,7 @@ export default function AddGameForm() {
                   <div className="space-y-2">
                     <Label className="block mt-4 text-lg font-semibold text-primary/80">
                       Status
+                      <span className="text-red-600 font-medium px-1">*</span>
                     </Label>
                     <div className="flex gap-6">
                       <label className="flex items-center gap-2">
@@ -214,6 +224,7 @@ export default function AddGameForm() {
                     <div className="space-y-2">
                       <Label className="block mt-4 text-lg font-semibold text-primary/80">
                         Publish Date
+                        <span className="text-red-600 font-medium px-1">*</span>
                       </Label>
                       <Popover>
                         <PopoverTrigger asChild>

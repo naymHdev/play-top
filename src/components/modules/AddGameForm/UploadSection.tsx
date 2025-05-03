@@ -8,11 +8,8 @@ type TUploadFileProps = {
 
 export default function UploadSection({
   setIsThumbnail,
-  setIsCover,
 }: TUploadFileProps) {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
-  const [coverPreview, setCoverPreview] = useState<string | null>(null);
-  const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -25,30 +22,6 @@ export default function UploadSection({
     }
     setIsThumbnail(file);
     // console.log("file", file);
-  };
-
-  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCoverPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-    setIsCover(file);
-  };
-
-  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-    const files = e.target.files;
-    if (files) {
-      const selectedFiles = Array.from(files).slice(0, 5); // Max 5 files
-      const previews = selectedFiles.map((file) => {
-        return URL.createObjectURL(file);
-      });
-      setGalleryPreviews(previews);
-    }
   };
 
   return (
@@ -103,61 +76,6 @@ export default function UploadSection({
                 <p className="text-sm text-foreground">
                   .jpg, .jpeg, .png — Max size: <strong>1.00 MB</strong> —
                   Dimension: <strong>1920×345 px</strong>
-                </p>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Cover Upload */}
-      <div>
-        <label className="block text-lg font-semibold text-primary/80">
-          Upload cover image
-        </label>
-
-        <p className="mt-1 text-sm font-normal text-foreground">
-          Keep in mind that the first file you upload will appear in the cover
-          preview.
-        </p>
-
-        <p className="mt-1 text-sm font-medium text-muted-foreground">
-          Recommended size:{" "}
-          <span className="text-primary font-semibold">372×102 px</span> &nbsp;
-          | &nbsp; Max file size:{" "}
-          <span className="text-primary font-semibold">200 KB</span>
-        </p>
-
-        <div className="relative border border-dashed border-foreground mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer">
-          <input
-            id="cover"
-            type="file"
-            accept="image/jpeg,image/jpg,image/png"
-            onChange={handleCoverChange}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-          />
-          {coverPreview ? (
-            <img
-              src={coverPreview}
-              alt="Cover Preview"
-              className="w-full h-48 object-cover rounded-lg"
-            />
-          ) : (
-            <>
-              <MdOutlineCloudUpload className="text-secondary text-5xl mb-4" />
-              <div className="space-y-1">
-                <p className="text-primary font-medium">
-                  Drag your file here or{" "}
-                  <label
-                    htmlFor="cover"
-                    className="text-secondary underline cursor-pointer"
-                  >
-                    browse
-                  </label>
-                </p>
-                <p className="text-sm text-foreground">
-                  .jpg, .jpeg, .png — Max size: <strong>200 KB</strong> —
-                  Dimension: <strong>372×102 px</strong>
                 </p>
               </div>
             </>

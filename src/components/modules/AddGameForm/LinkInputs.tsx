@@ -103,15 +103,15 @@ const LinkInputs = ({ register }: { register: any }) => {
         {/* Dynamic Inputs */}
         {extraLinks.map((_, index) => (
           <div key={index} className="col-span-1">
-            <Label htmlFor={`extraLink-${index}`}>
+            <Label htmlFor={`socialLinks-${index}`}>
               Additional Link {index + 1}
             </Label>
             <div className="relative">
               <Input
                 type="text"
-                id={`extraLink-${index}`}
+                id={`socialLinks-${index}`}
                 placeholder="Enter additional link"
-                {...register(`extraLinks.${index}`)}
+                {...register(`socialLinks.${index}`)}
                 className="px-2 mt-3 bg-[#111111] border-none py-6"
               />
             </div>
