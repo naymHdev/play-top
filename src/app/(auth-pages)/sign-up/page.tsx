@@ -45,9 +45,17 @@ const SignUpPage = () => {
     resolver: zodResolver(signInSchema),
   });
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
-    // console.log("Signing in with:", values);
+    console.log("Signing in with:", values);
     try {
-      const res = await signUp(values);
+      const authInfo = {
+        data: {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        },
+      };
+      const res = await signUp(authInfo);
+      console.log("signUp", res);
       if (res.success) {
         toast.success(res.message || "Sign in successful!");
         router.push("/sign-in"); // ✅ redirect to profile page

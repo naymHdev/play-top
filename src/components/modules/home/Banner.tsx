@@ -1,7 +1,7 @@
 import PTContainer from "@/components/ui/PTContainer";
 import { MdArrowForwardIos } from "react-icons/md";
 import Image from "next/image";
-import bannerImage from "../../../assets/images/banner-image.avif";
+import bannerImage from "../../../assets/images/banner-group-image.png";
 import PTButton from "@/components/ui/PTButton";
 
 const BannerSection = () => {
@@ -9,12 +9,12 @@ const BannerSection = () => {
     <>
       <div className="relative mt-10 lg:mt-0">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute w-full inset-0 z-0">
           <Image
             src={bannerImage}
             alt="Banner Image"
             layout="fill"
-            className=" object-cover bg-no-repeat object-center"
+            className=" object-cover bg-no-repeat bg-center object-center w-full h-full"
             quality={100}
           />
         </div>

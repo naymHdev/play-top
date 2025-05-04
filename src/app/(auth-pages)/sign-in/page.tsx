@@ -42,8 +42,14 @@ const SignInPage = () => {
   // Function to handle form submission
   const onSubmit = async (values: z.infer<typeof signInSchema>) => {
     try {
-      // window.location.href = '/dashboard'; // Example: Redirect to dashboard
-      const res = await signInUser(values);
+      const authInfo = {
+        data: {
+          email: values.email,
+          password: values.password,
+        },
+      };
+      const res = await signInUser(authInfo);
+      console.log(res);
       if (res.success) {
         toast.success(res.message || "Sign in successful!");
         window.location.href = "/profile"; // ✅ redirect to profile page

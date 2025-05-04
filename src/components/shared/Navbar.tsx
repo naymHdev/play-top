@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import PTContainer from "../ui/PTContainer";
 import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/contexts/UserContext";
 import {
@@ -15,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
+import Searchbar from "./Searchbar";
 
 const Navbar = () => {
   const { user, setIsLoading } = useUser();
@@ -41,15 +40,7 @@ const Navbar = () => {
             </div>
             <div className=" flex gap-4 items-center justify-center">
               <div className="relative w-full">
-                <Input
-                  type="search"
-                  placeholder="Search"
-                  className="pl-4 pr-10 py-2 rounded-full text-primary w-[426px] h-[48px] bg-card border-none"
-                />
-                <FiSearch
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary opacity-70"
-                  size={18}
-                />
+                <Searchbar />
               </div>
               <Link href="/submit-product">
                 <Button className="w-[179px] h-[48px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
