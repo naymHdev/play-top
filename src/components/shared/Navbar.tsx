@@ -14,8 +14,9 @@ import {
 import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import Searchbar from "./Searchbar";
+import { TUserProps } from "@/types/user";
 
-const Navbar = () => {
+const Navbar = ({ session }: { session: TUserProps | null }) => {
   const { user, setIsLoading } = useUser();
   // console.log("userId", user?.id);
   const router = useRouter();

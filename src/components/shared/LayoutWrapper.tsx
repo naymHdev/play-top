@@ -4,11 +4,13 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/components/shared/Navbar";
 import MobileNavbar from "@/components/shared/MobileNavbar";
 import Footer from "@/components/shared/Footer";
+import { TUserProps } from "@/types/user";
 
 export default function LayoutWrapper({
-  children,
+  children, session
 }: {
   children: React.ReactNode;
+  session: TUserProps
 }) {
   const pathname = usePathname();
   const isAuthPage = ["/sign-in", "/sign-up"].includes(pathname);
@@ -18,7 +20,7 @@ export default function LayoutWrapper({
       {!isAuthPage && (
         <>
           <div className="hidden md:block">
-            <Navbar />
+            <Navbar session={session} />
           </div>
           <div className="block md:hidden">
             <MobileNavbar />

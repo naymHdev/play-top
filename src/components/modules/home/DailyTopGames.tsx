@@ -50,7 +50,7 @@ const gamesData: TGame[] = [
 ];
 
 const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
-  console.log(topGameDay);
+  // console.log(topGameDay);
 
   // Simulated game list
   const repeatedGamesData = Array.from({ length: 20 }, (_, index) => ({
@@ -76,8 +76,8 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
         />
       </div>
 
-      <div className="mt-10 w-full lg:w-[70%]">
-        <div>
+      <div className="mt-10 w-full grid grid-cols-1 lg:grid-cols-6 gap-5">
+        <div className=" col-span-full lg:col-span-4">
           {repeatedGamesData.slice(0, visibleCount).map((game) => (
             <PTGameCard key={game._id} games={game} />
           ))}
@@ -92,6 +92,9 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
               />
             </div>
           </div>
+        </div>
+        <div className=" col-span-full lg:col-span-2">
+          <h3>Newsletters</h3>
         </div>
       </div>
     </PTContainer>

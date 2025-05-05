@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+export type TUserProps = {
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+};
+
 export interface IUser {
   id?: string;
   name?: string;

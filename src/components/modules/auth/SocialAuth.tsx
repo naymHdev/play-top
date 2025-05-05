@@ -1,4 +1,6 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
 
 const SocialAuth = () => {
   return (
@@ -11,6 +13,11 @@ const SocialAuth = () => {
         </div>
         <div className="">
           <Button
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: "http://localhost:3000",
+              })
+            }
             variant="outline"
             className="w-full bg-card hover:text-white hover:bg-card hover:cursor-pointer rounded-full border-none shadow text-white py-6"
           >
