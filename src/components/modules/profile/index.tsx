@@ -113,7 +113,7 @@ const ProfileDetails = () => {
       </div>
 
       {/* ----------- User Games ----------- */}
-      {/* <ProductTab /> */}
+      <ProductTab />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { repeatedGamesData } from "../home/DailyTopGames";
-import PTGameCard from "@/components/ui/PTGameCard";
+import MyGameCard from "./MyGameCard";
 
 const GamesTabs = () => {
   return (
@@ -17,7 +17,7 @@ const GamesTabs = () => {
           {/* Content for Games Submitted */}
           <div className="">
             {repeatedGamesData?.map((game) => (
-              <PTGameCard key={game._id} games={game} />
+              <MyGameCard key={game._id} games={game} />
             ))}
           </div>
         </TabsContent>

@@ -48,8 +48,8 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
   } = useForm<ProfileUpdateFormData>({
     resolver: zodResolver(profileUpdateSchema),
     defaultValues: {
-      name: currentUser?.name,
-      userId: currentUser?.userId,
+      name: "John Doe",
+      userId: "@johndoe",
       bio: `Competitive gamer. Strategy is my weapon, precision is my game. From FPS to open-world, I conquer pixels like a warzone. 🎯
 💻 PC Master Race | 🎧 Always online | 🏆 Grinding for greatness Born to frag, built to win. I don’t play games — I dominate them. 🕹️
 Apex in the lobby. Legend in the making. #NoMercy`,
