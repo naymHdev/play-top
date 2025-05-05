@@ -1,8 +1,16 @@
+import TermsOfService from "@/components/modules/TermsOfService";
+import PTContainer from "@/components/ui/PTContainer";
 
 const TermsOfServicePage = () => {
   return (
-    <>TermsOfServicePage</>
-);
+    <>
+      <PTContainer>
+        <div>
+          <TermsOfService />
+        </div>
+      </PTContainer>
+    </>
+  );
 };
 
 export default TermsOfServicePage;
