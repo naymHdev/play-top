@@ -33,7 +33,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
 
   return (
     <>
-      <div className="py-6">
+      <div className="py-5">
         <PTContainer>
           <div className=" flex items-center justify-between">
             <div>

@@ -68,7 +68,7 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
   };
 
   return (
-    <PTContainer className="mt-20 relative">
+    <PTContainer className="mt-24 relative">
       <div>
         <PTSectionName
           title="Top Games of the Day"
@@ -76,14 +76,14 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
         />
       </div>
 
-      <div className="mt-10 w-full grid grid-cols-1 lg:grid-cols-6 gap-5">
-        <div className=" col-span-full lg:col-span-4">
+      <div className="mt-10 w-[95%] lg:w-[85%]">
+        <div className="">
           {repeatedGamesData.slice(0, visibleCount).map((game) => (
             <PTGameCard key={game._id} games={game} />
           ))}
 
           <div className="bg-gradient-to-t from-black to-transparent h-[148px] absolute bottom-0 w-full">
-            <div className="w-full flex items-center ml-[130px] lg:ml-[340px] mt-20">
+            <div className="w-full flex items-center justify-center mt-16">
               <PTButton
                 onClick={handleToggle}
                 className="py-2 px-5 rounded-full border border-card hover:border-white"
@@ -92,9 +92,6 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
               />
             </div>
           </div>
-        </div>
-        <div className=" col-span-full lg:col-span-2">
-          <h3>Newsletters</h3>
         </div>
       </div>
     </PTContainer>

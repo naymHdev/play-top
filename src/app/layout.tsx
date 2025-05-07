@@ -25,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className={`${geistInter.variable} antialiased border border-red-700`}>
+      <body className={`${geistInter.variable} antialiased`}>
         <Providers>
           <LayoutWrapper session={session}>{children}</LayoutWrapper>
         </Providers>

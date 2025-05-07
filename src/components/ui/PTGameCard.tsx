@@ -23,7 +23,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
         </Link>
         <Link href={`game-details/${games._id}`}>
           <div className=" px-3 lg:px-0">
-            <h2 className=" text-xl lg:text-2xl font-semibold text-primary">
+            <h2 className=" text-xl font-semibold text-primary">
               {games.title}
             </h2>
           </div>
@@ -34,7 +34,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               ${games.price}
             </h1>
             {/* ----------- Up & Down Vot button -------------- */}
-            <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full px-2 py-1">
+            <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full py-0.5">
               <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
                 <FiArrowUpRight />
               </Button>
@@ -47,7 +47,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
         </div>
       </div>
 
-      <div className=" lg:mt-0 mt-3 p-3 bg-card border-t border-card rounded-b-2xl">
+      <div className=" lg:mt-0 mt-3 px-4 py-2 bg-card border-t border-card rounded-b-2xl">
         <div className="lg:flex items-center space-x-6 font-medium text-[12px] leading-5 text-foreground">
           <div className=" flex items-center gap-2">
             <h3 className=" ">Categories:</h3>

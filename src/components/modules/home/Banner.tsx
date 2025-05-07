@@ -8,34 +8,35 @@ const BannerSection = () => {
   return (
     <>
       <div className="relative mt-10 lg:mt-0">
-        {/* Background Image */}
-        <div className="absolute w-full inset-0 z-0">
-          <Image
-            src={bannerImage}
-            alt="Banner Image"
-            layout="fill"
-            className=" object-cover bg-no-repeat bg-center object-center w-full h-full"
-            quality={100}
-          />
-        </div>
-
         {/* Content on top of the image */}
-        <PTContainer>
-          <div className="relative lg:w-1/2 z-10 py-10 lg:py-46">
-            <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
-              All in One Place for Game Creators and Fans Alike
-            </h2>
-            <p className="text-primary text-sm leading-normal mt-5 max-w-3xl mx-auto">
-              This is your platform to showcase your work, grow a community, and
-              find your next favorite game. Submit a link or host it here—
-              whatever works for you. Indie spirit meets seamless sharing, with
-              discovery at its heart.
-            </p>
-            <PTButton
-              className=" px-[70px] py-[12px] bg-secondary"
-              label="Learn More"
-              icon={<MdArrowForwardIos className=" size-4 mt-1" />}
+        <PTContainer className="h-[100vh] relative">
+          {/* Background Image */}
+          <div className="absolute w-full inset-0 z-0 overflow-hidden">
+            <Image
+              src={bannerImage}
+              alt="Banner Image"
+              layout="fill"
+              className=" object-cover object-center"
+              quality={100}
             />
+          </div>
+          <div className="relative lg:w-1/2 z-10 flex flex-row justify-center h-full">
+            <div className=" absolute top-[20%]">
+              <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
+                All in One Place for Game Creators and Fans Alike
+              </h2>
+              <p className="text-primary text-sm leading-normal mt-5 max-w-3xl mx-auto">
+                This is your platform to showcase your work, grow a community,
+                and find your next favorite game. Submit a link or host it here—
+                whatever works for you. Indie spirit meets seamless sharing,
+                with discovery at its heart.
+              </p>
+              <PTButton
+                className=" px-[70px] py-[12px] bg-secondary"
+                label="Learn More"
+                icon={<MdArrowForwardIos className=" size-4 mt-1" />}
+              />
+            </div>
           </div>
         </PTContainer>
         <div className="bg-gradient-to-r from-black via-black via-25%  to-transparent inset-0 block absolute"></div>

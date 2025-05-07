@@ -111,7 +111,7 @@ const GameDetailsPage = async ({
               <div className="col-span-2">
                 <div className=" p-5 border border-card rounded-xl">
                   <div className=" text-primary flex items-center gap-3">
-                    <p className=" uppercase text-sm text-gray-300">
+                    <p className=" uppercase text-sm text-primary">
                       Game Posted By
                     </p>
                     <p className=" font-bold -mt-0.5">{findGame?.author}</p>
@@ -131,9 +131,16 @@ const GameDetailsPage = async ({
                       </div>
                     </div>
 
-                    <div className="">
-                      <Button className="flex items-center gap-2 bg-[#124116] hover:bg-green-900 hover:cursor-pointer text-primary rounded-full">
-                        <FiArrowUpRight /> Upvote 4.5k <FiArrowDownRight />
+                    {/* ----------- Up & Down Vot button -------------- */}
+                    <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full py-2 w-4/12">
+                      <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                        <FiArrowUpRight />
+                      </Button>
+                      <span className="text-white text-lg font-semibold">
+                        4.5k
+                      </span>
+                      <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                        <FiArrowDownRight />
                       </Button>
                     </div>
                   </div>
