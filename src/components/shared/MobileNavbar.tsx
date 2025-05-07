@@ -8,15 +8,30 @@ import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
+import { TUserProps } from "@/types/user";
+import { useUser } from "@/contexts/UserContext";
+import { logout } from "@/services/auth";
 
-import profile from "../../assets/images/profile-img.png";
-
-const MobileNavbar = () => {
+const MobileNavbar = ({ session }: { session: TUserProps | null }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const activeUser = true;
-
+  const { user, setIsLoading } = useUser();
+  const router = useRouter();
   const toggleNavbar = () => setIsOpen((prev) => !prev);
+
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
+
+    router.push("/sign-in");
+  };
 
   return (
     <header className="bg-black text-white fixed top-0 left-0 right-0 z-50">
@@ -51,19 +66,40 @@ const MobileNavbar = () => {
 
           <nav className="flex flex-col items-center p-6 gap-6">
             {/* User Actions */}
-            {activeUser ? (
+            {(user && user.role === "USER") || session?.user?.email ? (
               <div className="flex items-center justify-end gap-4 w-full mt-4">
                 {/* Avatar */}
-                <Link href={"/profile"}>
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <Image
-                      src={profile}
-                      alt="Profile Image"
-                      className="object-cover w-12 h-12"
-                      priority
-                    />
-                  </div>
-                </Link>
+                <div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <div className="cursor-pointer">
+                        <Avatar>
+                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarFallback>
+                            <FaRegCircleUser />
+                          </AvatarFallback>
+                        </Avatar>
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="end"
+                      sideOffset={8}
+                      className="border-none bg-card text-primary"
+                    >
+                      <DropdownMenuItem asChild>
+                        <Link className=" hover:cursor-pointer" href="/profile">
+                          Profile
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={handleLogout}
+                        className="hover:text-red-600 hover:cursor-pointer"
+                      >
+                        Log out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
                 {/* Notification */}
                 <div className="relative">
                   <div className="flex items-center justify-center rounded-full bg-card p-3">

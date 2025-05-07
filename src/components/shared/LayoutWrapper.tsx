@@ -7,10 +7,11 @@ import Footer from "@/components/shared/Footer";
 import { TUserProps } from "@/types/user";
 
 export default function LayoutWrapper({
-  children, session
+  children,
+  session,
 }: {
   children: React.ReactNode;
-  session: TUserProps
+  session: TUserProps | null;
 }) {
   const pathname = usePathname();
   const isAuthPage = ["/sign-in", "/sign-up"].includes(pathname);
@@ -23,7 +24,7 @@ export default function LayoutWrapper({
             <Navbar session={session} />
           </div>
           <div className="block md:hidden">
-            <MobileNavbar />
+            <MobileNavbar session={session} />
           </div>
         </>
       )}

@@ -22,6 +22,8 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
   const router = useRouter();
   // console.log(user);
 
+  // console.log("session ", session?.user?.email);
+
   const handleLogout = () => {
     logout();
     setIsLoading(true);
@@ -49,7 +51,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                   <FaPlus className=" ml-2" />
                 </Button>
               </Link>
-              {user && user.role === "USER" ? (
+              {(user && user.role === "USER") || session?.user?.email ? (
                 <>
                   <div className="flex items-center gap-4">
                     {/* Notification Icon with Green Dot */}

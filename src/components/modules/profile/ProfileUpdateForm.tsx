@@ -26,7 +26,7 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
 
   // -------- get current user -------- //
   const { user } = useUser();
-  const currentUser = userInfo.find((itm: any) => itm.id === user?.id);
+  const currentUser = userInfo?.find((itm: any) => itm.id === user?.id);
   // console.log("currentUser", currentUser);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
