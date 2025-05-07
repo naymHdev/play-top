@@ -95,6 +95,7 @@ export const updateUserProfile = async (profileData: FormData) => {
         method: "PATCH",
         body: profileData,
         headers: {
+          "Content-Type": "application/json",
           Authorization: (await cookies()).get("accessToken")!.value || "",
         },
       }

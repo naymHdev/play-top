@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import { updatePassword } from "@/services/auth";
+import { logout, updatePassword } from "@/services/auth";
 import { useUser } from "@/contexts/UserContext";
 import { useForm } from "react-hook-form";
 import { TUpdatePassword } from "@/types/auth";
@@ -53,7 +53,8 @@ const PasswordChange = () => {
       if (res?.success) {
         toast.success("Password updated successfully!");
         reset();
-        router.push("/profile");
+        await logout();
+        router.push("/sign-in");
       } else {
         toast.error(res?.message || "Failed to update password.");
       }
@@ -86,7 +87,7 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="password"
-              type="password"
+              type="text"
               {...register("password", {
                 required: "Old password is required",
               })}
@@ -106,7 +107,7 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="newPassword"
-              type="password"
+              type="text"
               {...register("newPassword", {
                 required: "New password is required",
               })}
