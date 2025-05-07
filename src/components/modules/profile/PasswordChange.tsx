@@ -1,6 +1,5 @@
 "use client";
 
-import { use, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,35 +15,51 @@ import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import { updatePassword } from "@/services/auth";
 import { useUser } from "@/contexts/UserContext";
+import { useForm } from "react-hook-form";
+import { TUpdatePassword } from "@/types/auth";
+import { useRouter } from "next/navigation";
+
+type FormData = {
+  password: string;
+  newPassword: string;
+};
 
 const PasswordChange = () => {
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const { user } = useUser();
-  console.log("user", user);
+  const router = useRouter();
 
-  const handleChangePassword = async () => {
-    if (newPassword !== confirmPassword) {
-      toast.error("New passwords do not match.");
-      return;
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<FormData>();
+
+  const onSubmit = async (data: { password: string; newPassword: string }) => {
+    if (!user?.id) return toast.error("User ID missing");
+
+    const passwordData: TUpdatePassword = {
+      data: {
+        userId: user.id,
+        password: data.password,
+        newPassword: data.newPassword,
+      },
+    };
 
     try {
-      setLoading(true);
-      const passwordData = {
-        userId: user?.id,
-        password: oldPassword,
-        newPassword,
-      };
-      console.log("passwordData", passwordData);
-
       const res = await updatePassword(passwordData);
-      console.log(res);
+      // console.log("res", res);
+
+      if (res?.success) {
+        toast.success("Password updated successfully!");
+        reset();
+        router.push("/profile");
+      } else {
+        toast.error(res?.message || "Failed to update password.");
+      }
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
+      toast.error("Something went wrong.");
     }
   };
 
@@ -58,25 +73,31 @@ const PasswordChange = () => {
       <DialogContent className="sm:max-w-[425px] border-none bg-card text-primary">
         <DialogHeader>
           <DialogTitle>Change Password</DialogTitle>
-          <DialogDescription className=" text-foreground">
+          <DialogDescription className="text-foreground">
             Update your account password. Enter your current password and set a
             new one.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="oldPassword" className="text-right">
+            <Label htmlFor="password" className="text-right">
               Old Password
             </Label>
             <Input
-              id="oldPassword"
-              type="text"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
+              id="password"
+              type="password"
+              {...register("password", {
+                required: "Old password is required",
+              })}
               className="col-span-3 px-2 border border-foreground text-primary"
               placeholder="Enter old password"
             />
+            {errors.password && (
+              <p className="col-span-4 text-red-500 text-sm mt-1 ml-[33%]">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
@@ -85,38 +106,30 @@ const PasswordChange = () => {
             </Label>
             <Input
               id="newPassword"
-              type="text"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              type="password"
+              {...register("newPassword", {
+                required: "New password is required",
+              })}
               className="col-span-3 px-2 border border-foreground text-primary"
               placeholder="Enter new password"
             />
+            {errors.newPassword && (
+              <p className="col-span-4 text-red-500 text-sm mt-1 ml-[33%]">
+                {errors.newPassword.message}
+              </p>
+            )}
           </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="confirmPassword" className="text-right">
-              Confirm Password
-            </Label>
-            <Input
-              id="confirmPassword"
-              type="text"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="col-span-3 px-2 border border-foreground text-primary"
-              placeholder="Confirm new password"
-            />
-          </div>
-        </div>
-
-        <DialogFooter>
-          <Button
-            onClick={handleChangePassword}
-            disabled={loading}
-            className="w-full bg-secondary text-primary"
-          >
-            {loading ? "Changing..." : "Save Changes"}
-          </Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-secondary text-primary"
+            >
+              {isSubmitting ? "Saving..." : "Save Changes"}
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

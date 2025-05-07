@@ -50,7 +50,7 @@ const Newsletter = () => {
               <Input
                 type="email"
                 placeholder="Enter Email Address"
-                className="w-full text-lg px-2 sm:w-[550px] h-[52px] bg-white text-black border-black"
+                className="w-full text-lg px-2 h-[52px] bg-white text-black border-black"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {

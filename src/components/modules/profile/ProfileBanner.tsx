@@ -5,8 +5,13 @@ import PTContainer from "@/components/ui/PTContainer";
 import { CiEdit } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { useUser } from "@/contexts/UserContext";
 
 const ProfileBanner = () => {
+
+  const {user} = useUser()
+  // console.log(user);
+
   return (
     <>
       <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A] mt-10 lg:mt-0">

@@ -31,7 +31,7 @@ const Searchbar = () => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setShowResults(true)}
           placeholder="Search"
-          className="pl-4 pr-10 py-2 rounded-full text-primary w-[426px] h-[48px] bg-card border-none"
+          className="pl-4 pr-10 py-2 rounded-full text-primary lg:w-[426px] h-[48px] bg-card border-none"
         />
         <FiSearch
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary opacity-70"
