@@ -15,6 +15,7 @@ import { logout } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import Searchbar from "./Searchbar";
 import { TUserProps } from "@/types/user";
+import { signOut } from "next-auth/react";
 
 const Navbar = ({ session }: { session: TUserProps | null }) => {
   const { user, setIsLoading } = useUser();
@@ -24,8 +25,9 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
 
   // console.log("session ", session?.user?.email);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
+    await signOut({ callbackUrl: "/sign-in" });
     setIsLoading(true);
 
     router.push("/sign-in");

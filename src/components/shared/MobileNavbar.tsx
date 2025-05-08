@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { TUserProps } from "@/types/user";
 import { useUser } from "@/contexts/UserContext";
 import { logout } from "@/services/auth";
+import { signOut } from "next-auth/react";
 
 const MobileNavbar = ({ session }: { session: TUserProps | null }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,8 +27,9 @@ const MobileNavbar = ({ session }: { session: TUserProps | null }) => {
   const router = useRouter();
   const toggleNavbar = () => setIsOpen((prev) => !prev);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
+    await signOut({ callbackUrl: "/sign-in" });
     setIsLoading(true);
 
     router.push("/sign-in");
