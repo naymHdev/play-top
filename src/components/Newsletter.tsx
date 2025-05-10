@@ -6,6 +6,8 @@ import { TfiEmail } from "react-icons/tfi";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { postNewsLetter } from "@/services/newsletter";
+import toast from "react-hot-toast";
 
 // Define the types for the form fields
 type NewsletterFormData = {
@@ -20,9 +22,27 @@ const Newsletter = () => {
     reset,
   } = useForm<NewsletterFormData>();
 
-  const onSubmit = (data: NewsletterFormData) => {
-    console.log("Subscribed email:", data.email);
-    reset(); // Reset form after submission
+  const onSubmit = async (data: NewsletterFormData) => {
+    reset();
+
+    const userEmail = {
+      data: {
+        email: data.email,
+      },
+    };
+    // console.log("Subscribed email:", userEmail);
+    try {
+      const res = await postNewsLetter(userEmail);
+      // console.log(res);
+      if (res.success) {
+        toast.success(res);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error: any) {
+      // console.log(error);
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -50,7 +70,7 @@ const Newsletter = () => {
               <Input
                 type="email"
                 placeholder="Enter Email Address"
-                className="w-full text-lg px-2 h-[52px] bg-white text-black border-black"
+                className="w-full lg:w-[550px] text-lg px-2 h-[52px] bg-white text-black border-black"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
