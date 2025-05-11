@@ -80,10 +80,10 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
             <PTGameCard key={game._id} games={game} />
           ))}
 
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-10">
             <PTButton
               onClick={handleToggle}
-              className="py-2 px-5 rounded-full border border-card hover:border-white"
+              className="py-2 px-5  bg-card rounded-sm"
               label={isShowingAll ? "Show Less" : "Show More"}
               icon={isShowingAll ? <FaArrowUp /> : <FaArrowRight />}
             />

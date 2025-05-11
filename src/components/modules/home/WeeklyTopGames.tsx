@@ -7,15 +7,15 @@ import android from "../../../assets/icons/android.png";
 import apple from "../../../assets/icons/apple.png";
 import windows from "../../../assets/icons/windows.png";
 import linux from "../../../assets/icons/linux.png";
-import game1 from "../../../assets/images/weekly-t1.png";
-import PTWeeklyGameCard from "@/components/ui/PTWeeklyGameCard";
+import game1 from "../../../assets/images/new-game-ui.png";
 import { TWeeklyGames } from "@/types/weeklyGames";
 import PTButton from "@/components/ui/PTButton";
 import { FiArrowRight, FiArrowUp } from "react-icons/fi";
 import { TGame } from "@/types/games";
+import PTGameCard from "@/components/ui/PTGameCard";
 
 // Game Data
- const gamesData: TWeeklyGames[] = [
+const gamesData: TWeeklyGames[] = [
   {
     _id: "1",
     title: "The Talos Principle: Resaw",
@@ -32,7 +32,7 @@ export const weeklyGamesData = Array.from({ length: 30 }, (_, index) => ({
   _id: `${index + 1}`,
 }));
 
-const WeeklyTopGames = ({topGameWeek}: {topGameWeek: TGame[]}) => {
+const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
@@ -46,21 +46,18 @@ const WeeklyTopGames = ({topGameWeek}: {topGameWeek: TGame[]}) => {
     <div className="mt-20">
       <PTContainer>
         <div>
-          <PTSectionName
-            title="Top Games of the Week"
-            description="Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat, cursus dictum enim."
-          />
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <PTSectionName title="Top Games of the Week" />
+          <div className="w-[60%] mt-12">
             {weeklyGamesData?.slice(0, visibleCount).map((games) => (
-              <PTWeeklyGameCard key={games._id} game={games} />
+              <PTGameCard key={games._id} games={games} />
             ))}
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-8">
+        <div className="flex w-[50%] mx-auto mt-10">
           <PTButton
             onClick={handleToggle}
-            className="border border-card py-2 px-5"
+            className=" bg-card rounded-sm py-2 px-5"
             label={isShowingAll ? "Show Less" : "Show More"}
             icon={isShowingAll ? <FiArrowUp /> : <FiArrowRight />}
           />

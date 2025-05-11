@@ -19,7 +19,7 @@ const HomePage = async () => {
       <BannerSection />
       <DailyTopGames topGameDay={allGamesData?.allGames} />
       <UpcomingRelease />
-      <WeeklyTopGames topGameWeek={topGameWeek} />
+      <WeeklyTopGames topGameWeek={allGamesData?.allGames} />
     </>
   );
 };

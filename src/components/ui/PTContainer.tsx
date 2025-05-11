@@ -10,6 +10,6 @@ export default function PTContainer({
   className = "",
 }: ContainerProps) {
   return (
-    <div className={`container mx-auto px-5 ${className}`}>{children}</div>
+    <div className={`container-box mx-auto px-5 ${className}`}>{children}</div>
   );
 }

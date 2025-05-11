@@ -25,7 +25,7 @@ const BannerSection = () => {
               <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
                 All in One Place for Game Creators and Fans Alike
               </h2>
-              <p className="text-primary text-sm leading-normal mt-5 max-w-3xl mx-auto">
+              <p className="text-primary text-sm leading-normal my-8 max-w-3xl mx-auto">
                 This is your platform to showcase your work, grow a community,
                 and find your next favorite game. Submit a link or host it here—
                 whatever works for you. Indie spirit meets seamless sharing,

@@ -29,10 +29,10 @@ const MobileNavbar = ({ session }: { session: TUserProps | null }) => {
 
   const handleLogout = async () => {
     await logout();
-    await signOut({ callbackUrl: "/sign-in" });
+    await signOut({ callbackUrl: "/" });
     setIsLoading(true);
 
-    router.push("/sign-in");
+    router.push("/");
   };
 
   return (

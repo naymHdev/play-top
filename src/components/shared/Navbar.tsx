@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import PTContainer from "../ui/PTContainer";
-import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
+import { FaPlus, FaRegCircleUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/contexts/UserContext";
@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import Searchbar from "./Searchbar";
 import { TUserProps } from "@/types/user";
 import { signOut } from "next-auth/react";
+import AuthModal from "../modules/auth/AuthModal";
 
 const Navbar = ({ session }: { session: TUserProps | null }) => {
   const { user, setIsLoading } = useUser();
@@ -27,10 +28,10 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
 
   const handleLogout = async () => {
     await logout();
-    await signOut({ callbackUrl: "/sign-in" });
+    await signOut({ callbackUrl: "/" });
     setIsLoading(true);
 
-    router.push("/sign-in");
+    router.push("/");
   };
 
   return (
@@ -107,11 +108,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 </>
               ) : (
                 <>
-                  <Link href="/sign-in">
-                    <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
-                      <FaRegUser /> Sign In
-                    </Button>
-                  </Link>
+                  <AuthModal />
                 </>
               )}
             </div>

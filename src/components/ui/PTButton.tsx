@@ -11,7 +11,7 @@ interface PTButtonProps {
 const PTButton: React.FC<PTButtonProps> = ({
   label,
   icon,
-  className,
+  className = "",
   type,
   onClick,
 }) => {
@@ -19,7 +19,7 @@ const PTButton: React.FC<PTButtonProps> = ({
     <button
       onClick={onClick}
       type={type}
-      className={`${className} mt-8 flex items-center gap-3 text-primary text-[16px] font-medium rounded-full hover:cursor-pointer`}
+      className={`${className} flex items-center gap-3 text-primary text-[16px] font-medium rounded-full hover:cursor-pointer`}
     >
       <span>{label}</span>
       {icon}
