@@ -18,6 +18,8 @@ import { useUser } from "@/contexts/UserContext";
 import { useForm } from "react-hook-form";
 import { TUpdatePassword } from "@/types/auth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 type FormData = {
   password: string;
@@ -25,6 +27,8 @@ type FormData = {
 };
 
 const PasswordChange = () => {
+  const [showOld, setShowOld] = useState(false);
+  const [showNew, setShowNew] = useState(false);
   const { user } = useUser();
   const router = useRouter();
 
@@ -81,41 +85,55 @@ const PasswordChange = () => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          {/* Old Password */}
+          <div className="relative space-y-2">
             <Label htmlFor="password" className="text-right">
               Old Password
             </Label>
             <Input
               id="password"
-              type="text"
+              type={showOld ? "text" : "password"}
               {...register("password", {
                 required: "Old password is required",
               })}
-              className="col-span-3 px-2 border border-foreground text-primary"
+              className="w-full px-2 pr-10 border border-foreground text-primary"
               placeholder="Enter old password"
             />
+            <div
+              className="absolute right-3 top-[30px] cursor-pointer text-muted-foreground"
+              onClick={() => setShowOld(!showOld)}
+            >
+              {showOld ? <EyeOff /> : <Eye />}
+            </div>
             {errors.password && (
-              <p className="col-span-4 text-red-500 text-sm mt-1 ml-[33%]">
+              <p className="text-red-500 text-sm mt-1">
                 {errors.password.message}
               </p>
             )}
           </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
+          {/* New Password */}
+          <div className="relative space-y-2 mt-4">
             <Label htmlFor="newPassword" className="text-right">
               New Password
             </Label>
             <Input
               id="newPassword"
-              type="text"
+              type={showNew ? "text" : "password"}
               {...register("newPassword", {
                 required: "New password is required",
               })}
-              className="col-span-3 px-2 border border-foreground text-primary"
+              className="w-full px-2 pr-10 border border-foreground text-primary"
               placeholder="Enter new password"
             />
+            <div
+              className="absolute right-3 top-[30px] cursor-pointer text-muted-foreground"
+              onClick={() => setShowNew(!showNew)}
+            >
+              {showNew ? <EyeOff /> : <Eye />}
+            </div>
             {errors.newPassword && (
-              <p className="col-span-4 text-red-500 text-sm mt-1 ml-[33%]">
+              <p className="text-red-500 text-sm mt-1">
                 {errors.newPassword.message}
               </p>
             )}

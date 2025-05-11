@@ -16,7 +16,7 @@ const LinkInputs = ({ register }: { register: any }) => {
         <div>
           <Label htmlFor="steamAccount" className="text-primary/80">
             Where to buy the game
-            <span className=" text-red-600 font-medium">*</span>
+            <span className=" text-gray-200 font-medium">*</span>
           </Label>
           <div className="relative">
             <Input

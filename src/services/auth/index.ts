@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 import { TUpdatePassword } from "@/types/auth";
+import { User } from "lucide-react";
 
 export const signUp = async (userData: FieldValues) => {
   try {
@@ -87,24 +88,21 @@ export const allUser = async () => {
 };
 
 // ---------- update user profile ----------
-export const updateUserProfile = async (profileData: FormData) => {
+export const updateUserProfile = async (
+  profileData: FormData,
+  userId: string
+) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/update_profile`,
+      `${process.env.NEXT_PUBLIC_API_URL}/user/update_profile/${userId}`,
       {
         method: "PATCH",
         body: profileData,
         headers: {
-          "Content-Type": "application/json",
           Authorization: (await cookies()).get("accessToken")!.value || "",
         },
       }
     );
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Failed to update profile");
-    }
     revalidateTag("USER");
     return await res.json();
   } catch (error: any) {

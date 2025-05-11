@@ -1,11 +1,11 @@
 interface PTSectionNameProps {
   title: string;
-  description: string;
+  description?: string;
 }
 const PTSectionName = ({ title, description }: PTSectionNameProps) => {
   return (
     <>
-      <div className=" text-center">
+      <div className=" text-left">
         <h1 className=" text-3xl lg:text-5xl font-bold lg:leading-14 text-primary">
           {title}
         </h1>

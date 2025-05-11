@@ -30,7 +30,7 @@ export default function UploadSection({
       <div>
         <label className="block text-lg font-semibold text-primary/80">
           Upload thumbnail
-          <span className="text-red-600 font-medium px-1">*</span>
+          <span className="text-gray-200 font-medium px-1">*</span>
         </label>
 
         <p className="mt-1 text-sm font-normal text-foreground">

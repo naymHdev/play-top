@@ -135,7 +135,7 @@ export default function AddGameForm() {
                   {/* Game Title Input */}
                   <label className="block text-lg font-semibold text-primary/80">
                     Game Title
-                    <span className=" text-red-600 font-medium px-1">*</span>
+                    <span className=" text-gray-200 font-medium px-1">*</span>
                   </label>
                   <input
                     type="text"
@@ -145,7 +145,7 @@ export default function AddGameForm() {
                     className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
                   />
                   {errors.gameTitle && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="text-gray-200 text-sm mt-1">
                       {errors.gameTitle.message}
                     </p>
                   )}
@@ -153,7 +153,7 @@ export default function AddGameForm() {
                   {/* Category Input */}
                   <label className="block mt-4 text-lg font-semibold text-primary/80">
                     Mention categories with a comma
-                    <span className="text-red-600 font-medium px-1">*</span>
+                    <span className="text-gray-200 font-medium px-1">*</span>
                   </label>
                   <input
                     type="text"
@@ -162,7 +162,7 @@ export default function AddGameForm() {
                     className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
                   />
                   {errors.gameCategory && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="text-gray-200 text-sm mt-1">
                       {errors.gameCategory.message}
                     </p>
                   )}
@@ -173,7 +173,7 @@ export default function AddGameForm() {
                       htmlFor="price"
                     >
                       Price
-                      <span className="text-red-600 font-medium px-1">*</span>
+                      <span className="text-gray-200 font-medium px-1">*</span>
                     </label>
                     <input
                       className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
@@ -182,7 +182,7 @@ export default function AddGameForm() {
                       {...register("price")}
                     />
                     {errors.price && (
-                      <p className="text-sm text-red-500">
+                      <p className="text-sm text-gray-200">
                         {errors.price.message}
                       </p>
                     )}
@@ -192,7 +192,7 @@ export default function AddGameForm() {
                   <div className="space-y-2">
                     <Label className="block mt-4 text-lg font-semibold text-primary/80">
                       Status
-                      <span className="text-red-600 font-medium px-1">*</span>
+                      <span className="text-gray-200 font-medium px-1">*</span>
                     </Label>
                     <div className="flex gap-6">
                       <label className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export default function AddGameForm() {
                       </label>
                     </div>
                     {errors.status && (
-                      <p className="text-sm text-red-500">
+                      <p className="text-sm text-gray-200">
                         {errors.status.message}
                       </p>
                     )}
@@ -224,7 +224,9 @@ export default function AddGameForm() {
                     <div className="space-y-2">
                       <Label className="block mt-4 text-lg font-semibold text-primary/80">
                         Publish Date
-                        <span className="text-red-600 font-medium px-1">*</span>
+                        <span className="text-gray-200 font-medium px-1">
+                          *
+                        </span>
                       </Label>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -256,7 +258,7 @@ export default function AddGameForm() {
                         </PopoverContent>
                       </Popover>
                       {errors.publishDate && (
-                        <p className="text-sm text-red-500">
+                        <p className="text-sm text-gray-200">
                           {errors.publishDate.message}
                         </p>
                       )}
@@ -269,7 +271,7 @@ export default function AddGameForm() {
                 <div>
                   <label className="block text-lg font-semibold text-primary/80">
                     Description of the Game
-                    <span className=" text-red-600 font-medium px-1">*</span>
+                    <span className=" text-gray-200 font-medium px-1">*</span>
                   </label>
                   <Description
                     editorState={editorState}
@@ -299,7 +301,7 @@ export default function AddGameForm() {
                     <div>
                       <label className="block text-lg font-semibold text-primary/80">
                         Upload Photos of game and gameplay (up to 5 pictures)
-                        <span className=" text-red-600 font-medium px-1">
+                        <span className=" text-gray-200 font-medium px-1">
                           *
                         </span>
                       </label>

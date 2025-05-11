@@ -1,6 +1,6 @@
 export type TUpdatePassword = {
   data: {
-    userId: string;
+    userId: string | undefined;
     password: string;
     newPassword: string;
   };

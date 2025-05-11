@@ -1,8 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { ChangeEvent, useRef, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,10 +13,7 @@ import PasswordChange from "./PasswordChange";
 import DeleteAccount from "./DeleteAccount";
 import Link from "next/link";
 import { updateUserProfile } from "@/services/auth";
-import { profileUpdateSchema } from "@/types/user";
 import { useUser } from "@/contexts/UserContext";
-
-type ProfileUpdateFormData = z.infer<typeof profileUpdateSchema>;
 
 const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -26,6 +21,7 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
 
   // -------- get current user -------- //
   const { user } = useUser();
+  // console.log("user", user);
   const currentUser = userInfo?.find((itm: any) => itm.id === user?.id);
   // console.log("currentUser", currentUser);
 
@@ -45,43 +41,24 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProfileUpdateFormData>({
-    resolver: zodResolver(profileUpdateSchema),
-    defaultValues: {
-      name: "John Doe",
-      userId: "@johndoe",
-      bio: `Competitive gamer. Strategy is my weapon, precision is my game. From FPS to open-world, I conquer pixels like a warzone. 🎯
-💻 PC Master Race | 🎧 Always online | 🏆 Grinding for greatness Born to frag, built to win. I don’t play games — I dominate them. 🕹️
-Apex in the lobby. Legend in the making. #NoMercy`,
-      steamAccount: "Stream profile link",
-      xAccount: "X profile link",
-      linkedinAccount: "Linkedin profile link",
-      redditAccount: "Reddit profile link",
-      instagramAccount: "Instagram profile link",
-    },
-  });
+  } = useForm();
 
-  const onSubmit = async (data: ProfileUpdateFormData) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("Form Data:", data);
+
+    const profileData = {
+      ...data,
+    };
+
     const formData = new FormData();
+    formData.append("data", JSON.stringify(profileData));
 
-    formData.append("name", data?.name || "");
-    formData.append("userId", data.userId || "");
-    formData.append("bio", data.bio || "");
-    formData.append("steamAccount", data.steamAccount || "");
-    formData.append("xAccount", data.xAccount || "");
-    formData.append("linkedinAccount", data.linkedinAccount || "");
-    formData.append("redditAccount", data.redditAccount || "");
-    formData.append("instagramAccount", data.instagramAccount || "");
-
-    if (fileInputRef.current?.files?.[0]) {
-      formData.append("photo", fileInputRef.current.files[0]);
+    if (selectedImage) {
+      formData.append("photo", selectedImage);
     }
 
-    console.log("formData", formData);
-
     try {
-      const res = await updateUserProfile(formData);
+      const res = await updateUserProfile(formData, currentUser?.id);
       console.log("Profile updated", res);
     } catch (error: any) {
       console.log("Profile update error:", error);
@@ -124,7 +101,7 @@ Apex in the lobby. Legend in the making. #NoMercy`,
         </div>
 
         <div>
-          <Label htmlFor="name">Name Title</Label>
+          <Label htmlFor="name">Name</Label>
           <Input
             className="mt-3 bg-card border-none py-6 px-4"
             type="text"

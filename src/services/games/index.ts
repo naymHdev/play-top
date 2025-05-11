@@ -2,6 +2,23 @@
 
 import { cookies } from "next/headers";
 
+// ------------ add game --------------
+export const addGame = async (data: FormData) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/game/add`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value || "",
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
 // ------------ all games --------------
 export const allGames = async () => {
   try {
