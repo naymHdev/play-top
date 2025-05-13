@@ -119,7 +119,7 @@ export default function AddGameForm() {
   }, [watchedGameTitle, currentStep]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
 
     const gameFormData = {
       ...data,
@@ -128,10 +128,7 @@ export default function AddGameForm() {
       isCover,
       gameImages: imageFiles,
     };
-
-    // console.log("allLinks", allLinks);
-
-    // console.log("Form Data:", gameFormData);
+    console.log("Form Data:", gameFormData);
   };
 
   return (

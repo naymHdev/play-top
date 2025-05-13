@@ -12,25 +12,25 @@ const PTGameCard = ({ games }: { games: TGame }) => {
     <>
       <div className="rounded-md border border-card mb-5">
         <div className="">
-          <div className=" flex items-center justify-between gap-4">
+          <div className="lg:flex items-center justify-between gap-4">
             <Link href={`/game-details/${games._id}`}>
-              <div className=" flex items-center gap-4">
+              <div className="lg:flex items-center gap-4">
                 {/*  -------------------- Image Section ---------------- */}
                 <section>
                   <Image
                     src={games.image}
                     alt={games.title}
-                    className=" rounded-md"
+                    className=" rounded-md w-full"
                   />
                 </section>
 
                 {/* -------------------- Content Section ---------------- */}
-                <section className=" flex flex-col gap-2">
+                <section className=" flex flex-col gap-2 px-3 py-4 lg:py-0">
                   <h2 className=" text-[16px] font-semibold text-primary leading-5">
                     {games.title}
                   </h2>
-                  <div className=" flex items-center gap-4">
-                    <div className="flex gap-1 items-center">
+                  <div className="lg:flex items-center gap-4">
+                    <div className="flex lg:gap-1 items-center">
                       {games.categories.map((category, idx) => (
                         <p
                           key={idx}
@@ -46,7 +46,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                       ))}
                     </div>
                     <div className=" h-6 border-r border-[#666262] hidden lg:block"></div>
-                    <div className=" flex gap-2 items-center">
+                    <div className=" flex gap-2 items-center mt-3 lg:mt-0">
                       {games.platform.map((device, idx) => (
                         <Image
                           key={idx}
@@ -61,8 +61,8 @@ const PTGameCard = ({ games }: { games: TGame }) => {
               </div>
             </Link>
             {/* -------------------- Price & Button Section ---------------- */}
-            <section className="px-4">
-              <div className=" flex items-center justify-end gap-14">
+            <section className="px-3 py-4 lg:py-0">
+              <div className=" flex items-center md:justify-end justify-between gap-14">
                 <h1 className=" font-medium text-xl uppercase text-secondary">
                   ${games.price}
                 </h1>

@@ -74,8 +74,8 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
         <PTSectionName title="Top Games of the Day" />
       </div>
 
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-7 gap-8">
-        <div className=" col-span-full md:col-span-5">
+      <div className="mt-10 grid grid-cols-1 lg:grid-cols-7 gap-8">
+        <div className=" col-span-full lg:col-span-5">
           {repeatedGamesData.slice(0, visibleCount).map((game) => (
             <PTGameCard key={game._id} games={game} />
           ))}
@@ -89,7 +89,7 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
             />
           </div>
         </div>
-        <div className="col-span-full md:col-span-2">
+        <div className="col-span-full lg:col-span-2">
           <Newsletter />
         </div>
       </div>

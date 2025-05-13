@@ -47,14 +47,14 @@ const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
       <PTContainer>
         <div>
           <PTSectionName title="Top Games of the Week" />
-          <div className="w-[60%] mt-12">
+          <div className="lg:w-[60%] mt-12">
             {weeklyGamesData?.slice(0, visibleCount).map((games) => (
               <PTGameCard key={games._id} games={games} />
             ))}
           </div>
         </div>
 
-        <div className="flex w-[50%] mx-auto mt-10">
+        <div className="flex lg:w-[50%] mx-auto mt-10">
           <PTButton
             onClick={handleToggle}
             className=" bg-card rounded-sm py-2 px-5"
