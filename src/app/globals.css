@@ -243,19 +243,26 @@
 
 .container-box {
   width: 100%;
-  @media (width >= 40rem /* 640px */) {
-    max-width: 40rem /* 640px */;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Base width: 90% for all screens */
+  max-width: 90%;
+
+  /* Optionally clamp max width at breakpoints for better UX */
+  @media (min-width: 640px) {
+    max-width: 90%;
   }
-  @media (width >= 48rem /* 768px */) {
-    max-width: 48rem /* 768px */;
+  @media (min-width: 768px) {
+    max-width: 85%;
   }
-  @media (width >= 64rem /* 1024px */) {
-    max-width: 64rem /* 1024px */;
+  @media (min-width: 1024px) {
+    max-width: 80%;
   }
-  @media (width >= 90rem /* 1280px */) {
-    max-width: 90rem /* 1280px */;
+  @media (min-width: 1280px) {
+    max-width: 85%;
   }
-  @media (width >= 100rem /* 1536px */) {
-    max-width: 100rem /* 1536px */;
+  @media (min-width: 1536px) {
+    max-width: 85%;
   }
 }

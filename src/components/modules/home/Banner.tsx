@@ -21,7 +21,7 @@ const BannerSection = () => {
             />
           </div>
           <div className="relative lg:w-1/2 z-10 flex flex-row justify-center h-full">
-            <div className=" absolute top-[20%]">
+            <div className=" absolute top-[30%]">
               <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
                 All in One Place for Game Creators and Fans Alike
               </h2>

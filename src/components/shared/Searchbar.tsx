@@ -55,14 +55,6 @@ const Searchbar = () => {
             </li>
             {/* Add more mock/fetched results */}
           </ul>
-
-          <div className="text-lg font-semibold mt-4 mb-2">Collections</div>
-          <ul className="space-y-2">
-            <li className="hover:bg-neutral-800 p-2 rounded-lg">
-              Fourth-Wall Breaking Games
-            </li>
-            <li className="hover:bg-neutral-800 p-2 rounded-lg">Youth</li>
-          </ul>
         </div>
       )}
     </div>

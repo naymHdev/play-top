@@ -5,7 +5,24 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 import { TUpdatePassword } from "@/types/auth";
-import { User } from "lucide-react";
+import { AuthPayload } from "@/types/user";
+
+export const socialRegister = async (payload: AuthPayload) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    revalidateTag("USER");
+    const result = await res.json();
+    return result;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
 
 export const signUp = async (userData: FieldValues) => {
   try {

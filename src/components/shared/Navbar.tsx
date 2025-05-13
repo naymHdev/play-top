@@ -24,7 +24,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
   const router = useRouter();
   // console.log(user);
 
-  // console.log("session ", session?.user?.email);
+  // console.log("session ", session);
 
   const handleLogout = async () => {
     await logout();

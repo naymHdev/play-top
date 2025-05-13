@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
+import { socialRegister } from "@/services/auth";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -23,4 +24,29 @@ export const authOptions: NextAuthOptions = {
     signIn: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
+
+  callbacks: {
+    async signIn({ user, account }) {
+      // console.log("user", user, "account", account);
+      try {
+        const payload = {
+          data: {
+            userId: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.image,
+          },
+        };
+
+        // console.log("payload", payload);
+
+        const result = await socialRegister(payload);
+        console.log("result", result);
+      } catch (error) {
+        console.error("Error saving session to backend:", error);
+      }
+
+      return true;
+    },
+  },
 };
