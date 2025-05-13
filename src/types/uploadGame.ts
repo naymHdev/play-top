@@ -11,6 +11,7 @@ export const formSchema = z
   .object({
     gameTitle: z.string().min(1, "Title is required"),
     gameCategory: z.string({ required_error: "Category must be required" }),
+    platforms: z.array(z.string()).min(1, "At least one platform is required"),
     price: z.string().min(1, "Price is required"),
     steamAccount: z.string().url("Invalid URL").optional(),
     linkedinAccount: z.string().url("Invalid URL").optional(),
@@ -18,8 +19,14 @@ export const formSchema = z
     instagramAccount: z.string().url("Invalid URL").optional(),
     xAccount: z.string().url("Invalid URL").optional(),
     socialLinks: z
-      .array(socialLinkSchema)
+      .array(
+        z.object({
+          platform: z.string().nonempty("Platform is required"),
+          url: z.string().url("Must be a valid URL"),
+        })
+      )
       .optional(),
+
     status: z.enum(["active", "upcoming"], {
       required_error: "Status is required",
     }),

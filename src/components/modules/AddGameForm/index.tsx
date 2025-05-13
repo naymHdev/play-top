@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StepIndicator } from "./Stepper";
@@ -25,6 +25,26 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const items = [
+  {
+    id: "android",
+    label: "Android",
+  },
+  {
+    id: "apple",
+    label: "Apple",
+  },
+  {
+    id: "windows",
+    label: "Windows",
+  },
+  {
+    id: "linux",
+    label: "Linux",
+  },
+] as const;
 
 type FormData = z.infer<typeof formSchema>;
 
@@ -40,7 +60,21 @@ export default function AddGameForm() {
   );
 
   const gameDescription = editorState.getCurrentContent().getPlainText();
-  //  console.log(gameDescription);
+
+  const methods = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+    defaultValues: {
+      socialLinks: [
+        { platform: "Game website", url: "Game website link" },
+        { platform: "Steam", url: "" },
+        { platform: "Linkedin", url: "" },
+        { platform: "Reddit", url: "" },
+        { platform: "Instagram", url: "" },
+        { platform: "X", url: "" },
+      ],
+    },
+  });
 
   const {
     register,
@@ -48,14 +82,25 @@ export default function AddGameForm() {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    mode: "onChange",
-  });
+  } = methods;
 
   const watchedGameTitle = watch("gameTitle");
   const status = watch("status");
   const publishDate = watch("publishDate");
+  const selectedPlatforms = watch("platforms") || [];
+
+  // Toggle platform
+  const togglePlatform = (id: string) => {
+    const current = watch("platforms") || [];
+    if (current.includes(id)) {
+      setValue(
+        "platforms",
+        current.filter((item) => item !== id)
+      );
+    } else {
+      setValue("platforms", [...current, id]);
+    }
+  };
 
   // Auto-scroll to the current section
   useEffect(() => {
@@ -74,14 +119,7 @@ export default function AddGameForm() {
   }, [watchedGameTitle, currentStep]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    const allLinks = [
-      data.steamAccount,
-      data.linkedinAccount,
-      data.redditAccount,
-      data.instagramAccount,
-      data.xAccount,
-      ...(data.socialLinks?.map((link) => link.url).filter(Boolean) ?? []),
-    ].filter(Boolean); // Remove any undefined or empty strings
+    console.log("Form Data:", data);
 
     const gameFormData = {
       ...data,
@@ -89,10 +127,11 @@ export default function AddGameForm() {
       isThumbnail,
       isCover,
       gameImages: imageFiles,
-      allLinks,
     };
 
-    console.log("Form Data:", gameFormData);
+    // console.log("allLinks", allLinks);
+
+    // console.log("Form Data:", gameFormData);
   };
 
   return (
@@ -264,6 +303,37 @@ export default function AddGameForm() {
                       )}
                     </div>
                   )}
+
+                  {/* ---------------- Add Multiple Checkbox For Select Platform ---------------- */}
+                  <div>
+                    <label
+                      className="block mt-4 text-lg font-semibold text-primary/80"
+                      htmlFor="price"
+                    >
+                      Platforms
+                      <span className="text-gray-200 font-medium px-1">*</span>
+                    </label>
+                    <div className="flex flex-wrap gap-4 my-4">
+                      {items.map((platform) => (
+                        <div
+                          key={platform.id}
+                          className="flex items-center gap-2"
+                        >
+                          <Checkbox
+                            id={platform.id}
+                            checked={selectedPlatforms.includes(platform.id)}
+                            onCheckedChange={() => togglePlatform(platform.id)}
+                          />
+                          <Label
+                            className=" text-gray-200"
+                            htmlFor={platform.id}
+                          >
+                            {platform.label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -282,10 +352,18 @@ export default function AddGameForm() {
 
               {index === 2 && (
                 <div>
-                  <p className="text-sm text-gray-400 mb-4">
+                  <h2 className="block  text-lg font-semibold text-primary/80">
+                    Social Links for the Game
+                  </h2>
+                  <p className="text-sm text-gray-400 mb-4 mt-2">
                     At least 1 social link is required*
                   </p>
-                  <LinkInputs register={register} />
+                  {/* <LinkInputs watch={watch} setValue={setValue} register={register} /> */}
+                  <FormProvider {...methods}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <LinkInputs />
+                    </form>
+                  </FormProvider>
                 </div>
               )}
 

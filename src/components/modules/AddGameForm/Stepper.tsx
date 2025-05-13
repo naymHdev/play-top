@@ -29,7 +29,7 @@ export const StepIndicator = ({
       </div>
       {stepIndex !== steps.length - 1 && (
         <div
-          className={`h-[35rem] w-1 bg-foreground  ${
+          className={`h-[37rem] w-1 bg-foreground  ${
             isCompleted
               ? "bg-green-500"
               : isActive

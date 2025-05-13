@@ -1,134 +1,42 @@
-import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Plus, X } from "lucide-react";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
-const LinkInputs = ({ register }: { register: any }) => {
-  const [extraLinks, setExtraLinks] = useState<string[]>([]);
+export default function LinkInputs() {
+  const { control, register } = useFormContext();
 
-  const handleAddMore = () => {
-    setExtraLinks((prev) => [...prev, ""]);
-  };
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "socialLinks",
+  });
 
   return (
-    <div>
-      <div className="grid grid-cols-2 gap-4">
-        {/* Predefined inputs */}
-        <div>
-          <Label htmlFor="steamAccount" className="text-primary/80">
-            Where to buy the game
-            <span className=" text-gray-200 font-medium">*</span>
-          </Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="steamAccount"
-              placeholder="Game website link"
-              {...register("steamAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
+    <div className="space-y-4">
+      {fields.map((field, index) => (
+        <div key={field.id} className="flex gap-4">
+          <input
+            type="text"
+            placeholder="Platform"
+            {...register(`socialLinks.${index}.platform`)}
+            className="mt-1 py-3 px-3 rounded-md border-none bg-card"
+          />
+          <input
+            type="url"
+            placeholder="https://example.com"
+            {...register(`socialLinks.${index}.url`)}
+            className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
+          />
+          <button type="button" onClick={() => remove(index)}>
+            <X className=" text-red-800 size-7 hover:cursor-pointer" />
+          </button>
         </div>
-
-        <div>
-          <Label htmlFor="steamProfile" className="text-primary/80">
-            Steam account of the game
-          </Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="steamProfile"
-              placeholder="Steam profile link"
-              {...register("steamProfile")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
-        </div>
-
-        <div>
-          <Label htmlFor="linkedinAccount" className="text-primary/80">
-            LinkedIn account of the game
-          </Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="linkedinAccount"
-              placeholder="LinkedIn profile link"
-              {...register("linkedinAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
-        </div>
-
-        <div>
-          <Label htmlFor="redditAccount">Reddit account of the game</Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="redditAccount"
-              placeholder="Reddit profile link"
-              {...register("redditAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
-        </div>
-
-        <div>
-          <Label htmlFor="instagramAccount">
-            Instagram account of the game
-          </Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="instagramAccount"
-              placeholder="Instagram profile link"
-              {...register("instagramAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
-        </div>
-
-        <div>
-          <Label htmlFor="xAccount">X account of the game</Label>
-          <div className="relative">
-            <Input
-              type="text"
-              id="xAccount"
-              placeholder="X profile link"
-              {...register("xAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-          </div>
-        </div>
-
-        {/* Dynamic Inputs */}
-        {extraLinks.map((_, index) => (
-          <div key={index} className="col-span-1">
-            <Label htmlFor={`socialLinks-${index}`}>
-              Additional Link {index + 1}
-            </Label>
-            <div className="relative">
-              <Input
-                type="text"
-                id={`socialLinks-${index}`}
-                placeholder="Enter additional link"
-                {...register(`socialLinks.${index}`)}
-                className="px-2 mt-3 bg-[#111111] border-none py-6"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Add More Button */}
+      ))}
       <button
+        className=" flex items-center gap-1 bg-card rounded-md px-4 py-2 font-medium leading-6 text-primary hover:cursor-pointer"
         type="button"
-        onClick={handleAddMore}
-        className="mt-4 px-4 py-2 bg-card hover:bg-card/80 text-white rounded-md"
+        onClick={() => append({ platform: "", url: "" })}
       >
-        + Add More Links
+        <Plus className="size-7" /> Add Link
       </button>
     </div>
   );
-};
-
-export default LinkInputs;
+}
