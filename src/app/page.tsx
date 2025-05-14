@@ -6,7 +6,7 @@ import { allGames, topGamesDay, topGamesWeek } from "@/services/games";
 
 const HomePage = async () => {
   const { data: allGamesData } = await allGames();
-  console.log("games", allGamesData);
+  // console.log("games", allGamesData);
 
   const { data: topGameDay } = await topGamesDay();
   // console.log("topGameDay", topGameDay);

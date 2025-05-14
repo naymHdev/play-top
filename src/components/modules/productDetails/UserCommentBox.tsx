@@ -1,92 +1,63 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import dynamic from "next/dynamic";
-import { EditorState } from "draft-js";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "draft-js/dist/Draft.css";
+import { useForm } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { comments } from "@/services/comments";
 import { useUser } from "@/contexts/UserContext";
+import { TUserProps } from "@/types/user";
 
-// Dynamically import the Editor
-const Editor = dynamic(
-  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
+type FormData = {
+  comment: string;
+};
 
-const UserCommentBox = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
-  // ----- User Data -----
+const UserCommentBox = ({ session }: { session: TUserProps | null }) => {
+  console.log("session", session?.user?.email);
   const { user } = useUser();
-  // console.log(user);
-  const editor = useRef<any>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<FormData>();
 
-  function focusEditor() {
-    if (editor.current) {
-      editor.current.focus();
-    }
-  }
-
-  const handleSubmit = async () => {
-    // const rawContentState = convertToRaw(editorState.getCurrentContent());
-    const commentText = editorState.getCurrentContent().getPlainText();
+  const onSubmit = async (data: FormData) => {
+    if (!user) return;
 
     const commentData = {
-      comment: commentText,
+      comment: data.comment,
       gameId: user?.id,
     };
 
     try {
-      // console.log("commentData", commentData);
       const res = await comments(commentData);
-      console.log("object", res);
+      console.log("Server Response:", res);
+      reset();
     } catch (error: any) {
-      console.log(error);
+      console.log("Error submitting comment:", error);
     }
-
-    console.log("Server Response:", commentData);
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto border border-card bg-card rounded-2xl p-4">
-      <div className="min-h-[10em] cursor-text" onClick={focusEditor}>
-        <Editor
-          editorState={editorState}
-          onEditorStateChange={setEditorState}
+    <div className="w-full mx-auto rounded-lg border border-card">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+        <Textarea
+          {...register("comment", { required: true })}
           placeholder="What do you think?..."
-          editorRef={(ref) => (editor.current = ref)}
-          toolbar={{
-            options: ["inline", "link", "list"],
-            inline: {
-              options: ["bold", "italic"],
-            },
-            link: {
-              options: ["link"],
-            },
-            list: {
-              options: ["unordered", "ordered"],
-            },
-          }}
-          toolbarStyle={{
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-          toolbarClassName="!bg-transparent border-b border-muted rounded-t-md"
-          editorClassName="px-2 py-2 min-h-[120px] text-sm"
+          className=" resize-none rounded-lg border-none bg-background text-foreground shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
         />
-      </div>
 
-      <div className="flex justify-end mt-4">
-        <button
-          onClick={handleSubmit}
-          className="bg-secondary text-primary-foreground px-5 py-1.5 rounded-full transition hover:border-none hover:cursor-pointer"
-        >
-          Submit
-        </button>
-      </div>
+        <div className="flex justify-end m-2">
+          <Button
+            type="submit"
+            disabled={!user || isSubmitting}
+            className="rounded-full px-5 py-1.5 text-sm bg-card text-primary hover:bg-card border-card hover:text-white hover:cursor-pointer"
+            variant="outline"
+          >
+            {user && session?.user?.email ? "Submit" : "Login to comment"}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

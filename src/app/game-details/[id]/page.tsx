@@ -20,6 +20,8 @@ import UserActivities from "@/components/modules/productDetails/UserActivities";
 import RelatedGames from "@/components/modules/productDetails/RelatedGames";
 import ProductCarousel from "@/components/modules/productDetails/ProductCarousel";
 import { EmblaOptionsType } from "embla-carousel";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authOptions";
 
 const gamesData: TGame[] = [
   {
@@ -62,6 +64,9 @@ const GameDetailsPage = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
+  const session = await getServerSession(authOptions);
+
+
   const { id } = await params;
 
   const findGame: TGame | undefined = gamesData.find((game) => game._id == id);
@@ -77,7 +82,7 @@ const GameDetailsPage = async ({
         />
 
         <PTContainer>
-          <div className=" -mt-26 w-full lg:w-11/12 mx-auto">
+          <div className=" -mt-26 w-full">
             <div>
               <h2 className=" text-2xl lg:text-4xl text-primary mt-10 lg:mt-0 font-bold lg:font-extrabold">
                 {findGame?.title}
@@ -103,7 +108,7 @@ const GameDetailsPage = async ({
                   </p>
                 </div>
                 <div className="mt-6">
-                  <UserActivities />
+                  <UserActivities session={session} />
                 </div>
               </div>
 

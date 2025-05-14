@@ -76,7 +76,7 @@ const MobileNavbar = ({ session }: { session: TUserProps | null }) => {
                     <DropdownMenuTrigger asChild>
                       <div className="cursor-pointer">
                         <Avatar>
-                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarImage src={`${session?.user?.image}`} />
                           <AvatarFallback>
                             <FaRegCircleUser />
                           </AvatarFallback>
