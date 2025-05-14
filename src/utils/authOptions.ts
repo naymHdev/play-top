@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import { socialRegister } from "@/services/auth";
+import toast from "react-hot-toast";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -31,7 +32,7 @@ export const authOptions: NextAuthOptions = {
       try {
         const payload = {
           data: {
-            userId: user.id,
+            sub: user.id,
             name: user.name,
             email: user.email,
             image: user.image,
@@ -42,6 +43,11 @@ export const authOptions: NextAuthOptions = {
 
         const result = await socialRegister(payload);
         console.log("result", result);
+        if (result.success) {
+          toast(result.message || "Sign in successful!");
+        } else {
+          toast(result.message || "Sign in failed.");
+        }
       } catch (error) {
         console.error("Error saving session to backend:", error);
       }

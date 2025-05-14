@@ -26,6 +26,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
+import { addGame } from "@/services/games";
+import { TUserProps } from "@/types/user";
 
 const items = [
   {
@@ -48,30 +50,35 @@ const items = [
 
 type FormData = z.infer<typeof formSchema>;
 
-export default function AddGameForm() {
+export default function AddGameForm({
+  session,
+}: {
+  session: TUserProps | null;
+}) {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const [isThumbnail, setIsThumbnail] = useState<string | null>(null);
-  const [isCover, setIsCover] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
+  // console.log("session", session);
+
   const gameDescription = editorState.getCurrentContent().getPlainText();
 
   const methods = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
       socialLinks: [
-        { platform: "Game website", url: "Game website link" },
-        { platform: "Steam", url: "" },
-        { platform: "Linkedin", url: "" },
-        { platform: "Reddit", url: "" },
-        { platform: "Instagram", url: "" },
-        { platform: "X", url: "" },
+        { name: "Game website", link: "Game website link" },
+        { name: "Steam", link: "" },
+        { name: "Linkedin", link: "" },
+        { name: "Reddit", link: "" },
+        { name: "Instagram", link: "" },
+        { name: "X", link: "" },
       ],
     },
   });
@@ -84,21 +91,21 @@ export default function AddGameForm() {
     formState: { errors },
   } = methods;
 
-  const watchedGameTitle = watch("gameTitle");
+  const watchedGameTitle = watch("title");
   const status = watch("status");
   const publishDate = watch("publishDate");
-  const selectedPlatforms = watch("platforms") || [];
+  const selectedPlatforms = watch("platform") || [];
 
   // Toggle platform
   const togglePlatform = (id: string) => {
-    const current = watch("platforms") || [];
+    const current = watch("platform") || [];
     if (current.includes(id)) {
       setValue(
-        "platforms",
+        "platform",
         current.filter((item) => item !== id)
       );
     } else {
-      setValue("platforms", [...current, id]);
+      setValue("platform", [...current, id]);
     }
   };
 
@@ -118,17 +125,39 @@ export default function AddGameForm() {
     }
   }, [watchedGameTitle, currentStep]);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    // console.log("Form Data:", data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("Form Data:", data);
 
     const gameFormData = {
-      ...data,
-      gameDescription,
-      isThumbnail,
-      isCover,
-      gameImages: imageFiles,
+      userId: session?.user?.email,
+      title: data.title,
+      description: gameDescription,
+      categories: data.categories,
+      platform: data.platform,
+      price: parseFloat(data.price),
+      socialLinks: data.socialLinks,
+      // images: imageFiles,
+      // thumbnail: isThumbnail,
     };
     console.log("Form Data:", gameFormData);
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(gameFormData));
+
+    for (const file of imageFiles) {
+      formData.append("images", file);
+    }
+
+    // for (const file of isThumbnail) {
+    //   formData.append("thumbnail", file);
+    // }
+
+    try {
+      const res = await addGame(formData);
+      console.log("Game added", res);
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   return (
@@ -177,12 +206,12 @@ export default function AddGameForm() {
                     type="text"
                     maxLength={40}
                     placeholder="Enter game title"
-                    {...register("gameTitle")}
+                    {...register("title")}
                     className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
                   />
-                  {errors.gameTitle && (
+                  {errors.title && (
                     <p className="text-gray-200 text-sm mt-1">
-                      {errors.gameTitle.message}
+                      {errors.title.message}
                     </p>
                   )}
 
@@ -194,12 +223,12 @@ export default function AddGameForm() {
                   <input
                     type="text"
                     placeholder="e.g. Action, Adventure, Strategy"
-                    {...register("gameCategory")}
+                    {...register("categories")}
                     className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
                   />
-                  {errors.gameCategory && (
+                  {errors.categories && (
                     <p className="text-gray-200 text-sm mt-1">
-                      {errors.gameCategory.message}
+                      {errors.categories.message}
                     </p>
                   )}
                   {/* Price */}
@@ -366,10 +395,7 @@ export default function AddGameForm() {
 
               {index === 3 && (
                 <div>
-                  <UploadSection
-                    setIsThumbnail={setIsThumbnail}
-                    setIsCover={setIsCover}
-                  />
+                  <UploadSection setIsThumbnail={setIsThumbnail} />
                   {/* Gallery Upload (Multiple Images) */}
 
                   <div className="mt-8">

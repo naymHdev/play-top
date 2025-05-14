@@ -15,8 +15,8 @@ export default function LinkInputs() {
         <div key={field.id} className="flex gap-4">
           <input
             type="text"
-            placeholder="Platform"
-            {...register(`socialLinks.${index}.platform`)}
+            placeholder="name"
+            {...register(`socialLinks.${index}.name`)}
             className="mt-1 py-3 px-3 rounded-md border-none bg-card"
           />
           <input
@@ -33,7 +33,7 @@ export default function LinkInputs() {
       <button
         className=" flex items-center gap-1 bg-card rounded-md px-4 py-2 font-medium leading-6 text-primary hover:cursor-pointer"
         type="button"
-        onClick={() => append({ platform: "", url: "" })}
+        onClick={() => append({ name: "", link: "" })}
       >
         <Plus className="size-7" /> Add Link
       </button>

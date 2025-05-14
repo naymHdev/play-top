@@ -2,10 +2,10 @@ import { z } from "zod";
 
 export type AuthPayload = {
   data: {
-    userId: string | null | undefined;
+    sub: string | null | undefined;
     name: string | null | undefined;
     email: string | null | undefined;
-    image: string | null | undefined;
+    image?: string | null | undefined;
   };
 };
 
