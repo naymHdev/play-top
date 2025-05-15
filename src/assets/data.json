@@ -1,0 +1,142 @@
+[
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@naymhossen12",
+    "title": "Nebula Chronicle",
+    "description": "An upcoming RPG set in a vibrant nebula.",
+    "categories": ["RPG", "Adventure"],
+    "platform": ["PC", "Xbox"],
+    "price": 69.99,
+    "socialLinks": [
+      { "name": "Reddit", "link": "https://reddit.com/r/nebulachronicles" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-12-01T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@gamerfox",
+    "title": "Skyforge: Rise",
+    "description": "A tactical air combat simulator with immersive sky battles.",
+    "categories": ["Simulation", "Strategy"],
+    "platform": ["PC"],
+    "price": 49.99,
+    "socialLinks": [
+      { "name": "Twitter", "link": "https://twitter.com/skyforge_rise" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-08-15T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@pixelcraze",
+    "title": "Retro Blitz",
+    "description": "A pixel-perfect arcade shooter with nostalgic vibes.",
+    "categories": ["Arcade", "Shooter"],
+    "platform": ["PC", "Switch"],
+    "price": 29.99,
+    "socialLinks": [
+      { "name": "Discord", "link": "https://discord.gg/retroblitz" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-07-20T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@mythosdev",
+    "title": "Mythos Arena",
+    "description": "A multiplayer mythological battle royale.",
+    "categories": ["Battle Royale", "Fantasy"],
+    "platform": ["Xbox", "PlayStation"],
+    "price": 59.99,
+    "socialLinks": [
+      { "name": "Instagram", "link": "https://instagram.com/mythosarena" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2026-01-10T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@arcadia_team",
+    "title": "Arcadia Shift",
+    "description": "A cyberpunk stealth adventure in a shifting reality.",
+    "categories": ["Stealth", "Sci-Fi"],
+    "platform": ["PC", "PlayStation"],
+    "price": 64.99,
+    "socialLinks": [
+      { "name": "YouTube", "link": "https://youtube.com/arcadiashift" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-11-25T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@stealthstrike",
+    "title": "Shadow Echoes",
+    "description": "A third-person action game rooted in espionage and revenge.",
+    "categories": ["Action", "Thriller"],
+    "platform": ["PC"],
+    "price": 54.99,
+    "socialLinks": [
+      { "name": "Reddit", "link": "https://reddit.com/r/shadowechoes" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-10-01T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@alienbyte",
+    "title": "Alien Byte",
+    "description": "A platformer where you play a hacker alien escaping digital prisons.",
+    "categories": ["Platformer", "Sci-Fi"],
+    "platform": ["Switch"],
+    "price": 39.99,
+    "socialLinks": [
+      { "name": "Facebook", "link": "https://facebook.com/alienbyte" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-09-14T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@zenrace",
+    "title": "Zen Racer X",
+    "description": "A hyper-speed racing game set on interstellar tracks.",
+    "categories": ["Racing", "Futuristic"],
+    "platform": ["PC", "Xbox"],
+    "price": 44.99,
+    "socialLinks": [
+      { "name": "Twitter", "link": "https://twitter.com/zenracerx" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-06-30T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@sol_syndicate",
+    "title": "Solar Syndicate",
+    "description": "A gritty open-world RPG across solar systems.",
+    "categories": ["RPG", "Open World"],
+    "platform": ["PC", "PlayStation", "Xbox"],
+    "price": 74.99,
+    "socialLinks": [
+      { "name": "Website", "link": "https://solarsyndicate.com" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-12-15T00:00:00.000Z"
+  },
+  {
+    "userId": "6825c77e33ff23ce57a92a59",
+    "userName": "@brawlerzdev",
+    "title": "Street Brawlerz",
+    "description": "A street fighting game with modern physics and co-op support.",
+    "categories": ["Fighting", "Co-op"],
+    "platform": ["PC", "PlayStation"],
+    "price": 59.49,
+    "socialLinks": [
+      { "name": "Twitch", "link": "https://twitch.tv/streetbrawlerz" }
+    ],
+    "gameStatus": "upcoming",
+    "upcomingDate": "2025-08-01T00:00:00.000Z"
+  }
+]

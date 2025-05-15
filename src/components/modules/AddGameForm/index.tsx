@@ -28,6 +28,7 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
+import { useUser } from "@/contexts/UserContext";
 
 const items = [
   {
@@ -64,6 +65,8 @@ export default function AddGameForm({
     EditorState.createEmpty()
   );
 
+  const {user} = useUser();
+  // console.log(user);
   // console.log("session", session);
 
   const gameDescription = editorState.getCurrentContent().getPlainText();

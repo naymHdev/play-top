@@ -1,10 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  typescript: {
-    ignoreBuildErrors: true, // This will ignore TypeScript errors during build
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gaming-showcase-backend.onrender.com",
+        pathname: "/**",
+      },
+    ],
   },
-  /* other config options here */
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // other config options here
 };
 
 export default nextConfig;

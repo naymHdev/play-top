@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import { socialRegister } from "@/services/auth";
-import toast from "react-hot-toast";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers

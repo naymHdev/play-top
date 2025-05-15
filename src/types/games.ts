@@ -17,7 +17,7 @@ export type TGame = {
   subTitle?: string;
   description: string;
   image: TImages[];
-  thumbnail?: string | StaticImport;
+  thumbnail?: string;
   categories: string[];
   platform: StaticImageData[];
   price: number;

@@ -31,8 +31,8 @@ export default async function RootLayout({
       >
         <Providers>
           <LayoutWrapper session={session}>{children}</LayoutWrapper>
+          <Toaster position="top-right" />
         </Providers>
-        <Toaster position="top-right" />
       </body>
     </html>
   );

@@ -62,7 +62,7 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const isShowingAll = visibleCount >= repeatedGamesData.length;
+  const isShowingAll = visibleCount >= topGameDay.length;
 
   const handleToggle = () => {
     setVisibleCount(isShowingAll ? INITIAL_COUNT : visibleCount + 5);
@@ -76,7 +76,7 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-7 gap-8">
         <div className=" col-span-full lg:col-span-5">
-          {repeatedGamesData.slice(0, visibleCount).map((game) => (
+          {topGameDay?.slice(0, visibleCount)?.map((game) => (
             <PTGameCard key={game._id} games={game} />
           ))}
 

@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export const SocialLinksSchema = z.object({
+  name: z.string().min(1, "Social link name is required"),
+  link: z.string().url("Must be a valid URL"),
+});
+
 export const formSchema = z
   .object({
     title: z.string().min(1, "Title is required"),
@@ -7,7 +12,9 @@ export const formSchema = z
       .string()
       .max(200, "Subtitle cannot exceed 200 characters")
       .optional(),
-    categories: z.string({ required_error: "Category must be required" }),
+    categories: z
+      .array(z.string().min(1, "Category cannot be empty"))
+      .min(1, "At least one category is required"),
     platform: z.array(z.string()).min(1, "At least one platform is required"),
     price: z.string().min(1, "Price is required"),
     socialLinks: z

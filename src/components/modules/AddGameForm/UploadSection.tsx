@@ -3,7 +3,6 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 
 type TUploadFileProps = {
   setIsThumbnail: any;
-  setIsCover: any;
 };
 
 export default function UploadSection({
