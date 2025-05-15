@@ -18,9 +18,14 @@ export const socialRegister = async (payload: AuthPayload) => {
     });
     revalidateTag("USER");
     const result = await res.json();
+    // console.log("result socialRegister", result);
+    if (result.success) {
+      (await cookies()).set("accessToken", result.data.accessToken);
+      (await cookies()).set("refreshToken", result.data.accessToken);
+    }
     return result;
   } catch (error: any) {
-    return Error(error);
+    console.log("error", error);
   }
 };
 

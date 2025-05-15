@@ -41,13 +41,13 @@ export const authOptions: NextAuthOptions = {
 
         // console.log("payload", payload);
 
-        const result = await socialRegister(payload);
-        console.log("result", result);
-        if (result.success) {
-          toast(result.message || "Sign in successful!");
-        } else {
-          toast(result.message || "Sign in failed.");
-        }
+        await socialRegister(payload);
+        // console.log("result", result);
+        // if (result.success) {
+        //   toast(result.message || "Sign in successful!");
+        // } else {
+        //   toast(result.message || "Sign in failed.");
+        // }
       } catch (error) {
         console.error("Error saving session to backend:", error);
       }

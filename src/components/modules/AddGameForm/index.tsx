@@ -126,7 +126,7 @@ export default function AddGameForm({
   }, [watchedGameTitle, currentStep]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
 
     const gameFormData = {
       userId: session?.user?.email,
@@ -136,21 +136,22 @@ export default function AddGameForm({
       platform: data.platform,
       price: parseFloat(data.price),
       socialLinks: data.socialLinks,
-      // images: imageFiles,
-      // thumbnail: isThumbnail,
     };
     console.log("Form Data:", gameFormData);
+    console.log("isThumbnail:", isThumbnail);
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(gameFormData));
 
     for (const file of imageFiles) {
-      formData.append("images", file);
+      formData.append("image", file);
     }
 
-    // for (const file of isThumbnail) {
-    //   formData.append("thumbnail", file);
-    // }
+    if (isThumbnail && typeof isThumbnail === "object") {
+      for (const file of Array.from(isThumbnail)) {
+        formData.append("thumbnail", file as Blob);
+      }
+    }
 
     try {
       const res = await addGame(formData);
