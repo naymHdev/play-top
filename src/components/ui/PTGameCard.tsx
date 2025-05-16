@@ -9,27 +9,15 @@ import android from "../../assets/icons/android.png";
 import apple from "../../assets/icons/apple.png";
 import windows from "../../assets/icons/windows.png";
 import linux from "../../assets/icons/linux.png";
-import type { StaticImageData } from "next/image";
+import { TWeeklyGames } from "@/types/weeklyGames";
 
-const platformIcons: Record<string, StaticImageData> = {
-  android,
-  apple,
-  windows,
-  linux,
-};
+const platformIcons = [android, apple, windows, linux];
 
-const PTGameCard = ({ games }: { games: TGame }) => {
-  const {
-    title,
-    subTitle,
-    image,
-    thumbnail,
-    categories,
-    price,
-    socialLinks,
-    platform = [],
-  } = games || {};
-  console.log(games);
+const PTGameCard = ({ games }) => {
+  const { title, thumbnail, categories, price, platform } = games || {};
+
+  // const pf = platform?.map((p, idx) => <h2 key={idx}>{p}</h2>);
+  console.log("pf----------------------------------------------", platform);
 
   return (
     <>
@@ -65,7 +53,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                     {title}
                   </h2>
                   <div className="lg:flex items-center gap-4">
-                    <div className="flex lg:gap-1 items-center">
+                    <div className="flex items-center">
                       {categories.map((category, idx) => (
                         <p
                           key={idx}
@@ -82,7 +70,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                     </div>
                     <div className=" h-6 border-r border-[#666262] hidden lg:block"></div>
                     <div className="flex gap-2 items-center mt-3 lg:mt-0">
-                      {platform?.map((icon, idx) => (
+                      {platformIcons?.map((icon, idx) => (
                         <Image
                           key={idx}
                           src={icon}
@@ -100,7 +88,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
             <section className="px-3 py-4 lg:py-0">
               <div className=" flex items-center md:justify-end justify-between gap-14">
                 <h1 className=" font-medium text-xl uppercase text-secondary">
-                  ${games.price}
+                  ${price}
                 </h1>
                 <div className="flex items-center justify-center bg-card rounded-full py-[6px]">
                   <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">

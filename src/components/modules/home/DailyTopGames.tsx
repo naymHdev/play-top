@@ -16,48 +16,11 @@ import { FaLinkedin, FaReddit } from "react-icons/fa";
 import PTButton from "@/components/ui/PTButton";
 import Newsletter from "@/components/Newsletter";
 
-// Game data
-const gamesData: TGame[] = [
-  {
-    _id: "1",
-    author: "John Doe",
-    title: "Need for Speed™ Heat Deluxe Edition",
-    subTitle:
-      "Save on the Sakura Storm Collection, Koumei Visions Bundle and more from April 9-23.",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-    image: game1,
-    categories: ["Design Tools", "Productivity", "Artificial Intelligence"],
-    platform: [android, apple, windows, linux],
-    price: 8.99,
-    thumbnail: thumb,
-    socialLinks: [
-      {
-        icon: <FaReddit />,
-        name: "Reddit",
-        link: "https://www.facebook.com/",
-      },
-      {
-        icon: <FaLinkedin />,
-        name: "Linkedin",
-        link: "https://www.facebook.com/",
-      },
-      {
-        icon: <FaXTwitter />,
-        name: "Twitter",
-        link: "https://twitter.com/",
-      },
-    ],
-  },
-];
-
-export // Simulated game list
-const repeatedGamesData = Array.from({ length: 20 }, (_, index) => ({
-  ...gamesData[0],
-  _id: `${index + 1}`,
-}));
-
-const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
-  // console.log(topGameDay);
+type DailyTopGamesProps = {
+  topGameDay: TGame[];
+};
+const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
+  console.log(topGameDay);
 
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
@@ -65,7 +28,11 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
   const isShowingAll = visibleCount >= topGameDay.length;
 
   const handleToggle = () => {
-    setVisibleCount(isShowingAll ? INITIAL_COUNT : visibleCount + 5);
+    if (isShowingAll) {
+      setVisibleCount(INITIAL_COUNT);
+    } else {
+      setVisibleCount((prev) => Math.min(prev + 5, topGameDay.length));
+    }
   };
 
   return (
@@ -76,18 +43,20 @@ const DailyTopGames = ({ topGameDay }: { topGameDay: TGame[] }) => {
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-7 gap-8">
         <div className=" col-span-full lg:col-span-5">
-          {topGameDay?.slice(0, visibleCount)?.map((game) => (
-            <PTGameCard key={game._id} games={game} />
+          {topGameDay?.slice(0, visibleCount)?.map((game, idx) => (
+            <PTGameCard key={`${idx + 1}`} games={game} />
           ))}
 
-          <div className="flex justify-center mt-10">
-            <PTButton
-              onClick={handleToggle}
-              className="py-2 px-5  bg-card rounded-sm"
-              label={isShowingAll ? "Show Less" : "Show More"}
-              icon={isShowingAll ? <FaArrowUp /> : <FaArrowRight />}
-            />
-          </div>
+          {topGameDay?.length > INITIAL_COUNT && (
+            <div className="flex justify-center mt-10">
+              <PTButton
+                onClick={handleToggle}
+                className="py-2 px-5 bg-card rounded-sm"
+                label={isShowingAll ? "Show Less" : "Show More"}
+                icon={isShowingAll ? <FaArrowUp /> : <FaArrowRight />}
+              />
+            </div>
+          )}
         </div>
         <div className="col-span-full lg:col-span-2">
           <Newsletter />

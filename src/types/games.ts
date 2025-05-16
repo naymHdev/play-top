@@ -19,7 +19,7 @@ export type TGame = {
   image: TImages[];
   thumbnail?: string;
   categories: string[];
-  platform: StaticImageData[];
+  platform: string[];
   price: number;
   socialLinks: TSocialLinks[];
 };
