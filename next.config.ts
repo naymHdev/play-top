@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "gaming-showcase-backend.onrender.com",
+        hostname: "**",
         pathname: "/**",
       },
     ],

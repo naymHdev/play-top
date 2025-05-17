@@ -1,5 +1,5 @@
 import { TGame } from "@/types/games";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React from "react";
 import { Button } from "./button";
 import { TbArrowBigUpFilled, TbArrowBigDown } from "react-icons/tb";
@@ -9,22 +9,23 @@ import android from "../../assets/icons/android.png";
 import apple from "../../assets/icons/apple.png";
 import windows from "../../assets/icons/windows.png";
 import linux from "../../assets/icons/linux.png";
-import { TWeeklyGames } from "@/types/weeklyGames";
 
-const platformIcons = [android, apple, windows, linux];
+const PTGameCard = ({ games }: { games: TGame }) => {
+  const { title, thumbnail, categories, price, platform, _id } = games || {};
 
-const PTGameCard = ({ games }) => {
-  const { title, thumbnail, categories, price, platform } = games || {};
-
-  // const pf = platform?.map((p, idx) => <h2 key={idx}>{p}</h2>);
-  console.log("pf----------------------------------------------", platform);
+  const platformIconMap: { [key: string]: StaticImageData } = {
+    PC: windows,
+    Android: android,
+    Linux: linux,
+    Mac: apple,
+  };
 
   return (
     <>
       <div className="rounded-md border border-card mb-5">
         <div className="">
           <div className="lg:flex items-center justify-between gap-4">
-            <Link href={`/game-details/${games._id}`}>
+            <Link href={`/game-details/${_id}`}>
               <div className="lg:flex items-center gap-4">
                 {/*  -------------------- Image Section ---------------- */}
                 <section>
@@ -54,7 +55,7 @@ const PTGameCard = ({ games }) => {
                   </h2>
                   <div className="lg:flex items-center gap-4">
                     <div className="flex items-center">
-                      {categories.map((category, idx) => (
+                      {categories.map((category: string, idx: number) => (
                         <p
                           key={idx}
                           className="font-semibold leading-5 text-[12px] text-foreground flex items-center"
@@ -70,15 +71,21 @@ const PTGameCard = ({ games }) => {
                     </div>
                     <div className=" h-6 border-r border-[#666262] hidden lg:block"></div>
                     <div className="flex gap-2 items-center mt-3 lg:mt-0">
-                      {platformIcons?.map((icon, idx) => (
-                        <Image
-                          key={idx}
-                          src={icon}
-                          alt="icon"
-                          width={20}
-                          height={20}
-                        />
-                      ))}
+                      {platform?.map((platformName: string, index: number) => {
+                        const icon = platformIconMap[platformName];
+                        return (
+                          icon && (
+                            <Image
+                              key={index}
+                              src={icon}
+                              alt={platformName}
+                              width={20}
+                              height={20}
+                              className="object-contain"
+                            />
+                          )
+                        );
+                      })}
                     </div>
                   </div>
                 </section>

@@ -2,7 +2,6 @@
 
 import PTContainer from "@/components/ui/PTContainer";
 import PTSectionName from "@/components/ui/PTSectionName";
-import { TUpcomingGames } from "@/types/upcomingRelease";
 import sectionBg from "../../../assets/images/upcoming-bg.png";
 import Image from "next/image";
 import {
@@ -14,25 +13,9 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import ucBG from "../../../assets/images/ucb.png";
-import ucGame from "../../../assets/images/ucg1.png";
+import { TGame } from "@/types/games";
 
-const upcomingGames: TUpcomingGames[] = [
-  {
-    _id: "01",
-    title: "The Talos Principle: Reawakened",
-    uc_bg: ucBG,
-    uc_game_image: ucGame,
-    price: 8.99,
-  },
-];
-
-// To repeat the same data 5 times (for example)
-const upcomingGamesData = Array.from({ length: 10 }, (_, index) => ({
-  ...upcomingGames[0],
-  _id: `${index + 1}`,
-}));
-
-const UpcomingRelease = () => {
+const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {
   return (
     <>
       <div className="relative mt-16">
@@ -61,7 +44,7 @@ const UpcomingRelease = () => {
             className="w-full"
           >
             <CarouselContent>
-              {upcomingGamesData?.map((ucr, index) => (
+              {upcomingGames?.map((ucr, index) => (
                 <CarouselItem
                   key={index}
                   className="basis-1/1 md:basis-1/3 lg:basis-1/4"
@@ -71,21 +54,23 @@ const UpcomingRelease = () => {
                       <CardContent className="p-6">
                         <div className="flex flex-col items-center justify-center">
                           <Image
-                            src={ucr.uc_bg}
+                            src={ucBG}
                             alt="The Talos Principle: Reawakened"
                             className="rounded-lg"
                           />
                           <Image
-                            src={ucr.uc_game_image}
+                            src={ucr?.image[1]}
                             alt="The Talos Principle: Reawakened"
+                            width={200}
+                            height={100}
                             className="rounded-lg -mt-16"
                           />
                           <div className=" text-center mt-6">
                             <h2 className=" text-primary font-semibold text-lg leading-6">
-                              {ucr.title}
+                              {ucr?.title}
                             </h2>
                             <p className=" text-secondary font-semibold text-xl mt-2">
-                              ${ucr.price}
+                              ${ucr?.price}
                             </p>
                           </div>
                         </div>

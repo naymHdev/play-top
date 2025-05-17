@@ -1,10 +1,10 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 
 type PropType = {
   selected: boolean;
   index: number;
-  imageUrl: StaticImageData;
+  imageUrl: string;
   onClick: () => void;
 };
 
@@ -22,6 +22,8 @@ export const Thumb: React.FC<PropType> = (props) => {
           src={imageUrl}
           alt={`Thumbnail ${index + 1}`}
           className="embla-thumbs__slide__img"
+          width={100}
+          height={100}
         />
       </div>
     </div>

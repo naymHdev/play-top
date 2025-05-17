@@ -3,6 +3,7 @@ import DailyTopGames from "@/components/modules/home/DailyTopGames";
 import UpcomingRelease from "@/components/modules/home/UpcomingRelease";
 import WeeklyTopGames from "@/components/modules/home/WeeklyTopGames";
 import { allGames, topGamesDay, topGamesWeek } from "@/services/games";
+import { TGame } from "@/types/games";
 
 const HomePage = async () => {
   const { data: allGamesData } = await allGames();
@@ -14,12 +15,17 @@ const HomePage = async () => {
   const { data: topGameWeek } = await topGamesWeek();
   // console.log("topGamesData", topGameWeek);
 
+  const upcomingGames = allGamesData?.allGames?.filter(
+    (game: TGame) => game.gameStatus === "upcoming"
+  );
+  // console.log("upcomingGames", upcomingGames);
+
   return (
     <>
       <BannerSection />
       <DailyTopGames topGameDay={topGameDay} />
-      <UpcomingRelease />
-      <WeeklyTopGames topGameWeek={allGamesData?.allGames} />
+      <UpcomingRelease upcomingGames={upcomingGames} />
+      <WeeklyTopGames topGameWeek={topGameWeek} />
     </>
   );
 };

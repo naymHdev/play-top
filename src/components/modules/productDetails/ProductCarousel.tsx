@@ -4,10 +4,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { Thumb } from "./EmblaCarouselThumbsButton";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 type PropType = {
-  slides: StaticImageData[] | undefined;
+  slides: string[] | undefined;
   options?: EmblaOptionsType;
 };
 
@@ -46,7 +46,7 @@ const ProductCarousel: React.FC<PropType> = (props) => {
       <div className="embla">
         <div className="embla__viewport" ref={emblaMainRef}>
           <div className="embla__container">
-            {slides.slice(2).map((img, idx) => (
+            {slides?.slice(2).map((img, idx) => (
               <div className="embla__slide" key={idx}>
                 <div className="relative w-full aspect-[6/4]">
                   <Image
@@ -55,6 +55,8 @@ const ProductCarousel: React.FC<PropType> = (props) => {
                     fill
                     className="object-contain object-center"
                     sizes="(max-width: 768px) 100vw, 800px"
+                    width={0}
+                    height={0}  
                   />
                 </div>
               </div>
@@ -65,7 +67,7 @@ const ProductCarousel: React.FC<PropType> = (props) => {
         <div className="embla-thumbs">
           <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
             <div className="embla-thumbs__container">
-              {slides.slice(2).map((img, idx) => (
+              {slides?.slice(2).map((img, idx) => (
                 <Thumb
                   key={idx}
                   onClick={() => onThumbClick(idx)}

@@ -1,5 +1,3 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { StaticImageData } from "next/image";
 import { ReactElement } from "react";
 
 type TSocialLinks = {
@@ -8,18 +6,20 @@ type TSocialLinks = {
   link: string;
 };
 
-export type TImages = string | StaticImport | undefined;
+export type TImages = string | undefined;
 
 export type TGame = {
   _id: string;
+  id?: string;
   author: string;
   title: string | undefined;
   subTitle?: string;
   description: string;
-  image: TImages[];
+  image: string[] | undefined;
   thumbnail?: string;
   categories: string[];
   platform: string[];
   price: number;
   socialLinks: TSocialLinks[];
+  gameStatus: "upcoming" | "released";
 };

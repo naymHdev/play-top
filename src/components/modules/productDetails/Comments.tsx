@@ -1,9 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import jolly from "../../../assets/images/comment-user.png";
 import { Separator } from "@/components/ui/separator";
 import { MdArrowOutward, MdOutlinedFlag } from "react-icons/md";
 import { RiShareForwardLine } from "react-icons/ri";
-import PTButton from "@/components/ui/PTButton";
 
 // Utility to calculate "X days ago"
 const getTimeAgo = (dateString: string) => {

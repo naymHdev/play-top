@@ -3,7 +3,7 @@ import React from "react";
 interface PTButtonProps {
   label: string;
   icon?: React.ReactNode;
-  className?: React.ReactNode;
+  className?: string;
   type?: "submit" | "reset" | "button";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -12,7 +12,7 @@ const PTButton: React.FC<PTButtonProps> = ({
   label,
   icon,
   className = "",
-  type,
+  type = "button",
   onClick,
 }) => {
   return (

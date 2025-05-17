@@ -12,7 +12,7 @@ type FormData = {
 };
 
 const UserCommentBox = ({ session }: { session: TUserProps | null }) => {
-  console.log("session", session?.user?.email);
+  // console.log("session", session?.user?.email);
   const { user } = useUser();
   const {
     register,

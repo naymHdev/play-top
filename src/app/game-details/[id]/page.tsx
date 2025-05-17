@@ -1,18 +1,5 @@
-import { TGame } from "@/types/games";
-import game1 from "../../../assets/images/game1.png";
-import g3 from "../../../assets/images/g3.png";
-import g4 from "../../../assets/images/g4.png";
-import g5 from "../../../assets/images/g5.png";
-import g6 from "../../../assets/images/g6.png";
-import g8 from "../../../assets/images/g8.png";
-import android from "../../../assets/icons/android.png";
-import apple from "../../../assets/icons/apple.png";
-import windows from "../../../assets/icons/windows.png";
-import linux from "../../../assets/icons/linux.png";
-import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-import thumb from "../../../assets/images/gameThumbnail.png";
-import { FaExternalLinkAlt, FaReddit } from "react-icons/fa";
-import Image from "next/image";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import Image, { StaticImageData } from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
@@ -22,40 +9,12 @@ import ProductCarousel from "@/components/modules/productDetails/ProductCarousel
 import { EmblaOptionsType } from "embla-carousel";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
-
-const gamesData: TGame[] = [
-  {
-    _id: "1",
-    title: "Need for Speed™ Heat Deluxe Edition",
-    author: "John Doe",
-    subTitle:
-      "Save on the Sakura Storm Collection, Koumei Visions Bundle and more from April 9-23.",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis dui dui. Nullam laoreet facilisis tempus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet. Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac habitasse platea dictumst. Cras vel accumsan odio, ac elementum lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien congue. Vestibulum aliquet pretium ligula, nec semper mauris commodo et. Cras vestibulum sollicitudin tortor non elementum. Quisque dapibus mauris at egestas luctus. ",
-    image: [game1, g3, g4, g5, g6, g8, g3, g4, g5, g6, g8],
-    categories: ["Design Tools", "Productivity", "Artificial Intelligence"],
-    platform: [android, apple, windows, linux],
-    price: 8.99,
-    thumbnail: thumb,
-    socialLinks: [
-      {
-        icon: <FaXTwitter />,
-        name: "Twitter",
-        link: "https://twitter.com/",
-      },
-      {
-        icon: <FaReddit />,
-        name: "Reddit",
-        link: "https://www.facebook.com/",
-      },
-      {
-        icon: <FaInstagram />,
-        name: "Instagram",
-        link: "https://www.facebook.com/",
-      },
-    ],
-  },
-];
+import { allGames } from "@/services/games";
+import { TGame } from "@/types/games";
+import android from "../../../assets/icons/android.png";
+import apple from "../../../assets/icons/apple.png";
+import windows from "../../../assets/icons/windows.png";
+import linux from "../../../assets/icons/linux.png";
 
 const OPTIONS: EmblaOptionsType = {};
 
@@ -64,13 +23,22 @@ const GameDetailsPage = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
-  const session = await getServerSession(authOptions);
-
-
   const { id } = await params;
+  const session = await getServerSession(authOptions);
+  const gamesData = await allGames();
+  // console.log("gamesData", gamesData.data.allGames);
 
-  const findGame: TGame | undefined = gamesData.find((game) => game._id == id);
-  //   console.log(findGame);
+  const findGame = gamesData?.data?.allGames?.find(
+    (game: TGame) => game.id === id
+  );
+  // console.log("findGame", findGame);
+
+  const platformIconMap: { [key: string]: StaticImageData } = {
+    PC: windows,
+    Android: android,
+    Linux: linux,
+    Mac: apple,
+  };
 
   return (
     <>
@@ -79,6 +47,9 @@ const GameDetailsPage = async ({
           className="object-cover"
           src={findGame?.thumbnail}
           alt="Thumbnail"
+          width={1000}
+          height={1000}
+          quality={100}
         />
 
         <PTContainer>
@@ -119,7 +90,9 @@ const GameDetailsPage = async ({
                     <p className=" uppercase text-sm text-primary">
                       Game Posted By
                     </p>
-                    <p className=" font-bold -mt-0.5">{findGame?.author}</p>
+                    <p className=" font-bold -mt-0.5">
+                      {findGame?.userId?.name}
+                    </p>
                   </div>
                   <div className="mt-8 space-y-8">
                     <div className=" flex items-center justify-between">
@@ -158,13 +131,15 @@ const GameDetailsPage = async ({
                   </p>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    {findGame?.categories?.map((category, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <p className="text-sm text-foreground font-medium">
-                          "{category}",
-                        </p>
-                      </div>
-                    ))}
+                    {findGame?.categories?.map(
+                      (category: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <p className="text-sm text-foreground font-medium">
+                            "{category}",
+                          </p>
+                        </div>
+                      )
+                    )}
                   </div>
 
                   <div>
@@ -173,9 +148,23 @@ const GameDetailsPage = async ({
                     </p>
 
                     <div className="mt-1 flex gap-2 items-center">
-                      {findGame?.platform.map((device, idx) => (
-                        <Image key={idx} src={device} alt="Device" />
-                      ))}
+                      {findGame?.platform?.map(
+                        (platformName: string, index: number) => {
+                          const icon = platformIconMap[platformName];
+                          return (
+                            icon && (
+                              <Image
+                                key={index}
+                                src={icon}
+                                alt={platformName}
+                                width={20}
+                                height={20}
+                                className="object-contain"
+                              />
+                            )
+                          );
+                        }
+                      )}
                     </div>
                   </div>
                 </div>
@@ -186,16 +175,16 @@ const GameDetailsPage = async ({
                     Links
                   </p>
                   <div className="mt-2 space-y-2">
-                    {findGame?.socialLinks.map((link, idx) => (
+                    {findGame?.socialLinks.map((link, idx: number) => (
                       <div
                         key={idx}
                         className="flex items-center justify-between rounded-md bg-[#111111]"
                       >
                         <div className=" flex">
                           <div className=" flex items-center gap-2">
-                            <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
+                            {/* <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
                               {link.icon}
-                            </div>
+                            </div> */}
                             <p className="text-sm font-semibold text-foreground">
                               {link.name}
                             </p>
