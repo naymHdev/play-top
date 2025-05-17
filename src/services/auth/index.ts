@@ -75,6 +75,23 @@ export const signInUser = async (userData: FieldValues) => {
   }
 };
 
+export const myProfile = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/user/user-profile`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value || "",
+        },
+      }
+    );
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
 export const getCurrentUser = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;
   let decodedData = null;

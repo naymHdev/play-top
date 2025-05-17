@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
@@ -12,57 +12,57 @@ import { FaCamera } from "react-icons/fa6";
 import PasswordChange from "./PasswordChange";
 import DeleteAccount from "./DeleteAccount";
 import Link from "next/link";
-import { updateUserProfile } from "@/services/auth";
-import { useUser } from "@/contexts/UserContext";
+
+interface LinkItem {
+  name: string;
+  link: string;
+}
 
 const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [formData, setFormData] = useState({
+    userId: "68251e4fe842d33780cd1a7f",
+    name: "Xinagop5980 Updated",
+    userName: "XinagopUpdated",
+    bio: "This is my updated bio, telling a bit about me.",
+    links: [
+      { name: "GitHub", link: "https://github.com/Xinagop5980" },
+      { name: "LinkedIn", link: "https://www.linkedin.com/in/xinagop5980" },
+    ] as LinkItem[],
+  });
 
-  // -------- get current user -------- //
-  const { user } = useUser();
-  // console.log("user", user);
-  const currentUser = userInfo?.find((itm: any) => itm.id === user?.id);
-  // console.log("currentUser", currentUser);
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
-    }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleOverlayClick = () => {
-    fileInputRef.current?.click();
+  const handleLinkChange = (
+    index: number,
+    field: keyof LinkItem,
+    value: string
+  ) => {
+    const updatedLinks = [...formData.links];
+    updatedLinks[index][field] = value;
+    setFormData((prev) => ({ ...prev, links: updatedLinks }));
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const handleAddLink = () => {
+    setFormData((prev) => ({
+      ...prev,
+      links: [...prev.links, { name: "", link: "" }],
+    }));
+  };
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Form Data:", data);
+  const handleRemoveLink = (index: number) => {
+    const updatedLinks = formData.links.filter((_, i) => i !== index);
+    setFormData((prev) => ({ ...prev, links: updatedLinks }));
+  };
 
-    const profileData = {
-      ...data,
-    };
-
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(profileData));
-
-    if (selectedImage) {
-      formData.append("photo", selectedImage);
-    }
-
-    try {
-      const res = await updateUserProfile(formData, currentUser?.id);
-      console.log("Profile updated", res);
-    } catch (error: any) {
-      console.log("Profile update error:", error);
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("✅ Final JSON Payload:", JSON.stringify(formData, null, 2));
+    // Make API call here if needed
   };
 
   return (
@@ -73,15 +73,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
       >
         <div className="flex items-center justify-center">
           <div className="relative flex items-center justify-center w-[200px] h-[200px]">
-            {/* Profile Image */}
             <Avatar className="w-full h-full">
               <AvatarImage
                 src={selectedImage || "https://github.com/shadcn.png"}
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-
-            {/* Hidden Input for Upload */}
             <input
               type="file"
               accept="image/*"
@@ -89,8 +86,6 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
               ref={fileInputRef}
               className="hidden"
             />
-
-            {/* Overlay */}
             <div
               className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center hover:cursor-pointer"
               onClick={handleOverlayClick}
@@ -141,16 +136,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Label htmlFor="steamAccount">Steam account of the game</Label>
-            <div className="relative">
-              <div className="">
-                <Input
-                  type="text"
-                  id="steamAccount"
-                  {...register("steamAccount")}
-                  className="px-2 mt-3 bg-[#111111] border-none py-6"
-                />
-              </div>
-            </div>
+            <Input
+              type="text"
+              id="steamAccount"
+              {...register("steamAccount")}
+              className="px-2 mt-3 bg-[#111111] border-none py-6"
+            />
             {errors.steamAccount && (
               <p className="text-red-500 text-xs mt-1">Invalid Steam account</p>
             )}
@@ -158,16 +149,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
 
           <div>
             <Label htmlFor="xAccount">X account of the game</Label>
-            <div className="relative">
-              <div className="">
-                <Input
-                  type="text"
-                  id="xAccount"
-                  {...register("xAccount")}
-                  className="px-2 mt-3 bg-[#111111] border-none py-6"
-                />
-              </div>
-            </div>
+            <Input
+              type="text"
+              id="xAccount"
+              {...register("xAccount")}
+              className="px-2 mt-3 bg-[#111111] border-none py-6"
+            />
             {errors.xAccount && (
               <p className="text-red-500 text-xs mt-1">Invalid X account</p>
             )}
@@ -179,16 +166,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
             <Label htmlFor="linkedinAccount">
               LinkedIn account of the game
             </Label>
-            <div className="relative">
-              <div className="">
-                <Input
-                  type="text"
-                  id="linkedinAccount"
-                  {...register("linkedinAccount")}
-                  className="px-2 mt-3 bg-[#111111] border-none py-6"
-                />
-              </div>
-            </div>
+            <Input
+              type="text"
+              id="linkedinAccount"
+              {...register("linkedinAccount")}
+              className="px-2 mt-3 bg-[#111111] border-none py-6"
+            />
             {errors.linkedinAccount && (
               <p className="text-red-500 text-xs mt-1">
                 Invalid LinkedIn account
@@ -198,16 +181,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
 
           <div>
             <Label htmlFor="redditAccount">Reddit account of the game</Label>
-            <div className="relative">
-              <div className="">
-                <Input
-                  type="text"
-                  id="redditAccount"
-                  {...register("redditAccount")}
-                  className="px-2 mt-3 bg-[#111111] border-none py-6"
-                />
-              </div>
-            </div>
+            <Input
+              type="text"
+              id="redditAccount"
+              {...register("redditAccount")}
+              className="px-2 mt-3 bg-[#111111] border-none py-6"
+            />
             {errors.redditAccount && (
               <p className="text-red-500 text-xs mt-1">
                 Invalid Reddit account
@@ -221,16 +200,12 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
             <Label htmlFor="instagramAccount">
               Instagram account of the game
             </Label>
-            <div className="relative">
-              <div className="">
-                <Input
-                  type="text"
-                  id="instagramAccount"
-                  {...register("instagramAccount")}
-                  className="px-2 mt-3 bg-[#111111] border-none py-6"
-                />
-              </div>
-            </div>
+            <Input
+              type="text"
+              id="instagramAccount"
+              {...register("instagramAccount")}
+              className="px-2 mt-3 bg-[#111111] border-none py-6"
+            />
             {errors.instagramAccount && (
               <p className="text-red-500 text-xs mt-1">
                 Invalid Instagram account
@@ -253,6 +228,7 @@ const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
           />
         </div>
       </form>
+
       <div className="flex items-center gap-4 justify-end max-w-3xl mx-auto mt-10">
         <PasswordChange />
         <DeleteAccount />
