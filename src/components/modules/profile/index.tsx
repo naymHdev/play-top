@@ -8,8 +8,9 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import ProductTab from "./ProductTab";
+import { TGame } from "@/types/games";
 
-const ProfileDetails = () => {
+const ProfileDetails = ({myGames}: {myGames: TGame[]}) => {
   return (
     <>
       <div className=" mt-24 grid-cols-1 grid lg:grid-cols-6 gap-8">
@@ -113,7 +114,7 @@ const ProfileDetails = () => {
       </div>
 
       {/* ----------- User Games ----------- */}
-      <ProductTab />
+      <ProductTab myGames={myGames} />
     </>
   );
 };

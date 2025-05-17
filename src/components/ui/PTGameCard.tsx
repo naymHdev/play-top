@@ -5,21 +5,10 @@ import { Button } from "./button";
 import { TbArrowBigUpFilled, TbArrowBigDown } from "react-icons/tb";
 import Link from "next/link";
 import { LuDot } from "react-icons/lu";
-import android from "../../assets/icons/android.png";
-import apple from "../../assets/icons/apple.png";
-import windows from "../../assets/icons/windows.png";
-import linux from "../../assets/icons/linux.png";
+import { platformIconMap } from "@/constants/platform";
 
 const PTGameCard = ({ games }: { games: TGame }) => {
   const { title, thumbnail, categories, price, platform, _id } = games || {};
-
-  const platformIconMap: { [key: string]: StaticImageData } = {
-    PC: windows,
-    Android: android,
-    Linux: linux,
-    Mac: apple,
-  };
-
   return (
     <>
       <div className="rounded-md border border-card mb-5">

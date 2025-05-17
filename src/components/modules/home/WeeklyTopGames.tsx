@@ -12,7 +12,7 @@ const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const isShowingAll = visibleCount >= topGameWeek.length;
+  const isShowingAll = visibleCount >= topGameWeek?.length;
 
   const handleToggle = () => {
     if (isShowingAll) {

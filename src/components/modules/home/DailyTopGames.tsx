@@ -23,7 +23,6 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
   const isShowingAll = visibleCount >= topGameDay?.length;
 
   const handleToggle = () => {
-    console.log("Toggling...", visibleCount);
     if (isShowingAll) {
       setVisibleCount(INITIAL_COUNT);
     } else {
@@ -41,12 +40,9 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-7 gap-8">
         <div className=" col-span-full lg:col-span-5">
-          {[...topGameDay]
-            .reverse()
-            .slice(0, visibleCount)
-            .map((game, idx) => (
-              <PTGameCard key={game._id || idx} games={game} />
-            ))}
+          {topGameDay?.reverse().map((game, idx) => (
+            <PTGameCard key={game._id || idx} games={game} />
+          ))}
 
           <div>
             {topGameDay?.length > INITIAL_COUNT && (

@@ -34,9 +34,9 @@ const Newsletter = () => {
     // console.log("Subscribed email:", userEmail);
     try {
       const res = await postNewsLetter(userEmail);
-      console.log(res);
+      // console.log(res);
       if (res.success) {
-        toast.success(res);
+        toast.success(res.message);
       } else {
         toast.error(res.message);
       }

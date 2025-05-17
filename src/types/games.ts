@@ -9,6 +9,7 @@ type TSocialLinks = {
 export type TImages = string | undefined;
 
 export type TGame = {
+  userId?: { email: string };
   _id: string;
   id?: string;
   author: string;

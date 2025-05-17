@@ -1,8 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { repeatedGamesData } from "../home/DailyTopGames";
-import MyGameCard from "./MyGameCard";
 
-const GamesTabs = () => {
+import MyGameCard from "./MyGameCard";
+import { TGame } from "@/types/games";
+
+const GamesTabs = ({ myGames }: { myGames: TGame[] }) => {
   return (
     <div className="mt-12">
       <Tabs defaultValue="submitted" className="  mx-auto">
@@ -16,8 +17,8 @@ const GamesTabs = () => {
         <TabsContent value="submitted">
           {/* Content for Games Submitted */}
           <div className="">
-            {repeatedGamesData?.map((game) => (
-              <MyGameCard key={game._id} games={game} />
+            {myGames?.map((game, idx: number) => (
+              <MyGameCard key={`${idx + 1}`} games={game} />
             ))}
           </div>
         </TabsContent>
