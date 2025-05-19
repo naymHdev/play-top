@@ -9,3 +9,10 @@ export type TCommentType = {
   _id: string;
   id: string;
 };
+
+export type CommentActionProps = {
+  data: {
+    gameId: string;
+    commentId: string;
+  };
+};

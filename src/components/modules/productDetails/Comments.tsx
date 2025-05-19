@@ -1,11 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { TCommentType } from "@/types/comment";
+import { CommentActionProps, TCommentType } from "@/types/comment";
 import { TGame } from "@/types/games";
 import { TUserProps } from "@/types/user";
 import { MdArrowOutward, MdOutlinedFlag } from "react-icons/md";
 import { RiShareForwardLine } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
+import { upvoteComment } from "@/services/comments";
+import toast from "react-hot-toast";
 
 type CommentsProps = {
   session: TUserProps | null;
@@ -27,8 +29,31 @@ const getTimeAgo = (dateString: string) => {
 
 const CommentsSection = ({ commentData, session }: CommentsProps) => {
   const comments: TCommentType[] = commentData?.comments || [];
-  // console.log("commentData", comments);
+  console.log("commentData", comments);
   // console.log("session", session);
+
+  const handleUpvote = async (commentId: string) => {
+    const upvotedData = {
+      data: {
+        gameId: commentData?.id as string,
+        commentId: commentId,
+      },
+    };
+    // console.log("upvotedData", upvotedData);
+
+    try {
+      const res = await upvoteComment(upvotedData);
+      // console.log("Upvote response:", res);
+
+      if (res.success) {
+        toast.success("Comment upvoted successfully!");
+      } else {
+        toast.error("Failed to upvote comment.");
+      }
+    } catch (error) {
+      console.error("Error upvoting comment:", error);
+    }
+  };
 
   return (
     <section className="mt-10 space-y-6">
@@ -70,8 +95,13 @@ const CommentsSection = ({ commentData, session }: CommentsProps) => {
                 <Separator className="my-4 bg-foreground w-full" />
                 <div className=" flex items-center justify-start gap-3">
                   <div className=" flex items-center gap-1 text-sm font-normal text-foreground">
-                    <MdArrowOutward className=" font-bold text-xl" />{" "}
-                    <p>Upvote (10)</p>
+                    <button
+                      onClick={() => handleUpvote(comment?.id)}
+                      className=" hover:cursor-pointer hover:text-green-500 hover:scale-110 transition-all duration-200 ease-in-out"
+                    >
+                      <MdArrowOutward className=" font-bold text-xl" />
+                    </button>
+                    <p>Upvote ({comment?.totalUpvote})</p>
                   </div>
                   <div className=" flex items-center gap-1 text-sm font-normal text-foreground">
                     <RiShareForwardLine className=" font-bold text-xl" />
