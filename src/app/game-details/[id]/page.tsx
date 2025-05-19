@@ -29,7 +29,7 @@ const GameDetailsPage = async ({
   const findGame = gamesData?.data?.allGames?.find(
     (game: TGame) => game.id === id
   );
-  console.log("findGame", findGame);
+  // console.log("findGame", findGame);
 
   return (
     <>
@@ -68,7 +68,7 @@ const GameDetailsPage = async ({
                   </p>
                 </div>
                 <div className="mt-6">
-                  <UserActivities session={session} />
+                  <UserActivities session={session} gameDetails={findGame} />
                 </div>
               </div>
 

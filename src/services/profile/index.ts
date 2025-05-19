@@ -32,7 +32,7 @@ export const updateProfile = async (profileData: FormData) => {
 
 export const deleteMyGame = async (gameId: string) => {
   const token = (await cookies()).get("accessToken")?.value || "";
-  console.log("token", token);
+  // console.log("token", token);
   try {
     const res = await fetch(
       `https://gaming-showcase-backend.onrender.com/api/v1/user/delete_game/${gameId}`,

@@ -2,12 +2,18 @@
 import { TUserProps } from "@/types/user";
 import CommentsSection from "./Comments";
 import UserCommentBox from "./UserCommentBox";
+import { TGame } from "@/types/games";
 
-const UserActivities = ({ session }: { session: TUserProps | null }) => {
+type UserActivitiesProps = {
+  session: TUserProps | null;
+  gameDetails: TGame | null;
+};
+
+const UserActivities = ({ session, gameDetails }: UserActivitiesProps) => {
   return (
     <>
       <div>
-        <UserCommentBox session={session} />
+        <UserCommentBox session={session} gameDetails={gameDetails} />
         <CommentsSection />
       </div>
     </>
