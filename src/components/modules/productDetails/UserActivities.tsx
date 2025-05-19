@@ -14,7 +14,7 @@ const UserActivities = ({ session, gameDetails }: UserActivitiesProps) => {
     <>
       <div>
         <UserCommentBox session={session} gameDetails={gameDetails} />
-        <CommentsSection />
+        <CommentsSection commentData={gameDetails} session={session} />
       </div>
     </>
   );
