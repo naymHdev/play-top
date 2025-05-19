@@ -1,5 +1,5 @@
 import { FaExternalLinkAlt } from "react-icons/fa";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
 import { Button } from "@/components/ui/button";
 import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
@@ -11,10 +11,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { allGames } from "@/services/games";
 import { TGame } from "@/types/games";
-import android from "../../../assets/icons/android.png";
-import apple from "../../../assets/icons/apple.png";
-import windows from "../../../assets/icons/windows.png";
-import linux from "../../../assets/icons/linux.png";
+import { platformIconMap, socialIconMap } from "@/constants/platform";
+import bannerImg from "../../../assets/images/gameThumbnail.png";
 
 const OPTIONS: EmblaOptionsType = {};
 
@@ -31,24 +29,15 @@ const GameDetailsPage = async ({
   const findGame = gamesData?.data?.allGames?.find(
     (game: TGame) => game.id === id
   );
-  // console.log("findGame", findGame);
-
-  const platformIconMap: { [key: string]: StaticImageData } = {
-    PC: windows,
-    Android: android,
-    Linux: linux,
-    Mac: apple,
-  };
+  console.log("findGame", findGame);
 
   return (
     <>
       <div className=" mt-16 lg:mt-0">
         <Image
           className="object-cover"
-          src={findGame?.thumbnail}
+          src={bannerImg}
           alt="Thumbnail"
-          width={1000}
-          height={1000}
           quality={100}
         />
 
@@ -63,7 +52,7 @@ const GameDetailsPage = async ({
               </p>
             </div>
 
-            {/* ------------------------------------\\ Grid Content Layout \\------------------------------------ */}
+            {/* --------------\\ Grid Content Layout \\----------------- */}
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6">
               {/* ------------------------------------\\ Left Side Content \\------------------------------------ */}
               <div className="col-span-3">
@@ -147,7 +136,7 @@ const GameDetailsPage = async ({
                       Platform:
                     </p>
 
-                    <div className="mt-1 flex gap-2 items-center">
+                    <div className="flex gap-2 items-center mt-3">
                       {findGame?.platform?.map(
                         (platformName: string, index: number) => {
                           const icon = platformIconMap[platformName];
@@ -157,8 +146,8 @@ const GameDetailsPage = async ({
                                 key={index}
                                 src={icon}
                                 alt={platformName}
-                                width={20}
-                                height={20}
+                                width={25}
+                                height={25}
                                 className="object-contain"
                               />
                             )
@@ -175,35 +164,45 @@ const GameDetailsPage = async ({
                     Links
                   </p>
                   <div className="mt-2 space-y-2">
-                    {findGame?.socialLinks.map((link, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between rounded-md bg-[#111111]"
-                      >
-                        <div className=" flex">
-                          <div className=" flex items-center gap-2">
-                            {/* <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
-                              {link.icon}
-                            </div> */}
-                            <p className="text-sm font-semibold text-foreground">
-                              {link.name}
-                            </p>
+                    {findGame.socialLinks.map((link, idx: number) => {
+                      const icon = socialIconMap[link.name];
+                      if (!icon) return null;
+
+                      return (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-between rounded-md bg-[#111111]"
+                        >
+                          <div className="flex">
+                            <div className="flex items-center gap-2">
+                              <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
+                                <Image
+                                  src={icon}
+                                  alt={link.name}
+                                  width={20}
+                                  height={20}
+                                />
+                              </div>
+                              <p className="text-sm font-semibold text-foreground">
+                                {link.name}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="px-3">
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={link.link}
+                            >
+                              <FaExternalLinkAlt
+                                size={16}
+                                className="text-primary/80"
+                              />
+                            </a>
                           </div>
                         </div>
-                        <div className=" px-3">
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={link.link}
-                          >
-                            <FaExternalLinkAlt
-                              size={16}
-                              className=" text-primary/80"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

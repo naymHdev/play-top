@@ -35,7 +35,7 @@ const Description = ({editorState, setEditorState}) => {
 
   return (
     <div
-      className="border border-card bg-card rounded-xl p-2 mt-3 relative"
+      className="border border-card bg-card rounded-xl p-3 mt-3 relative"
       style={{ minHeight: "10em", cursor: "text" }}
       onClick={focusEditor}
     >

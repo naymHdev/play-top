@@ -4,9 +4,27 @@ import apple from "../assets/icons/apple.png";
 import windows from "../assets/icons/windows.png";
 import linux from "../assets/icons/linux.png";
 
+// Social Media Icons
+import facebook from "../assets/icons/facebook.png";
+import twitter from "../assets/icons/twitter.png";
+import reddit from "../assets/icons/reddit.png";
+import linkedin from "../assets/icons/linkedin.png";
+import github from "../assets/icons/github.png";
+import steam from "../assets/icons/steam.png";
+
 export const platformIconMap: { [key: string]: StaticImageData } = {
   PC: windows,
   Android: android,
   Linux: linux,
   Mac: apple,
+};
+
+
+export const socialIconMap: { [key: string]: StaticImageData } = {
+  Facebook: facebook,
+  X: twitter,
+  Reddit: reddit,
+  Linkedin: linkedin,
+  Github: github,
+  Steam: steam,
 };

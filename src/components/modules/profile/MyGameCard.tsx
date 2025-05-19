@@ -15,14 +15,20 @@ import { LuDot } from "react-icons/lu";
 import { TbArrowBigDown, TbArrowBigUpFilled } from "react-icons/tb";
 
 const MyGameCard = ({ games }: { games: TGame }) => {
-  const { title, thumbnail, categories, price, platform, _id } = games || {};
+  const { title, thumbnail, categories, price, platform, id } = games || {};
   // console.log(games);
+
+  // ---------------- Game Delete Handler ----------------
+  const handleDeleteGame = async (gameId: string | undefined) => {
+    console.log("Deleting game with ID:", gameId);
+  };
+
   return (
     <>
       <div className="rounded-md border border-card mb-5 relative">
         <div className="">
           <div className="lg:flex items-center justify-between gap-4">
-            <Link href={`/game-details/${_id}`}>
+            <Link href={`/game-details/${id}`}>
               <div className="lg:flex items-center gap-4">
                 {/*  -------------------- Image Section ---------------- */}
                 <section>
@@ -109,14 +115,16 @@ const MyGameCard = ({ games }: { games: TGame }) => {
             </section>
           </div>
         </div>
-        <div className=" absolute top-1 right-1 p-2">
+        <div className=" absolute top-0.5 right-0">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <EllipsisVertical className=" text-primary/80 hover:cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className=" bg-card text-primary border-none">
               <DropdownMenuItem>Edit Game</DropdownMenuItem>
-              <DropdownMenuItem>Delete Game</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleDeleteGame(id)}>
+                Delete Game
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
