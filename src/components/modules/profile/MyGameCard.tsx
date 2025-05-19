@@ -16,7 +16,7 @@ import { TbArrowBigDown, TbArrowBigUpFilled } from "react-icons/tb";
 
 const MyGameCard = ({ games }: { games: TGame }) => {
   const { title, thumbnail, categories, price, platform, _id } = games || {};
-  console.log(games);
+  // console.log(games);
   return (
     <>
       <div className="rounded-md border border-card mb-5 relative">
@@ -109,7 +109,7 @@ const MyGameCard = ({ games }: { games: TGame }) => {
             </section>
           </div>
         </div>
-        <div className=" absolute top-2 right-1">
+        <div className=" absolute top-1 right-1 p-2">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <EllipsisVertical className=" text-primary/80 hover:cursor-pointer" />

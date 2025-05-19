@@ -1,239 +1,217 @@
 "use client";
 
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  useForm,
+  SubmitHandler,
+  useFieldArray,
+  FieldValues,
+} from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PTButton from "@/components/ui/PTButton";
-import { FaCamera } from "react-icons/fa6";
-import PasswordChange from "./PasswordChange";
-import DeleteAccount from "./DeleteAccount";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {useState } from "react";
+import { MdOutlineCloudUpload } from "react-icons/md";
+import { updateProfile } from "@/services/profile";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-interface LinkItem {
+type LinkItem = {
   name: string;
   link: string;
-}
+};
 
-const ProfileUpdateForm = ({ userInfo }: { userInfo: any }) => {
-  const [formData, setFormData] = useState({
-    userId: "68251e4fe842d33780cd1a7f",
-    name: "Xinagop5980 Updated",
-    userName: "XinagopUpdated",
-    bio: "This is my updated bio, telling a bit about me.",
-    links: [
-      { name: "GitHub", link: "https://github.com/Xinagop5980" },
-      { name: "LinkedIn", link: "https://www.linkedin.com/in/xinagop5980" },
-    ] as LinkItem[],
+type FormValues = {
+  userId: string;
+  name: string;
+  userName: string;
+  bio: string;
+  links: LinkItem[];
+};
+
+const ProfileUpdateForm = () => {
+  const [imageFiles, setImageFiles] = useState<File | undefined>(undefined);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  // Function to handle file upload
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+    setImageFiles(file);
+  };
+  // console.log("imageFiles", imageFiles);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      userId: "682ad95e4e8b478885041709",
+      name: "Mr. Tomas",
+      userName: "@tomas.s42",
+      bio: "This is my updated bio, telling a bit about me.",
+      links: [
+        { name: "GitHub", link: "https://github.com/Xinagop5980" },
+        { name: "LinkedIn", link: "https://www.linkedin.com/in/xinagop5980" },
+      ],
+    },
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "links",
+  });
 
-  const handleLinkChange = (
-    index: number,
-    field: keyof LinkItem,
-    value: string
-  ) => {
-    const updatedLinks = [...formData.links];
-    updatedLinks[index][field] = value;
-    setFormData((prev) => ({ ...prev, links: updatedLinks }));
-  };
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // console.log("✅ Final JSON Payload:", JSON.stringify(data, null, 2));
 
-  const handleAddLink = () => {
-    setFormData((prev) => ({
-      ...prev,
-      links: [...prev.links, { name: "", link: "" }],
-    }));
-  };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    formData.append("photo", imageFiles as File);
 
-  const handleRemoveLink = (index: number) => {
-    const updatedLinks = formData.links.filter((_, i) => i !== index);
-    setFormData((prev) => ({ ...prev, links: updatedLinks }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("✅ Final JSON Payload:", JSON.stringify(formData, null, 2));
-    // Make API call here if needed
+    try {
+      const res = await updateProfile(formData);
+      // console.log("Response from API:", res);
+      if (res.success) {
+        toast.success(res.message);
+        router.push("/profile");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error: any) {
+      console.error("Error uploading file:", error);
+    }
   };
 
   return (
-    <div className=" -mt-[190px]">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 max-w-3xl mx-auto mt-10"
-      >
-        <div className="flex items-center justify-center">
-          <div className="relative flex items-center justify-center w-[200px] h-[200px]">
-            <Avatar className="w-full h-full">
-              <AvatarImage
-                src={selectedImage || "https://github.com/shadcn.png"}
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              ref={fileInputRef}
-              className="hidden"
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6 max-w-3xl mx-auto -mt-40"
+    >
+      <div className="w-44 h-44 mx-auto relative  mt-4 bg-card rounded-full flex flex-col items-center justify-center text-center cursor-pointer">
+        <input
+          id="thumbnail"
+          type="file"
+          accept="image/jpeg,image/jpg,image/png"
+          onChange={handleThumbnailChange}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        />
+
+        {imagePreview ? (
+          <Avatar className="w-44 h-44">
+            <AvatarImage src={imagePreview} alt="Avatar Preview" />
+            <AvatarFallback>NA</AvatarFallback>
+          </Avatar>
+        ) : (
+          <>
+            <MdOutlineCloudUpload className="text-white text-5xl mb-4 mt-6" />
+          </>
+        )}
+      </div>
+
+      <div>
+        <Label htmlFor="userId">User ID</Label>
+        <Input
+          {...register("userId", { required: true })}
+          className="mt-3 bg-card border-none py-6 px-4"
+        />
+        {errors.userId && (
+          <p className="text-red-500 text-xs mt-1">This field is required</p>
+        )}
+      </div>
+
+      <div>
+        <Label htmlFor="name">Name</Label>
+        <Input
+          {...register("name", { required: true })}
+          className="mt-3 bg-card border-none py-6 px-4"
+        />
+        {errors.name && (
+          <p className="text-red-500 text-xs mt-1">This field is required</p>
+        )}
+      </div>
+
+      <div>
+        <Label htmlFor="userName">Username</Label>
+        <Input
+          {...register("userName", { required: true })}
+          className="mt-3 bg-card border-none py-6 px-4"
+        />
+        {errors.userName && (
+          <p className="text-red-500 text-xs mt-1">This field is required</p>
+        )}
+      </div>
+
+      <div>
+        <Label htmlFor="bio">Bio</Label>
+        <Textarea
+          {...register("bio", { required: true })}
+          className="mt-3 bg-card border-none py-6 px-4"
+        />
+        {errors.bio && (
+          <p className="text-red-500 text-xs mt-1">This field is required</p>
+        )}
+      </div>
+
+      {/* Dynamic Links Field */}
+      <div>
+        <Label>Links</Label>
+        {fields.map((field, index) => (
+          <div key={field.id} className="grid grid-cols-2 gap-4 mt-4">
+            <Input
+              placeholder="Link name (e.g. GitHub)"
+              {...register(`links.${index}.name`, { required: true })}
+              className="bg-card border-none py-6 px-4"
             />
-            <div
-              className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center hover:cursor-pointer"
-              onClick={handleOverlayClick}
-            >
-              <FaCamera className="text-white text-3xl" />
+            <Input
+              placeholder="https://example.com"
+              {...register(`links.${index}.link`, { required: true })}
+              className="bg-card border-none py-6 px-4"
+            />
+            <div className="col-span-2 text-right">
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className="text-red-500 text-sm underline"
+              >
+                Remove
+              </button>
             </div>
           </div>
-        </div>
+        ))}
 
-        <div>
-          <Label htmlFor="name">Name</Label>
-          <Input
-            className="mt-3 bg-card border-none py-6 px-4"
-            type="text"
-            id="name"
-            {...register("name")}
-          />
-          {errors.name && (
-            <p className="text-red-500 text-xs mt-1">This field is required</p>
-          )}
-        </div>
-
-        <div>
-          <Label htmlFor="userId">User Id</Label>
-          <Input
-            type="text"
-            id="userId"
-            {...register("userId")}
-            className="text-gray-400 mt-3 bg-card border-none py-6 px-4"
-          />
-          {errors.userId && (
-            <p className="text-red-500 text-xs mt-1">This field is required</p>
-          )}
-        </div>
-
-        <div>
-          <Label htmlFor="bio">Bio</Label>
-          <Textarea
-            id="bio"
-            {...register("bio")}
-            className=" mt-3 bg-card border-none py-6 px-4"
-          />
-          {errors.bio && (
-            <p className="text-red-500 text-xs mt-1">This field is required</p>
-          )}
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="steamAccount">Steam account of the game</Label>
-            <Input
-              type="text"
-              id="steamAccount"
-              {...register("steamAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-            {errors.steamAccount && (
-              <p className="text-red-500 text-xs mt-1">Invalid Steam account</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="xAccount">X account of the game</Label>
-            <Input
-              type="text"
-              id="xAccount"
-              {...register("xAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-            {errors.xAccount && (
-              <p className="text-red-500 text-xs mt-1">Invalid X account</p>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="linkedinAccount">
-              LinkedIn account of the game
-            </Label>
-            <Input
-              type="text"
-              id="linkedinAccount"
-              {...register("linkedinAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-            {errors.linkedinAccount && (
-              <p className="text-red-500 text-xs mt-1">
-                Invalid LinkedIn account
-              </p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="redditAccount">Reddit account of the game</Label>
-            <Input
-              type="text"
-              id="redditAccount"
-              {...register("redditAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-            {errors.redditAccount && (
-              <p className="text-red-500 text-xs mt-1">
-                Invalid Reddit account
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="instagramAccount">
-              Instagram account of the game
-            </Label>
-            <Input
-              type="text"
-              id="instagramAccount"
-              {...register("instagramAccount")}
-              className="px-2 mt-3 bg-[#111111] border-none py-6"
-            />
-            {errors.instagramAccount && (
-              <p className="text-red-500 text-xs mt-1">
-                Invalid Instagram account
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <Link href={"/profile"}>
-            <PTButton
-              className="border border-card rounded-full px-8 py-3"
-              label="Cancel"
-            />
-          </Link>
-          <PTButton
-            type="submit"
-            className=" border-none bg-secondary rounded-full px-8 py-3"
-            label="Save Change"
-          />
-        </div>
-      </form>
-
-      <div className="flex items-center gap-4 justify-end max-w-3xl mx-auto mt-10">
-        <PasswordChange />
-        <DeleteAccount />
+        <button
+          type="button"
+          onClick={() => append({ name: "", link: "" })}
+          className="text-sm text-blue-500 underline mt-2"
+        >
+          + Add Link
+        </button>
       </div>
-    </div>
+
+      <div className="flex items-center justify-between mt-6">
+        <Link href={"/profile"}>
+          <PTButton label="Cancel" className="border rounded-full px-8 py-3" />
+        </Link>
+        <PTButton
+          type="submit"
+          label="Save Change"
+          className="bg-secondary border-none rounded-full px-8 py-3"
+        />
+      </div>
+    </form>
   );
 };
 
