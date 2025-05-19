@@ -26,15 +26,15 @@ export const formSchema = z
       )
       .optional(),
 
-    status: z.enum(["active", "upcoming"], {
+    gameStatus: z.enum(["active", "upcoming"], {
       required_error: "Status is required",
     }),
-    publishDate: z.date().optional(),
+    upcomingDate: z.date().optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.status === "upcoming" && !data.publishDate) {
+    if (data.gameStatus === "upcoming" && !data.upcomingDate) {
       ctx.addIssue({
-        path: ["publishDate"],
+        path: ["upcomingDate"],
         code: z.ZodIssueCode.custom,
         message: "Publish date is required for upcoming games",
       });

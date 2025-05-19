@@ -29,6 +29,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
 import { useUser } from "@/contexts/UserContext";
+import toast from "react-hot-toast";
 
 const items = [
   {
@@ -58,14 +59,14 @@ export default function AddGameForm({
 }) {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
-  const [isThumbnail, setIsThumbnail] = useState<string | null>(null);
+  const [isThumbnail, setIsThumbnail] = useState<File | undefined>(undefined);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
 
-  const {user} = useUser();
+  const { user } = useUser();
   // console.log(user);
   // console.log("session", session);
 
@@ -75,14 +76,7 @@ export default function AddGameForm({
     // resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      socialLinks: [
-        { name: "Game website", link: "Game website link" },
-        { name: "Steam", link: "" },
-        { name: "Linkedin", link: "" },
-        { name: "Reddit", link: "" },
-        { name: "Instagram", link: "" },
-        { name: "X", link: "" },
-      ],
+      socialLinks: [{ name: "X", link: "https://x.com/realdonaldtrump" }],
     },
   });
 
@@ -95,8 +89,8 @@ export default function AddGameForm({
   } = methods;
 
   const watchedGameTitle = watch("title");
-  const status = watch("status");
-  const publishDate = watch("publishDate");
+  const gameStatus = watch("gameStatus");
+  const upcomingDate = watch("upcomingDate");
   const selectedPlatforms = watch("platform") || [];
 
   // Toggle platform
@@ -129,7 +123,7 @@ export default function AddGameForm({
   }, [watchedGameTitle, currentStep]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    // console.log("Form Data:", data);
+    console.log("Core Data:", data);
 
     const gameFormData = {
       userId: session?.user?.email,
@@ -139,26 +133,28 @@ export default function AddGameForm({
       platform: data.platform,
       price: parseFloat(data.price),
       socialLinks: data.socialLinks,
+      upcomingDate: data.upcomingDate,
     };
-    console.log("Form Data:", gameFormData);
-    console.log("isThumbnail:", isThumbnail);
+    console.log("gameFormData:", gameFormData);
+    // console.log("isThumbnail:", isThumbnail);
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(gameFormData));
+    formData.append("thumbnail", isThumbnail as File);
 
     for (const file of imageFiles) {
       formData.append("image", file);
     }
 
-    if (isThumbnail && typeof isThumbnail === "object") {
-      for (const file of Array.from(isThumbnail)) {
-        formData.append("thumbnail", file as Blob);
-      }
-    }
-
     try {
       const res = await addGame(formData);
-      console.log("Game added", res);
+      console.log("Game added response from API:", res);
+
+      if (res?.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
     } catch (err: any) {
       console.error(err);
     }
@@ -227,9 +223,17 @@ export default function AddGameForm({
                   <input
                     type="text"
                     placeholder="e.g. Action, Adventure, Strategy"
-                    {...register("categories")}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      const array = value
+                        .split(",")
+                        .map((cat) => cat.trim())
+                        .filter((cat) => cat.length > 0);
+                      setValue("categories", array);
+                    }}
                     className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
                   />
+
                   {errors.categories && (
                     <p className="text-gray-200 text-sm mt-1">
                       {errors.categories.message}
@@ -268,7 +272,7 @@ export default function AddGameForm({
                         <input
                           type="radio"
                           value="active"
-                          {...register("status")}
+                          {...register("gameStatus")}
                         />
                         Active
                       </label>
@@ -276,20 +280,20 @@ export default function AddGameForm({
                         <input
                           type="radio"
                           value="upcoming"
-                          {...register("status")}
+                          {...register("gameStatus")}
                         />
                         Upcoming
                       </label>
                     </div>
-                    {errors.status && (
+                    {errors.gameStatus && (
                       <p className="text-sm text-gray-200">
-                        {errors.status.message}
+                        {errors.gameStatus.message}
                       </p>
                     )}
                   </div>
 
                   {/* Conditional Calendar */}
-                  {status === "upcoming" && (
+                  {gameStatus === "upcoming" && (
                     <div className="space-y-2">
                       <Label className="block mt-4 text-lg font-semibold text-primary/80">
                         Publish Date
@@ -303,12 +307,12 @@ export default function AddGameForm({
                             variant={"outline"}
                             className={cn(
                               "w-full justify-start text-left font-normal bg-card border-none",
-                              !publishDate && "text-muted-foreground"
+                              !upcomingDate && "text-muted-foreground"
                             )}
                           >
                             <CalendarIcon className="mr-2 h-4 w-4" />
-                            {publishDate
-                              ? format(publishDate, "PPP")
+                            {upcomingDate
+                              ? format(upcomingDate, "PPP")
                               : "Pick a date"}
                           </Button>
                         </PopoverTrigger>
@@ -316,9 +320,9 @@ export default function AddGameForm({
                           <Calendar
                             className="w-full rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
                             mode="single"
-                            selected={publishDate}
+                            selected={upcomingDate}
                             onSelect={(date) => {
-                              setValue("publishDate", date, {
+                              setValue("upcomingDate", date, {
                                 shouldValidate: true,
                               });
                             }}
@@ -326,9 +330,9 @@ export default function AddGameForm({
                           />
                         </PopoverContent>
                       </Popover>
-                      {errors.publishDate && (
+                      {errors.upcomingDate && (
                         <p className="text-sm text-gray-200">
-                          {errors.publishDate.message}
+                          {errors.upcomingDate.message}
                         </p>
                       )}
                     </div>

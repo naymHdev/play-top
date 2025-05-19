@@ -22,7 +22,7 @@ export default function LinkInputs() {
           <input
             type="url"
             placeholder="https://example.com"
-            {...register(`socialLinks.${index}.url`)}
+            {...register(`socialLinks.${index}.link`)}
             className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
           />
           <button type="button" onClick={() => remove(index)}>
