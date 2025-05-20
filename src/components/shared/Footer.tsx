@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="mt-10 bg-primary text-black">
+      <div className=" bg-primary text-black">
         <PTContainer>
           <div className="mt-16 grid grid-cols-7 gap-8 lg:gap-56 ">
             {/* ------------------ Logo ---------------- */}

@@ -21,7 +21,7 @@ const ProfilePage = async () => {
 
   return (
     <>
-      <div>
+      <div className=" mb-20">
         <ProfileBanner />
         <PTContainer>
           <div className=" w-full lg:max-w-4xl mx-auto">

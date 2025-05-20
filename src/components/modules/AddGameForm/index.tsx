@@ -76,7 +76,10 @@ export default function AddGameForm({
     // resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      socialLinks: [{ name: "X", link: "https://x.com/realdonaldtrump" }],
+      socialLinks: [
+        { name: "Game Website", link: "https://store.steampowered.com" },
+        { name: "X", link: "https://x.com/realdonaldtrump" },
+      ],
     },
   });
 

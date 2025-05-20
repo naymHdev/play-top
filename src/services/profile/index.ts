@@ -1,5 +1,6 @@
 "use server";
 
+import { GameIdResponse } from "@/types/games";
 import { cookies } from "next/headers";
 
 export const updateProfile = async (profileData: FormData) => {
@@ -30,18 +31,24 @@ export const updateProfile = async (profileData: FormData) => {
   }
 };
 
-export const deleteMyGame = async (gameId: string) => {
+export const deleteMyGame = async (deleteData: {
+  data: { gameId: string | undefined };
+}) => {
+  console.log("deleteData", deleteData);
+
   const token = (await cookies()).get("accessToken")?.value || "";
-  // console.log("token", token);
+  console.log("token", token);
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/user/delete_game/${gameId}`,
+      `https://gaming-showcase-backend.onrender.com/api/v1/user/delete-game`,
       {
         method: "DELETE",
+        body: JSON.stringify(deleteData),
+        cache: "no-store",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        cache: "no-store",
       }
     );
 

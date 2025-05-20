@@ -16,6 +16,7 @@ import ucBG from "../../../assets/images/ucb.png";
 import { TGame } from "@/types/games";
 
 const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {
+  // console.log("upcomingGames", upcomingGames);
   return (
     <>
       <div className="relative mt-16">

@@ -24,3 +24,9 @@ export type TGame = {
   socialLinks: TSocialLinks[];
   gameStatus: "upcoming" | "released";
 };
+
+export type GameIdResponse = {
+  data: {
+    gameId: string | undefined;
+  };
+};

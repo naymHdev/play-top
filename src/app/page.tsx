@@ -23,9 +23,14 @@ const HomePage = async () => {
   return (
     <>
       <BannerSection />
-      <DailyTopGames topGameDay={topGameDay} />
-      <UpcomingRelease upcomingGames={upcomingGames} />
-      <WeeklyTopGames topGameWeek={topGameWeek} />
+
+      {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />}
+
+      {upcomingGames?.length > 0 && (
+        <UpcomingRelease upcomingGames={upcomingGames} />
+      )}
+
+      {topGameWeek?.length > 0 && <WeeklyTopGames topGameWeek={topGameWeek} />}
     </>
   );
 };
