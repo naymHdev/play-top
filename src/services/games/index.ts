@@ -90,3 +90,26 @@ export const topGamesWeek = async () => {
     return Error(error);
   }
 };
+
+export const gameSearch = async (query?: {
+  [key: string]: string | string[] | undefined;
+}) => {
+  const params = new URLSearchParams();
+
+  if (query?.searchTerm) {
+    params.append("searchTerm", query?.searchTerm.toString());
+  }
+  try {
+    const res = await fetch(
+      `https://gaming-showcase-backend.onrender.com/api/v1/game/search-game?${params.toString()}`,
+      {
+        next: {
+          tags: ["GAME"],
+        },
+      }
+    );
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};

@@ -4,10 +4,10 @@ import { CommentActionProps, TCommentType } from "@/types/comment";
 import { TGame } from "@/types/games";
 import { TUserProps } from "@/types/user";
 import { MdArrowOutward, MdOutlinedFlag } from "react-icons/md";
-import { RiShareForwardLine } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { upvoteComment } from "@/services/comments";
 import toast from "react-hot-toast";
+import ShareComment from "./ShareComment";
 
 type CommentsProps = {
   session: TUserProps | null;
@@ -29,7 +29,7 @@ const getTimeAgo = (dateString: string) => {
 
 const CommentsSection = ({ commentData, session }: CommentsProps) => {
   const comments: TCommentType[] = commentData?.comments || [];
-  console.log("commentData", comments);
+  // console.log("commentData", comments);
   // console.log("session", session);
 
   const handleUpvote = async (commentId: string) => {
@@ -103,10 +103,7 @@ const CommentsSection = ({ commentData, session }: CommentsProps) => {
                     </button>
                     <p>Upvote ({comment?.totalUpvote})</p>
                   </div>
-                  <div className=" flex items-center gap-1 text-sm font-normal text-foreground">
-                    <RiShareForwardLine className=" font-bold text-xl" />
-                    <p>Share</p>
-                  </div>
+                  <ShareComment shareUrl={window.location.href} />
                   <div className=" flex items-center gap-1 text-sm font-normal text-foreground">
                     <MdOutlinedFlag className=" font-bold text-xl" />
                     <p>Report</p>
