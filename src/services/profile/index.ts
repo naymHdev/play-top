@@ -1,6 +1,5 @@
 "use server";
 
-import { GameIdResponse } from "@/types/games";
 import { cookies } from "next/headers";
 
 export const updateProfile = async (profileData: FormData) => {
@@ -56,6 +55,33 @@ export const deleteMyGame = async (deleteData: {
     return data;
   } catch (error: any) {
     console.error("Delete Game Error:", error);
+    return {
+      success: false,
+      message: "Internal server error",
+      error: error?.message || error,
+    };
+  }
+};
+
+export const updateMyGame = async (updateGame: FormData) => {
+  const token = (await cookies()).get("accessToken")?.value || "";
+  // console.log("token", token);
+  try {
+    const res = await fetch(
+      `https://gaming-showcase-backend.onrender.com/api/v1/game/update_game`,
+      {
+        method: "PATCH",
+        body: updateGame,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    console.error("Update Game Error:", error);
     return {
       success: false,
       message: "Internal server error",

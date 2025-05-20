@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { StepIndicator } from "./Stepper";
 import PTButton from "@/components/ui/PTButton";
 import Description from "./Description";
@@ -28,7 +27,6 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
-import { useUser } from "@/contexts/UserContext";
 import toast from "react-hot-toast";
 
 const items = [
@@ -65,10 +63,6 @@ export default function AddGameForm({
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-
-  const { user } = useUser();
-  // console.log(user);
-  // console.log("session", session);
 
   const gameDescription = editorState.getCurrentContent().getPlainText();
 

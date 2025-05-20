@@ -1,20 +1,29 @@
-// app/game-update-request/page.tsx
+import UpdateGameForm from "@/components/modules/game/UpdateGameForm";
+import PTContainer from "@/components/ui/PTContainer";
+import { allGames } from "@/services/games";
+import { TGame } from "@/types/games";
 
 type PageProps = {
-  searchParams: {
-    id?: string;
-    title?: string;
-  };
+  searchParams: Promise<{ id?: string }>;
 };
 
-const GameUpdateRequestPage = ({ searchParams }: PageProps) => {
-  const { id, title } = searchParams;
+const GameUpdateRequestPage = async ({ searchParams }: PageProps) => {
+  const { id } = await searchParams;
+  const gamesData = await allGames();
+
+  const game = gamesData?.data?.allGames?.find((itm: TGame) => itm?.id === id);
+  //   console.log("game", game);
 
   return (
-    <div>
-      <h1 className="text-white">Edit Game: {title}</h1>
-      <p>ID: {id}</p>
-    </div>
+    <>
+      <div className=" mb-20">
+        <PTContainer>
+          <div>
+            <UpdateGameForm game={game} />
+          </div>
+        </PTContainer>
+      </div>
+    </>
   );
 };
 

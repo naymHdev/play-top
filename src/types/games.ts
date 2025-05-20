@@ -22,7 +22,8 @@ export type TGame = {
   platform: string[];
   price: number;
   socialLinks: TSocialLinks[];
-  gameStatus: "upcoming" | "released";
+  gameStatus: "upcoming" | "active" | undefined;
+  upcomingDate?: Date | undefined;
 };
 
 export type GameIdResponse = {
