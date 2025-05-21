@@ -1,18 +1,37 @@
 "use client";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { FaInstagram, FaReddit, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import ProductTab from "./ProductTab";
 import { TGame } from "@/types/games";
 import { IUser } from "@/types/user";
+import Image from "next/image";
+import { socialIconProfile } from "@/constants/platform";
+import { TLinks } from "@/types/type";
 
 type TProfileInfo = {
   myGames: TGame[];
   profileInfo: IUser;
 };
+
+// --------------- Profile Social Links Icons --------------- //
+function normalizeKey(name: string): string | undefined {
+  const map: Record<string, string> = {
+    facebook: "Facebook",
+    x: "X",
+    twitter: "X",
+    reddit: "Reddit",
+    linkedin: "Linkedin",
+    github: "Github",
+    steam: "Steam",
+  };
+
+  const normalized = name.toLowerCase().replace(/\s+/g, "");
+  return map[normalized];
+}
+
 const ProfileDetails = ({ myGames, profileInfo }: TProfileInfo) => {
   const pData = profileInfo?.data;
-  console.log("profileInfo", pData);
+  // console.log("profileInfo", pData);
 
   return (
     <>
@@ -23,84 +42,58 @@ const ProfileDetails = ({ myGames, profileInfo }: TProfileInfo) => {
             BIO
           </h4>
           <p className=" font-normal text-primary/90 text-lg leading-7 mt-2">
-            {pData.bio}
+            {pData?.bio}
           </p>
         </div>
 
         {/* ----------- User Links ----------- */}
-        <div className=" col-span-2">
-          <h4 className=" text-foreground font-semibold uppercase text-sm">
-            Links
+        <div className="col-span-2">
+          <h4 className="text-foreground font-semibold uppercase text-sm mb-3">
+            LINKS
           </h4>
-          <div className="mt-2 space-y-2">
-            <div className="flex items-center justify-between rounded-md bg-[#111111]">
-              <div className=" flex">
-                <div className=" flex items-center gap-2">
-                  <div className="text-xl p-3 bg-[#202020] rounded-l-md">
-                    <FaReddit />
+          <div className="space-y-3">
+            {pData?.links.map((link: TLinks) => {
+              if (!link.name || !link.link) return null;
+
+              const keyName = normalizeKey(link.name);
+              const icon = socialIconProfile[keyName];
+              if (!icon) return null;
+
+              return (
+                <div
+                  key={link._id || link.id}
+                  className="flex rounded-md bg-[#1a1a1a] overflow-hidden"
+                >
+                  {/* Icon Box */}
+                  <div className="flex items-center justify-center p-3 bg-[#202020] rounded-l-md min-w-[44px]">
+                    {/* Use dynamic bg color if you want per icon */}
+                    <Image
+                      src={icon}
+                      alt={`${link.name} icon`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
                   </div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Reddit
-                  </p>
-                </div>
-              </div>
-              <div className=" px-3">
-                <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center justify-between rounded-md bg-[#111111]">
-              <div className=" flex">
-                <div className=" flex items-center gap-2">
-                  <div className="text-xl p-3 bg-[#202020] rounded-l-md">
-                    <FaInstagram />
+
+                  {/* Name and Link */}
+                  <div className="flex flex-1 items-center justify-between bg-[#111111] px-4 rounded-r-md">
+                    <p className="text-sm font-semibold text-white">
+                      {link.name}
+                    </p>
+                    <a
+                      href={link.link}
+                      target="_blank"
+                      rel="nofollow"
+                      aria-label={`Visit ${link.name}`}
+                      className="text-primary/80 hover:text-primary transition"
+                    >
+                      <FaExternalLinkAlt size={16} />
+                    </a>
                   </div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Instagram
-                  </p>
                 </div>
-              </div>
-              <div className=" px-3">
-                <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center justify-between rounded-md bg-[#111111]">
-              <div className=" flex">
-                <div className=" flex items-center gap-2">
-                  <div className="text-xl  p-3 bg-[#202020] rounded-l-md">
-                    <FaXTwitter />
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Twitter
-                  </p>
-                </div>
-              </div>
-              <div className=" px-3">
-                <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center justify-between rounded-md bg-[#111111]">
-              <div className=" flex">
-                <div className=" flex items-center gap-2">
-                  <div className="text-xl p-3 bg-[#202020] rounded-l-md">
-                    <FaYoutube />
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Youtube
-                  </p>
-                </div>
-              </div>
-              <div className=" px-3">
-                <a target="_blank" rel="noopener noreferrer" href="#">
-                  <FaExternalLinkAlt size={16} className=" text-primary/80" />
-                </a>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

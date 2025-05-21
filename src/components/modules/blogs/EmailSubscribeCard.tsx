@@ -5,8 +5,43 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import email from "../../../assets/icons/email-Vector.png";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { postNewsLetter } from "@/services/newsletter";
+import toast from "react-hot-toast";
+
+type NewsletterFormData = {
+  email: string;
+};
 
 export default function EmailSubscribeCard() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<NewsletterFormData>();
+
+  const onSubmit = async (data: NewsletterFormData) => {
+    const userEmail = {
+      data: {
+        email: data.email,
+      },
+    };
+    try {
+      const res = await postNewsLetter(userEmail);
+      // console.log(res);
+      if (res.success) {
+        toast.success(res.message);
+        reset();
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error: any) {
+      // console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
     <div className="mt-16 bg-[#424242] text-white p-6 md:p-10 lg:p-14 mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       {/* Left Text Content */}
@@ -19,7 +54,10 @@ export default function EmailSubscribeCard() {
       </div>
 
       {/* Form Section */}
-      <form className="flex flex-col gap-4 w-full">
+      <form
+        className="flex flex-col gap-4 w-full"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="relative w-full">
           <Image
             src={email}
@@ -32,11 +70,15 @@ export default function EmailSubscribeCard() {
             type="email"
             placeholder="Enter your email"
             className="pl-9 bg-[#3A3A3A] border-none focus:border-none py-6 w-full placeholder:text-gray-100"
+            {...register("email")}
           />
+          {errors.email && (
+            <span className=" text-red-600">Email must be required.</span>
+          )}
         </div>
         <Button
           type="submit"
-          className="bg-black hover:bg-gray-900 text-white w-6/12 lg:w-4/12 py-6"
+          className="bg-black hover:bg-gray-900 text-white w-6/12 lg:w-4/12 py-6 hover:cursor-pointer"
         >
           Submit <ArrowRight />
         </Button>

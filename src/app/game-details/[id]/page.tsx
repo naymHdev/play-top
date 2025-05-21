@@ -206,8 +206,8 @@ const GameDetailsPage = async ({
           </div>
 
           {/* ------------------------------------\\ Related Games \\------------------------------------ */}
-          <div className=" mt-20 w-full lg:w-11/12 mx-auto">
-            <RelatedGames />
+          <div className=" mt-20 w-full">
+            <RelatedGames gamesData={gamesData?.data?.allGames} />
           </div>
         </PTContainer>
       </div>

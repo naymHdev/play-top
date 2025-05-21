@@ -19,8 +19,18 @@ export const platformIconMap: { [key: string]: StaticImageData } = {
   Mac: apple,
 };
 
-
 export const socialIconMap: { [key: string]: StaticImageData } = {
+  Facebook: facebook,
+  X: twitter,
+  Reddit: reddit,
+  Linkedin: linkedin,
+  Github: github,
+  Steam: steam,
+};
+
+// --------------- Profile Social Links Icons --------------- //
+
+export const socialIconProfile: { [key: string]: StaticImageData } = {
   Facebook: facebook,
   X: twitter,
   Reddit: reddit,

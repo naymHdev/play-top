@@ -17,7 +17,6 @@ const ProfilePage = async () => {
   const myGames = gamesData?.data?.allGames?.filter(
     (game: TGame) => game?.userId?.email === session?.user?.email
   );
-
   // console.log("myGames", myGames);
 
   const profileInfo = await myProfile();
