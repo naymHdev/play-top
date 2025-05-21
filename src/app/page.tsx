@@ -12,25 +12,29 @@ const HomePage = async () => {
   const { data: topGameDay } = await topGamesDay();
   // console.log("topGameDay", topGameDay);
 
-  const { data: topGameWeek } = await topGamesWeek();
-  // console.log("topGamesData", topGameWeek);
-
   const upcomingGames = allGamesData?.allGames?.filter(
     (game: TGame) => game.gameStatus === "upcoming"
   );
   // console.log("upcomingGames", upcomingGames);
 
+  const { data: topGameWeek } = await topGamesWeek();
+  // console.log("topGamesData", topGameWeek);
+
   return (
     <>
-      <BannerSection />
+      <div className=" mb-20">
+        <BannerSection />
 
-      {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />}
+        {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />}
 
-      {upcomingGames?.length > 0 && (
-        <UpcomingRelease upcomingGames={upcomingGames} />
-      )}
+        {upcomingGames?.length > 0 && (
+          <UpcomingRelease upcomingGames={upcomingGames} />
+        )}
 
-      {topGameWeek?.length > 0 && <WeeklyTopGames topGameWeek={topGameWeek} />}
+        {topGameWeek?.length > 0 && (
+          <WeeklyTopGames topGameWeek={topGameWeek} />
+        )}
+      </div>
     </>
   );
 };

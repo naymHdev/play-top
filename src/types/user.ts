@@ -29,6 +29,7 @@ export interface IUser {
   approvedUpdate: boolean;
   uploadedGame?: string[];
   isDeleted?: boolean;
+  userName?: string;
 }
 
 export const profileUpdateSchema = z.object({

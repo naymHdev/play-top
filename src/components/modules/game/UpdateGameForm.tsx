@@ -22,13 +22,14 @@ import { formSchema } from "@/types/updateGame";
 import PTButton from "@/components/ui/PTButton";
 import { updateMyGame } from "@/services/profile";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const PLATFORMS = ["Android", "Apple", "Windows", "Linux"];
 
 type FormValues = z.infer<typeof formSchema>;
 
 const UpdateGameForm = ({ game }: { game: TGame }) => {
-  console.log("game", game);
+  // console.log("game", game);
   const {
     register,
     handleSubmit,
@@ -52,6 +53,7 @@ const UpdateGameForm = ({ game }: { game: TGame }) => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     // console.log("Form submitted:", data);
+    const router = useRouter();
 
     const updatedData = {
       gameId: game.id,
@@ -73,6 +75,7 @@ const UpdateGameForm = ({ game }: { game: TGame }) => {
 
       if (res.success) {
         toast.success("Game updated successfully!");
+        router.push("/profile");
       } else {
         toast.error("Failed to update game.");
       }

@@ -15,9 +15,8 @@ const BannerSection = () => {
             <Image
               src={bannerImage}
               alt="Banner Image"
-              layout="fill"
+              fill
               className=" object-cover object-center rounded-md"
-              quality={100}
             />
           </div>
           <div className="relative lg:w-1/2 z-10 flex flex-row justify-center h-full">

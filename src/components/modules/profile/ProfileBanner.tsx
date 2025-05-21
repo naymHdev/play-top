@@ -5,13 +5,9 @@ import PTContainer from "@/components/ui/PTContainer";
 import { CiEdit } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { useUser } from "@/contexts/UserContext";
+import { IUser } from "@/types/user";
 
-const ProfileBanner = () => {
-
-  const {user} = useUser()
-  // console.log(user);
-
+const ProfileBanner = ({ profileInfo }: { profileInfo: IUser }) => {
   return (
     <>
       <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A] mt-10 lg:mt-0">
@@ -22,18 +18,18 @@ const ProfileBanner = () => {
                 <div className="lg:w-[240px] w-[130px] lg:h-[240px] h-[130px] mt-8 lg:mt-14">
                   <Avatar className="lg:w-[240px] w-[130px] lg:h-[240px] h-[130px]">
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
+                      src={profileInfo?.photo}
+                      alt={profileInfo?.name}
                     />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </div>
                 <div>
                   <h2 className="text-4xl font-bold text-primary leading-10">
-                    Jackson Roy
+                    {profileInfo?.name}
                   </h2>
                   <p className="text-foreground text-sm font-normal mt-1">
-                    @jacksonroy_gammer
+                    {profileInfo?.userName}
                   </p>
                 </div>
               </div>

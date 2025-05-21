@@ -27,7 +27,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistInter.variable} antialiased`}
+        className={`${geistInter.className} antialiased`}
       >
         <Providers>
           <LayoutWrapper session={session}>{children}</LayoutWrapper>

@@ -76,7 +76,6 @@ export const topGamesWeek = async () => {
       {
         method: "GET",
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value || "",
           "Content-Type": "application/json",
         },
         next: {

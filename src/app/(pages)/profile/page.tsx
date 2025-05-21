@@ -1,6 +1,7 @@
 import ProfileDetails from "@/components/modules/profile";
 import ProfileBanner from "@/components/modules/profile/ProfileBanner";
 import PTContainer from "@/components/ui/PTContainer";
+import { myProfile } from "@/services/auth";
 import { allGames } from "@/services/games";
 import { TGame } from "@/types/games";
 import { authOptions } from "@/utils/authOptions";
@@ -19,13 +20,16 @@ const ProfilePage = async () => {
 
   // console.log("myGames", myGames);
 
+  const profileInfo = await myProfile();
+  // console.log("profileInfo", profileInfo);
+
   return (
     <>
       <div className=" mb-20">
-        <ProfileBanner />
+        <ProfileBanner profileInfo={profileInfo.data} />
         <PTContainer>
           <div className=" w-full lg:max-w-4xl mx-auto">
-            <ProfileDetails myGames={myGames} />
+            <ProfileDetails myGames={myGames} profileInfo={profileInfo} />
           </div>
         </PTContainer>
       </div>

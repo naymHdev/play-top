@@ -17,6 +17,7 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 import { updateProfile } from "@/services/profile";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { IUser } from "@/types/user";
 
 type LinkItem = {
   name: string;
@@ -32,6 +33,7 @@ type FormValues = {
 };
 
 const ProfileUpdateForm = () => {
+
   const [imageFiles, setImageFiles] = useState<File | undefined>(undefined);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -75,7 +77,6 @@ const ProfileUpdateForm = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // console.log("✅ Final JSON Payload:", JSON.stringify(data, null, 2));
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));

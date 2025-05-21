@@ -6,7 +6,7 @@ const UpdateProfile = async () => {
     <>
       <div className="h-[240px] bg-gradient-to-b from-[#000000] to-[#09190A]"></div>
       <PTContainer>
-        <div>
+        <div className=" mb-20">
           <ProfileUpdateForm />
         </div>
       </PTContainer>

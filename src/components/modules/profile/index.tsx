@@ -1,16 +1,19 @@
 "use client";
 
 import { FaExternalLinkAlt } from "react-icons/fa";
-import {
-  FaInstagram,
-  FaReddit,
-  FaXTwitter,
-  FaYoutube,
-} from "react-icons/fa6";
+import { FaInstagram, FaReddit, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import ProductTab from "./ProductTab";
 import { TGame } from "@/types/games";
+import { IUser } from "@/types/user";
 
-const ProfileDetails = ({myGames}: {myGames: TGame[]}) => {
+type TProfileInfo = {
+  myGames: TGame[];
+  profileInfo: IUser;
+};
+const ProfileDetails = ({ myGames, profileInfo }: TProfileInfo) => {
+  const pData = profileInfo?.data;
+  console.log("profileInfo", pData);
+
   return (
     <>
       <div className=" mt-24 grid-cols-1 grid lg:grid-cols-6 gap-8">
@@ -20,18 +23,7 @@ const ProfileDetails = ({myGames}: {myGames: TGame[]}) => {
             BIO
           </h4>
           <p className=" font-normal text-primary/90 text-lg leading-7 mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            ipsum tellus, volutpat in eros ac, rhoncus vehicula nibh. Proin quis
-            dui dui. Nullam laoreet facilisis tempus. Orci varius natoque
-            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Aliquam nibh sem, molestie non ex eu, consequat facilisis lacus. Ut
-            sollicitudin dictum elit, ac hendrerit tortor aliquam sit amet.
-            Suspendisse ultrices turpis vel ligula mollis pulvinar. Donec
-            blandit eros nulla, quis lacinia lectus ullamcorper sit amet. In hac
-            habitasse platea dictumst. Cras vel accumsan odio, ac elementum
-            lectus. Curabitur libero augue, rhoncus ac elit vitae, feugiat
-            suscipit erat. Sed dictum ipsum non felis cursus, quis mattis sapien
-            congue.
+            {pData.bio}
           </p>
         </div>
 
