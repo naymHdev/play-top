@@ -17,17 +17,17 @@ const AuthModal = () => {
             <FaRegUser /> Sign In
           </Button>
         </DialogTrigger>
-        <DialogContent className="[&>button]:hidden bg-white border-none backdrop-blur-md py-10 top-80">
-          <div className=" flex flex-col items-center justify-center gap-4 text-center">
+        <DialogContent className="[&>button]:hidden bg-card border-none backdrop-blur-md py-10 top-80">
+          <div className="flex flex-col items-center justify-center gap-4 text-center">
             <Image
               src={authIcon}
               alt="Auth Icon"
-              className=" h-auto object-cover"
+              className="h-auto object-cover"
             />
-            <h2 className="font-bold text-xl text-gray-800">
+            <h2 className="font-bold text-xl text-gray-200">
               Sign up on Own Game
             </h2>
-            <p className=" text-gray-600 font-normal text-lg">
+            <p className="text-gray-200 font-normal text-lg">
               Join our community of friendly folks discovering and sharing the
               latest products in tech.
             </p>
@@ -37,9 +37,9 @@ const AuthModal = () => {
                   callbackUrl: "http://localhost:3000",
                 })
               }
-              className="flex items-center gap-2 border text-black rounded-sm px-10 py-3 hover:cursor-pointer"
+              className="flex items-center gap-2 border border-gray-600 text-gray-200 rounded-sm px-10 py-3 hover:cursor-pointer hover:border-gray-400"
             >
-              <FcGoogle className=" size-5" /> Sign in with Google
+              <FcGoogle className="size-5" /> Sign in with Google
             </button>
             <div className="flex items-center justify-center gap-2">
               <button
@@ -48,9 +48,9 @@ const AuthModal = () => {
                     callbackUrl: "http://localhost:3000",
                   })
                 }
-                className=" border rounded-sm px-5 py-3 hover:cursor-pointer"
+                className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
               >
-                <FaXTwitter className=" text-black size-5" />
+                <FaXTwitter className="text-gray-200 size-5" />
               </button>
               <button
                 onClick={() =>
@@ -58,12 +58,12 @@ const AuthModal = () => {
                     callbackUrl: "http://localhost:3000",
                   })
                 }
-                className=" border rounded-sm px-5 py-3 hover:cursor-pointer"
+                className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
               >
-                <FaFacebook className=" text-sky-700 size-5" />
+                <FaFacebook className="text-sky-400 size-5" />
               </button>
             </div>
-            <p className=" text-gray-600 font-normal text-sm">
+            <p className="text-gray-400 font-normal text-sm">
               We'll never post to any of your accounts without your permission.
             </p>
           </div>

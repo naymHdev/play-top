@@ -216,6 +216,15 @@
   border-color: #e0e9e4;
 }
 
+/* ------------------- Search Bar Custom Design ---------------- */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* ------------------- Comment Box Custom Design ---------------- */
 /* styles/editor.css or globals.css */
 .custom-toolbar {
