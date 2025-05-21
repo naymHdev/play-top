@@ -5,9 +5,7 @@ type TUploadFileProps = {
   setIsThumbnail: any;
 };
 
-export default function UploadSection({
-  setIsThumbnail,
-}: TUploadFileProps) {
+export default function UploadSection({ setIsThumbnail }: TUploadFileProps) {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +27,9 @@ export default function UploadSection({
       <div>
         <label className="block text-lg font-semibold text-primary/80">
           Upload thumbnail
-          <span className="text-gray-200 font-medium px-1">*</span>
+          <span className=" text-gray-400 font-normal leading-normal px-1">
+            *
+          </span>
         </label>
 
         <p className="mt-1 text-sm font-normal text-foreground">
@@ -38,10 +38,7 @@ export default function UploadSection({
         </p>
 
         <p className="mt-1 text-sm font-medium text-muted-foreground">
-          Recommended size:{" "}
-          <span className="text-primary font-semibold">1920×345 px</span> &nbsp;
-          | &nbsp; Max file size:{" "}
-          <span className="text-primary font-semibold">1.00 MB</span>
+          Recommended size: 1920×345 px &nbsp; | &nbsp; Max file size: 1.00 MB
         </p>
 
         <div className="relative border border-dashed border-foreground mt-4 bg-card rounded-lg py-4 px-4 flex flex-col items-center justify-center text-center cursor-pointer">

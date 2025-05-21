@@ -39,6 +39,10 @@ const items = [
     label: "Apple",
   },
   {
+    id: "Mac",
+    label: "Mac",
+  },
+  {
     id: "Windows",
     label: "Windows",
   },
@@ -161,7 +165,7 @@ export default function AddGameForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex w-full lg:max-w-3xl mx-auto text-white py-10">
         {/* Timeline */}
-        <div className="w-20 flex flex-col items-center py-10 sticky top-0">
+        <div className="w-20 flex flex-col items-center py-10 sticky top-0 h-full">
           {steps.map((_, index) => (
             <StepIndicator
               key={index}
@@ -188,7 +192,9 @@ export default function AddGameForm({
           {steps.map((step, index) => (
             <section
               key={index}
-              ref={(el) => (sectionRefs.current[index] = el)}
+              ref={(el) => {
+                sectionRefs.current[index] = el as HTMLDivElement | null;
+              }}
             >
               <h2 className="text-3xl font-bold mb-4">{step}</h2>
 
@@ -197,14 +203,16 @@ export default function AddGameForm({
                   {/* Game Title Input */}
                   <label className="block text-lg font-semibold text-primary/80">
                     Game Title
-                    <span className=" text-gray-200 font-medium px-1">*</span>
+                    <span className=" text-gray-400 font-normal leading-normal px-1">
+                      *
+                    </span>
                   </label>
                   <input
                     type="text"
                     maxLength={40}
                     placeholder="Enter game title"
                     {...register("title")}
-                    className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
+                    className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card text-white"
                   />
                   {errors.title && (
                     <p className="text-gray-200 text-sm mt-1">
@@ -215,7 +223,9 @@ export default function AddGameForm({
                   {/* Category Input */}
                   <label className="block mt-4 text-lg font-semibold text-primary/80">
                     Mention categories with a comma
-                    <span className="text-gray-200 font-medium px-1">*</span>
+                    <span className=" text-gray-400 font-normal leading-normal px-1">
+                      *
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -228,7 +238,7 @@ export default function AddGameForm({
                         .filter((cat) => cat.length > 0);
                       setValue("categories", array);
                     }}
-                    className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
+                    className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card placeholder:text-muted-foreground text-white"
                   />
 
                   {errors.categories && (
@@ -242,11 +252,13 @@ export default function AddGameForm({
                       className="block mt-4 text-lg font-semibold text-primary/80"
                       htmlFor="price"
                     >
-                      Price
-                      <span className="text-gray-200 font-medium px-1">*</span>
+                      Price <span className=" text-sm">(USD)</span>
+                      <span className=" text-gray-400 font-normal leading-normal px-1">
+                        *
+                      </span>
                     </label>
                     <input
-                      className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-foreground placeholder:text-muted-foreground"
+                      className="w-full mt-2 py-3 px-3 rounded-md border-none bg-card text-white placeholder:text-muted-foreground"
                       id="price"
                       placeholder="Enter price"
                       {...register("price")}
@@ -262,7 +274,9 @@ export default function AddGameForm({
                   <div className="space-y-2">
                     <Label className="block mt-4 text-lg font-semibold text-primary/80">
                       Status
-                      <span className="text-gray-200 font-medium px-1">*</span>
+                      <span className=" text-gray-400 font-normal leading-normal px-1">
+                        *
+                      </span>
                     </Label>
                     <div className="flex gap-6">
                       <label className="flex items-center gap-2">
@@ -294,7 +308,7 @@ export default function AddGameForm({
                     <div className="space-y-2">
                       <Label className="block mt-4 text-lg font-semibold text-primary/80">
                         Publish Date
-                        <span className="text-gray-200 font-medium px-1">
+                        <span className=" text-gray-400 font-normal leading-normal px-1">
                           *
                         </span>
                       </Label>
@@ -342,7 +356,9 @@ export default function AddGameForm({
                       htmlFor="price"
                     >
                       Platforms
-                      <span className="text-gray-200 font-medium px-1">*</span>
+                      <span className=" text-gray-400 font-normal leading-normal px-1">
+                        *
+                      </span>
                     </label>
                     <div className="flex flex-wrap gap-4 my-4">
                       {items.map((platform) => (
@@ -354,6 +370,7 @@ export default function AddGameForm({
                             id={platform.id}
                             checked={selectedPlatforms.includes(platform.id)}
                             onCheckedChange={() => togglePlatform(platform.id)}
+                            className="data-[state=checked]:text-blue-700"
                           />
                           <Label
                             className=" text-gray-200"
@@ -372,7 +389,9 @@ export default function AddGameForm({
                 <div>
                   <label className="block text-lg font-semibold text-primary/80">
                     Description of the Game
-                    <span className=" text-gray-200 font-medium px-1">*</span>
+                    <span className=" text-gray-400 font-normal leading-normal px-1">
+                      *
+                    </span>
                   </label>
                   <Description
                     editorState={editorState}
@@ -407,7 +426,7 @@ export default function AddGameForm({
                     <div>
                       <label className="block text-lg font-semibold text-primary/80">
                         Upload Photos of game and gameplay (up to 5 pictures)
-                        <span className=" text-gray-200 font-medium px-1">
+                        <span className=" text-gray-400 font-normal leading-normal px-1">
                           *
                         </span>
                       </label>

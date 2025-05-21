@@ -25,8 +25,10 @@ export const StepIndicator = ({
             : "bg-gray-700"
         }`}
       >
-        {isCompleted ? <Check className="w-4 h-4" /> : `0 ${stepIndex + 1}`}
+        {isCompleted ? <Check className="w-4 h-4" /> : `0${stepIndex + 1}`}
       </div>
+
+      {/* Connecting line */}
       {stepIndex !== steps.length - 1 && (
         <div
           className={`h-[32rem] w-1 bg-foreground  ${
