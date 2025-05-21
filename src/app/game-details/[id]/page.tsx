@@ -192,7 +192,7 @@ const GameDetailsPage = async ({
                             <a target="_blank" rel="nofollow" href={link.link}>
                               <FaExternalLinkAlt
                                 size={16}
-                                className="text-primary/80"
+                                className="text-primary/60"
                               />
                             </a>
                           </div>

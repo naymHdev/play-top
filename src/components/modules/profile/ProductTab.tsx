@@ -4,6 +4,7 @@ import MyGameCard from "./MyGameCard";
 import { TGame } from "@/types/games";
 
 const GamesTabs = ({ myGames }: { myGames: TGame[] }) => {
+  // console.log("myGames", myGames);
   return (
     <div className="mt-12">
       <Tabs defaultValue="submitted" className="  mx-auto">

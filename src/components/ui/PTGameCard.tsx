@@ -9,6 +9,7 @@ import { platformIconMap } from "@/constants/platform";
 
 const PTGameCard = ({ games }: { games: TGame }) => {
   const { title, thumbnail, categories, price, platform, _id } = games || {};
+  // console.log("games", games);
   return (
     <>
       <div className="rounded-md border border-card mb-5">
@@ -44,7 +45,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                   </h2>
                   <div className="lg:flex items-center gap-4">
                     <div className="flex items-center">
-                      {categories.map((category: string, idx: number) => (
+                      {categories?.map((category: string, idx: number) => (
                         <p
                           key={idx}
                           className="font-semibold leading-5 text-[12px] text-foreground flex items-center"

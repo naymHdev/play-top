@@ -7,6 +7,8 @@ import moment from "moment";
 import Image from "next/image";
 import Newsletter from "@/components/Newsletter";
 import BlogDetails from "@/components/modules/blogs/BlogDetails";
+import PTBlogCard from "@/components/ui/core/PTBlogCard";
+import PTSectionName from "@/components/ui/PTSectionName";
 
 const BlogDetailsPage = async ({
   params,
@@ -16,7 +18,7 @@ const BlogDetailsPage = async ({
   const { id } = await params;
 
   const { data: blogs } = await getAllBlogs(1);
-  //   console.log("blogs", blogs?.allBlogs);
+  // console.log("blogs", blogs?.allBlogs);
 
   const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog.id === id);
   //   console.log("blogDetails", blogDetails);
@@ -34,7 +36,7 @@ const BlogDetailsPage = async ({
         <PTContainer>
           <div className="my-14">
             {/* ------------- Blog Header Details ------------- */}
-            <div>
+            <div className="">
               <h1 className=" text-5xl font-bold leading-14 text-white">
                 {title}
               </h1>
@@ -90,6 +92,22 @@ const BlogDetailsPage = async ({
               <div className=" col-span-full lg:col-span-2 border-l border-card pt-6 px-10">
                 <Newsletter />
               </div>
+            </div>
+
+            {/* ------------- All Blogs Section ------------- */}
+            <div className="mt-20">
+              <PTSectionName
+                title="All Blogs"
+                description="Explore the latest articles, tips, and insights from our blog."
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+              {blogs?.allBlogs
+                ?.slice()
+                .reverse()
+                .map((blog: TBlogs) => (
+                  <PTBlogCard key={blog.id} blog={blog} />
+                ))}
             </div>
           </div>
         </PTContainer>

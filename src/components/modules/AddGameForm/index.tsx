@@ -28,6 +28,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const items = [
   {
@@ -67,6 +68,9 @@ export default function AddGameForm({
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const gameDescription = editorState.getCurrentContent().getPlainText();
 
@@ -125,6 +129,7 @@ export default function AddGameForm({
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     // console.log("Core Data:", data);
+    setIsLoading(true);
 
     const gameFormData = {
       userId: session?.user?.email,
@@ -148,16 +153,23 @@ export default function AddGameForm({
     }
 
     try {
+      setIsLoading(true);
       const res = await addGame(formData);
       // console.log("Game added response from API:", res);
 
       if (res?.success) {
         toast.success(res.message);
+        router.push("/");
+        setIsLoading(false);
       } else {
         toast.error(res.message);
+        setIsLoading(false);
       }
     } catch (err: any) {
       console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -469,7 +481,7 @@ export default function AddGameForm({
               />
               <PTButton
                 type="submit"
-                label="Submit Game"
+                label={`${isLoading ? "Submitting..." : "Submit Game"}`}
                 className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
               />
             </div>

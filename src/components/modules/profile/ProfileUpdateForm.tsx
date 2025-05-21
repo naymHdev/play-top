@@ -12,12 +12,13 @@ import { Textarea } from "@/components/ui/textarea";
 import PTButton from "@/components/ui/PTButton";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {useState } from "react";
+import { useState } from "react";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { updateProfile } from "@/services/profile";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { IUser } from "@/types/user";
+import { Trash2 } from "lucide-react";
+import { TUserProps } from "@/types/user";
 
 type LinkItem = {
   name: string;
@@ -25,17 +26,17 @@ type LinkItem = {
 };
 
 type FormValues = {
-  userId: string;
   name: string;
   userName: string;
   bio: string;
   links: LinkItem[];
 };
 
-const ProfileUpdateForm = () => {
-
+const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
+  // console.log("session", session);
   const [imageFiles, setImageFiles] = useState<File | undefined>(undefined);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -60,13 +61,12 @@ const ProfileUpdateForm = () => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      userId: "682ad95e4e8b478885041709",
-      name: "Mr. Tomas",
-      userName: "@tomas.s42",
+      name: session?.user?.name || "",
+      userName: "@example111",
       bio: "This is my updated bio, telling a bit about me.",
       links: [
-        { name: "GitHub", link: "https://github.com/Xinagop5980" },
-        { name: "LinkedIn", link: "https://www.linkedin.com/in/xinagop5980" },
+        { name: "GitHub", link: "https://github.com/ownlink" },
+        { name: "LinkedIn", link: "https://www.linkedin.com/in/ownlink" },
       ],
     },
   });
@@ -77,22 +77,26 @@ const ProfileUpdateForm = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
     formData.append("photo", imageFiles as File);
 
     try {
+      setIsLoading(true);
       const res = await updateProfile(formData);
       // console.log("Response from API:", res);
       if (res.success) {
         toast.success(res.message);
         router.push("/profile");
+        setIsLoading(false);
       } else {
         toast.error(res.message);
       }
     } catch (error: any) {
       console.error("Error uploading file:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -122,7 +126,7 @@ const ProfileUpdateForm = () => {
         )}
       </div>
 
-      <div>
+      {/* <div>
         <Label htmlFor="userId">User ID</Label>
         <Input
           {...register("userId", { required: true })}
@@ -131,7 +135,7 @@ const ProfileUpdateForm = () => {
         {errors.userId && (
           <p className="text-red-500 text-xs mt-1">This field is required</p>
         )}
-      </div>
+      </div> */}
 
       <div>
         <Label htmlFor="name">Name</Label>
@@ -187,7 +191,7 @@ const ProfileUpdateForm = () => {
                 onClick={() => remove(index)}
                 className="text-red-500 text-sm underline"
               >
-                Remove
+                <Trash2 className=" text-red-600/50 size-6 hover:cursor-pointer" />
               </button>
             </div>
           </div>
@@ -208,7 +212,7 @@ const ProfileUpdateForm = () => {
         </Link>
         <PTButton
           type="submit"
-          label="Save Change"
+          label={`${isLoading ? "Updating..." : "Update"}`}
           className="bg-secondary border-none rounded-full px-8 py-3"
         />
       </div>
