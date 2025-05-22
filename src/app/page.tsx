@@ -23,7 +23,7 @@ const HomePage = async () => {
   // console.log("topGamesData", topGameWeek);
 
   const { data: blogs } = await getAllBlogs(1);
-  // console.log("blogs", blogs?.allBlogs);
+  // console.log("blogs", blogs);
 
   return (
     <>
@@ -40,7 +40,7 @@ const HomePage = async () => {
           <WeeklyTopGames topGameWeek={topGameWeek} />
         )}
 
-        {blogs?.allBlogs?.length > 0 && <LatestBlogs blogs={blogs.allBlogs} />}
+        {blogs.allBlogs.length > 0 && <LatestBlogs blogs={blogs.allBlogs} />}
       </div>
     </>
   );

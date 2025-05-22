@@ -12,30 +12,38 @@ export default function LinkInputs() {
   return (
     <div className="space-y-4">
       {fields.map((field, index) => (
-        <div key={field.id} className="flex gap-4">
+        <div
+          key={field.id}
+          className="flex flex-col sm:flex-row gap-4 items-center"
+        >
           <input
             type="text"
             placeholder="name"
             {...register(`socialLinks.${index}.name`)}
-            className="mt-1 py-3 px-3 rounded-md border-none bg-card"
+            className="w-full sm:w-40 mt-1 py-3 px-3 rounded-md border-none bg-card"
           />
           <input
             type="url"
             placeholder="https://example.com"
             {...register(`socialLinks.${index}.link`)}
-            className="w-full mt-1 py-3 px-2 rounded-md border-none bg-card"
+            className="w-full sm:flex-1 mt-1 py-3 px-2 rounded-md border-none bg-card"
           />
-          <button type="button" onClick={() => remove(index)}>
-            <Trash2 className=" text-red-600/50 size-6 hover:cursor-pointer" />
+          <button
+            type="button"
+            onClick={() => remove(index)}
+            className="mt-1 sm:mt-0"
+            aria-label="Remove link"
+          >
+            <Trash2 className="text-red-600/50 w-6 h-6 hover:cursor-pointer" />
           </button>
         </div>
       ))}
       <button
-        className=" flex items-center gap-1 bg-card rounded-md px-4 py-2 font-medium leading-6 text-primary hover:cursor-pointer"
+        className="flex items-center gap-1 bg-card rounded-md px-4 py-2 font-medium leading-6 text-primary hover:cursor-pointer"
         type="button"
         onClick={() => append({ name: "", link: "" })}
       >
-        <Plus className="size-7" /> Add Link
+        <Plus className="w-7 h-7" /> Add Link
       </button>
     </div>
   );

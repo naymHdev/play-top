@@ -14,16 +14,13 @@ const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
     <>
       <PTContainer>
         <div className=" relative mt-24">
-          <div className="  flex flex-col items-center justify-center">
+          <div className="  flex flex-col items-center justify-center mb-10">
             <PTSectionName title="Latest Blogs & Articles" />
           </div>
-          <div className="mt-14 flex items-center justify-center gap-8">
-            {blogs
-              ?.splice(-3)
-              .reverse()
-              .map((blog: TBlogs) => (
-                <PTBlogCard key={blog.id} blog={blog} />
-              ))}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            {blogs?.splice(1, 3).map((blog: TBlogs) => (
+              <PTBlogCard key={blog.id} blog={blog} />
+            ))}
           </div>
           <div className="flex items-end justify-end mt-10">
             <PTButton

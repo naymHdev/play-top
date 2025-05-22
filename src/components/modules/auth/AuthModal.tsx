@@ -13,7 +13,7 @@ const AuthModal = () => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="w-[140px] h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
+          <Button className="md:w-[140px] w-28 h-9 md:h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
             <FaRegUser /> Sign In
           </Button>
         </DialogTrigger>

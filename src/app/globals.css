@@ -215,6 +215,7 @@
 .embla-thumbs__slide--selected .embla-thumbs__slide__img {
   border-color: #e0e9e4;
 }
+/* ----------------- End Carousel Custom Css---------------- */
 
 /* ------------------- Search Bar Custom Design ---------------- */
 .hide-scrollbar::-webkit-scrollbar {

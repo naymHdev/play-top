@@ -58,7 +58,7 @@ const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {
                   return (
                     <CarouselItem
                       key={ucr.id ?? index}
-                      className="relative flex-shrink-0 basis-1/1 md:basis-1/4 lg:basis-1/6"
+                      className="relative flex-shrink-0 basis-full md:basis-1/2 lg:basis-1/6"
                       role="group"
                       aria-roledescription="slide"
                       aria-label={ucr.title}
