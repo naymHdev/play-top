@@ -15,19 +15,19 @@ const PTBlogCard = ({ blog }: { blog: TBlogs }) => {
     <>
       <Link href={`/blogs/${blog.id}`}>
         <div className="flex flex-col overflow-hidden w-full">
-          <div className=" w-full rounded-lg">
+          <div className="rounded-lg w-full">
             <Image
               src={blog.blogImage}
               alt={blog.title}
               width={400}
               height={200}
-              className=" w-full rounded-lg object-center"
+              className="rounded-lg object-center w-full"
             />
           </div>
 
           {/* Content */}
           <div className="mt-8 flex flex-col flex-grow">
-            <h3 className="text-white font-semibold text-lg mb-2 line-clamp-2">
+            <h3 className="text-white font-semibold text-lg mb-2 line-clamp-1">
               {blog.title}
             </h3>
             <p className="text-gray-400 text-sm">{dateString}</p>

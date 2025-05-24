@@ -23,7 +23,7 @@ const HomePage = async () => {
   // console.log("topGamesData", topGameWeek);
 
   const { data: blogs } = await getAllBlogs(1);
-  // console.log("blogs", blogs);
+  // console.log("blogs", blogs?.allBlogs);
 
   return (
     <>

@@ -7,9 +7,9 @@ import moment from "moment";
 import Image from "next/image";
 import Newsletter from "@/components/Newsletter";
 import BlogDetails from "@/components/modules/blogs/BlogDetails";
-import PTBlogCard from "@/components/ui/core/PTBlogCard";
-import PTSectionName from "@/components/ui/PTSectionName";
 import BlogTable from "@/components/modules/blogs/BlogTable";
+import LatestBlogs from "@/components/modules/home/LatestBlogs";
+import parse from "html-react-parser";
 
 const BlogDetailsPage = async ({
   params,
@@ -21,9 +21,9 @@ const BlogDetailsPage = async ({
   // console.log("blogs", blogs?.allBlogs);
 
   const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog.id === id);
-  const { author, title, description, blogImage, createdAt, blogId } =
+  const { author, title, description, blogImage, createdAt, altTag, rewards } =
     blogDetails || {};
-  //   console.log("blogDetails", blogDetails);
+  // console.log("blogDetails", blogDetails);
 
   const formattedDate = moment(createdAt).format("MMMM Do, YYYY");
 
@@ -63,8 +63,16 @@ const BlogDetailsPage = async ({
                 </div>
               </div>
               <p className=" text-white text-lg lg:text-[22px] font-normal leading-normal lg:leading-8 mt-4 lg:mt-8">
-                {description}
+                {title}
               </p>
+              {/* Description (HTML parsed) */}
+              {/* <article className="prose prose-invert max-w-none mb-10">
+                {description ? (
+                  parse(description)
+                ) : (
+                  <p>No description available.</p>
+                )}
+              </article> */}
             </div>
 
             {/* ------------- Blog Layout Details ------------- */}
@@ -74,7 +82,7 @@ const BlogDetailsPage = async ({
                 <div className=" w-full h-fit">
                   <Image
                     src={blogImage}
-                    alt={title}
+                    alt={altTag}
                     width={1000}
                     height={800}
                     className="w-full h-[400px] object-cover rounded-lg"
@@ -82,12 +90,17 @@ const BlogDetailsPage = async ({
                 </div>
 
                 <div className="">
-                  <p className=" text-white text-xl font-normal leading-8 mt-8">
-                    {description}
-                  </p>
+                  {/* Description (HTML parsed) */}
+                  <article className="prose prose-invert text-white max-w-none mb-10">
+                    {description ? (
+                      parse(description)
+                    ) : (
+                      <p>No description available.</p>
+                    )}
+                  </article>
                 </div>
+                <BlogTable rewards={rewards} />
                 <BlogDetails />
-                <BlogTable />
               </div>
 
               {/* ------------- Newsletter Details ------------- */}
@@ -95,24 +108,12 @@ const BlogDetailsPage = async ({
                 <Newsletter />
               </div>
             </div>
-
-            {/* ------------- All Blogs Section ------------- */}
-            <div className="mt-20">
-              <PTSectionName
-                title="Related Blogs & Articles"
-                description="Explore the latest articles, tips, and insights from our blog."
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-              {blogs?.allBlogs
-                ?.slice(0, 3)
-                .reverse()
-                .map((blog: TBlogs) => (
-                  <PTBlogCard key={blog.id} blog={blog} />
-                ))}
-            </div>
           </div>
         </PTContainer>
+        {/* ------------- All Blogs Section ------------- */}
+        <div className=" mb-10">
+          <LatestBlogs blogs={blogs?.allBlogs} />
+        </div>
       </div>
     </>
   );
