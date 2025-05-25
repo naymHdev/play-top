@@ -12,7 +12,6 @@ export const getAllBlogs = async (page: number) => {
         next: {
           tags: ["Blogs"],
         },
-        cache: "no-store",
       }
     );
 

@@ -99,7 +99,7 @@ const GameDetailsPage = async ({
 
                       {/* ----------------- By Website Icons Button ---------------- */}
                       <div>
-                        <div className=" bg-secondary text-primary rounded-full px-8 py-2">
+                        <div className=" bg-secondary text-primary rounded-full px-4 md:px-8 py-2">
                           <a
                             target="_blank"
                             rel="nofollow"
@@ -107,13 +107,14 @@ const GameDetailsPage = async ({
                             className=" flex gap-2 items-center"
                           >
                             <p className=" text-lg font-medium capitalize">
-                              {findGame?.linkType === "steam"
+                              {/* {findGame?.linkType === "steam"
                                 ? "steam"
                                 : findGame?.linkType === "itch.io"
                                 ? "itch"
                                 : findGame?.linkType === "globe"
                                 ? "globe"
-                                : "globe"}
+                                : "globe"} */}
+                                Buy Now on
                             </p>
                             <Image
                               src={
