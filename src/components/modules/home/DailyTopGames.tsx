@@ -37,7 +37,7 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
     (visibleCount > INITIAL_COUNT || !isShowingAll);
 
   return (
-    <PTContainer className="mt-24 relative">
+    <PTContainer className="md:mt-24 relative">
       <div>
         <PTSectionName title="Top Games of the Day" />
       </div>

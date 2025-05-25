@@ -24,6 +24,7 @@ export type TGame = {
   socialLinks: TSocialLinks[];
   gameStatus: "upcoming" | "active" | undefined;
   upcomingDate?: Date | undefined;
+  totalUpvote: number | string;
 };
 
 export type GameIdResponse = {

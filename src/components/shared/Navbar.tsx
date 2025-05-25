@@ -17,6 +17,8 @@ import Searchbar from "./Searchbar";
 import { TUserProps } from "@/types/user";
 import { signOut } from "next-auth/react";
 import AuthModal from "../modules/auth/AuthModal";
+import logo from "../../assets/logo/header-logo.png";
+import Image from "next/image";
 
 const Navbar = ({ session }: { session: TUserProps | null }) => {
   const { user, setIsLoading } = useUser();
@@ -41,7 +43,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
           <div className=" flex items-center justify-between">
             <div>
               <Link href={"/"}>
-                <h1 className=" text-3xl font-bold text-primary">Logo</h1>
+                <Image src={logo} alt="logo" width={120} height={120} />
               </Link>
             </div>
             <div className=" flex gap-4 items-center justify-center">

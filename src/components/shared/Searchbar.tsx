@@ -106,9 +106,8 @@ const Searchbar = () => {
                     onClick={() => {
                       setQuery(game.title);
                       setShowResults(false);
-                      // Navigate or do something else if needed
                     }}
-                    className="flex items-center gap-4 w-full text-left px-3 py-2 rounded-lg hover:bg-gray-800 focus:bg-gray-800 focus:outline-none"
+                    className="flex items-center gap-4 w-full text-left px-3 py-2 rounded-lg hover:bg-gray-800 focus:bg-gray-800 focus:outline-none hover:cursor-pointer"
                     role="option"
                     aria-selected={query === game.title}
                     type="button"

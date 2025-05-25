@@ -14,6 +14,11 @@ import { TGame } from "@/types/games";
 import { platformIconMap, socialIconMap } from "@/constants/platform";
 import bannerImg from "../../../assets/images/gameThumbnail.png";
 
+// ------------- By website icons -------------
+import steam from "../../../assets/icons/steam-icn.png";
+import itch from "../../../assets/icons/icons8-itch-io-48.png";
+import globe from "../../../assets/icons/icons8-global-50.png";
+
 const OPTIONS: EmblaOptionsType = {};
 
 const GameDetailsPage = async ({
@@ -91,15 +96,46 @@ const GameDetailsPage = async ({
                           ${findGame?.price}
                         </h3>
                       </div>
+
+                      {/* ----------------- By Website Icons Button ---------------- */}
                       <div>
-                        <Button className="flex items-center gap-1 bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary rounded-full">
-                          Buy Now <FiArrowUpRight />
-                        </Button>
+                        <div className=" bg-secondary text-primary rounded-full px-8 py-2">
+                          <a
+                            target="_blank"
+                            rel="nofollow"
+                            href={findGame?.socialLinks[0]?.link}
+                            className=" flex gap-2 items-center"
+                          >
+                            <p className=" text-lg font-medium capitalize">
+                              {findGame?.linkType === "steam"
+                                ? "steam"
+                                : findGame?.linkType === "itch.io"
+                                ? "itch"
+                                : findGame?.linkType === "globe"
+                                ? "globe"
+                                : "globe"}
+                            </p>
+                            <Image
+                              src={
+                                findGame?.linkType === "steam"
+                                  ? steam
+                                  : findGame?.linkType === "itch.io"
+                                  ? itch
+                                  : findGame?.linkType === "globe"
+                                  ? globe
+                                  : globe
+                              }
+                              alt="Website Icon"
+                              width={25}
+                              height={25}
+                            />
+                          </a>
+                        </div>
                       </div>
                     </div>
 
                     {/* ----------- Up & Down Vot button -------------- */}
-                    <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full py-2 w-4/12">
+                    <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full py-2 w-5/12 md:w-4/12">
                       <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
                         <FiArrowUpRight />
                       </Button>
@@ -164,7 +200,7 @@ const GameDetailsPage = async ({
                     Links
                   </p>
                   <div className="mt-2 space-y-2">
-                    {findGame.socialLinks.map((link, idx: number) => {
+                    {findGame?.socialLinks?.map((link, idx: number) => {
                       const icon = socialIconMap[link.name];
                       if (!icon) return null;
 

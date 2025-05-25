@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { FaFacebook, FaRegUser, FaXTwitter } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import authIcon from "@/assets/images/kitty-auth.png";
+import authIcon from "@/assets/logo/header-logo.png";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 
@@ -23,6 +23,8 @@ const AuthModal = () => {
               src={authIcon}
               alt="Auth Icon"
               className="h-auto object-cover"
+              width={200}
+              height={200}
             />
             <h2 className="font-bold text-xl text-gray-200">
               Sign up on Own Game

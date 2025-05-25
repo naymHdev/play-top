@@ -90,6 +90,7 @@ export default function AddGameForm({
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = methods;
 
@@ -97,6 +98,11 @@ export default function AddGameForm({
   const gameStatus = watch("gameStatus");
   const upcomingDate = watch("upcomingDate");
   const selectedPlatforms = watch("platform") || [];
+
+  const handleCancel = () => {
+    reset();
+    router.push("/");
+  };
 
   // Toggle platform
   const togglePlatform = (id: string) => {
@@ -470,21 +476,15 @@ export default function AddGameForm({
           {/* Footer Buttons */}
           <div className="flex items-center justify-between">
             <PTButton
+              onClick={handleCancel}
               label="Cancel"
               className="border border-card text-primary bg-background px-3 lg:px-6 py-2 hover:cursor-pointer"
             />
-
-            <div className="flex items-center gap-2 lg:gap-4">
-              <PTButton
-                label="Save as Draft"
-                className="border-none text-primary bg-foreground px-2 lg:px-6 py-2"
-              />
-              <PTButton
-                type="submit"
-                label={`${isLoading ? "Submitting..." : "Submit Game"}`}
-                className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
-              />
-            </div>
+            <PTButton
+              type="submit"
+              label={isLoading ? "Submitting..." : "Submit Game"}
+              className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
+            />
           </div>
         </div>
       </div>

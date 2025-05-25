@@ -78,7 +78,7 @@ const UserCommentBox = ({ session, gameDetails }: UserCommentsProps) => {
             maxLength: MAX_COMMENT_LENGTH,
           })}
           placeholder="What do you think?..."
-          className=" resize-none rounded-lg border-none bg-background text-foreground shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" resize-none rounded-lg border-none bg-background shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-white"
         />
         {errors.comment && (
           <p className="text-sm text-red-500 px-2">{errors.comment.message}</p>

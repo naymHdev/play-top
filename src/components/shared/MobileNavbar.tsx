@@ -25,6 +25,8 @@ import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Searchbar from "./Searchbar";
 import { Search } from "lucide-react";
+import logo from "../../assets/logo/header-logo.png";
+import Image from "next/image";
 
 interface MobileNavbarProps {
   session: TUserProps | null;
@@ -91,12 +93,11 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ session }) => {
     <>
       <header className="bg-black text-white fixed top-0 left-0 right-0 z-50 shadow-md">
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          <Link
-            href="/"
-            className="text-lg font-semibold tracking-wide hover:text-secondary transition-colors"
-          >
-            Logo
-          </Link>
+          <div>
+            <Link href={"/"}>
+              <Image src={logo} alt="logo" width={110} height={110} />
+            </Link>
+          </div>
 
           <div className="flex items-center gap-3">
             {/* Search Button */}

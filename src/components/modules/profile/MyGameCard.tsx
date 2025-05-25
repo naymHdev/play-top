@@ -150,7 +150,7 @@ const MyGameCard = ({ games }: { games: TGame }) => {
 
       <div className="absolute top-0.5 right-3.5 ">
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="bg-card md:bg-transparent text-primary rounded-lg md:rounded-none">
             <BsThreeDots className="text-primary/80 hover:cursor-pointer size-5" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-card text-primary border-none">

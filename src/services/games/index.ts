@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 
 // ------------ add game --------------
 export const addGame = async (data: FormData) => {
@@ -18,6 +19,7 @@ export const addGame = async (data: FormData) => {
         },
       }
     );
+        revalidateTag("GAME");
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -107,6 +109,28 @@ export const gameSearch = async (query?: {
         },
       }
     );
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+export const upvoteGame = async (gameId: string) => {
+  const token = (await cookies()).get("accessToken")?.value || "";
+  // console.log("token", gameId);
+  try {
+    const res = await fetch(
+      `https://gaming-showcase-backend.onrender.com/api/v1/game/upvote-game`,
+      {
+        body: JSON.stringify(gameId),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    revalidateTag("GAME");
     return await res.json();
   } catch (error: any) {
     return Error(error);

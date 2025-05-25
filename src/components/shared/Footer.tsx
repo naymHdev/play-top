@@ -20,6 +20,7 @@ import { ReactNode, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { BiSolidErrorCircle } from "react-icons/bi";
 import toast from "react-hot-toast";
+import logo from "../../assets/logo/footer-logo.png";
 
 type Inputs = {
   email: string;
@@ -68,7 +69,11 @@ const Footer = () => {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-7 gap-x-6 gap-y-10 lg:gap-x-14">
           {/* ------------------ Logo ---------------- */}
           <div className="col-span-1 md:col-span-2">
-            <h2 className="text-4xl font-bold">Logo</h2>
+            <div>
+              <Link href={"/"}>
+                <Image src={logo} alt="logo" width={200} height={200} />
+              </Link>
+            </div>
             <p className="leading-normal mt-6">
               To advertise your game or for outreach article, reach us at{" "}
               <strong className="px-1">email@gmail.com</strong>
@@ -108,12 +113,12 @@ const Footer = () => {
                     </span>
                   )}
                 </div>
-                   <PTButton
-                      type="submit"
-                      className=" bg-secondary text-white py-3 px-10 font-semibold rounded-md shadow-none hover:shadow-lg transition-all duration-300 ease-in-out"
-                      label="Submit"
-                      icon={<FaArrowRight />}
-                    />
+                <PTButton
+                  type="submit"
+                  className=" bg-secondary text-white py-3 px-10 font-semibold rounded-md shadow-none hover:shadow-lg transition-all duration-300 ease-in-out"
+                  label="Submit"
+                  icon={<FaArrowRight />}
+                />
               </div>
             </form>
             <p className="text-black mt-6">{message}</p>
@@ -161,7 +166,7 @@ const Footer = () => {
 
         <div className="my-10 mt-16">
           <div className="text-sm font-medium text-end">
-            © {currentYear} Business Name. All Rights Reserved.
+            © {currentYear} GameHunt Org. All Rights Reserved.
           </div>
         </div>
       </PTContainer>

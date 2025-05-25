@@ -23,13 +23,16 @@ import PTButton from "@/components/ui/PTButton";
 import { updateMyGame } from "@/services/profile";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-const PLATFORMS = ["Android", "Apple", "Windows", "Linux"];
-
+const PLATFORMS = ["Android", "Apple", "Windows", "Linux", "Mac"];
 type FormValues = z.infer<typeof formSchema>;
 
 const UpdateGameForm = ({ game }: { game: TGame }) => {
   // console.log("game", game);
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -53,7 +56,7 @@ const UpdateGameForm = ({ game }: { game: TGame }) => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     // console.log("Form submitted:", data);
-    const router = useRouter();
+    setLoading(true);
 
     const updatedData = {
       gameId: game.id,
@@ -66,21 +69,29 @@ const UpdateGameForm = ({ game }: { game: TGame }) => {
       upcomingDate: data.upcomingDate,
     };
 
+    // console.log("Updated Data:", updatedData);
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(updatedData));
 
     try {
+      setLoading(true);
       const res = await updateMyGame(formData);
       // console.log("Update response:", res);
 
       if (res.success) {
         toast.success("Game updated successfully!");
         router.push("/profile");
+        setLoading(false);
       } else {
         toast.error("Failed to update game.");
       }
     } catch (error) {
       console.error("Error updating game:", error);
+      toast.error("Error updating game.");
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -222,7 +233,7 @@ const UpdateGameForm = ({ game }: { game: TGame }) => {
 
           <PTButton
             type="submit"
-            label="Update Game"
+            label={loading ? "Updating..." : "Update Game"}
             className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
           />
         </form>

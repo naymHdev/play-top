@@ -1,3 +1,4 @@
+"use client";
 import { TGame } from "@/types/games";
 import Image from "next/image";
 import React from "react";
@@ -6,10 +7,36 @@ import { TbArrowBigUpFilled, TbArrowBigDown } from "react-icons/tb";
 import Link from "next/link";
 import { LuDot } from "react-icons/lu";
 import { platformIconMap } from "@/constants/platform";
+import { upvoteGame } from "@/services/games";
+import toast from "react-hot-toast";
 
 const PTGameCard = ({ games }: { games: TGame }) => {
-  const { title, thumbnail, categories, price, platform, _id } = games || {};
+  const { title, thumbnail, categories, price, platform, _id, totalUpvote } =
+    games || {};
   // console.log("games", games);
+
+  const handleUpvote = async (id: string) => {
+    const gameUpVote = {
+      data: {
+        gameId: id as string,
+      },
+    };
+    // console.log("gameUpVote", gameUpVote);
+
+    try {
+      const res = await upvoteGame(gameUpVote);
+      // console.log("api response", res);
+
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.log("Game Upvote Error:", error);
+    }
+  };
+
   return (
     <>
       <div className="rounded-md border border-card mb-5">
@@ -47,7 +74,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                     <div className="flex items-center">
                       {categories?.map((category: string, idx: number) => (
                         <p
-                          key={idx}
+                          key={`${idx + 1}`}
                           className="font-semibold leading-5 text-[12px] text-foreground flex items-center"
                         >
                           {idx !== 0 && (
@@ -66,7 +93,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                         return (
                           icon && (
                             <Image
-                              key={index}
+                              key={`${index + 1}`}
                               src={icon}
                               alt={platformName}
                               width={20}
@@ -88,11 +115,14 @@ const PTGameCard = ({ games }: { games: TGame }) => {
                   ${price}
                 </h1>
                 <div className="flex items-center justify-center bg-card rounded-full py-[6px]">
-                  <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
+                  <Button
+                    onClick={() => handleUpvote(_id)}
+                    className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent"
+                  >
                     <TbArrowBigUpFilled />
                   </Button>
                   <span className="text-white font-normal leading-[18px]">
-                    4
+                    {totalUpvote}
                   </span>
                   <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
                     <TbArrowBigDown />

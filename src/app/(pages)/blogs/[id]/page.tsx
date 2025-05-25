@@ -23,7 +23,7 @@ const BlogDetailsPage = async ({
   const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog.id === id);
   const { author, title, description, blogImage, createdAt, altTag, rewards } =
     blogDetails || {};
-  // console.log("blogDetails", blogDetails);
+  // console.log("blogDetails", rewards);
 
   const formattedDate = moment(createdAt).format("MMMM Do, YYYY");
 
@@ -89,7 +89,7 @@ const BlogDetailsPage = async ({
                   />
                 </div>
 
-                <div className="">
+                <div className="mt-6">
                   {/* Description (HTML parsed) */}
                   <article className="prose prose-invert text-white max-w-none mb-10">
                     {description ? (
@@ -99,7 +99,7 @@ const BlogDetailsPage = async ({
                     )}
                   </article>
                 </div>
-                <BlogTable rewards={rewards} />
+                {rewards.length > 0 && <BlogTable rewards={rewards} />}
                 <BlogDetails />
               </div>
 

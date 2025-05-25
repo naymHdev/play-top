@@ -7,6 +7,7 @@ type NewsletterFormData = {
 };
 
 export const postNewsLetter = async (userEmail: NewsletterFormData) => {
+  const token = (await cookies()).get("accessToken")?.value || "";
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/newsletter/add-mail`,
@@ -14,7 +15,7 @@ export const postNewsLetter = async (userEmail: NewsletterFormData) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: (await cookies()).get("accessToken")!.value || "",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(userEmail),
       }

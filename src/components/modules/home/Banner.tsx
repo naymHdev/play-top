@@ -1,46 +1,46 @@
-import PTContainer from "@/components/ui/PTContainer";
-import { MdArrowForwardIos } from "react-icons/md";
+"use client";
+
 import Image from "next/image";
-import bannerImage from "../../../assets/images/banner-image.avif";
+import PTContainer from "@/components/ui/PTContainer";
 import PTButton from "@/components/ui/PTButton";
+import { MdArrowForwardIos } from "react-icons/md";
+import bannerImage from "../../../assets/images/avhinash-bg-min.png";
 
 const BannerSection = () => {
   return (
-    <>
-      <div className="relative mt-10">
-        {/* Content on top of the image */}
-        <PTContainer className="h-[70vh] relative">
-          {/* Background Image */}
-          <div className="absolute w-full inset-0 z-0 overflow-hidden">
-            <Image
-              src={bannerImage}
-              alt="Banner Image"
-              fill
-              className=" object-cover object-center rounded-md"
-            />
-          </div>
-          <div className="relative lg:w-1/2 z-10 flex flex-row justify-center h-full">
-            <div className=" absolute top-[30%]">
-              <h2 className="text-primary font-extrabold text-3xl md:text-6xl lg:leading-16">
-                All in One Place for Game Creators and Fans Alike
-              </h2>
-              <p className="text-primary text-sm leading-normal my-8 max-w-3xl mx-auto">
-                This is your platform to showcase your work, grow a community,
-                and find your next favorite game. Submit a link or host it here—
-                whatever works for you. Indie spirit meets seamless sharing,
-                with discovery at its heart.
-              </p>
-              <PTButton
-                className=" px-[70px] py-[12px] bg-secondary"
-                label="Learn More"
-                icon={<MdArrowForwardIos className=" size-4 mt-1" />}
-              />
-            </div>
-          </div>
-        </PTContainer>
-        <div className="bg-gradient-to-r from-black via-black via-25%  to-transparent inset-0 block absolute"></div>
-      </div>
-    </>
+    <section className="relative bg-black overflow-hidden rounded-lg">
+      <PTContainer className="relative min-h-[80vh] flex items-center justify-start">
+        {/* Background image only inside container and only on md+ */}
+        <div className="absolute inset-0 hidden md:block z-0 rounded-lg">
+          <Image
+            src={bannerImage}
+            alt="Banner Background"
+            fill
+            priority
+            className="object-contain object-right w-full h-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent rounded-lg" />
+        </div>
+
+        {/* Foreground content */}
+        <div className="relative z-10 max-w-2xl">
+          <h1 className="text-white font-extrabold text-4xl md:text-6xl leading-tight mb-6">
+            All in One Place for Game Creators and Fans Alike
+          </h1>
+          <p className="text-gray-300 text-lg mb-10">
+            This is your platform to showcase your work, grow a community, and
+            find your next favorite game. Submit a link or host it here—whatever
+            works for you. Indie spirit meets seamless sharing, with discovery
+            at its heart.
+          </p>
+          <PTButton
+            className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-medium text-sm rounded-full"
+            label="Learn More"
+            icon={<MdArrowForwardIos className="ml-2 mt-0.5 text-white" />}
+          />
+        </div>
+      </PTContainer>
+    </section>
   );
 };
 

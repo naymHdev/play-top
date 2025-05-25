@@ -61,7 +61,9 @@ const BlogTable: FC<BlogTableProps> = ({ rewards }) => {
         <TableHeader>
           <TableRow className="border-dashed border-gray-700">
             <TableHead className="w-40 text-white">Code</TableHead>
-            <TableHead className="text-white">Reward</TableHead>
+            <TableHead className="text-white flex items-center justify-center">
+              Reward
+            </TableHead>
             <TableHead className="text-white">Validity</TableHead>
           </TableRow>
         </TableHeader>
@@ -92,7 +94,7 @@ const BlogTable: FC<BlogTableProps> = ({ rewards }) => {
                   </div>
                 </div>
               </TableCell>
-              <TableCell className="py-3 px-4 text-gray-300">
+              <TableCell className="py-3 px-4 text-gray-300 flex items-center justify-center">
                 <Badge
                   className={`flex items-center gap-1 border rounded ${getBadgeClasses(
                     reward
