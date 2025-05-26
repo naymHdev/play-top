@@ -6,6 +6,7 @@ import LayoutWrapper from "@/components/shared/LayoutWrapper";
 import Providers from "@/providers/Providers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
+import TopLoader from "@/components/shared/TopLoader";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default async function RootLayout({
       <body
         className={`${geistInter.className} antialiased`}
       >
+        <TopLoader />
         <Providers>
           <LayoutWrapper session={session}>{children}</LayoutWrapper>
           <Toaster position="top-right" />

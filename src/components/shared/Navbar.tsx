@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import PTContainer from "../ui/PTContainer";
-import { FaPlus, FaRegCircleUser } from "react-icons/fa6";
+import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@/contexts/UserContext";
@@ -110,7 +110,13 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 </>
               ) : (
                 <>
-                  <AuthModal />
+                  <AuthModal
+                    children={
+                      <Button className="md:w-[140px] w-28 h-9 md:h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
+                        <FaRegUser /> Sign In
+                      </Button>
+                    }
+                  />
                 </>
               )}
             </div>

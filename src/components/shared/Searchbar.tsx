@@ -78,7 +78,7 @@ const Searchbar = () => {
           }}
           onFocus={() => setShowResults(true)}
           placeholder="Search games..."
-          className="pl-4 pr-10 py-2 rounded-full text-primary lg:w-[626px] h-[48px]  bg-card border-none focus:outline-none focus:ring-2 focus:ring-primary"
+          className="pl-4 pr-10 py-2 rounded-full text-primary w-full lg:w-[353px] h-[48px]  bg-card border-none focus:outline-none focus:ring-2 focus:ring-primary"
           autoComplete="off"
           aria-label="Search games"
         />

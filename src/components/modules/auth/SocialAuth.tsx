@@ -15,7 +15,7 @@ const SocialAuth = () => {
           <Button
             onClick={() =>
               signIn("google", {
-                callbackUrl: "https://gamehunt.org",
+                callbackUrl: "http://localhost:3000",
               })
             }
             variant="outline"

@@ -29,6 +29,7 @@ import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import AuthModal from "../auth/AuthModal";
 
 const items = [
   {
@@ -60,6 +61,7 @@ export default function AddGameForm({
 }: {
   session: TUserProps | null;
 }) {
+  console.log("Session in AddGameForm:", session?.user);
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const [isThumbnail, setIsThumbnail] = useState<File | undefined>(undefined);
@@ -480,11 +482,23 @@ export default function AddGameForm({
               label="Cancel"
               className="border border-card text-primary bg-background px-3 lg:px-6 py-2 hover:cursor-pointer"
             />
-            <PTButton
-              type="submit"
-              label={isLoading ? "Submitting..." : "Submit Game"}
-              className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
-            />
+            {session?.user?.email ? (
+              <PTButton
+                type="submit"
+                label={isLoading ? "Submitting..." : "Submit Game"}
+                className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
+              />
+            ) : (
+              <AuthModal
+                children={
+                  <PTButton
+                    type="button"
+                    label={isLoading ? "Submitting..." : "Submit Game"}
+                    className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
+                  />
+                }
+              />
+            )}
           </div>
         </div>
       </div>

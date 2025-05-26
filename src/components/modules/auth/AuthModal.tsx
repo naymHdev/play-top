@@ -7,16 +7,13 @@ import { FcGoogle } from "react-icons/fc";
 import authIcon from "@/assets/logo/header-logo.png";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import React from "react";
 
-const AuthModal = () => {
+const AuthModal = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger asChild>
-          <Button className="md:w-[140px] w-28 h-9 md:h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
-            <FaRegUser /> Sign In
-          </Button>
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="[&>button]:hidden bg-card border-none backdrop-blur-md py-10 top-80">
           <div className="flex flex-col items-center justify-center gap-4 text-center">
             <Image
@@ -36,7 +33,7 @@ const AuthModal = () => {
             <button
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: "https://gamehunt.org",
+                  callbackUrl: "http://localhost:3000",
                 })
               }
               className="flex items-center gap-2 border border-gray-600 text-gray-200 rounded-sm px-10 py-3 hover:cursor-pointer hover:border-gray-400"
@@ -47,7 +44,7 @@ const AuthModal = () => {
               <button
                 onClick={() =>
                   signIn("twitter", {
-                    callbackUrl: "https://gamehunt.org",
+                    callbackUrl: "http://localhost:4000",
                   })
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
@@ -57,7 +54,7 @@ const AuthModal = () => {
               <button
                 onClick={() =>
                   signIn("facebook", {
-                    callbackUrl: "https://gamehunt.org",
+                    callbackUrl: "http://localhost:4000",
                   })
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
