@@ -90,7 +90,7 @@ const Footer = () => {
 
           {/* ------------------ Subscribe ---------------- */}
           <div className="col-span-1 md:col-span-3 md:mt-8">
-            <h2 className="text-5xl font-bold">Get Rewarded!!!</h2>
+            <h2 className="md:text-5xl text-4xl font-bold">Get Rewarded!!!</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div className="relative w-full sm:flex-1">

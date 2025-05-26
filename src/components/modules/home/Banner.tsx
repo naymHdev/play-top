@@ -19,7 +19,7 @@ const BannerSection = () => {
             priority
             className="object-contain object-right w-full h-full"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-transparent rounded-lg" />
         </div>
 
         {/* Foreground content */}

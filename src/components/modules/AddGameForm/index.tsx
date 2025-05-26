@@ -194,13 +194,13 @@ export default function AddGameForm({
         </div>
 
         {/* Form Content */}
-        <div className="flex-1 space-y-14 lg:p-10 py-6 lg:py-0">
+        <div className="flex-1 space-y-14 lg:p-10 mt-3 lg:mt-0 py-6 lg:py-0">
           {/* Header */}
           <div>
-            <h2 className="text-5xl font-bold text-primary leading-tight">
+            <h2 className="md:text-5xl text-3xl font-bold text-primary leading-tight">
               Add a New Game
             </h2>
-            <p className="text-lg font-normal mt-2 leading-7">
+            <p className="md:text-lg font-normal mt-2 leading-7">
               Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat,
               cursus dictum enim.
             </p>
