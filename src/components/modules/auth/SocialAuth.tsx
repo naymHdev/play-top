@@ -14,9 +14,7 @@ const SocialAuth = () => {
         <div className="">
           <Button
             onClick={() =>
-              signIn("google", {
-                callbackUrl: "https://gamehunt.org",
-              })
+              signIn("google")
             }
             variant="outline"
             className="w-full bg-card hover:text-white hover:bg-card hover:cursor-pointer rounded-full border-none shadow text-white py-6"

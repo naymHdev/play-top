@@ -20,11 +20,12 @@ export const authOptions: NextAuthOptions = {
     //   clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
     // }),
   ],
+  
   pages: {
     signIn: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
-
+  
   callbacks: {
     async signIn({ user, account }) {
       // console.log("user", user, "account", account);
