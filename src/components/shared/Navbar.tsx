@@ -51,7 +51,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 <Searchbar />
               </div>
               <Link href="/submit-product">
-                <Button className="w-[179px] h-[48px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
+                <Button className="w-[150px] h-[40px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
                   Submit Game
                   <FaPlus className=" ml-2" />
                 </Button>
@@ -60,16 +60,15 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 <>
                   <div className="flex items-center gap-4">
                     {/* Notification Icon with Green Dot */}
-                    <div className="relative">
+                    {/* <div className="relative">
                       <div className="rounded-full bg-card p-2 flex items-center justify-center">
                         <IoNotificationsOutline
                           size={22}
                           className="text-primary"
                         />
                       </div>
-                      {/* Green Dot */}
                       <span className="absolute top-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background" />
-                    </div>
+                    </div> */}
 
                     {/* Avatar */}
                     <div>
@@ -112,7 +111,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 <>
                   <AuthModal
                     children={
-                      <Button className="md:w-[140px] w-28 h-9 md:h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
+                      <Button className="lg:w-[110px] w-28 h-9 lg:h-[40px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
                         <FaRegUser /> Sign In
                       </Button>
                     }

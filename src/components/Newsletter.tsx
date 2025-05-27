@@ -36,9 +36,9 @@ const Newsletter = () => {
       const res = await postNewsLetter(userEmail);
       // console.log(res);
       if (res.success) {
-        toast.success(res.message);
+        toast.success("Thanks for subscribing to our newsletter!");
       } else {
-        toast.error(res.message);
+        toast.error("Failed to subscribe. Please try again.");
       }
     } catch (error: any) {
       // console.log(error);
@@ -62,23 +62,23 @@ const Newsletter = () => {
         {/* Content Section */}
         <div className="relative z-10">
           {/* Top: Icon and Text */}
-          <div className="flex flex-col items-start space-y-5">
+          <div className="flex flex-col items-start space-y-2 md:space-y-5">
             <div className="flex items-center space-x-2">
               <Image src={ev} alt="Email Icon" />
-              <p className="font-semibold uppercase text-white leading-5">
+              <p className="md:font-semibold font-normal uppercase text-white leading-5">
                 subscribe our newsletter
               </p>
             </div>
-            <h1 className="text-[32px] font-extrabold leading-[42px] text-white uppercase">
+            <h1 className=" text-[22px] md:text-[32px] font-extrabold leading-[42px] text-white uppercase">
               Never miss an update.
             </h1>
-            <p className="font-normal text-[18px] leading-[26px] text-white">
+            <p className="font-normal text-sm md:text-[18px] leading-[26px] text-white">
               Subscribe for latest game news.
             </p>
           </div>
 
           {/* Bottom: Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6 md:mt-10">
             <div className="w-full rounded-full">
               <Input
                 type="email"
@@ -101,7 +101,7 @@ const Newsletter = () => {
 
             <Button
               type="submit"
-              className="bg-transparent w-full rounded-full border border-white mt-5 py-6 font-bold leading- uppercase hover:bg-transparent hover:cursor-pointer"
+              className="bg-transparent w-full rounded-full border border-white mt-5 md:mt-8 py-6 font-bold leading- uppercase hover:bg-transparent hover:cursor-pointer"
             >
               Subscribe <GoArrowRight className="text-white text-7xl size-5" />
             </Button>

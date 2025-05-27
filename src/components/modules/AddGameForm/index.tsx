@@ -460,7 +460,7 @@ export default function AddGameForm({
                       <NMImageUploader
                         setImageFiles={setImageFiles}
                         setImagePreview={setImagePreview}
-                        label="Upload Image"
+                        label="Upload Image +"
                         className="w-fit mt-0"
                       />
                       <ImagePreviewer

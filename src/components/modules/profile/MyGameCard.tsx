@@ -68,7 +68,7 @@ const MyGameCard = ({ games }: { games: TGame }) => {
   };
 
   return (
-    <div className="rounded-md border border-card mb-5 relative">
+    <div className="rounded-md border border-card mb-5 relative p-4">
       <div className="lg:flex items-center justify-between gap-4">
         <Link href={`/game-details/${id}`}>
           <div className="lg:flex items-center gap-4">
@@ -148,9 +148,9 @@ const MyGameCard = ({ games }: { games: TGame }) => {
         </section>
       </div>
 
-      <div className="absolute top-0.5 right-3.5 ">
+      <div className="absolute top-5 lg:top-0.5 lg:right-1.5 right-4.5 ">
         <DropdownMenu>
-          <DropdownMenuTrigger className="bg-card md:bg-transparent text-primary rounded-lg md:rounded-none">
+          <DropdownMenuTrigger className="bg-card md:bg-transparent text-primary rounded-full md:rounded-none p-1">
             <BsThreeDots className="text-primary/80 hover:cursor-pointer size-5" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-card text-primary border-none">

@@ -23,12 +23,12 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
               width={200}
               height={200}
             />
-            <h2 className="font-bold text-xl text-gray-200">
+            {/* <h2 className="font-bold text-xl text-gray-200">
               Sign up on Own Game
-            </h2>
-            <p className="text-gray-200 font-normal text-lg">
-              Join our community of friendly folks discovering and sharing the
-              latest products in tech.
+            </h2> */}
+            <p className="text-gray-200 font-normal text-lg mb-2">
+              Sign up to upvote, submit games, chance to win Steam gift cards
+              and for new game updates.
             </p>
             <button
               onClick={() =>

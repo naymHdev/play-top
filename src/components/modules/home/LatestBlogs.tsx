@@ -38,12 +38,9 @@ const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {visibleBlogs
-            .slice(0, visibleCount)
-            .reverse()
-            .map((blog) => (
-              <PTBlogCard key={blog.id} blog={blog} />
-            ))}
+          {visibleBlogs.slice(0, visibleCount).map((blog) => (
+            <PTBlogCard key={blog.id} blog={blog} />
+          ))}
         </div>
 
         {shouldShowButton && (

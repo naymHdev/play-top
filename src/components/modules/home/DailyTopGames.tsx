@@ -42,8 +42,8 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
         <PTSectionName title="Top Games of the Day" />
       </div>
 
-      <div className="mt-10 grid grid-cols-1 lg:grid-cols-7 gap-8">
-        <div className="col-span-full lg:col-span-5">
+      <div className="mt-10 grid grid-cols-1 xl:grid-cols-7 gap-8">
+        <div className="col-span-full xl:col-span-5">
           {visibleGames.map((game, idx) => (
             <PTGameCard key={game._id || idx} games={game} />
           ))}
@@ -60,7 +60,7 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
           )}
         </div>
 
-        <div className="col-span-full lg:col-span-2">
+        <div className="col-span-full xl:col-span-2">
           <Newsletter />
         </div>
       </div>

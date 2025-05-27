@@ -11,7 +11,7 @@ const RelatedGames = ({ gamesData }: { gamesData: TGame[] }) => {
         description="Donec ac posuere tellus. Nunc sem ipsum, cursus quis erat feugiat, cursus dictum enim. "
       />
 
-      <div className=" my-12 grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className=" my-12 grid grid-cols-1 xl:grid-cols-5 gap-6">
         <div className=" col-span-3">
           {gamesData?.map((games: TGame) => (
             <PTGameCard key={games._id} games={games} />

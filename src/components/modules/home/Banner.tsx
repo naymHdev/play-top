@@ -5,6 +5,7 @@ import PTContainer from "@/components/ui/PTContainer";
 import PTButton from "@/components/ui/PTButton";
 import { MdArrowForwardIos } from "react-icons/md";
 import bannerImage from "../../../assets/images/avhinash-bg-min.png";
+import Link from "next/link";
 
 const BannerSection = () => {
   return (
@@ -33,11 +34,13 @@ const BannerSection = () => {
             works for you. Indie spirit meets seamless sharing, with discovery
             at its heart.
           </p>
-          <PTButton
-            className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-medium text-sm rounded-full"
-            label="Learn More"
-            icon={<MdArrowForwardIos className="ml-2 mt-0.5 text-white" />}
-          />
+          <Link href="/submit-product">
+            <PTButton
+              className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-medium text-sm rounded-full"
+              label="Submit Game"
+              icon={<MdArrowForwardIos className="ml-2 mt-0.5 text-white" />}
+            />
+          </Link>
         </div>
       </PTContainer>
     </section>

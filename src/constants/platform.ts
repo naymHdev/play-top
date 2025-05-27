@@ -1,9 +1,9 @@
 import { StaticImageData } from "next/image";
-import android from "../assets/icons/icons8-android-os-50.png";
-import apple from "../assets/icons/apple-laptop-computer-white.png";
-import windows from "../assets/icons/icons8-windows-32.png";
-import linux from "../assets/icons/icons8-linux-50.png";
-import mac from "../assets/icons/apple-laptop-computer-white.png";
+import android from "../assets/icons/android.png";
+import apple from "../assets/icons/apple-icon.png";
+import windows from "../assets/icons/windows-icon.png";
+import linux from "../assets/icons/linux-icon.png";
+import mac from "../assets/icons/mac-icons.png";
 
 // Social Media Icons
 import facebook from "../assets/icons/facebook.png";

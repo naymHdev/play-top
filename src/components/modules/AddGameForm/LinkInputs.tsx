@@ -1,4 +1,4 @@
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 export default function LinkInputs() {
@@ -34,7 +34,7 @@ export default function LinkInputs() {
             className="mt-1 sm:mt-0"
             aria-label="Remove link"
           >
-            <Trash2 className="text-red-600/50 w-6 h-6 hover:cursor-pointer" />
+            <X className="text-red-600/50 w-6 h-6 hover:cursor-pointer" />
           </button>
         </div>
       ))}

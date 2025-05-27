@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
-import { FaPlus, FaRegCircleUser } from "react-icons/fa6";
+import { FaPlus, FaRegCircleUser, FaRegUser } from "react-icons/fa6";
 import { IoNotificationsOutline } from "react-icons/io5";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -123,14 +123,20 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ session }) => {
                 <AvatarDropdown session={session} onLogout={handleLogout} />
               </>
             ) : (
-              <AuthModal />
+              <AuthModal
+                children={
+                  <Button className="lg:w-[110px] w-28 h-9 lg:h-[40px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
+                    <FaRegUser /> Sign In
+                  </Button>
+                }
+              />
             )}
 
-            <Link href="/submit-product" className="flex-shrink-0">
+            {/* <Link href="/submit-product" className="flex-shrink-0">
               <Button className="h-8 px-3 rounded-full bg-secondary text-primary font-medium flex items-center justify-center gap-1 text-sm">
                 Submit <FaPlus size={14} />
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </header>

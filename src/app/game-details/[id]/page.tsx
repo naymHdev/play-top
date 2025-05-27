@@ -15,9 +15,9 @@ import { platformIconMap, socialIconMap } from "@/constants/platform";
 import bannerImg from "../../../assets/images/gameThumbnail.png";
 
 // ------------- By website icons -------------
-import steam from "../../../assets/icons/steam-icn.png";
-import itch from "../../../assets/icons/icons8-itch-io-48.png";
-import globe from "../../../assets/icons/icons8-global-50.png";
+import steam from "../../../assets/icons/steam-wb.png";
+import itch from "../../../assets/icons/itch-wb.png";
+import globe from "../../../assets/icons/globe-wb.png";
 
 const OPTIONS: EmblaOptionsType = {};
 
@@ -88,18 +88,23 @@ const GameDetailsPage = async ({
                       {findGame?.userId?.name}
                     </p>
                   </div>
-                  <div className="mt-8 space-y-8">
-                    <div className=" flex items-center justify-between">
+                  <div className="mt-8">
+                    <div className=" flex justify-between">
                       <div>
-                        <p className=" uppercase text-sm text-primary">Price</p>
-                        <h3 className=" font-medium text-xl uppercase text-secondary">
+                        <p className="text-sm text-primary mb-3">
+                          Price
+                        </p>
+                        <h3 className=" font-bold text-xl uppercase text-secondary">
                           ${findGame?.price}
                         </h3>
                       </div>
 
                       {/* ----------------- By Website Icons Button ---------------- */}
                       <div>
-                        <div className=" bg-secondary text-primary rounded-full px-4 md:px-8 py-2">
+                        <p className="text-sm text-primary mb-4">
+                          By Now at
+                        </p>
+                        <div className=" bg-card text-primary/70 rounded-md px-4 md:px-8 py-2">
                           <a
                             target="_blank"
                             rel="nofollow"
@@ -107,14 +112,13 @@ const GameDetailsPage = async ({
                             className=" flex gap-2 items-center"
                           >
                             <p className=" text-lg font-medium capitalize">
-                              {/* {findGame?.linkType === "steam"
+                              {findGame?.linkType === "steam"
                                 ? "steam"
                                 : findGame?.linkType === "itch.io"
                                 ? "itch"
                                 : findGame?.linkType === "globe"
-                                ? "globe"
-                                : "globe"} */}
-                                Buy Now on
+                                ? "Bye Now"
+                                : "Bye Now"}
                             </p>
                             <Image
                               src={
@@ -151,17 +155,17 @@ const GameDetailsPage = async ({
                 </div>
 
                 {/* ------------------------------------\\ Category Content Box \\------------------------------------ */}
-                <div className="mt-5 p-3 border border-card rounded-md bg-card">
+                <div className="mt-5 p-4 border border-card rounded-md bg-card w-full">
                   <p className=" uppercase font-semibold text-foreground">
                     Categories
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3 mt-2">
                     {findGame?.categories?.map(
                       (category: string, idx: number) => (
                         <div key={idx} className="flex items-center gap-2">
                           <p className="text-sm text-foreground font-medium">
-                            "{category}",
+                            {category},
                           </p>
                         </div>
                       )
@@ -173,7 +177,7 @@ const GameDetailsPage = async ({
                       Platform:
                     </p>
 
-                    <div className="flex gap-2 items-center mt-3">
+                    <div className="flex gap-4 items-center mt-3">
                       {findGame?.platform?.map(
                         (platformName: string, index: number) => {
                           const icon = platformIconMap[platformName];
@@ -183,8 +187,8 @@ const GameDetailsPage = async ({
                                 key={index}
                                 src={icon}
                                 alt={platformName}
-                                width={25}
-                                height={25}
+                                width={20}
+                                height={20}
                                 className="object-contain"
                               />
                             )

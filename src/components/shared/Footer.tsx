@@ -6,6 +6,7 @@ import {
   FaDiscord,
   FaInstagram,
   FaLinkedin,
+  FaReddit,
   FaXTwitter,
   FaYoutube,
 } from "react-icons/fa6";
@@ -66,9 +67,9 @@ const Footer = () => {
   return (
     <div className="bg-primary text-black">
       <PTContainer>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-7 gap-x-6 gap-y-10 lg:gap-x-14">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-7 gap-x-6 gap-y-5 lg:gap-y-10 lg:gap-x-14">
           {/* ------------------ Logo ---------------- */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 md:col-span-3 xl:col-span-2">
             <div>
               <Link href={"/"}>
                 <Image src={logo} alt="logo" width={200} height={200} />
@@ -76,7 +77,7 @@ const Footer = () => {
             </div>
             <p className="leading-normal mt-6">
               To advertise your game or for outreach article, reach us at{" "}
-              <strong className="px-1">email@gmail.com</strong>
+              <strong className="px-1">support@gamehunt.org</strong>
             </p>
             <div className="mt-6 flex gap-4 text-primary">
               <a href="#">
@@ -89,7 +90,7 @@ const Footer = () => {
           </div>
 
           {/* ------------------ Subscribe ---------------- */}
-          <div className="col-span-1 md:col-span-3 md:mt-8">
+          <div className="col-span-1 md:col-span-4 xl:col-span-3 md:mt-8">
             <h2 className="md:text-5xl text-4xl font-bold">Get Rewarded!!!</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3">
@@ -125,15 +126,15 @@ const Footer = () => {
           </div>
 
           {/* ------------------ Socials ---------------- */}
-          <div className="col-span-1 md:col-span-2">
+          <div className=" col-span-full xl:col-span-2">
             <div className="flex flex-col md:flex-row gap-6 md:gap-12">
               <div>
                 <ul className="flex flex-col gap-5 mt-3 md:mt-6">
                   <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
-                    <FaXTwitter />
-                    Twitter
+                    <FaReddit />
+                    Reddit
                   </li>
-                  <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
+                  {/* <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
                     <FaLinkedin />
                     LinkedIn
                   </li>
@@ -144,11 +145,11 @@ const Footer = () => {
                   <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
                     <FaInstagram />
                     Instagram
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div>
-                <ul className="flex flex-col gap-2 mt-3 md:mt-6">
+                <ul className="flex flex-col gap-2 mt-3 md:mt-5">
                   <Link
                     href={"/terms-of-service"}
                     className="font-medium hover:underline"
