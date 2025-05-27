@@ -41,9 +41,7 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
             <div className="flex items-center justify-center gap-2">
               <button
                 onClick={() =>
-                  signIn("twitter", {
-                    callbackUrl: "https://www.gamehunt.org",
-                  })
+                  signIn("twitter")
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
               >
@@ -51,9 +49,7 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
               </button>
               <button
                 onClick={() =>
-                  signIn("facebook", {
-                    callbackUrl: "https://www.gamehunt.org",
-                  })
+                  signIn("facebook")
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
               >
