@@ -33,7 +33,7 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
             <button
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: "http://localhost:3000",
+                  callbackUrl: "https://gamehunt.org",
                 })
               }
               className="flex items-center gap-2 border border-gray-600 text-gray-200 rounded-sm px-10 py-3 hover:cursor-pointer hover:border-gray-400"
@@ -44,7 +44,7 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
               <button
                 onClick={() =>
                   signIn("twitter", {
-                    callbackUrl: "http://localhost:4000",
+                    callbackUrl: "https://gamehunt.org",
                   })
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
@@ -54,7 +54,7 @@ const AuthModal = ({ children }: { children: React.ReactNode }) => {
               <button
                 onClick={() =>
                   signIn("facebook", {
-                    callbackUrl: "http://localhost:4000",
+                    callbackUrl: "https://gamehunt.org",
                   })
                 }
                 className="border border-gray-600 rounded-sm px-5 py-3 hover:cursor-pointer hover:border-gray-400"
