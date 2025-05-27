@@ -12,13 +12,11 @@ const INITIAL_COUNT = 3;
 const LOAD_MORE_COUNT = 3;
 
 const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
-  // Reverse first, then slice
-  const reversedBlogs = [...blogs].reverse();
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   const isShowingAll = visibleCount >= blogs.length;
 
-  const visibleBlogs = reversedBlogs.slice(0, visibleCount);
+  const visibleBlogs = blogs?.slice(0, visibleCount);
 
   const handleToggle = () => {
     setVisibleCount((prev) =>
@@ -38,7 +36,7 @@ const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {visibleBlogs.slice(0, visibleCount).map((blog) => (
+          {visibleBlogs?.slice(0, visibleCount).map((blog) => (
             <PTBlogCard key={blog.id} blog={blog} />
           ))}
         </div>

@@ -27,7 +27,7 @@ const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
         <div>
           <PTSectionName title="Top Games of the Week" />
           <div className="w-full xl:w-[71%] mt-12">
-            {topGameWeek?.slice(0, visibleCount).map((games) => (
+            {topGameWeek?.data?.slice(0, visibleCount).map((games) => (
               <PTGameCard key={games._id} games={games} />
             ))}
           </div>

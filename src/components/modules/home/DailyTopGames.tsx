@@ -12,6 +12,7 @@ import Newsletter from "@/components/Newsletter";
 type DailyTopGamesProps = {
   topGameDay: TGame[];
 };
+
 const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
   const INITIAL_COUNT = 10;
   const LOAD_MORE_COUNT = 5;
@@ -30,7 +31,7 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
     }
   };
 
-  const visibleGames = [...topGameDay].slice(0, visibleCount).reverse();
+  const visibleGames = [...topGameDay?.data]?.slice(0, visibleCount);
 
   const shouldShowButton =
     topGameDay.length > INITIAL_COUNT &&

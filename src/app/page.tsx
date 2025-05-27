@@ -1,17 +1,21 @@
 import BannerSection from "@/components/modules/home/Banner";
-import DailyTopGames from "@/components/modules/home/DailyTopGames";
-import LatestBlogs from "@/components/modules/home/LatestBlogs";
-import UpcomingRelease from "@/components/modules/home/UpcomingRelease";
-import WeeklyTopGames from "@/components/modules/home/WeeklyTopGames";
+import Section1 from "@/components/modules/home/Section1";
+import Section2 from "@/components/modules/home/Section2";
+import Section3 from "@/components/modules/home/Section3";
+import Section4 from "@/components/modules/home/Section4";
+import PTBlogSkeleton from "@/components/ui/core/PTBlogSkeleton";
+import PTCSliderSkeleton from "@/components/ui/core/PTCSliderSkeleton";
+import PTGameCardSkeleton from "@/components/ui/core/PTGameCardSkeleton";
 import { getAllBlogs } from "@/services/blogs";
 import { allGames, topGamesDay, topGamesWeek } from "@/services/games";
 import { TGame } from "@/types/games";
+import { Suspense } from "react";
 
 const HomePage = async () => {
   const { data: allGamesData } = await allGames();
   // console.log("games", allGamesData);
 
-  const { data: topGameDay } = await topGamesDay();
+  const topGameDay = topGamesDay();
   // console.log("topGameDay", topGameDay);
 
   const upcomingGames = allGamesData?.allGames?.filter(
@@ -19,10 +23,10 @@ const HomePage = async () => {
   );
   // console.log("upcomingGames", upcomingGames);
 
-  const { data: topGameWeek } = await topGamesWeek();
+  const topGameWeek = topGamesWeek();
   // console.log("topGamesData", topGameWeek);
 
-  const { data: blogs } = await getAllBlogs(1);
+  const blogs = getAllBlogs(1);
   // console.log("blogs", blogs?.allBlogs);
 
   return (
@@ -30,17 +34,32 @@ const HomePage = async () => {
       <div className=" mb-10">
         <BannerSection />
 
-        {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />}
+        {/* {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />} */}
 
-        {upcomingGames?.length > 0 && (
-          <UpcomingRelease upcomingGames={upcomingGames} />
-        )}
-
-        {topGameWeek?.length > 0 && (
+        {/* {topGameWeek?.length > 0 && (
           <WeeklyTopGames topGameWeek={topGameWeek} />
-        )}
+        )} */}
+        {/* {upcomingGames?.length > 0 && (
+          <UpcomingRelease upcomingGames={upcomingGames} />
+        )} */}
+        {/* {blogs.allBlogs.length > 0 && <LatestBlogs blogs={blogs.allBlogs} />} */}
 
-        {blogs.allBlogs.length > 0 && <LatestBlogs blogs={blogs.allBlogs} />}
+        {/* --------------- Use Suspense instead of Suspense --------------- */}
+        <Suspense fallback={<PTGameCardSkeleton />}>
+          <Section1 game={topGameDay} />
+        </Suspense>
+
+        <Suspense fallback={<PTCSliderSkeleton />}>
+          <Section2 game={upcomingGames} />
+        </Suspense>
+
+        <Suspense fallback={<PTGameCardSkeleton />}>
+          <Section3 game={topGameWeek} />
+        </Suspense>
+
+        <Suspense fallback={<PTBlogSkeleton />}>
+          <Section4 blogs={blogs} />
+        </Suspense>
       </div>
     </>
   );
