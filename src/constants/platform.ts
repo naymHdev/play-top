@@ -1,17 +1,19 @@
 import { StaticImageData } from "next/image";
-import android from "../assets/icons/android.png";
-import apple from "../assets/icons/apple-icon.png";
-import windows from "../assets/icons/windows-icon.png";
-import linux from "../assets/icons/linux-icon.png";
-import mac from "../assets/icons/mac-icons.png";
+
+//  ------------- Platform Icons --------------- //
+import android from "../assets/icons/ad.png";
+import apple from "../assets/icons/ap.png";
+import windows from "../assets/icons/ws.png";
+import linux from "../assets/icons/lx.png";
+import mac from "../assets/icons/ap.png";
 
 // Social Media Icons
-import facebook from "../assets/icons/facebook.png";
-import twitter from "../assets/icons/twitter.png";
-import reddit from "../assets/icons/reddit.png";
-import linkedin from "../assets/icons/linkedin.png";
-import github from "../assets/icons/github.png";
-import steam from "../assets/icons/steam.png";
+import facebook from "../assets/icons/icons8-facebook-48.png";
+import twitter from "../assets/icons/icons8-twitter-50.png";
+import reddit from "../assets/icons/icons8-reddit-50.png";
+import linkedin from "../assets/icons/icons8-linkedin-48.png";
+import github from "../assets/icons/icons8-github-24.png";
+import steam from "../assets/icons/icons8-steam-50.png";
 
 export const platformIconMap: { [key: string]: StaticImageData } = {
   PC: windows,

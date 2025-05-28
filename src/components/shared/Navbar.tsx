@@ -35,14 +35,6 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
 
     router.push("/");
   };
-
-  const SubmitButton = (
-    <Button className="w-[150px] h-[40px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
-      Submit Game
-      <FaPlus className="ml-2" />
-    </Button>
-  );
-
   return (
     <>
       <div className="py-5">
@@ -58,12 +50,6 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 <Searchbar />
               </div>
 
-              {/* // Usage in component render */}
-              {session?.user?.email ? (
-                <Link href="/submit-product">{SubmitButton}</Link>
-              ) : (
-                <AuthModal>{SubmitButton}</AuthModal>
-              )}
               {(user && user.role === "USER") || session?.user?.email ? (
                 <>
                   <div className="flex items-center gap-4">

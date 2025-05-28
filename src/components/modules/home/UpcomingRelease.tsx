@@ -51,7 +51,7 @@ const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {
               className="w-full overflow-visible"
               aria-label="Upcoming games carousel"
             >
-              <CarouselContent className="flex gap-6">
+              <CarouselContent className="flex">
                 {upcomingGames?.map((ucr, index) => {
                   const bgColor =
                     backgroundColors[index % backgroundColors.length];

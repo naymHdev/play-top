@@ -9,9 +9,12 @@ import PTGameCardSkeleton from "@/components/ui/core/PTGameCardSkeleton";
 import { getAllBlogs } from "@/services/blogs";
 import { allGames, topGamesDay, topGamesWeek } from "@/services/games";
 import { TGame } from "@/types/games";
+import { authOptions } from "@/utils/authOptions";
+import { getServerSession } from "next-auth";
 import { Suspense } from "react";
 
 const HomePage = async () => {
+  const session = await getServerSession(authOptions);
   const { data: allGamesData } = await allGames();
   // console.log("games", allGamesData);
 
@@ -32,7 +35,7 @@ const HomePage = async () => {
   return (
     <>
       <div className=" mb-10">
-        <BannerSection />
+        <BannerSection session={session} />
 
         {/* {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />} */}
 

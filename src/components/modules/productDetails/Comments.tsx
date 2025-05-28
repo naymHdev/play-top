@@ -169,9 +169,12 @@ const CommentsSection = ({ commentData, session }: CommentsProps) => {
         ))}
 
       {/* ---- More comments ---- */}
-      <div className=" flex flex-col items-center justify-center rounded-md bg-card text-primary/90 w-full py-4 hover:cursor-pointer">
-        {comments?.length} more comments
-      </div>
+
+      {comments?.length > 10 && (
+        <div className=" flex flex-col items-center justify-center rounded-md bg-card text-primary/90 w-full py-4 hover:cursor-pointer">
+          {comments?.length} more comments
+        </div>
+      )}
     </section>
   );
 };

@@ -79,7 +79,7 @@ const GameDetailsPage = async ({
 
               {/* ------------------------------------\\ Right Side Content \\------------------------------------ */}
               <div className="col-span-2">
-                <div className=" p-5 border border-card rounded-xl">
+                <div className=" p-6 border border-card rounded-xl">
                   <div className=" text-primary flex items-center gap-3">
                     <p className=" uppercase text-sm text-primary">
                       Game Posted By
@@ -91,9 +91,7 @@ const GameDetailsPage = async ({
                   <div className="mt-8">
                     <div className=" flex justify-between">
                       <div>
-                        <p className="text-sm text-primary mb-3">
-                          Price
-                        </p>
+                        <p className="text-sm text-primary mb-3">Price</p>
                         <h3 className=" font-bold text-xl uppercase text-secondary">
                           ${findGame?.price}
                         </h3>
@@ -101,9 +99,7 @@ const GameDetailsPage = async ({
 
                       {/* ----------------- By Website Icons Button ---------------- */}
                       <div>
-                        <p className="text-sm text-primary mb-4">
-                          By Now at
-                        </p>
+                        <p className="text-sm text-primary mb-4">Buy Now at</p>
                         <div className=" bg-card text-primary/70 rounded-md px-4 md:px-8 py-2">
                           <a
                             target="_blank"
@@ -155,29 +151,34 @@ const GameDetailsPage = async ({
                 </div>
 
                 {/* ------------------------------------\\ Category Content Box \\------------------------------------ */}
-                <div className="mt-5 p-4 border border-card rounded-md bg-card w-full">
-                  <p className=" uppercase font-semibold text-foreground">
+                <div className="mt-5 p-6 border border-card rounded-md bg-card w-full">
+                  <p className=" uppercase font-semibold text-foreground mb-2">
                     Categories
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-3 mt-2">
+                  <div className="flex flex-wrap items-center">
                     {findGame?.categories?.map(
                       (category: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <p className="text-sm text-foreground font-medium">
-                            {category},
-                          </p>
+                        <div key={idx} className="flex items-center">
+                          <span className=" text-foreground font-medium">
+                            {category}
+                          </span>
+                          {idx < findGame.categories.length - 1 && (
+                            <span className="mx-2 text-foreground text-lg">
+                              •
+                            </span>
+                          )}
                         </div>
                       )
                     )}
                   </div>
 
                   <div>
-                    <p className="mt-6 uppercase font-semibold text-foreground">
+                    <p className="mt-8 uppercase font-semibold mb-3 text-foreground">
                       Platform:
                     </p>
 
-                    <div className="flex gap-4 items-center mt-3">
+                    <div className="flex gap-4 items-center">
                       {findGame?.platform?.map(
                         (platformName: string, index: number) => {
                           const icon = platformIconMap[platformName];
@@ -199,49 +200,56 @@ const GameDetailsPage = async ({
                   </div>
                 </div>
 
-                {/* ------------------------------------\\ Social Links \\------------------------------------ */}
-                <div>
-                  <p className="mt-6 uppercase font-semibold text-foreground">
-                    Links
-                  </p>
-                  <div className="mt-2 space-y-2">
-                    {findGame?.socialLinks?.map((link, idx: number) => {
-                      const icon = socialIconMap[link.name];
-                      if (!icon) return null;
+                {/* -------------------------\\ Social Links \\--------------------- */}
 
-                      return (
-                        <div
-                          key={idx}
-                          className="flex items-center justify-between rounded-md bg-[#111111]"
-                        >
-                          <div className="flex">
-                            <div className="flex items-center gap-2">
-                              <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
-                                <Image
-                                  src={icon}
-                                  alt={link.name}
-                                  width={20}
-                                  height={20}
-                                />
+                {findGame?.socialLinks.length !== 0 && (
+                  <div>
+                    <p className="mt-6 uppercase font-semibold text-foreground">
+                      Links
+                    </p>
+                    <div className="mt-2 space-y-2">
+                      {findGame?.socialLinks?.map((link, idx: number) => {
+                        const icon = socialIconMap[link.name];
+                        if (!icon) return null;
+
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between rounded-md bg-[#111111]"
+                          >
+                            <div className="flex">
+                              <div className="flex items-center gap-2">
+                                <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
+                                  <Image
+                                    src={icon}
+                                    alt={link.name}
+                                    width={20}
+                                    height={20}
+                                  />
+                                </div>
+                                <p className="text-sm font-semibold text-foreground">
+                                  {link.name}
+                                </p>
                               </div>
-                              <p className="text-sm font-semibold text-foreground">
-                                {link.name}
-                              </p>
+                            </div>
+                            <div className="px-3">
+                              <a
+                                target="_blank"
+                                rel="nofollow"
+                                href={link.link}
+                              >
+                                <FaExternalLinkAlt
+                                  size={16}
+                                  className="text-primary/60"
+                                />
+                              </a>
                             </div>
                           </div>
-                          <div className="px-3">
-                            <a target="_blank" rel="nofollow" href={link.link}>
-                              <FaExternalLinkAlt
-                                size={16}
-                                className="text-primary/60"
-                              />
-                            </a>
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

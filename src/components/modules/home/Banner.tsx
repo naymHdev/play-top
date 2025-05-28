@@ -6,8 +6,19 @@ import PTButton from "@/components/ui/PTButton";
 import { MdArrowForwardIos } from "react-icons/md";
 import bannerImage from "../../../assets/images/avhinash-bg-min.png";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { FaPlus } from "react-icons/fa6";
+import AuthModal from "../auth/AuthModal";
+import { TUserProps } from "@/types/user";
 
-const BannerSection = () => {
+const BannerSection = ({ session }: { session: TUserProps | null }) => {
+  const SubmitButton = (
+    <Button className="w-[150px] h-[40px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
+      Submit Game
+      <FaPlus className="ml-2" />
+    </Button>
+  );
+
   return (
     <section className="relative bg-black overflow-hidden rounded-lg">
       <PTContainer className="relative min-h-[80vh] flex items-center justify-start">
@@ -34,13 +45,11 @@ const BannerSection = () => {
             works for you. Indie spirit meets seamless sharing, with discovery
             at its heart.
           </p>
-          <Link href="/submit-product">
-            <PTButton
-              className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-medium text-sm rounded-full"
-              label="Submit Game"
-              icon={<MdArrowForwardIos className="ml-2 mt-0.5 text-white" />}
-            />
-          </Link>
+          {session?.user?.email ? (
+            <Link href="/submit-product">{SubmitButton}</Link>
+          ) : (
+            <AuthModal>{SubmitButton}</AuthModal>
+          )}
         </div>
       </PTContainer>
     </section>
