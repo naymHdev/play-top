@@ -166,11 +166,11 @@ export default function AddGameForm({
       // console.log("Game added response from API:", res);
 
       if (res?.success) {
-        toast.success(res.message);
+        toast.success("Game added successfully!");
         router.push("/");
         setIsLoading(false);
       } else {
-        toast.error(res.message);
+        toast.error("Failed to add game!");
         setIsLoading(false);
       }
     } catch (err: any) {
@@ -482,23 +482,11 @@ export default function AddGameForm({
               label="Cancel"
               className="border border-card text-primary bg-background px-3 lg:px-6 py-2 hover:cursor-pointer"
             />
-            {session?.user?.email ? (
-              <PTButton
-                type="submit"
-                label={isLoading ? "Submitting..." : "Submit Game"}
-                className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
-              />
-            ) : (
-              <AuthModal
-                children={
-                  <PTButton
-                    type="button"
-                    label={isLoading ? "Submitting..." : "Submit Game"}
-                    className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
-                  />
-                }
-              />
-            )}
+            <PTButton
+              type="submit"
+              label={isLoading ? "Submitting..." : "Submit Game"}
+              className="text-primary border-none bg-secondary px-2 lg:px-6 py-2"
+            />
           </div>
         </div>
       </div>

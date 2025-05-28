@@ -8,6 +8,9 @@ import Link from "next/link";
 import { IUser } from "@/types/user";
 
 const ProfileBanner = ({ profileInfo }: { profileInfo: IUser }) => {
+
+  // console.log("profileInfo", profileInfo);
+
   return (
     <div className="bg-gradient-to-b from-black to-[#09190A] mt-10 lg:mt-0 relative">
       <PTContainer>

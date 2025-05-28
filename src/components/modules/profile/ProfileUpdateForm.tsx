@@ -30,6 +30,7 @@ type FormValues = {
   userName: string;
   bio: string;
   links: LinkItem[];
+  photo: string;
 };
 
 const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
@@ -40,18 +41,22 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
 
   const router = useRouter();
 
-  // Function to handle file upload
-  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-    setImageFiles(file);
-  };
+  const profileImage = session?.user?.image || "";
+
+  // // Function to handle file upload
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   setImageFiles((prev) => [...prev, file]);
+
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImagePreview((prev) => [...prev, reader.result as string]);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  //   setImageFiles(file);
+  // };
   // console.log("imageFiles", imageFiles);
 
   const {
@@ -62,11 +67,11 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
   } = useForm<FormValues>({
     defaultValues: {
       name: session?.user?.name || "",
-      userName: "@example111",
+      userName: "@username",
       bio: "This is my updated bio, telling a bit about me.",
       links: [
-        { name: "GitHub", link: "https://github.com/ownlink" },
-        { name: "LinkedIn", link: "https://www.linkedin.com/in/ownlink" },
+        { name: "GitHub", link: "example.com" },
+        { name: "LinkedIn", link: "example.com" },
       ],
     },
   });
@@ -77,6 +82,14 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // console.log("data", data);
+
+    // const updatedData = {
+    //   ...data,
+    //   photo: profileImage,
+    // };
+    // console.log("updatedData", updatedData);
+
     setIsLoading(true);
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
@@ -85,7 +98,7 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
     try {
       setIsLoading(true);
       const res = await updateProfile(formData);
-      // console.log("Response from API:", res);
+      console.log("Response from API:", res);
       if (res.success) {
         toast.success(res.message);
         router.push("/profile");
@@ -107,10 +120,10 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
     >
       <div className="w-44 h-44 mx-auto relative  mt-4 bg-card rounded-full flex flex-col items-center justify-center text-center cursor-pointer">
         <input
-          id="thumbnail"
           type="file"
-          accept="image/jpeg,image/jpg,image/png"
-          onChange={handleThumbnailChange}
+          accept="image/*"
+          id="photo"
+          // onChange={handleImageChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
 
@@ -119,23 +132,17 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
             <AvatarImage src={imagePreview} alt="Avatar Preview" />
             <AvatarFallback>NA</AvatarFallback>
           </Avatar>
+        ) : profileImage ? (
+          <Avatar className="w-44 h-44">
+            <AvatarImage src={profileImage} alt="Current Profile Image" />
+            <AvatarFallback>NA</AvatarFallback>
+          </Avatar>
         ) : (
           <>
             <MdOutlineCloudUpload className="text-white text-5xl mb-4 mt-6" />
           </>
         )}
       </div>
-
-      {/* <div>
-        <Label htmlFor="userId">User ID</Label>
-        <Input
-          {...register("userId", { required: true })}
-          className="mt-3 bg-card border-none py-6 px-4"
-        />
-        {errors.userId && (
-          <p className="text-red-500 text-xs mt-1">This field is required</p>
-        )}
-      </div> */}
 
       <div>
         <Label htmlFor="name">Name</Label>
