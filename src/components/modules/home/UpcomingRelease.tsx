@@ -81,6 +81,7 @@ const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {
                                 width={200}
                                 height={100}
                                 className="rounded-lg -mt-[90px] shadow-lg"
+                                style={{ height: "auto" }}
                               />
                             ) : (
                               <div className="w-[200px] h-[100px] bg-gray-300 rounded-lg -mt-[80px]" />

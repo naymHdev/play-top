@@ -29,7 +29,6 @@ import { addGame } from "@/services/games";
 import { TUserProps } from "@/types/user";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import AuthModal from "../auth/AuthModal";
 
 const items = [
   {
@@ -61,7 +60,7 @@ export default function AddGameForm({
 }: {
   session: TUserProps | null;
 }) {
-  console.log("Session in AddGameForm:", session?.user);
+  // console.log("Session in AddGameForm:", session?.user);
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const [isThumbnail, setIsThumbnail] = useState<File | undefined>(undefined);
@@ -149,7 +148,7 @@ export default function AddGameForm({
       socialLinks: data.socialLinks,
       upcomingDate: data.upcomingDate,
     };
-    // console.log("gameFormData:", gameFormData);
+    console.log("gameFormData:", gameFormData);
     // console.log("isThumbnail:", isThumbnail);
 
     const formData = new FormData();
@@ -163,7 +162,7 @@ export default function AddGameForm({
     try {
       setIsLoading(true);
       const res = await addGame(formData);
-      // console.log("Game added response from API:", res);
+      console.log("Game added response from API:", res);
 
       if (res?.success) {
         toast.success("Game added successfully!");

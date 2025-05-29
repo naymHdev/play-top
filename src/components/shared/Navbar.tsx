@@ -70,7 +70,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                         <DropdownMenuTrigger asChild>
                           <div className="cursor-pointer">
                             <Avatar>
-                              <AvatarImage src={`${session?.user?.image}`} />
+                              <AvatarImage src={`${session?.user?.image}`} width={40} height={40} />
                               <AvatarFallback>
                                 <FaRegCircleUser />
                               </AvatarFallback>

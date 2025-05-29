@@ -4,7 +4,7 @@ import WeeklyTopGames from "./WeeklyTopGames";
 type DailyTopGamesProps = {
   game: TGame[];
 };
-const Section3 = async ({ game }: DailyTopGamesProps) => {
+const Section3 = async ({ game }: {game : Promise<DailyTopGamesProps>}) => {
   const topGameWeek = await game;
 
   return (

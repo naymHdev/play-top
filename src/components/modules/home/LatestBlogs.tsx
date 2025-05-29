@@ -12,6 +12,7 @@ const INITIAL_COUNT = 3;
 const LOAD_MORE_COUNT = 3;
 
 const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
+  // console.log("blogs", blogs);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   const isShowingAll = visibleCount >= blogs.length;
