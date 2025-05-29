@@ -29,9 +29,11 @@ const GameDetailsPage = async ({
   const { id } = await params;
   const session = await getServerSession(authOptions);
 
+  console.log("id", id);
+
   const singleGame = await getSingleGame(id);
   const findGame = singleGame?.data;
-  // console.log("findGame", findGame);
+  
 
   return (
     <>
