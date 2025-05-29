@@ -98,7 +98,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="relative w-[426px]" ref={wrapperRef}>
+    <div className="relative w-full md:w-[426px]" ref={wrapperRef}>
       <div className="relative w-full">
         <Input
           ref={inputRef}
@@ -114,7 +114,7 @@ const Searchbar = () => {
           }}
           onFocus={() => setShowResults(Boolean(query.trim()))}
           placeholder="Search games..."
-          className="pl-4 pr-12 py-2 rounded-full text-primary w-full h-[48px] bg-card border-none focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          className="pl-4 pr-12 py-2 rounded-full text-primary w-full h-[48px] bg-card border-none focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-none  transition-all"
           autoComplete="off"
           aria-label="Search games"
           aria-expanded={showResults}

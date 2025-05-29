@@ -5,11 +5,16 @@ import PTContainer from "@/components/ui/PTContainer";
 import { CiEdit } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { IUser } from "@/types/user";
+import { IUser, TUserProps } from "@/types/user";
 
-const ProfileBanner = ({ profileInfo }: { profileInfo: IUser }) => {
-
-  // console.log("profileInfo", profileInfo);
+const ProfileBanner = ({
+  profileInfo,
+  session,
+}: {
+  profileInfo: IUser;
+  session: TUserProps;
+}) => {
+  // console.log("profileInfo", session);
 
   return (
     <div className="bg-gradient-to-b from-black to-[#09190A] mt-10 lg:mt-0 relative">
@@ -21,7 +26,7 @@ const ProfileBanner = ({ profileInfo }: { profileInfo: IUser }) => {
               <div className="flex-shrink-0">
                 <Avatar className="w-[130px] h-[130px] lg:w-[240px] lg:h-[240px]">
                   <AvatarImage
-                    src={profileInfo?.photo}
+                    src={session?.user?.image || "/profile-ig.png"}
                     alt={profileInfo?.name || "User avatar"}
                   />
                   <AvatarFallback>

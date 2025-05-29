@@ -25,7 +25,7 @@ const ProfilePage = async () => {
   return (
     <>
       <div className=" mb-20">
-        <ProfileBanner profileInfo={profileInfo.data} />
+        <ProfileBanner session={session} profileInfo={profileInfo.data} />
         <PTContainer>
           <div className=" w-full lg:max-w-4xl mx-auto">
             <ProfileDetails myGames={myGames} profileInfo={profileInfo} />

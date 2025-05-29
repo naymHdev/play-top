@@ -29,12 +29,8 @@ const GameDetailsPage = async ({
   const { id } = await params;
   const session = await getServerSession(authOptions);
 
-  console.log("id", id);
-
   const singleGame = await getSingleGame(id);
-  console.log("singleGame----------------------------",singleGame);            
   const findGame = singleGame?.data;
-  
 
   return (
     <>
@@ -78,7 +74,7 @@ const GameDetailsPage = async ({
               </div>
 
               {/* ------------------------------------\\ Right Side Content \\------------------------------------ */}
-              <div className="col-span-2">
+              <div className="col-span-3 lg:col-span-2">
                 <div className=" p-6 border border-card rounded-xl">
                   <div className=" text-primary flex items-center gap-3">
                     <p className=" uppercase text-sm text-primary">

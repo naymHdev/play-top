@@ -82,8 +82,8 @@ const BlogDetailsPage = async ({
                     src={blogImage || ""}
                     alt="Blog Details"
                     width={1000}
-                    height={800}
-                    className="w-full h-[400px] object-cover rounded-lg"
+                    height={1000}
+                    className="w-full h-fit object-cover rounded-lg"
                   />
                 </div>
 
