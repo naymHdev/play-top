@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PTBlogCard = ({ blog }: { blog: TBlogs }) => {
-  console.log("blog", blog);
+  // console.log("blog", blog);
   const dateString = new Date(blog.createdAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",
