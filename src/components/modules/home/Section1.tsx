@@ -5,14 +5,14 @@ type DailyTopGamesProps = {
   game: TGame[];
 };
 
-const Section1 = async ({ game }: {game : Promise<DailyTopGamesProps>}) => {
+const Section1 = async ({ game, hasid }: {game : Promise<DailyTopGamesProps>, hasid : boolean}) => {
   const topGameDay = await game as any;
   //   console.log("topGameDay", topGameDay);
 
   return (
     <>
       <div>
-        <DailyTopGames topGameDay={topGameDay} />
+        <DailyTopGames topGameDay={topGameDay} hasid={hasid} />
       </div>
     </>
   );

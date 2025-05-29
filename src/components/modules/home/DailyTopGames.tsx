@@ -11,9 +11,10 @@ import Newsletter from "@/components/Newsletter";
 
 type DailyTopGamesProps = {
   topGameDay: TGame[];
+   hasid : boolean
 };
 
-const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
+const DailyTopGames = ({ topGameDay, hasid }: DailyTopGamesProps) => {
   // console.log("topGameDay", topGameDay?.data);
 
   const INITIAL_COUNT = 10;
@@ -48,7 +49,7 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
       <div className="mt-10 grid grid-cols-1 xl:grid-cols-7 gap-8">
         <div className="col-span-full xl:col-span-5">
           {visibleGames.map((game, idx) => (
-            <PTGameCard key={game._id || idx} games={game} />
+            <PTGameCard key={game._id || idx} games={game} hasid={hasid} />
           ))}
 
           {shouldShowButton && (

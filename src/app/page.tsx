@@ -39,7 +39,7 @@ const HomePage = async () => {
 
         {/* --------------- Use Suspense instead of Suspense --------------- */}
         <Suspense fallback={<PTGameCardSkeleton />}>
-          <Section1 game={topGameDay} />
+          <Section1 game={topGameDay} hasid={false} />
         </Suspense>
 
         <Suspense fallback={<PTCSliderSkeleton />}>

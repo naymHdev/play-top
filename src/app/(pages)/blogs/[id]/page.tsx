@@ -18,9 +18,8 @@ const BlogDetailsPage = async ({
 }) => {
   const { id } = await params;
   const blogs = await getAllBlogs();
-  // console.log("blogs", blogs?.allBlogs);
 
-  const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog?._id === id);
+  const blogDetails = blogs?.data?.allBlogs?.find((blog: TBlogs) => blog?.blogId === id);
   const { author, title, description, blogImage, createdAt, altTag, rewards } =
     blogDetails || {};
   // console.log("blogDetails", blogDetails);

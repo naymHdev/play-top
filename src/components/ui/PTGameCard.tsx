@@ -20,7 +20,7 @@ interface TGame {
   id?: string;
 }
 
-const PTGameCard = ({ games }: { games: TGame }) => {
+const PTGameCard = ({ games, hasid }: { games: TGame, hasid?:boolean }) => {
   const {
     title,
     thumbnail,
@@ -136,7 +136,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex lg:items-center lg:justify-between pr-4">
-        <Link href={`/game-details/${_id}`} className="flex-1">
+        <Link href={`/game-details/${hasid ? id : _id}`} className="flex-1">
           <div className="flex items-center gap-4">
             {/* Image Section */}
             <section className="flex-shrink-0">

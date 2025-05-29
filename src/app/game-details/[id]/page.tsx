@@ -29,12 +29,9 @@ const GameDetailsPage = async ({
   const { id } = await params;
   const session = await getServerSession(authOptions);
   const gamesData = await allGames();
-  // console.log("gamesData", gamesData.data.allGames);
 
-  const findGame = gamesData?.data?.allGames?.find(
-    (game: TGame) => game?._id === id
-  );
-  // console.log("findGame", findGame);
+  const findGame = gamesData?.data?.allGames?.find((game: TGame) => game?.id == id);
+  
 
   return (
     <>
@@ -113,8 +110,8 @@ const GameDetailsPage = async ({
                                 : findGame?.linkType === "itch.io"
                                 ? "itch"
                                 : findGame?.linkType === "globe"
-                                ? "Bye Now"
-                                : "Bye Now"}
+                                ? "Other"
+                                : "Buy Now"}
                             </p>
                             <Image
                               src={
@@ -256,7 +253,7 @@ const GameDetailsPage = async ({
 
           {/* ------------------------------------\\ Related Games \\------------------------------------ */}
           <div className=" mt-20 w-full">
-            <RelatedGames gamesData={gamesData?.data?.allGames} />
+            <RelatedGames gamesData={gamesData?.data?.allGames} hasId={true}/>
           </div>
         </PTContainer>
       </div>
