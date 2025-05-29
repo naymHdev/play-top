@@ -20,7 +20,7 @@ const BlogDetailsPage = async ({
   const blogs = await getAllBlogs();
   // console.log("blogs", blogs?.allBlogs);
 
-  const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog?.id === id);
+  const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog?._id === id);
   const { author, title, description, blogImage, createdAt, altTag, rewards } =
     blogDetails || {};
   // console.log("blogDetails", blogDetails);

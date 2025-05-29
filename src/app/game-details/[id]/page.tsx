@@ -32,7 +32,7 @@ const GameDetailsPage = async ({
   // console.log("gamesData", gamesData.data.allGames);
 
   const findGame = gamesData?.data?.allGames?.find(
-    (game: TGame) => game.id === id
+    (game: TGame) => game?._id === id
   );
   // console.log("findGame", findGame);
 
