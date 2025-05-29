@@ -10,7 +10,7 @@ export const addGame = async (data: FormData) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/upload_game`,
+      `${process.env.BASE_URL}/game/upload_game`,
       {
         method: "POST",
         body: data,
@@ -29,7 +29,7 @@ export const addGame = async (data: FormData) => {
 export const getSingleGame = async (id: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/getAllGame/${id}`,
+      `${process.env.BASE_URL}/game/getAllGame/${id}`,
       {
         method: "GET",
         headers: {
@@ -51,7 +51,7 @@ export const getSingleGame = async (id: string) => {
 export const allGames = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/getAllGame`,
+      `${process.env.BASE_URL}/game/getAllGame`,
       {
         method: "GET",
         headers: {
@@ -73,7 +73,7 @@ export const allGames = async () => {
 export const topGamesDay = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/top-game/day`,
+      `${process.env.BASE_URL}/game/top-game/day`,
       {
         method: "GET",
         headers: {
@@ -95,7 +95,7 @@ export const topGamesDay = async () => {
 export const topGamesWeek = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/top-game/week`,
+      `${process.env.BASE_URL}/game/top-game/week`,
       {
         method: "GET",
         headers: {
@@ -124,7 +124,7 @@ export const gameSearch = async (query?: {
   try {
     const res = await fetch(
       `${
-        process.env.NEXT_PUBLIC_API_URL
+        process.env.BASE_URL
       }/game/search-game?${params.toString()}`,
       {
         next: {
@@ -143,7 +143,7 @@ export const upvoteGame = async (gameId: string) => {
   // console.log("token", gameId);
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/upvote-game`,
+      `${process.env.BASE_URL}/game/upvote-game`,
       {
         body: JSON.stringify(gameId),
         method: "POST",

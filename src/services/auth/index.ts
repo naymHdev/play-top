@@ -9,7 +9,7 @@ import { AuthPayload } from "@/types/user";
 
 export const socialRegister = async (payload: AuthPayload) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
+    const res = await fetch(`${process.env.BASE_URL}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export const socialRegister = async (payload: AuthPayload) => {
 
 export const signUp = async (userData: FieldValues) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
+    const res = await fetch(`${process.env.BASE_URL}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export const signUp = async (userData: FieldValues) => {
 
 export const signInUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+    const res = await fetch(`${process.env.BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export const signInUser = async (userData: FieldValues) => {
 export const myProfile = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/user-profile`,
+      `${process.env.BASE_URL}/user/user-profile`,
       {
         method: "GET",
         headers: {
@@ -112,7 +112,7 @@ export const logout = async () => {
 export const allUser = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/find_all_users`,
+      `${process.env.BASE_URL}/user/find_all_users`,
       {
         method: "GET",
         headers: {
@@ -133,7 +133,7 @@ export const updateUserProfile = async (
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/update_profile/${userId}`,
+      `${process.env.BASE_URL}/user/update_profile/${userId}`,
       {
         method: "PATCH",
         body: profileData,
@@ -152,7 +152,7 @@ export const updateUserProfile = async (
 export const updatePassword = async (updateData: TUpdatePassword) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/update-password`,
+      `${process.env.BASE_URL}/auth/update-password`,
       {
         method: "PATCH",
         headers: {

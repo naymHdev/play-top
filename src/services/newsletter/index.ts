@@ -10,7 +10,7 @@ export const postNewsLetter = async (userEmail: NewsletterFormData) => {
   const token = (await cookies()).get("accessToken")?.value || "";
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/newsletter/add-mail`,
+      `${process.env.BASE_URL}/newsletter/add-mail`,
       {
         method: "POST",
         headers: {

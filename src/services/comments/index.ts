@@ -9,7 +9,7 @@ export const comments = async (commentsData: any) => {
   const token = (await cookies()).get("accessToken")?.value || "";
   // console.log("token", token);
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/game/comment`, {
+    const res = await fetch(`${process.env.BASE_URL}/game/comment`, {
       method: "POST",
       body: JSON.stringify(commentsData),
       headers: {
@@ -28,7 +28,7 @@ export const upvoteComment = async (upvoted: CommentActionProps) => {
   const token = (await cookies()).get("accessToken")?.value || "";
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/upvote-comment`,
+      `${process.env.BASE_URL}/game/upvote-comment`,
       {
         method: "POST",
         body: JSON.stringify(upvoted),

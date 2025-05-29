@@ -7,7 +7,7 @@ export const updateProfile = async (profileData: FormData) => {
   console.log("token", token);
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/update_profile`,
+      `${process.env.BASE_URL}/user/update_profile`,
       {
         method: "PATCH",
         body: profileData,
@@ -39,7 +39,7 @@ export const deleteMyGame = async (deleteData: {
   console.log("token", token);
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/delete-game`,
+      `${process.env.BASE_URL}/user/delete-game`,
       {
         method: "DELETE",
         body: JSON.stringify(deleteData),
@@ -68,7 +68,7 @@ export const updateMyGame = async (updateGame: FormData) => {
   // console.log("token", token);
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/update_game`,
+      `${process.env.BASE_URL}/game/update_game`,
       {
         method: "PATCH",
         body: updateGame,

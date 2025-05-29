@@ -3,7 +3,7 @@
 export const getAllBlogs = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/getAllBlog/`,
+      `${process.env.BASE_URL}/blog/getAllBlog/`,
       {
         method: "GET",
         headers: {
@@ -28,7 +28,7 @@ export const getAllBlogs = async () => {
 export const getSingleBlog = async (id: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/getAllBlog/${id}`,
+      `${process.env.BASE_URL}/blog/getAllBlog/${id}`,
       {
         method: "GET",
         headers: {
