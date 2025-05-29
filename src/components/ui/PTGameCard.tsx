@@ -152,7 +152,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
 
             {/* Content Section */}
             <section className="flex flex-col gap-2 flex-1 min-w-0">
-              <h2 className="text-lg font-semibold text-white leading-tight">
+              <h2 className="text-[16px] font-semibold text-white leading-tight">
                 {title}
               </h2>
               <div className="flex items-center gap-4">

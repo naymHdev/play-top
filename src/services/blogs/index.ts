@@ -10,7 +10,7 @@ export const getAllBlogs = async () => {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["Blogs"],
+          revalidate: 300,
         },
       }
     );

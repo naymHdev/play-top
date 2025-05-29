@@ -37,16 +37,6 @@ const HomePage = async () => {
       <div className=" mb-10">
         <BannerSection session={session} />
 
-        {/* {topGameDay?.length > 0 && <DailyTopGames topGameDay={topGameDay} />} */}
-
-        {/* {topGameWeek?.length > 0 && (
-          <WeeklyTopGames topGameWeek={topGameWeek} />
-        )} */}
-        {/* {upcomingGames?.length > 0 && (
-          <UpcomingRelease upcomingGames={upcomingGames} />
-        )} */}
-        {/* {blogs.allBlogs.length > 0 && <LatestBlogs blogs={blogs.allBlogs} />} */}
-
         {/* --------------- Use Suspense instead of Suspense --------------- */}
         <Suspense fallback={<PTGameCardSkeleton />}>
           <Section1 game={topGameDay} />
