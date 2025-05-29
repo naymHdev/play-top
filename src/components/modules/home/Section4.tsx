@@ -7,7 +7,7 @@ type DailyTopGamesProps = {
 const Section4 = async ({ blogs }: { blogs: Promise<DailyTopGamesProps> }) => {
   const AllBlogs = await blogs;
 
-  //   console.log("blogs", AllBlogs?.data?.allBlogs);
+    console.log("blogs", AllBlogs?.data?.allBlogs);
 
   return (
     <>

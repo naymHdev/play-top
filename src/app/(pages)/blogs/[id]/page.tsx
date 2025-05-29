@@ -16,8 +16,8 @@ const BlogDetailsPage = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
-  const id = (await params)?.id;
-  const { data: blogs } = await getAllBlogs();
+  const { id } = await params;
+  const blogs = await getAllBlogs();
   // console.log("blogs", blogs?.allBlogs);
 
   const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog?.id === id);
