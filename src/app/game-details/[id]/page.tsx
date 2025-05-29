@@ -219,7 +219,7 @@ const GameDetailsPage = async ({
                           >
                             <div className="flex">
                               <div className="flex items-center gap-2">
-                                <div className="text-xl text-[#000000] p-3 bg-foreground/60 rounded-l-md">
+                                <div className="text-xl text-[#000000] p-3 bg-foreground/10 rounded-l-md">
                                   <Image
                                     src={icon}
                                     alt={link.name}
