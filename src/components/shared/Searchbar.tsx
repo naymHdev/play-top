@@ -1,23 +1,30 @@
 "use client";
 
-import { FiSearch } from "react-icons/fi";
-import { Input } from "../ui/input";
 import { useState, useRef, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Loader2, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { gameSearch } from "@/services/games";
-import { TGame } from "@/types/games";
-import Image from "next/image";
-import Link from "next/link";
+import type { TGame } from "@/types/games";
+import { useDebounce } from "@/hooks/useDebounce";
+import SearchResultsLoading from "./SearchResultsLoading";
+import SearchResultItem from "./SearchResultItem";
 
 const Searchbar = () => {
   const [games, setGames] = useState<TGame[] | null>(null);
   const [query, setQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // Debounce search query to prevent excessive API calls
+  const debouncedQuery = useDebounce(query, 300);
 
   // Close search results when clicking outside
   useEffect(() => {
@@ -29,27 +36,48 @@ const Searchbar = () => {
         setShowResults(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Fetch games on query change
+  // Handle keyboard navigation
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const searchGames = await gameSearch({ searchTerm: query });
-        setGames(searchGames?.data || []);
-      } catch (error: any) {
-        console.error("Fetch error", error);
-        setGames(null);
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowResults(false);
       }
     };
-    if (query.trim()) {
-      fetchData();
-    } else {
-      setGames(null);
-    }
-  }, [query]);
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
+
+  // Fetch games on debounced query change
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!debouncedQuery.trim()) {
+        setGames(null);
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setError(null);
+        const searchGames = await gameSearch({ searchTerm: debouncedQuery });
+        setGames(searchGames?.data || []);
+      } catch (error: any) {
+        console.error("Search error:", error);
+        setError("Failed to fetch games. Please try again.");
+        setGames(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [debouncedQuery]);
 
   // Update URL query params
   const handleSearchQuery = (query: string, value: string | number) => {
@@ -62,73 +90,88 @@ const Searchbar = () => {
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  // console.log("games", games);
+  const clearSearch = () => {
+    setQuery("");
+    setGames(null);
+    handleSearchQuery("searchTerm", "");
+    inputRef.current?.focus();
+  };
 
   return (
-    <div className="relative" ref={wrapperRef}>
-      {/*className="pl-4 pr-10 py-2 rounded-full text-primary lg:w-[626px] h-[48px] bg-card border-none" */}
+    <div className="relative w-[426px]" ref={wrapperRef}>
       <div className="relative w-full">
         <Input
-          type="search"
+          ref={inputRef}
           value={query}
           onChange={(e) => {
             const value = e.target.value;
             setQuery(value);
             handleSearchQuery("searchTerm", value);
+            if (value.trim()) {
+              setIsLoading(true);
+              setShowResults(true);
+            }
           }}
-          onFocus={() => setShowResults(true)}
+          onFocus={() => setShowResults(Boolean(query.trim()))}
           placeholder="Search games..."
-          className="pl-4 pr-10 py-2 rounded-full text-primary w-full lg:w-[353px] h-[48px]  bg-card border-none focus:outline-none focus:ring-2 focus:ring-primary"
+          className="pl-4 pr-12 py-2 rounded-full text-primary w-full h-[48px] bg-card border-none focus:outline-none focus:ring-2 focus:ring-primary transition-all"
           autoComplete="off"
           aria-label="Search games"
+          aria-expanded={showResults}
+          aria-controls="search-results"
         />
-        <FiSearch
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary opacity-70 pointer-events-none"
-          size={18}
-          aria-hidden="true"
-        />
+
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
+          {query && (
+            <button
+              onClick={clearSearch}
+              className="p-1 rounded-full hover:bg-gray-700 text-gray-400 hover:text-white transition-colors"
+              aria-label="Clear search"
+            >
+              <X size={16} />
+            </button>
+          )}
+        </div>
       </div>
 
       {showResults && query && (
         <div
-          className="absolute mt-2 w-full max-h-[70vh] bg-black text-white rounded-xl shadow-lg overflow-y-auto z-50 p-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900 hide-scrollbar"
+          id="search-results"
+          className="absolute mt-2 w-full max-h-[70vh] bg-card text-white rounded-xl shadow-lg overflow-hidden z-50 border border-gray-800 animate-in fade-in-0 zoom-in-95 duration-100"
           role="listbox"
           aria-label="Search results"
         >
-          <div className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">
-            Games
+          <div className="text-lg font-semibold px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+            <span>Games</span>
+            {isLoading && (
+              <Loader2 className="animate-spin text-primary" size={16} />
+            )}
           </div>
-          <div className="flex flex-col gap-3">
-            {games?.length ? (
-              games.map((game) => (
-                <Link href={`/game-details/${game?.id}`} key={game?.id}>
-                  <button
+
+          <div className="overflow-y-auto hide-scrollbar max-h-[calc(70vh-48px)] p-2">
+            {isLoading && !games?.length ? (
+              <SearchResultsLoading />
+            ) : error ? (
+              <div className="p-4 text-center text-red-400">
+                <p>{error}</p>
+              </div>
+            ) : games?.length ? (
+              <div className="flex flex-col gap-2">
+                {games.map((game) => (
+                  <SearchResultItem
+                    key={game.id}
+                    game={game}
                     onClick={() => {
-                      setQuery(game.title);
+                      setQuery(game?.title);
                       setShowResults(false);
                     }}
-                    className="flex items-center gap-4 w-full text-left px-3 py-2 rounded-lg hover:bg-gray-800 focus:bg-gray-800 focus:outline-none hover:cursor-pointer"
-                    role="option"
-                    aria-selected={query === game.title}
-                    type="button"
-                  >
-                    <div className="relative  flex-shrink-0 rounded-md overflow-hidden bg-gray-700">
-                      <Image
-                        src={game.thumbnail || "/placeholder.png"}
-                        alt={game.title}
-                        width={200}
-                        height={200}
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="truncate">{game.title}</span>
-                  </button>
-                </Link>
-              ))
+                  />
+                ))}
+              </div>
             ) : (
-              <p className="text-gray-400 italic text-center select-none">
-                No games found.
-              </p>
+              <div className="p-6 text-gray-400 italic text-center select-none">
+                No games found matching "{query}"
+              </div>
             )}
           </div>
         </div>

@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
-import PTButton from "@/components/ui/PTButton";
-import { MdArrowForwardIos } from "react-icons/md";
 import bannerImage from "../../../assets/images/avhinash-bg-min.png";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +11,7 @@ import { TUserProps } from "@/types/user";
 
 const BannerSection = ({ session }: { session: TUserProps | null }) => {
   const SubmitButton = (
-    <Button className="w-[150px] h-[40px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex items-center gap-1">
+    <Button className="w-[210px] h-[55px] rounded-full bg-secondary hover:bg-green-700 hover:cursor-pointer text-primary font-medium flex text-lg items-center gap-1">
       Submit Game
       <FaPlus className="ml-2" />
     </Button>

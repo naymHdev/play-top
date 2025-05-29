@@ -1,6 +1,5 @@
 import PTContainer from "@/components/ui/PTContainer";
-import { getAllBlogs } from "@/services/blogs";
-import { TBlogs } from "@/types/blog";
+import { getAllBlogs, getSingleBlog } from "@/services/blogs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleUserRound } from "lucide-react";
 import moment from "moment";
@@ -19,10 +18,10 @@ const BlogDetailsPage = async ({
   const { id } = await params;
   const blogs = await getAllBlogs();
 
-  const blogDetails = blogs?.data?.allBlogs?.find((blog: TBlogs) => blog?.blogId === id);
-  const { author, title, description, blogImage, createdAt, altTag, rewards } =
+  const singleBlog = await getSingleBlog(id);
+  const blogDetails = singleBlog?.data;
+  const { author, title, description, blogImage, createdAt, rewards } =
     blogDetails || {};
-  // console.log("blogDetails", blogDetails);
 
   const formattedDate = moment(createdAt).format("MMMM Do, YYYY");
 
@@ -111,7 +110,7 @@ const BlogDetailsPage = async ({
         </PTContainer>
         {/* ------------- All Blogs Section ------------- */}
         <div className=" mb-10">
-          <LatestBlogs blogs={blogs?.allBlogs} />
+          <LatestBlogs blogs={blogs.data.allBlogs} />
         </div>
       </div>
     </>

@@ -70,7 +70,11 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                         <DropdownMenuTrigger asChild>
                           <div className="cursor-pointer">
                             <Avatar>
-                              <AvatarImage src={`${session?.user?.image}`} width={40} height={40} />
+                              <AvatarImage
+                                src={`${session?.user?.image}`}
+                                width={40}
+                                height={40}
+                              />
                               <AvatarFallback>
                                 <FaRegCircleUser />
                               </AvatarFallback>
@@ -105,7 +109,7 @@ const Navbar = ({ session }: { session: TUserProps | null }) => {
                 <>
                   <AuthModal
                     children={
-                      <Button className="lg:w-[110px] w-28 h-9 lg:h-[40px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
+                      <Button className="md:w-[140px] w-28 h-9 md:h-[48px] bg-card font-medium text-primary rounded-full flex items-center gap-2 hover:bg-card hover:cursor-pointer">
                         <FaRegUser /> Sign In
                       </Button>
                     }

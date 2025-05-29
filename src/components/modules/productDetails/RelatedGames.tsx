@@ -1,8 +1,10 @@
 import PTGameCard from "@/components/ui/PTGameCard";
 import PTSectionName from "@/components/ui/PTSectionName";
+import { allGames } from "@/services/games";
 import { TGame } from "@/types/games";
-const RelatedGames = ({ gamesData, hasId }: { gamesData: TGame[], hasId?: boolean }) => {
- 
+const RelatedGames = async () => {
+  const allGame = await allGames();
+  const gamesData = allGame?.data?.allGames;
 
   return (
     <>
@@ -14,7 +16,7 @@ const RelatedGames = ({ gamesData, hasId }: { gamesData: TGame[], hasId?: boolea
       <div className=" my-12 grid grid-cols-1 xl:grid-cols-5 gap-6">
         <div className=" col-span-3">
           {gamesData?.map((games: TGame) => (
-            <PTGameCard key={games.id} games={games} hasid={hasId} />
+            <PTGameCard key={games.id} games={games} hasid={true} />
           ))}
         </div>
         <div className=" col-span-2"></div>

@@ -19,7 +19,28 @@ export const addGame = async (data: FormData) => {
         },
       }
     );
-        revalidateTag("GAME");
+    revalidateTag("GAME");
+    return await res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
+export const getSingleGame = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/game/getAllGame/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["GAME"],
+        },
+        cache: "no-store",
+      }
+    );
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -102,7 +123,9 @@ export const gameSearch = async (query?: {
   }
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/game/search-game?${params.toString()}`,
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }/game/search-game?${params.toString()}`,
       {
         next: {
           tags: ["GAME"],

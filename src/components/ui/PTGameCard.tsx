@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 // Mock types
 interface TGame {
-  _id?: string;
+  _id?: string | undefined;
   title: string;
   thumbnail?: string;
   categories?: string[];

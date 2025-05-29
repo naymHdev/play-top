@@ -15,11 +15,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { TGame } from "@/types/games";
 
 const backgroundColors = [
-  "bg-blue-800",
-  "bg-yellow-800",
-  "bg-red-800",
-  "bg-rose-800",
-  "bg-sky-900",
+  "bg-[#3C5A72]",
+  "bg-[#50491A]",
+  "bg-[#8B0D16]",
+  "bg-[#4B1516]",
+  "bg-[#00303D]",
 ];
 
 const UpcomingRelease = ({ upcomingGames }: { upcomingGames: TGame[] }) => {

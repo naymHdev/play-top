@@ -1,16 +1,15 @@
+"use server";
+
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Image from "next/image";
 import PTContainer from "@/components/ui/PTContainer";
-import { Button } from "@/components/ui/button";
-import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import UserActivities from "@/components/modules/productDetails/UserActivities";
 import RelatedGames from "@/components/modules/productDetails/RelatedGames";
 import ProductCarousel from "@/components/modules/productDetails/ProductCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
-import { allGames } from "@/services/games";
-import { TGame } from "@/types/games";
+import { getSingleGame } from "@/services/games";
 import { platformIconMap, socialIconMap } from "@/constants/platform";
 import bannerImg from "../../../assets/images/gameThumbnail.png";
 
@@ -18,6 +17,7 @@ import bannerImg from "../../../assets/images/gameThumbnail.png";
 import steam from "../../../assets/icons/steam-wb.png";
 import itch from "../../../assets/icons/itch-wb.png";
 import globe from "../../../assets/icons/globe-wb.png";
+import UpvoteButton from "@/components/vote/upvote-button";
 
 const OPTIONS: EmblaOptionsType = {};
 
@@ -28,10 +28,10 @@ const GameDetailsPage = async ({
 }) => {
   const { id } = await params;
   const session = await getServerSession(authOptions);
-  const gamesData = await allGames();
 
-  const findGame = gamesData?.data?.allGames?.find((game: TGame) => game?.id == id);
-  
+  const singleGame = await getSingleGame(id);
+  const findGame = singleGame?.data;
+  // console.log("findGame", findGame);
 
   return (
     <>
@@ -97,7 +97,7 @@ const GameDetailsPage = async ({
                       {/* ----------------- By Website Icons Button ---------------- */}
                       <div>
                         <p className="text-sm text-primary mb-4">Buy Now at</p>
-                        <div className=" bg-card text-primary/70 rounded-md px-4 md:px-8 py-2">
+                        <div className=" bg-card text-primary/70 rounded-md px-4 md:px-6 py-2">
                           <a
                             target="_blank"
                             rel="nofollow"
@@ -124,8 +124,8 @@ const GameDetailsPage = async ({
                                   : globe
                               }
                               alt="Website Icon"
-                              width={25}
-                              height={25}
+                              width={22}
+                              height={22}
                             />
                           </a>
                         </div>
@@ -133,17 +133,10 @@ const GameDetailsPage = async ({
                     </div>
 
                     {/* ----------- Up & Down Vot button -------------- */}
-                    <div className="flex items-center justify-center bg-[#124116] hover:bg-green-900 text-primary rounded-full py-2 w-5/12 md:w-4/12">
-                      <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
-                        <FiArrowUpRight />
-                      </Button>
-                      <span className="text-white text-lg font-semibold">
-                        4.5k
-                      </span>
-                      <Button className="hover:cursor-pointer bg-transparent p-0 h-auto hover:bg-transparent">
-                        <FiArrowDownRight />
-                      </Button>
-                    </div>
+                    <UpvoteButton
+                      totalVotes={findGame?.totalUpvote}
+                      findGame={findGame}
+                    />
                   </div>
                 </div>
 
@@ -253,7 +246,7 @@ const GameDetailsPage = async ({
 
           {/* ------------------------------------\\ Related Games \\------------------------------------ */}
           <div className=" mt-20 w-full">
-            <RelatedGames gamesData={gamesData?.data?.allGames} hasId={true}/>
+            <RelatedGames />
           </div>
         </PTContainer>
       </div>
