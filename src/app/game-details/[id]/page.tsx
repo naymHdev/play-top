@@ -32,6 +32,7 @@ const GameDetailsPage = async ({
   console.log("id", id);
 
   const singleGame = await getSingleGame(id);
+  console.log("singleGame----------------------------",singleGame);            
   const findGame = singleGame?.data;
   
 
