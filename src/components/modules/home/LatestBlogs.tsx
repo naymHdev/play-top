@@ -15,7 +15,7 @@ const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
   // console.log("blogs", blogs);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const isShowingAll = visibleCount >= blogs.length;
+  const isShowingAll = visibleCount >= blogs?.length;
 
   const visibleBlogs = blogs?.slice(0, visibleCount);
 
@@ -23,11 +23,11 @@ const LatestBlogs = ({ blogs }: { blogs: TBlogs[] }) => {
     setVisibleCount((prev) =>
       isShowingAll
         ? INITIAL_COUNT
-        : Math.min(prev + LOAD_MORE_COUNT, blogs.length)
+        : Math.min(prev + LOAD_MORE_COUNT, blogs?.length)
     );
   };
 
-  const shouldShowButton = blogs.length > INITIAL_COUNT;
+  const shouldShowButton = blogs?.length > INITIAL_COUNT;
 
   return (
     <PTContainer>

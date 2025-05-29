@@ -16,7 +16,7 @@ const BlogDetailsPage = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
-  const { id } = await params;
+  const id = (await params)?.id;
   const { data: blogs } = await getAllBlogs();
   // console.log("blogs", blogs?.allBlogs);
 

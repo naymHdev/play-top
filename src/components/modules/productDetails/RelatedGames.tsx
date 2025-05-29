@@ -14,7 +14,7 @@ const RelatedGames = ({ gamesData }: { gamesData: TGame[] }) => {
       <div className=" my-12 grid grid-cols-1 xl:grid-cols-5 gap-6">
         <div className=" col-span-3">
           {gamesData?.map((games: TGame) => (
-            <PTGameCard key={games._id} games={games} />
+            <PTGameCard key={games.id} games={games} />
           ))}
         </div>
         <div className=" col-span-2"></div>

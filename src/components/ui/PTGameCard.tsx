@@ -10,18 +10,27 @@ import toast from "react-hot-toast";
 
 // Mock types
 interface TGame {
-  _id: string;
+  _id?: string;
   title: string;
   thumbnail?: string;
   categories?: string[];
   price: number;
   platform?: string[];
   totalUpvote: number;
+  id?: string;
 }
 
 const PTGameCard = ({ games }: { games: TGame }) => {
-  const { title, thumbnail, categories, price, platform, _id, totalUpvote } =
-    games || {};
+  const {
+    title,
+    thumbnail,
+    categories,
+    price,
+    platform,
+    id,
+    totalUpvote,
+    _id,
+  } = games || {};
   const handleUpvote = async (id: string) => {
     const gameUpVote = {
       data: {
@@ -192,7 +201,7 @@ const PTGameCard = ({ games }: { games: TGame }) => {
           <h1 className="font-bold text-xl text-green-400">${price}</h1>
           <div className="flex items-center bg-card rounded-full py-2">
             <Button
-              onClick={() => handleUpvote(_id)}
+              onClick={() => handleUpvote(_id as string)}
               className="hover:cursor-pointer bg-transparent p-1 h-auto hover:bg-transparent text-gray-400 hover:text-white"
             >
               <TbArrowBigUpFilled className="w-10 h-10" />

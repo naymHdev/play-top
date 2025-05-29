@@ -9,9 +9,7 @@ export const getAllBlogs = async () => {
         headers: {
           "Content-Type": "application/json",
         },
-        next: {
-          revalidate: 300,
-        },
+        cache: "force-cache",
       }
     );
 
