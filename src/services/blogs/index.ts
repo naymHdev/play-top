@@ -1,9 +1,9 @@
 "use server";
 
-export const getAllBlogs = async (page: number) => {
+export const getAllBlogs = async () => {
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/blog/getAllBlog?page=${page}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/getAllBlog`,
       {
         method: "GET",
         headers: {

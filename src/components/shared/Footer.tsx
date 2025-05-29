@@ -72,7 +72,11 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-3 xl:col-span-2">
             <div>
               <Link href={"/"}>
-                <Image src={logo} alt="logo" width={200} height={200} />
+                <Image
+                  src={logo}
+                  alt="logo"
+                  style={{ width: "150px", height: "auto" }} // Maintain aspect ratio
+                />
               </Link>
             </div>
             <p className="leading-normal mt-6">

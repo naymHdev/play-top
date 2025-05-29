@@ -17,13 +17,13 @@ const BlogDetailsPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const { data: blogs } = await getAllBlogs(1);
+  const { data: blogs } = await getAllBlogs();
   // console.log("blogs", blogs?.allBlogs);
 
   const blogDetails = blogs?.allBlogs?.find((blog: TBlogs) => blog.id === id);
   const { author, title, description, blogImage, createdAt, altTag, rewards } =
     blogDetails || {};
-  console.log("blogDetails", blogDetails);
+  // console.log("blogDetails", blogDetails);
 
   const formattedDate = moment(createdAt).format("MMMM Do, YYYY");
 
@@ -81,8 +81,8 @@ const BlogDetailsPage = async ({
               <div className=" col-span-full lg:col-span-5 border-r border-card pt-2 lg:pt-6 px-2 lg:px-10">
                 <div className=" w-full h-fit">
                   <Image
-                    src={blogImage}
-                    alt={altTag}
+                    src={blogImage || ""}
+                    alt="Blog Details"
                     width={1000}
                     height={800}
                     className="w-full h-[400px] object-cover rounded-lg"

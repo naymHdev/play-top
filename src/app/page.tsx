@@ -27,9 +27,9 @@ const HomePage = async () => {
   // console.log("upcomingGames", upcomingGames);
 
   const topGameWeek = topGamesWeek();
-  // console.log("topGamesData", topGameWeek);
+  // console.log("topGamesData", topGameWeek)
 
-  const blogs = getAllBlogs(1);
+  const blogs = getAllBlogs();
   // console.log("blogs", blogs?.allBlogs);
 
   return (

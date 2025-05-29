@@ -13,12 +13,12 @@ const PTBlogCard = ({ blog }: { blog: TBlogs }) => {
 
   return (
     <>
-      <Link href={`/blogs/${blog._id}`}>
+      <Link href={`/blogs/${blog.id}`}>
         <div className="flex flex-col overflow-hidden w-full">
           <div className="rounded-lg w-full">
             <Image
               src={blog.blogImage}
-              alt={blog.title}
+              alt="Blog Title"
               width={400}
               height={200}
               className="rounded-lg object-center w-full"

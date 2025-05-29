@@ -9,16 +9,18 @@ import PTGameCard from "@/components/ui/PTGameCard";
 import { FaArrowRight, FaArrowUp } from "react-icons/fa6";
 
 const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
+  // console.log("topGameWeek", topGameWeek?.data);
+
   const INITIAL_COUNT = 10;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const isShowingAll = visibleCount >= topGameWeek?.length;
+  const isShowingAll = visibleCount >= topGameWeek?.data?.length;
 
   const handleToggle = () => {
     if (isShowingAll) {
       setVisibleCount(INITIAL_COUNT);
     } else {
-      setVisibleCount((prev) => Math.min(prev + 5, topGameWeek.length));
+      setVisibleCount((prev) => Math.min(prev + 5, topGameWeek?.data.length));
     }
   };
   return (
@@ -26,23 +28,25 @@ const WeeklyTopGames = ({ topGameWeek }: { topGameWeek: TGame[] }) => {
       <PTContainer>
         <div>
           <PTSectionName title="Top Games of the Week" />
-          <div className="w-full xl:w-[71%] mt-12">
+          <div className="w-full xl:w-[70%] mt-12">
             {topGameWeek?.data?.slice(0, visibleCount).map((games) => (
               <PTGameCard key={games._id} games={games} />
             ))}
           </div>
         </div>
 
-        {topGameWeek?.length > INITIAL_COUNT && (
-          <div className="flex justify-center mt-10">
-            <PTButton
-              onClick={handleToggle}
-              className="py-2 px-5 bg-card rounded-sm"
-              label={isShowingAll ? "Show Less" : "Show More"}
-              icon={isShowingAll ? <FaArrowUp /> : <FaArrowRight />}
-            />
-          </div>
-        )}
+        <div className="w-full xl:w-[70%]">
+          {topGameWeek?.data?.length > INITIAL_COUNT && (
+            <div className="flex justify-center mt-10">
+              <PTButton
+                onClick={handleToggle}
+                className="py-2 px-5 bg-card rounded-sm"
+                label={isShowingAll ? "Show Less" : "Show More"}
+                icon={isShowingAll ? <FaArrowUp /> : <FaArrowRight />}
+              />
+            </div>
+          )}
+        </div>
       </PTContainer>
     </div>
   );

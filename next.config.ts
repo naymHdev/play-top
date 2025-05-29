@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+    formats: ["image/webp"],
   },
   serverActions: {
     bodySizeLimit: "10mb",
@@ -22,7 +23,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // other config options here
+  reactStrictMode: true,
 };
 
 export default nextConfig;

@@ -14,19 +14,21 @@ type DailyTopGamesProps = {
 };
 
 const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
+  // console.log("topGameDay", topGameDay?.data);
+
   const INITIAL_COUNT = 10;
   const LOAD_MORE_COUNT = 5;
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const isShowingAll = visibleCount >= topGameDay.length;
+  const isShowingAll = visibleCount >= topGameDay?.data?.length;
 
   const handleToggle = () => {
     if (isShowingAll) {
       setVisibleCount(INITIAL_COUNT);
     } else {
       setVisibleCount((prev) =>
-        Math.min(prev + LOAD_MORE_COUNT, topGameDay.length)
+        Math.min(prev + LOAD_MORE_COUNT, topGameDay?.data?.length)
       );
     }
   };
@@ -34,7 +36,7 @@ const DailyTopGames = ({ topGameDay }: DailyTopGamesProps) => {
   const visibleGames = [...topGameDay?.data]?.slice(0, visibleCount);
 
   const shouldShowButton =
-    topGameDay.length > INITIAL_COUNT &&
+    topGameDay?.data?.length > INITIAL_COUNT &&
     (visibleCount > INITIAL_COUNT || !isShowingAll);
 
   return (

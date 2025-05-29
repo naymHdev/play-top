@@ -78,7 +78,7 @@ export const signInUser = async (userData: FieldValues) => {
 export const myProfile = async () => {
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/user/user-profile`,
+      `${process.env.NEXT_PUBLIC_API_URL}/user/user-profile`,
       {
         method: "GET",
         headers: {

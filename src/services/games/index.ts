@@ -10,7 +10,7 @@ export const addGame = async (data: FormData) => {
 
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/game/upload_game`,
+      `${process.env.NEXT_PUBLIC_API_URL}/game/upload_game`,
       {
         method: "POST",
         body: data,
@@ -102,7 +102,7 @@ export const gameSearch = async (query?: {
   }
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/game/search-game?${params.toString()}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/game/search-game?${params.toString()}`,
       {
         next: {
           tags: ["GAME"],
@@ -120,7 +120,7 @@ export const upvoteGame = async (gameId: string) => {
   // console.log("token", gameId);
   try {
     const res = await fetch(
-      `https://gaming-showcase-backend.onrender.com/api/v1/game/upvote-game`,
+      `${process.env.NEXT_PUBLIC_API_URL}/game/upvote-game`,
       {
         body: JSON.stringify(gameId),
         method: "POST",
