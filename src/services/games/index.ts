@@ -12,7 +12,9 @@ export const addGame = async (data: FormData) => {
     const res = await fetch(`${process.env.BASE_URL}/game/upload_game`, {
       method: "POST",
       body: data,
-      headers: {},
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     revalidateTag("GAME");
     return await res.json();

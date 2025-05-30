@@ -148,7 +148,7 @@ export default function AddGameForm({
       socialLinks: data.socialLinks,
       upcomingDate: data.upcomingDate,
     };
-    console.log("gameFormData:", gameFormData);
+    // console.log("gameFormData:", gameFormData);
     // console.log("isThumbnail:", isThumbnail);
 
     const formData = new FormData();
@@ -162,7 +162,7 @@ export default function AddGameForm({
     try {
       setIsLoading(true);
       const res = await addGame(formData);
-      console.log("Game added response from API:", res);
+      // console.log("Game added response from API:", res);
 
       if (res?.success) {
         toast.success("Game added successfully!");

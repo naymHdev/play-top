@@ -20,7 +20,7 @@ interface TGame {
   id?: string;
 }
 
-const PTGameCard = ({ games, hasid }: { games: TGame, hasid?:boolean }) => {
+const PTGameCard = ({ games, hasid }: { games: TGame; hasid?: boolean }) => {
   const {
     title,
     thumbnail,
@@ -183,9 +183,9 @@ const PTGameCard = ({ games, hasid }: { games: TGame, hasid?:boolean }) => {
                           key={index}
                           src={icon || "/placeholder.svg"}
                           alt={platformName}
-                          width={16}
-                          height={16}
-                          className="object-contain opacity-70"
+                          width={100}
+                          height={100}
+                          className="object-contain opacity-70 w-[20px] h-[20px]"
                         />
                       )
                     );

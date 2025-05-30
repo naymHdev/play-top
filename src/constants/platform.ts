@@ -5,7 +5,7 @@ import android from "../assets/icons/ad.png";
 import apple from "../assets/icons/ap.png";
 import windows from "../assets/icons/ws.png";
 import linux from "../assets/icons/lx.png";
-import mac from "../assets/icons/ap.png";
+import mac from "../assets/icons/mac-ico.png";
 
 // Social Media Icons
 import facebook from "../assets/icons/icons8-facebook-48.png";
