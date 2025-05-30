@@ -83,14 +83,6 @@ const Footer = () => {
               To advertise your game or for outreach article, reach us at{" "}
               <strong className="px-1">support@gamehunt.org</strong>
             </p>
-            <div className="mt-6 flex gap-4 text-primary">
-              <a href="#">
-                <FaXTwitter size={30} />
-              </a>
-              <a href="#">
-                <FaDiscord size={30} />
-              </a>
-            </div>
           </div>
 
           {/* ------------------ Subscribe ---------------- */}
@@ -135,21 +127,27 @@ const Footer = () => {
               <div>
                 <ul className="flex flex-col gap-5 mt-3 md:mt-6">
                   <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
-                    <FaReddit />
-                    Reddit
-                  </li>
-                  {/* <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
-                    <FaLinkedin />
-                    LinkedIn
+                    <a
+                      rel="noopener noreferrer nofollow"
+                      target="_blank"
+                      className=" flex items-center gap-2"
+                      href="https://www.reddit.com/r/GameHunt"
+                    >
+                      <FaReddit className=" text-orange-500" size={25} />
+                      Reddit
+                    </a>
                   </li>
                   <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
-                    <FaYoutube />
-                    YouTube
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className=" flex items-center gap-2"
+                      href="https://x.com/GameHuntOrg"
+                    >
+                      <FaXTwitter className=" text-gray-800" size={25} />
+                      Twitter
+                    </a>
                   </li>
-                  <li className="flex items-center gap-2 font-normal text-[20px] leading-5">
-                    <FaInstagram />
-                    Instagram
-                  </li> */}
                 </ul>
               </div>
               <div>

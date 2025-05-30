@@ -9,16 +9,13 @@ export const addGame = async (data: FormData) => {
   // console.log("token", token);
 
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/upload_game`,
-      {
-        method: "POST",
-        body: data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/upload_game`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     revalidateTag("GAME");
     return await res.json();
   } catch (error: any) {
@@ -28,19 +25,13 @@ export const addGame = async (data: FormData) => {
 
 export const getSingleGame = async (id: string) => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/getAllGame/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["GAME"],
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/getAllGame/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    revalidateTag("GAME");
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -50,19 +41,15 @@ export const getSingleGame = async (id: string) => {
 // ------------ all games --------------
 export const allGames = async () => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/getAllGame`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["GAME"],
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/getAllGame`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["GAME"],
+      },
+    });
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -72,19 +59,15 @@ export const allGames = async () => {
 // ------------ top game of the day --------------
 export const topGamesDay = async () => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/top-game/day`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["GAME"],
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/top-game/day`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["GAME"],
+      },
+    });
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -94,19 +77,15 @@ export const topGamesDay = async () => {
 //------------ top game of the week --------------
 export const topGamesWeek = async () => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/top-game/week`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["GAME"],
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/top-game/week`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["GAME"],
+      },
+    });
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -123,9 +102,7 @@ export const gameSearch = async (query?: {
   }
   try {
     const res = await fetch(
-      `${
-        process.env.BASE_URL
-      }/game/search-game?${params.toString()}`,
+      `${process.env.BASE_URL}/game/search-game?${params.toString()}`,
       {
         next: {
           tags: ["GAME"],
@@ -142,17 +119,14 @@ export const upvoteGame = async (gameId: string) => {
   const token = (await cookies()).get("accessToken")?.value || "";
   // console.log("token", gameId);
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/game/upvote-game`,
-      {
-        body: JSON.stringify(gameId),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/game/upvote-game`, {
+      body: JSON.stringify(gameId),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     revalidateTag("GAME");
     return await res.json();
   } catch (error: any) {
