@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PTButton from "@/components/ui/PTButton";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { updateProfile } from "@/services/profile";
 import toast from "react-hot-toast";
@@ -42,21 +42,24 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
   const router = useRouter();
 
   const profileImage = session?.user?.image || "";
+  useEffect(() => {
+    if (session?.user?.image) {
+      setImagePreview(session?.user?.image);
+    }
+  }, []);
 
-  // // Function to handle file upload
-  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   setImageFiles((prev) => [...prev, file]);
-
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setImagePreview((prev) => [...prev, reader.result as string]);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  //   setImageFiles(file);
-  // };
+  // Handle file input change event
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    if (file) {
+      setImageFiles(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   // console.log("imageFiles", imageFiles);
 
   const {
@@ -80,25 +83,23 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
     control,
     name: "links",
   });
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // console.log("data", data);
 
-    // const updatedData = {
-    //   ...data,
-    //   photo: profileImage,
-    // };
-    // console.log("updatedData", updatedData);
-
     setIsLoading(true);
     const formData = new FormData();
+
     formData.append("data", JSON.stringify(data));
-    formData.append("photo", imageFiles as File);
+
+    // Append photo only if new image selected
+    if (imageFiles) {
+      formData.append("photo", imageFiles);
+    }
 
     try {
       setIsLoading(true);
       const res = await updateProfile(formData);
-      console.log("Response from API:", res);
+      // console.log("Response from API:", res);
       if (res.success) {
         toast.success(res.message);
         router.push("/profile");
@@ -123,8 +124,9 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
           type="file"
           accept="image/*"
           id="photo"
-          // onChange={handleImageChange}
+          onChange={handleImageChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          aria-label="Upload profile photo"
         />
 
         {imagePreview ? (
@@ -142,6 +144,24 @@ const ProfileUpdateForm = ({ session }: { session: TUserProps }) => {
             <MdOutlineCloudUpload className="text-white text-5xl mb-4 mt-6" />
           </>
         )}
+
+        {/* Upload icon overlay */}
+        <label
+          htmlFor="photo"
+          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity rounded-full cursor-pointer"
+          aria-label="Upload profile photo"
+        >
+          <MdOutlineCloudUpload className="text-white text-6xl" />
+        </label>
+
+        {/* Hidden file input */}
+        <input
+          type="file"
+          accept="image/*"
+          id="photo"
+          onChange={handleImageChange}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer rounded-full"
+        />
       </div>
 
       <div>

@@ -16,8 +16,8 @@ export const socialRegister = async (payload: AuthPayload) => {
       },
       body: JSON.stringify(payload),
     });
-    revalidateTag("USER");
     const result = await res.json();
+    revalidateTag("USER");
     // console.log("result socialRegister", result);
     if (result.success) {
       (await cookies()).set("accessToken", result.data.accessToken);
@@ -77,15 +77,12 @@ export const signInUser = async (userData: FieldValues) => {
 
 export const myProfile = async () => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/user/user-profile`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: (await cookies()).get("accessToken")!.value || "",
-        },
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/user/user-profile`, {
+      method: "GET",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value || "",
+      },
+    });
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -111,15 +108,12 @@ export const logout = async () => {
 // -------- All User --------
 export const allUser = async () => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/user/find_all_users`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: (await cookies()).get("accessToken")!.value || "",
-        },
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/user/find_all_users`, {
+      method: "GET",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value || "",
+      },
+    });
     return await res.json();
   } catch (error: any) {
     return Error(error);
@@ -151,17 +145,14 @@ export const updateUserProfile = async (
 
 export const updatePassword = async (updateData: TUpdatePassword) => {
   try {
-    const res = await fetch(
-      `${process.env.BASE_URL}/auth/update-password`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: (await cookies()).get("accessToken")!.value || "",
-        },
-        body: JSON.stringify(updateData),
-      }
-    );
+    const res = await fetch(`${process.env.BASE_URL}/auth/update-password`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value || "",
+      },
+      body: JSON.stringify(updateData),
+    });
 
     return await res.json();
   } catch (error: any) {
