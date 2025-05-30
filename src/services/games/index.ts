@@ -12,9 +12,7 @@ export const addGame = async (data: FormData) => {
     const res = await fetch(`${process.env.BASE_URL}/game/upload_game`, {
       method: "POST",
       body: data,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: {},
     });
     revalidateTag("GAME");
     return await res.json();
@@ -25,13 +23,15 @@ export const addGame = async (data: FormData) => {
 
 export const getSingleGame = async (id: string) => {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/game/getAllGame/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    revalidateTag("GAME");
+    const res = await fetch(
+      `${process.env.BASE_URL}/game/getAllGame/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return await res.json();
   } catch (error: any) {
     return Error(error);

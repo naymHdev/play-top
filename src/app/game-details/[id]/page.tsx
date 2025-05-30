@@ -27,10 +27,12 @@ const GameDetailsPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
+  // console.log("id", id);
   const session = await getServerSession(authOptions);
 
   const singleGame = await getSingleGame(id);
   const findGame = singleGame?.data;
+  // console.log("findGame", findGame);
 
   return (
     <>
