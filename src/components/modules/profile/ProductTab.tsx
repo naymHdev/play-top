@@ -36,13 +36,9 @@ const GamesTabs = ({ myGames }: { myGames: TGame[] }) => {
           ) : (
             <>
               <div className="text-center py-12">
-                <ThumbsUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-muted-foreground mb-2">
-                  No upvoted games
+                  No submitted games
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  Click the button above to see some upvoted games!
-                </p>
               </div>
             </>
           )}
